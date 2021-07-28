@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::Auth();
+
+// Route::group(
+    // 'middleware' => ['jwt.verify', 'role:admin|customer|staff|bendahara|pengepul'], function () {
+
+    Route::post('login', 'Api\UserController@login'); //[All User]
+    Route::post('register', 'Api\UserController@register'); //[Customer]
+    // Route::post('password/reset/email', 'Api\ForgotPasswordController@forgot');
+    // Route::post('password/reset', 'Api\ForgotPasswordController@reset');
+
+// });
