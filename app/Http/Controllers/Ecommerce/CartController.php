@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Product;
-use App\Province;
-use App\City;
-use App\District;
-use App\Customer;
 use App\Order;
 use App\OrderDetail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -273,5 +269,6 @@ class CartController extends Controller
         // $nothing = "awkwkwkwk.803716578";
         // return view('ecommerce.qtyCart', compact('nothing'));
     }
+
 
 }
