@@ -27,7 +27,7 @@
 		<div class="top_menu row m0">
 			<div class="container-fluid">
 				<div class="float-left">
-					<p>Call Us: +62 82128 796431</p>
+					<p>WA/SMS: (+62)82128796431</p>
 				</div>
 				<div class="float-right">
 					<ul class="right_side">
@@ -53,7 +53,7 @@
 				<div class="container-fluid">
 					<!-- Brand and toggle get grouped for better mobile display -->
                     <a class="navbar-brand logo_h" href="{{ url('/') }}">
-						<img src="{{ asset('ecommerce/img/logo/logo-tookoo-dil.png') }}" alt="">
+						<img src="{{ asset('ecommerce/img/logo/logo-waroeng-jajanan.png') }}" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 					 aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,8 @@
                                     <li class="nav-item">
                                         <a href="{{ route('front.list_cart') }}" class="icons">
                                             <i class="lnr lnr lnr-cart"><span class="badge bg-warning">
-                                                {{ $jmlQty }}</span></i>
+                                                {{-- {{ $jmlQty }}</span></i> --}}
+                                                9</span></i>
                                         </a>
                                     </li>
 									<hr>
@@ -149,7 +150,7 @@
 				<div class="col-lg-4 col-md-6 col-sm-6">
 					<div class="single-footer-widget">
 						<h6 class="footer_title">Newsletter</h6>
-						<p>Stay updated with our latest trends</p>
+						<p>Stay updated with our latest snacks</p>
 						<div id="mc_embed_signup">
 							<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
 							 method="get" class="subscribe_form relative">
@@ -176,7 +177,7 @@
 								<img src="{{ asset('ecommerce/img/instagram/Image-02.jpg') }}" alt="">
 							</li>
 							<li>
-								<img src="{{ asset('ecommerce/img/instagram/Image-03.jpg') }}" alt="">
+								<img src="{{ asset('ecommerce/img/instagram/Image-03.png') }}" alt="">
 							</li>
 							<li>
 								<img src="{{ asset('ecommerce/img/instagram/Image-04.jpg') }}" alt="">
@@ -201,17 +202,17 @@
 						<h6 class="footer_title">Follow Us</h6>
 						<p>Let us be social</p>
 						<div class="f_social">
-							<a href="#">
+							<a href="https://www.facebook.com/bsona1">
 								<i class="fa fa-facebook"></i>
 							</a>
-							<a href="#">
-								<i class="fa fa-twitter"></i>
+							<a href="https://www.instagram.com/bagus_sona">
+								<i class="fa fa-instagram"></i>
 							</a>
-							<a href="#">
-								<i class="fa fa-dribbble"></i>
+							<a href="https://www.github.com/bagussona">
+								<i class="fa fa-github"></i>
 							</a>
-							<a href="#">
-								<i class="fa fa-behance"></i>
+							<a href="https://www.linkedin.com/in/bagus-sonarangga/">
+								<i class="fa fa-linkedin"></i>
 							</a>
 						</div>
 					</div>

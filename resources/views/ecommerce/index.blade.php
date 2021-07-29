@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-<title>tookoodil - Footwear Shop</title>
+<title>Waroeng Jajanan - WARJAN</title>
 @endsection
 
 @section('content')
@@ -12,11 +12,11 @@
 			<div class="container">
 				<div class="banner_content row">
 					<div class="offset-lg-2 col-lg-8">
-						<h3>Footwear trend-setter for
-							<br />Everyone!</h3>
+						<h3>Waroeng Jajanan untuk
+							<br />Semuanya!</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 							aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-						<a class="white_bg_btn" href="{{ route('front.product') }}">View Collection</a>
+						<a class="white_bg_btn" href="{{ route('front.product') }}">Jajan Yuk!</a>
 						{{-- <a class="white_bg_btn" href="{{ route('front.index') }}">View Collection</a> --}}
 					</div>
 				</div>
@@ -32,42 +32,47 @@
 				<div class="row">
 					<div class="main_title">
 						<h2>Produk Terbaru</h2>
-						<p>Tampil trendi dengan kumpulan produk kekinian kami.</p>
+						<p>Waroeng Jajanan menjual jajanan yang berkualitas dan pas dikantong semua umat.</p>
 					</div>
 				</div>
 				<div class="row">
 
           <!-- PERHATIAKAN BAGIAN INI, LOOPING DATA PRODUK -->
-          @forelse($products as $row)
+          {{-- @forelse($products as $row) --}}
 					<div class="col col1">
 						<div class="f_p_item">
 							<div class="f_p_img">
                 <!-- KEMUDIAN TAMPILKAN IMAGENYA DARI FOLDER /PUBLIC/STORAGE/PRODUCTS -->
-                <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->name }}">
+                {{-- <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->name }}"> --}}
+                <img class="img-fluid" src="" alt="">
 								<div class="p_icon">
-									<a href="{{ url('/product/' . $row->slug) }}">
+									{{-- <a href="{{ url('/product/' . $row->slug) }}"> --}}
+									<a href="">
 										<i class="lnr lnr-cart"></i>
 									</a>
 								</div>
 							</div>
               <!-- KETIKA PRODUK INI DIKLIK MAKA AKAN DIARAHKAN KE URL DIBAWAH -->
               <!-- HANYA SAJA URL TERSEBUT BELUM DISEDIAKAN PADA ARTIKEL KALI INI -->
-              <a href="{{ url('/product/' . $row->slug) }}">
+              {{-- <a href="{{ url('/product/' . $row->slug) }}"> --}}
+              <a href="">
                 <!-- TAMPILKAN NAMA PRODUK -->
-                 <h4>{{ $row->name }}</h4>
+                 {{-- <h4>{{ $row->name }}</h4> --}}
+                 <h4></h4>
 							</a>
               <!-- TAMPILKAN HARGA PRODUK -->
-              <h5>Rp {{ number_format($row->price) }}</h5>
+              {{-- <h5>Rp {{ number_format($row->price) }}</h5> --}}
+              <h5>Rp. 0</h5>
 						</div>
 					</div>
-          @empty
+          {{-- @empty --}}
 
-          @endforelse
+          {{-- @endforelse --}}
 				</div>
 
         <!-- GENERATE PAGINATION UNTUK MEMBUAT NAVIGASI DATA SELANJUTNYA JIKA ADA -->
 				<div class="row">
-					{{ $products->links() }}
+					{{-- {{ $products->links() }} --}}
 				</div>
 			</div>
 		</div>
@@ -80,11 +85,12 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="hot_deal_box">
+						{{-- <img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt=""> --}}
 						<img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt="">
 						<div class="content">
-							<h1>Hot Deals of this Month</h1>
+							<h1>Paling bantak dicari!</h1>
 							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
-                            <h2>Shop Now!</h2>
+                            <h2>Jajan Yuk!</h2>
 						</div>
 						<a class="hot_deal_link" href="{{ route('front.listLoved') }}"></a>
 					</div>
@@ -94,9 +100,9 @@
 					<div class="hot_deal_box">
 						<img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt="">
 						<div class="content">
-							<h1>Hot Deals of this Month</h1>
+							<h1>Paling banyak dicari!</h1>
 							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
-                            <h2>Shop Now!</h2>
+                            <h2>Jajan Yuk!</h2>
 						</div>
 						<a class="hot_deal_link" href="{{ route('front.listLoved') }}"></a>
 					</div>
@@ -108,7 +114,7 @@
 @endsection
 
 @section('js')
-    <script>
+    {{-- <script>
 $(document).ready(function () {
     @if($scroll)
         $('html, body').animate({
@@ -116,5 +122,5 @@ $(document).ready(function () {
         }, 'slow');
     @endif
 });
-</script>
+</script> --}}
 @endsection

@@ -20,13 +20,12 @@ class FrontController extends Controller
 
         // $scroll = true;
         // return view('ecommerce.index', compact('products', 'jmlQty', 'scroll'));
-
+        return view('ecommerce.index');
 
 
     }
 
-    public function product()
-    {
+    public function product(){
         // $products = Product::orderBy('created_at', 'DESC')->paginate(12);
 
         // $getQty = new CartController();

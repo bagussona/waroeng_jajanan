@@ -28,23 +28,23 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 // });
 
 
-Route::group([
-    'prefix' => 'administrator',
-    'middleware' => 'auth'
-], function() {
-    Route::get('/home', 'HomeController@index')->name('home');
+// Route::group([
+//     'prefix' => 'administrator',
+//     'middleware' => 'auth'
+// ], function() {
+    Route::get('/home', 'Web\HomeController@index')->name('home');
 
-    Route::get('/category', 'CategoryController@index')->name('category.index');
-    Route::post('/category', 'CategoryController@store')->name('category.store');
-    Route::get('/category/{category_id}/edit', 'CategoryController@edit')->name('category.edit');
-    Route::put('/category/{category_id}', 'CategoryController@edit')->name('category.update');
-    Route::delete('/category/{category_id}', 'CategoryController@destroy')->name('category.destroy');
+    Route::get('/category', 'Web\CategoryController@index')->name('category.index');
+    Route::post('/category', 'Web\CategoryController@store')->name('category.store');
+    Route::get('/category/{category_id}/edit', 'Web\CategoryController@edit')->name('category.edit');
+    Route::put('/category/{category_id}', 'Web\CategoryController@edit')->name('category.update');
+    Route::delete('/category/{category_id}', 'Web\CategoryController@destroy')->name('category.destroy');
 
-    Route::resource('product', 'ProductController');
+    Route::resource('product', 'Web\ProductController');
 
-});
+// });
 
-Route::get('/', 'Ecommerce\FrontController@index')->name('front.index');
+Route::get('/', 'Ecommerce\FrontController@index')->name('front.index')->middleware('verified');
 
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product');
 Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
