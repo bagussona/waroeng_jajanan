@@ -1,4 +1,4 @@
-<title>tookoodil - 404 notfound</title>
+<title>Waroeng Jajanan - 404</title>
 
 {{-- {{ url('ecommerce/css/404.css') }} --}}
 <link rel="stylesheet" href="{{url('ecommerce/css/404.css')}}">

@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    <title>Login</title>
+    <title>Login {{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')
@@ -27,13 +27,7 @@
                                 </div>
 
                               	<!-- $errors->has('email') AKAN MENGECEK JIKA ADA ERROR DARI HASIL VALIDASI LARAVEL, SEMUA KEGAGALAN VALIDASI LARAVEL AKAN DISIMPAN KEDALAM VARIABLE $errors -->
-                                <input class="form-control {{ $errors->has('username') ? ' is-invalid' : '' }}"
-                                type="text"
-                                name="username"
-                                placeholder="Username"
-                                value="{{ old('username') }}"
-                                autofocus
-                                required>
+                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="text" name="email" placeholder="email" value="{{ old('email') }}" autofocus required>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -58,7 +52,7 @@
                                 </div>
                                 <div class="col-6 text-right">
                                     {{-- <button class="btn btn-link px-0" type="button">Forgot password?</button> --}}
-                                    <a class="hot_deal_link" href="{{ route('front.listLoved') }}"><button class="btn btn-link px-0" type="button">Forgot password?</button></a>
+                                    <a class="hot_deal_link" href="{{ route('front.notfound') }}"><button class="btn btn-link px-0" type="button">Forgot password?</button></a>
                                 </div>
                             </div>
                             <div class="row">

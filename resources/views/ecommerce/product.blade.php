@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-    <title>tookoodil - produk</title>
+    <title>{{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')

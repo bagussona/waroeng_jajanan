@@ -264,10 +264,9 @@ class CartController extends Controller
 
     }
 
-    public function listloved()
-    {
+    public function notfound(){
         // $nothing = "awkwkwkwk.803716578";
-        // return view('ecommerce.qtyCart', compact('nothing'));
+        return view('ecommerce.notfound');
     }
 
 

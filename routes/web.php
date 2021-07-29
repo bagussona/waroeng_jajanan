@@ -44,7 +44,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 // });
 
-Route::get('/', 'Ecommerce\FrontController@index')->name('front.index')->middleware('verified');
+// Route::get('/', 'Ecommerce\FrontController@index')->name('front.index')->middleware('verified');
+Route::get('/', 'Ecommerce\FrontController@index')->name('front.index');
 
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product');
 Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
@@ -60,7 +61,7 @@ Route::post('/checkout', 'Ecommerce\CartController@processCheckout')->name('fron
 Route::get('/checkout/{invoice}', 'Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
 
 // ini buat render di semua header
-Route::get('/qtyCart', 'Ecommerce\CartController@listloved')->name('front.listLoved');
+Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfound');
 
 //ini profile
 Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile');

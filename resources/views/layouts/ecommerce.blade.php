@@ -32,19 +32,34 @@
 				<div class="float-right">
 					<ul class="right_side">
 						{{-- <li><a href="login.html">Login/Register</a></li> --}}
+                        @guest
+
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login/Register</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                                </li>
+                                <div class="list-group">
+                                    <a href="{{ route('login') }}" class="list-group-item list-group-item-action">Login</a>
+                                    <a href="{{ route('register') }}" class="list-group-item list-group-item-action">Register</a>
+                                </div>
                             </ul>
                         </li>
+                    </ul>
+                        @endguest
 
-						<li><a href="{{ route('front.UserProfile') }}">My Account</a></li>
-						<li><a href="{{ route('front.UserContact') }}">Contact Us</a></li>
-					</ul>
+                        @auth
+                        <div class="float-right">
+                            <p>Welcome! {{ Auth::user()->name }}</p>
+                        </div>
+
+                        <div class="float-right">
+                            {{-- <p>WA/SMS: (+62)82128796431</p> --}}
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                {{-- <button class="btn btn-lighting" type="submit" value="sign-out"><img src="{{ asset('ecommerce/img/elements/box-arrow-right.svg')}}" alt=""></button> --}}
+                                <button class="btn btn-lighting" type="submit">Sign Out</button>
+                            </form>
+                        </div>
+                        @endauth
 				</div>
 			</div>
 		</div>
@@ -79,11 +94,16 @@
 										</a>
 									</li>
 									<hr>
+                                    @auth
+
+
 									<li class="nav-item">
-                                        <a href="{{ route('front.listLoved') }}" class="icons">
+                                        <a href="{{ route('front.notfound') }}" class="icons">
 											<i class="fa fa-heart-o" aria-hidden="true"><span class="badge bg-warning"> {{ 0 }} </span></i>
                                         </a>
                                     </li>
+
+                                    @endauth
                                     <hr>
                                     <li class="nav-item">
                                         <a href="{{ route('front.list_cart') }}" class="icons">
@@ -144,18 +164,18 @@
 				<div class="col-lg-3  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
 						<h6 class="footer_title">About Us</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+						<p>{{ env('APP_NAME') }} adalah umkm yang sedang berkembang, {{ env('APP_NAME') }} ini berbasis online, untuk membeli jajanan cukup pesan lewat webapp.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6 class="footer_title">Newsletter</h6>
-						<p>Stay updated with our latest snacks</p>
+						<h6 class="footer_title">Subscribe {{ env('APP_NAME')}} </h6>
+						<p>Dapatkan kabar terbaru mengenai jajanan yang akan di display!</p>
 						<div id="mc_embed_signup">
 							<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
 							 method="get" class="subscribe_form relative">
 								<div class="input-group d-flex flex-row">
-									<input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '"
+									<input name="email" placeholder="email address.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input yur email.. '"
 									 required="" type="email">
 									<button class="btn sub-btn">
 										<span class="lnr lnr-arrow-right"></span>
@@ -222,7 +242,7 @@
 				<p class="col-lg-12 footer-text text-center">
                     Copyright &copy;<script>document.write(new Date().getFullYear());</script>
                     All rights reserved | This template is made with
-                    <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://daengweb.id" target="_blank">Daengweb</a>
+                    <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://daengweb.id" target="_blank">Daengweb</a> and rebuild by <a href="https://github.com/bagussona">Bagus</a>
 				</p>
 			</div>
 		</div>

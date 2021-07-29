@@ -18,9 +18,9 @@ class FrontController extends Controller
         // // dd($jmlQty);
         // $products = Product::orderBy('created_at', 'DESC')->paginate(10);
 
-        // $scroll = true;
+        $scroll = true;
         // return view('ecommerce.index', compact('products', 'jmlQty', 'scroll'));
-        return view('ecommerce.index');
+        return view('ecommerce.index', compact('scroll'));
 
 
     }

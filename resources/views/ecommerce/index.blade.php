@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-<title>Waroeng Jajanan - WARJAN</title>
+<title> {{env('APP_NAME')}}</title>
 @endsection
 
 @section('content')
@@ -14,8 +14,6 @@
 					<div class="offset-lg-2 col-lg-8">
 						<h3>Waroeng Jajanan untuk
 							<br />Semuanya!</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
 						<a class="white_bg_btn" href="{{ route('front.product') }}">Jajan Yuk!</a>
 						{{-- <a class="white_bg_btn" href="{{ route('front.index') }}">View Collection</a> --}}
 					</div>
@@ -92,7 +90,7 @@
 							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
                             <h2>Jajan Yuk!</h2>
 						</div>
-						<a class="hot_deal_link" href="{{ route('front.listLoved') }}"></a>
+						<a class="hot_deal_link" href="{{ route('front.notfound') }}"></a>
 					</div>
 				</div>
 
@@ -104,7 +102,7 @@
 							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
                             <h2>Jajan Yuk!</h2>
 						</div>
-						<a class="hot_deal_link" href="{{ route('front.listLoved') }}"></a>
+						<a class="hot_deal_link" href="{{ route('front.notfound') }}"></a>
 					</div>
 				</div>
 			</div>
@@ -114,7 +112,7 @@
 @endsection
 
 @section('js')
-    {{-- <script>
+    <script>
 $(document).ready(function () {
     @if($scroll)
         $('html, body').animate({
@@ -122,5 +120,5 @@ $(document).ready(function () {
         }, 'slow');
     @endif
 });
-</script> --}}
+</script>
 @endsection

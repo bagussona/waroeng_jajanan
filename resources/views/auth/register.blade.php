@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    <title>Register</title>
+    <title>Register {{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')
@@ -58,15 +58,7 @@
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-user"></i></span>
-                                </div>
-
-                                <input class="form-control" type="text" name="username" placeholder="Insert username.." value="{{ old('username') }}" autofocus required>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-user"></i></span>
+                                    <span class="input-group-text"><i class="icon-envelope"></i></span>
                                 </div>
 
                                 <input class="form-control" type="text" name="email" placeholder="Insert Email Address.." value="{{ old('email') }}" autofocus required>
