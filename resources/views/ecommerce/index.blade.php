@@ -86,7 +86,7 @@
 						{{-- <img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt=""> --}}
 						<img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt="">
 						<div class="content">
-							<h1>Paling bantak dicari!</h1>
+							<h1>Paling banyak dicari!</h1>
 							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
                             <h2>Jajan Yuk!</h2>
 						</div>

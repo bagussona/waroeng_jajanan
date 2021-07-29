@@ -10,8 +10,8 @@
             <div class="card-group">
                 <div class="card p-4">
                     <div class="card-body">
-                        <h1>Login</h1>
-
+                        <h1>Sign In</h1>
+                        <p class="text-muted">Signing In your account</p>
                         <!-- ACTIONNYA MENGARAH PADA URL /LOGIN -->
                         <!-- UNTUK MENCARI TAU TUJUAN URI DARI ROUTE NAME DIBAWAH, PADA COMMAND LINE, KETIKKAN PHP ARTISAN ROUTE:LIST DAN CARI URI YANG MENGGUNAKAN METHOD POST -->
                       	<!-- KARENA URI /LOGIN DENGAN METHOD GET DIGUNAKAN UNTUK ME-LOAD VIEW HALAMAN LOGIN -->

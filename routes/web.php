@@ -45,13 +45,14 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 // });
 
 // Route::get('/', 'Ecommerce\FrontController@index')->name('front.index')->middleware('verified');
-Route::get('/', 'Ecommerce\FrontController@index')->name('front.index');
+Route::get('/', 'Ecommerce\FrontController@index')->name('front.index'); //index guest
+Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact'); //index contact pengaduan
 
 Route::group([
     'middleware' => ['verified']
 ], function () {
 
-Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product');
+Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home
 Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
 Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
 
@@ -65,10 +66,9 @@ Route::post('/checkout', 'Ecommerce\CartController@processCheckout')->name('fron
 Route::get('/checkout/{invoice}', 'Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
 
 // ini buat render di semua header
-Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfound');
+Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfound'); //index notfound
 
 //ini profile
-Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile');
-Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact');
+Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile'); //index profile
 
 });

@@ -44,8 +44,8 @@
                 {{-- <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%"> --}}
                 <div class="card text-white bg-primary py-5 d-md-down-none">
                     <div class="card-body text-center">
-                        <h1>Register</h1>
-                        <p class="text-muted">Create your account</p>
+                        <h1>Sign Up</h1>
+                        <p class="text-muted">Signing Up your account</p>
                         <form action="{{ route('register') }}" method="POST">
                             @csrf
 

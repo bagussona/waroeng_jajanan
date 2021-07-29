@@ -2,7 +2,7 @@
 {{-- {{ url('profile/contact.css')}} --}}
 
 @section('title')
-    <title>tookoodil - Contact</title>
+    <title>Contact - {{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
     <div class="row">5</div>
 </div>
 <div>
-    <div class="row">5</div>
+    <div class="row">6</div>
 </div>
 <div class="container contact-form">
     <div class="contact-image">

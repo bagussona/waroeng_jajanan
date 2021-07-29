@@ -14,6 +14,7 @@ class UserProfileController extends Controller
         // $jmlQty = $getQty->showQtyCart();
         // $profile = "wkwk";
         // return view('user.user_profile', compact('profile', 'jmlQty'));
+        return view('user.user_profile');
 
 
 
@@ -25,6 +26,7 @@ class UserProfileController extends Controller
         // $jmlQty = $getQty->showQtyCart();
         // $contact = "wkwk";
         // return view('user.user_contact', compact('contact', 'jmlQty'));
+        return view('user.user_contact');
 
 
 

@@ -2,7 +2,7 @@
 {{-- {{ url('profile/profile.css')}} --}}
 
 @section('title')
-    <title>tookoodil - Profile</title>
+    <title>Profile - {{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
     <div class="row">5</div>
 </div>
 <div>
-    <div class="row">5</div>
+    <div class="row">6</div>
 </div>
 <div class="container emp-profile mt-4">
     <form method="post">
@@ -102,7 +102,7 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>+(62) 82128 796431</p>
+                                        <p>+(62) 82128796431</p>
                                     </div>
                                 </div>
                                 <div class="row">

@@ -172,7 +172,7 @@
 						<h6 class="footer_title">Subscribe {{ env('APP_NAME')}} </h6>
 						<p>Dapatkan kabar terbaru mengenai jajanan yang akan di display!</p>
 						<div id="mc_embed_signup">
-							<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+							<form target="_blank" action=""
 							 method="get" class="subscribe_form relative">
 								<div class="input-group d-flex flex-row">
 									<input name="email" placeholder="email address.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input yur email.. '"
@@ -188,7 +188,7 @@
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="single-footer-widget instafeed">
-						<h6 class="footer_title">Instagram Feed</h6>
+						<h6 class="footer_title">Galery {{ env('APP_NAME') }}</h6>
 						<ul class="list instafeed d-flex flex-wrap">
 							<li>
 								<img src="{{ asset('ecommerce/img/instagram/Image-01.jpg') }}" alt="">
