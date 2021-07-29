@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderHistory extends Model
 {
     protected $fillable = [
-        'Tanggal', 'Keterangan', 'Jenis', 'Berat', '@KG', 'Debit', 'Credit', 'Subtotal', 'user_id'
+        'tanggal', 'keterangan', 'name', 'qty', 'pcs', 'subtotal', 'user_id'
     ];
 
     public function users(){
