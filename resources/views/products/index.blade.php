@@ -38,7 +38,8 @@
                             <form action="{{ route('product.index') }}" method="get">
                                 <div class="input-group mb-3 col-md-3 float-right">
                                     <!-- KEMUDIAN NAME-NYA ADALAH Q YANG AKAN MENAMPUNG DATA PENCARIAN -->
-                                    <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}">
+                                    {{-- <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}"> --}}
+                                    <input type="text" name="q" class="form-control" placeholder="Cari..." value="">
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary" type="button">Cari</button>
                                     </div>
@@ -61,30 +62,34 @@
                                     <tbody>
                                         <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
                                         <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
-                                        @forelse ($product as $row)
+                                        {{-- @forelse ($product as $row) --}}
                                         <tr>
                                             <td>
                                                 <!-- TAMPILKAN GAMBAR DARI FOLDER PUBLIC/STORAGE/PRODUCTS -->
                                                 {{-- <img src="{{ asset('storage/products/' . $row->image) }}" width="100px" height="100px" alt="{{ $row->name }}"> --}}
-                                                <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}">
+                                                {{-- <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}"> --}}
+                                                <img src="" width="100px" height="100px" alt="">
                                             </td>
                                             <td>
-                                                <strong>{{ $row->name }}</strong><br>
+                                                <strong> [name] </strong><br>
                                                 <!-- ADAPUN NAMA KATEGORINYA DIAMBIL DARI HASIL RELASI PRODUK DAN KATEGORI -->
-                                                <label>Kategori: <span class="badge badge-info">{{ $row->category->name }}</span></label><br>
-                                                <label>Berat: <span class="badge badge-info">{{ $row->weight }} gr</span></label>
+                                                <label>kategori: <span class="badge badge-info">[category->name]</span></label><br>
+                                                <label>pcs: <span class="badge badge-info">[pcs]</span></label>
                                             </td>
-                                            <td>Rp {{ number_format($row->price) }}</td>
-                                            <td>{{ $row->created_at->format('d-m-Y') }}</td>
+                                            <td>Rp 0</td>
+                                            <td>[created_at]</td>
 
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
-                                            <td>{!! $row->status_label !!}</td>
+                                            {{-- <td>{!! $row->status_label !!}</td> --}}
+                                            <td>[stok]</td>
                                             <td>
                                                 <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
-                                                <form action="{{ route('product.destroy', $row->id) }}" method="post">
+                                                {{-- <form action="{{ route('product.destroy', $row->id) }}" method="post"> --}}
+                                                <form action="" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('product.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                    {{-- <a href="{{ route('product.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a> --}}
+                                                    <a href="" class="btn btn-warning btn-sm">Edit</a>
                                                     <button class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
@@ -98,7 +103,8 @@
                                 </table>
                             </div>
                             <!-- MEMBUAT LINK PAGINASI JIKA ADA -->
-                            {!! $product->links() !!}
+                            {{-- {!! $product->links() !!} --}}
+                            [pagination]
                         </div>
                     </div>
                 </div>

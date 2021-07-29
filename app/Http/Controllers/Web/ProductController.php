@@ -19,6 +19,7 @@ class ProductController extends Controller
         // }
         // $product = $product->paginate(10);
         // return view('products.index', compact('product'));
+        return view('products.index');
 
 
 

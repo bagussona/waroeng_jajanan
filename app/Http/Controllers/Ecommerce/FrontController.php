@@ -33,6 +33,7 @@ class FrontController extends Controller
         // $jmlQty = $getQty->showQtyCart();
         // // $categories = Category::with(['child'])->withCount(['child'])->getParent()->orderBy('name', 'ASC')->get();
         // return view('ecommerce.product', compact('products', 'jmlQty'));
+        return view('ecommerce.product');
 
 
 

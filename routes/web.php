@@ -47,6 +47,10 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 // Route::get('/', 'Ecommerce\FrontController@index')->name('front.index')->middleware('verified');
 Route::get('/', 'Ecommerce\FrontController@index')->name('front.index');
 
+Route::group([
+    'middleware' => ['verified']
+], function () {
+
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product');
 Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
 Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
@@ -67,3 +71,4 @@ Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfou
 Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile');
 Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact');
 
+});
