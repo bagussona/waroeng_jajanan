@@ -50,4 +50,5 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function orderhistories(){
         return $this->hasMany(User::class);
     }
+
 }

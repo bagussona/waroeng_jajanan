@@ -98,7 +98,7 @@
 					<div class="hot_deal_box">
 						<img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt="">
 						<div class="content">
-							<h1>Paling banyak dicari!</h1>
+							<h1>Paling banyak dibeli!</h1>
 							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
                             <h2>Jajan Yuk!</h2>
 						</div>

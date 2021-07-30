@@ -27,7 +27,7 @@
                                 </div>
 
                               	<!-- $errors->has('email') AKAN MENGECEK JIKA ADA ERROR DARI HASIL VALIDASI LARAVEL, SEMUA KEGAGALAN VALIDASI LARAVEL AKAN DISIMPAN KEDALAM VARIABLE $errors -->
-                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="text" name="email" placeholder="email" value="{{ old('email') }}" autofocus required>
+                                <input class="form-control @error('email') is-invalid @enderror"" type="text" name="email" placeholder="email" value="{{ old('email') }}" autofocus required>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -35,16 +35,20 @@
                                         <i class="icon-lock"></i>
                                     </span>
                                 </div>
-                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="password" name="password" placeholder="Password" required>
+                                <input class="form-control @error('password') is-invalid @enderror"" type="password" name="password" placeholder="Password" required>
                             </div>
                             <div class="row">
-                                @if (session('error'))
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ session('error') }}
-                                    </div>
-                                </div>
-                                @endif
+                                    @error('email')
+                                        <span class="alert alert-warning" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+
+                                    @error('password')
+                                    <span class="alert alert-warning" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
 
                                 <div class="col-6">
                                     <input type="submit" class="btn btn-primary px-4" value="Login">

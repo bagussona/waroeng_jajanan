@@ -60,15 +60,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-envelope"></i></span>
                                 </div>
-
-                                <input class="form-control" type="text" name="email" placeholder="Insert Email Address.." value="{{ old('email') }}" autofocus required>
+                                <input class="form-control @error('email') is-invalid @enderror" type="email"  name="email" placeholder="Insert email.." value="{{ old('email') }}" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-lock"></i></span>
                                 </div>
-                                    <input class="form-control" type="password" name="password" placeholder="Insert Password.." required>
+                                <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="Insert password.." required>
                             </div>
 
 
@@ -76,22 +75,26 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-lock"></i></span>
                                 </div>
-                                    <input class="form-control" type="password" name="password_confirmation" placeholder="Password Confirmation" required>
+                                <input class="form-control" type="password" name="password_confirmation" placeholder="Password Confirmation" required>
                             </div>
 
                             <div class="row">
-                                @if (session('error'))
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ session('error') }}
-                                    </div>
-                                </div>
-                                @endif
+                                @error('email')
+                                    <span class="alert alert-warning" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+
+                                @error('password')
+                                <span class="alert alert-warning" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
 
                                 <div class="col-6">
                                     <input class="btn btn-light px-4" type="submit" value="Register">
-                                    {{-- <button ">Register</button> --}}
                                 </div>
+
                                 <div class="row">
                                     <div class="col-7">
                                     </div>
@@ -108,4 +111,5 @@
             </div>
         </div>
     </div>
+
 @endsection

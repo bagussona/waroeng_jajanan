@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-    <title>tookoodil - {{ $product->name }}</title>
+    <title>{{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')
@@ -10,10 +10,11 @@
 		<div class="banner_inner d-flex align-items-center">
 			<div class="container">
 				<div class="banner_content text-center">
-                    <h2>{{ $product->name }}</h2>
+                    <h2>[produk->name]</h2>
 					<div class="page_link">
                         <a href="{{ url('/') }}">Home</a>
-                        <a href="#">{{ $product->name }}</a>
+                        {{-- <a href="#">{{ $product->name }}</a> --}}
+                        <a href="#">[product->name]</a>
 					</div>
 				</div>
 			</div>
@@ -29,7 +30,8 @@
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img class="d-block w-100" src="{{ $product->image }}" alt="{{ $product->name }}">
+									{{-- <img class="d-block w-100" src="{{ $product->image }}" alt="{{ $product->name }}"> --}}
+									<img class="d-block w-100" src="" alt="">
 								</div>
 							</div>
 						</div>
@@ -37,12 +39,15 @@
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<h3>{{ $product->name }}</h3>
-                        <h2>Rp {{ number_format($product->price) }}</h2>
+						{{-- <h3>{{ $product->name }}</h3> --}}
+						<h3>[product->name]</h3>
+                        {{-- <h2>Rp {{ number_format($product->price) }}</h2> --}}
+                        <h2>Rp 0 }}</h2>
 						<ul class="list">
 							<li>
 								<a class="active" href="#">
-                                    <span>Kategori</span> : {{ $product->category->name }}</a>
+                                    {{-- <span>Kategori</span> : {{ $product->category->name }}</a> --}}
+                                    <span>Kategori</span> : [product->category->name]</a>
 							</li>
 						</ul>
 						<p></p>
@@ -52,7 +57,8 @@
 							<label for="qty">Quantity:</label>
 							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
 
-							<input type="hidden" name="product_id" value="{{ $product->id }}" class="form-control">
+							{{-- <input type="hidden" name="product_id" value="{{ $product->id }}" class="form-control"> --}}
+							<input type="hidden" name="product_id" value="" class="form-control">
 
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button">
@@ -87,7 +93,8 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="color: black">
-					{!! $product->description !!}
+					{{-- {!! $product->description !!} --}}
+					[product->description]
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="table-responsive">
@@ -98,7 +105,8 @@
 										<h5>Berat</h5>
 									</td>
 									<td>
-                                        <h5>{{ $product->weight }} gr</h5>
+                                        {{-- <h5>{{ $product->weight }} gr</h5> --}}
+                                        <h5>[product->stock]</h5>
 									</td>
 								</tr>
 								<tr>
@@ -106,7 +114,8 @@
 										<h5>Harga</h5>
 									</td>
 									<td>
-										<h5>Rp {{ number_format($product->price) }}</h5>
+										{{-- <h5>Rp {{ number_format($product->price) }}</h5> --}}
+										<h5>Rp 0</h5>
 									</td>
 								</tr>
 								<tr>
@@ -114,7 +123,8 @@
 										<h5>Kategori</h5>
 									</td>
 									<td>
-										<h5>{{ $product->category->name }}</h5>
+										{{-- <h5>{{ $product->category->name }}</h5> --}}
+										<h5>[product->category->name]</h5>
 									</td>
 								</tr>
 							</tbody>

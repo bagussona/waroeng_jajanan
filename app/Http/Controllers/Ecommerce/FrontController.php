@@ -39,7 +39,7 @@ class FrontController extends Controller
 
     }
 
-    public function categoryProduct($slug)
+    public function categoryProduct($name)
     {
     //    //JADI QUERYNYA ADALAH KITA CARI DULU KATEGORI BERDASARKAN SLUG, SETELAH DATANYA DITEMUKAN
     //    //MAKA SLUG AKAN MENGAMBIL DATA PRODUCT YANG BERELASI MENGGUNAKAN METHOD PRODUCT() YANG TELAH DIDEFINISIKAN PADA FILE CATEGORY.PHP SERTA DIURUTKAN BERDASARKAN CREATED_AT DAN DI-LOAD 12 DATA PER SEKALI LOAD
@@ -49,13 +49,14 @@ class FrontController extends Controller
     //    $getQty->showQtyCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
     //    $jmlQty = $getQty->showQtyCart();
     //     //LOAD VIEW YANG SAMA YAKNI PRODUCT.BLADE.PHP KARENA TAMPILANNYA AKAN KITA BUAT SAMA JUGA
-    //     return view('ecommerce.product', compact('products', 'jmlQty'));
+        // return view('ecommerce.product', compact('products', 'jmlQty'));
+        return view('ecommerce.product');
 
 
 
     }
 
-    public function show($slug)
+    public function show($name)
     {
     // //QUERY UNTUK MENGAMBIL SINGLE DATA BERDASARKAN SLUG-NYA
     // $product = Product::with(['category'])->where('slug', $slug)->first();
@@ -65,6 +66,7 @@ class FrontController extends Controller
     // $jmlQty = $getQty->showQtyCart();
     // //LOAD VIEW SHOW.BLADE.PHP DAN PASSING DATA PRODUCT
     // return view('ecommerce.show', compact('product', 'jmlQty'));
+    return view('ecommerce.show');
 
 
 

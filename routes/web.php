@@ -53,8 +53,8 @@ Route::group([
 ], function () {
 
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home
-Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
-Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
+Route::get('/category/{name}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
+Route::get('/product/{name}', 'Ecommerce\FrontController@show')->name('front.show_product');
 
 Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');
 Route::get('/cart', 'Ecommerce\CartController@listCart')->name('front.list_cart');

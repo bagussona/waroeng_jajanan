@@ -35,12 +35,16 @@
                         @guest
 
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login/Register</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login / Register</a>
                             <ul class="dropdown-menu">
-                                <div class="list-group">
-                                    <a href="{{ route('login') }}" class="list-group-item list-group-item-action">Login</a>
-                                    <a href="{{ route('register') }}" class="list-group-item list-group-item-action">Register</a>
-                                </div>
+                                {{-- <div class="list-group"> --}}
+                                    <li class="nav-link">
+                                        <a href="{{ route('login') }}" class="nav-link">Sign In</a>
+                                    </li>
+                                    <li class="nav-link">
+                                        <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
+                                    </li>
+                                    {{-- </div> --}}
                             </ul>
                         </li>
                     </ul>
