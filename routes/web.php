@@ -34,18 +34,18 @@ Auth::routes(['verify' => true]);
 // ], function() {
     Route::get('/admin', 'Web\HomeController@index')->name('home'); //index admin
 
-    Route::get('/category', 'Web\CategoryController@index')->name('category.index'); //index category
-    Route::post('/category', 'Web\CategoryController@store')->name('category.store');
-    Route::get('/category/{category_id}/edit', 'Web\CategoryController@edit')->name('category.edit');
-    Route::put('/category/{category_id}', 'Web\CategoryController@edit')->name('category.update');
-    Route::delete('/category/{category_id}', 'Web\CategoryController@destroy')->name('category.destroy');
+    Route::get('/admin/category', 'Web\CategoryController@index')->name('category.index'); //index category
+    Route::post('/admin/category', 'Web\CategoryController@store')->name('category.store');
+    Route::get('/admin/category/{category_id}/edit', 'Web\CategoryController@edit')->name('category.edit');
+    Route::put('/admin/category/{category_id}/edit', 'Web\CategoryController@update')->name('category.update');
+    Route::delete('/admin/category/{category_id}/delete', 'Web\CategoryController@destroy')->name('category.destroy');
 
-    Route::get('/products', 'Web\ProductController@index')->name('products.index'); //index product
-    Route::get('/products/show', 'Web\ProductController@create')->name('products.create');
-    Route::post('/products/show', 'Web\ProductController@store')->name('products.store');
-    Route::get('/products/{products_id}/edit', 'Web\ProductController@edit')->name('products.edit');
-    Route::put('/products/{products_id}', 'Web\ProductController@edit')->name('products.update');
-    Route::delete('/products/{products_id}', 'Web\ProductController@destroy')->name('products.destroy');
+    Route::get('/admin/products', 'Web\ProductController@index')->name('products.index'); //index product
+    Route::get('/admin/products/show', 'Web\ProductController@create')->name('products.create');
+    Route::post('/admin/products/show', 'Web\ProductController@store')->name('products.store');
+    Route::get('/admin/products/{products_id}/edit', 'Web\ProductController@edit')->name('products.edit');
+    Route::put('/admin/products/{products_id}', 'Web\ProductController@edit')->name('products.update');
+    Route::delete('/admin/products/{products_id}', 'Web\ProductController@destroy')->name('products.destroy');
     // Route::resource('product', 'Web\ProductController');
 
 // });

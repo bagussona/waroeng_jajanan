@@ -1,31 +1,3 @@
-{{-- @extends('layouts.app') --}}
-
-{{-- @section('content') --}}
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -503,7 +475,7 @@
                   <tr>
                     <td class="content-cell" style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 35px;">
                       <div class="f-fallback">
-                        <h1 style="margin-top: 0; color: #333333; font-size: 22px; font-weight: bold; text-align: center;" align="center">Selamat Datang!</h1>
+                        <h1 style="margin-top: 0; color: #333333; font-size: 22px; font-weight: bold; text-align: center;" align="center">Selamat Datang! {{ Auth::user()->name }}</h1>
                         <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Terima kasih telah mendaftar di {{ env('APP_NAME') }}. Untuk bisa segera mendapat akses penuh ke {{ env('APP_NAME') }}, silahkan verifikasi email terlebih dulu..</p>
                         <!-- Action -->
                         <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Belum menerima email? Klik tombol dibawah ini..</p>
@@ -524,8 +496,8 @@
                           </tr>
                         </table>
 
-                        <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">If you have any questions, feel free to <a href="mailto:{{ env('MAIL_USERNAME') }}" style="color: #3869D4;">email our customer team</a>. (We're lightning quick at replying.)
-                        <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Thanks,
+                        <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Ada pertanyaan? Langsung saja kirim email ke <a href="mailto:{{ env('MAIL_USERNAME') }}" style="color: #3869D4;">customer_care</a>. (Diproses dalam 1 x 8 jam kerja.)
+                        <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Terima Kasih,
                           <br />{{ env('APP_NAME') }} Team</p>
                       </div>
                     </td>
@@ -540,8 +512,8 @@
                     <td class="content-cell" align="center" style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 35px;">
                       <p class="f-fallback sub align-center" style="font-size: 13px; line-height: 1.625; text-align: center; color: #6B6E76; margin: .4em 0 1.1875em;" align="center">© 2021 {{ env('APP_NAME') }}. All rights reserved.</p>
                       <p class="f-fallback sub align-center" style="font-size: 13px; line-height: 1.625; text-align: center; color: #6B6E76; margin: .4em 0 1.1875em;" align="center">
-                        <br />Kretek, Bantul City.
-                        <br />D.I Yogyakarta
+                        <br />Bantul, Yogyakarta, Indonesia.
+                        <br />Koperasi Pondok Programmer
                       </p>
                     </td>
                   </tr>
@@ -554,5 +526,3 @@
     </table>
   </body>
 </html>
-
-{{-- @endsection --}}

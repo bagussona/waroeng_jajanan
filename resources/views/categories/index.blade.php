@@ -88,47 +88,47 @@
                                     </thead>
                                     <tbody>
                                       	<!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $CATEGORY -->
-                                        {{-- @forelse ($category as $val) --}}
+                                        @forelse ($category as $val)
                                         <tr>
                                             {{-- <td>new arrival</td> --}}
-                                            {{-- <td><strong>{{ $val->name }}</strong></td> --}}
-                                            <td><strong>[val->name]</strong></td>
+                                            <td><strong>{{ $val->name }}</strong></td>
+                                            {{-- <td><strong>[val->name]</strong></td> --}}
 
                                           	<!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
                                             {{-- <td>{{ $val->parent ? $val->parent->name:'-' }}</td> --}}
                                             {{-- <td>['parent']</td> --}}
 
                                             <!-- FORMAT TANGGAL KETIKA KATEGORI DIINPUT SESUAI FORMAT INDONESIA -->
-                                            {{-- <td>{{ $val->created_at->format('d-m-Y') }}</td> --}}
-                                            <td>[2021/7/30]</td>
-                                            {{-- <td>{{ $val->updated->format('d-m-Y') }}</td> --}}
-                                            <td>[2021/7/30]</td>
+                                            <td>{{ $val->created_at->format('d-m-Y') }}</td>
+                                            {{-- <td>[2021/7/30]</td> --}}
+                                            <td>{{ $val->updated_at->format('d-m-Y') }}</td>
+                                            {{-- <td>[2021/7/30]</td> --}}
                                             <td>
 
                                                 <!-- FORM ACTION UNTUK METHOD DELETE -->
-                                                {{-- <form action="{{ route('category.destroy', $val->id) }}" method="post"> --}}
-                                                <form action="" method="POST">
+                                                <form action="{{ route('category.destroy', $val->id) }}" method="POST">
+                                                {{-- <form action="" method="POST"> --}}
                                                     <!-- KONVERSI DARI @ CSRF & @ METHOD AKAN DIJELASKAN DIBAWAH -->
                                                     @csrf
                                                     @method('DELETE')
-                                                    {{-- <a href="{{ route('category.edit', $val->id) }}" class="btn btn-warning btn-sm">Edit</a> --}}
-                                                    <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                                    <a href="{{ route('category.edit', $val->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                    {{-- <a href="" class="btn btn-warning btn-sm">Edit</a> --}}
+                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
                                         <!-- JIKA DATA CATEGORY KOSONG, MAKA AKAN DIRENDER KOLOM DIBAWAH INI  -->
-                                        {{-- @empty --}}
+                                        @empty
                                         <tr>
                                             <td colspan="5" class="text-center">Tidak ada data</td>
                                         </tr>
-                                        {{-- @endforelse --}}
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
                             <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
                             {{-- {!! $category->links() !!} --}}
-                            [pagination]
+                            {{-- [pagination] --}}
                         </div>
                     </div>
                 </div>

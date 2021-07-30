@@ -70,6 +70,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
             'email' => $data['email'],
+            'nohape' => 026244112,
+            'gender' => 'Undefined',
             'password' => Hash::make($data['password']),
         ]);
     }

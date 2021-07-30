@@ -9,62 +9,56 @@ use App\Http\Controllers\Controller;
 class CategoryController extends Controller
 {
     public function index(){
-        // $category = Category::with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
-        // $parent = Category::getParent()->orderBy('name', 'DESC')->get();
-        // return view('categories.index', compact('category', 'parent'));
-        return view('categories.index');
+        $category = Category::all();
 
-
+        return view('categories.index', compact('category'));
     }
 
     public function store(Request $request){
-        // $this->validate($request, [
-        //     'name' => 'required|string|max:50|unique:categories'
-        //     ]);
-        // $request->request->add(['slug' => $request->name]);
-        // Category::create($request->except('_token'));
-        // return redirect(route('category.index'))->with(['success' => 'Kategori baru ditambahkan!']);
+        $this->validate($request, [
+            'name' => 'required|string|max:50|unique:categories'
+            ]);
 
+        Category::create([
+            'name' => $request->get('name'),
+        ]);
 
-
+        return redirect(route('category.index'))->with(['success' => 'Kategori baru ditambahkan!']);
     }
 
     public function edit($id){
-        // $category = Category::find($id); //Query track by ID
-        // $parent = Category::getParent()->orderBy('name', 'ASC')->get();
-        // return view('categories.edit', compact('category', 'parent'));
+        $category = Category::find($id); //Query track by ID
 
-
+        // dd($category);
+        return view('categories.edit', compact('category'));
 
     }
 
     public function update(Request $request, $id){
-        // $this->validate($request, [
-        //     'name' => 'required|string|max:50|unique:categories,name,' . $id
-        // ]);
-        // $category = Category::find($id);
-        // $category->update([
-        //     'name' => $request->name,
-        //     'parent_id' => $request->parent_id
-        // ]);
-        // return redirect(route('category.index'))->with(['success' => 'Kategori berhasil di update!']);
+        // dd($request);
 
+        $this->validate($request, [
+            'name' => 'required|string|max:50' . $id
+        ]);
+        $category = Category::find($id);
+        $category->update([
+            'name' => $request->name,
+        ]);
 
+        // dd($category);
+
+        return redirect(route('category.index'))->with(['success' => 'Kategori berhasil di update!']);
 
     }
 
     public function destroy($id){
-    //     $category = Category::withCount(['child', 'product'])->find($id);
-    //     if ($category->child_count == 0 && $category->product_count == 0){
-    //         $category->delete();
+        // dd($id);
+        // $category = Category::withCount(['child', 'product'])->find($id);
+        // if ($category->child_count == 0 && $category->product_count == 0){
+            // $id->delete();
+        Category::where('id', $id)->delete();
 
-    //         return redirect(route('category.index'))->with(['success' => 'Kategori berhasil dihapus!']);
-    //     }
-    //         return redirect(route('category.index'))->with(['failed' => 'Kategori memiliki anak kategori!']);
-
-
-
-    }
-
+           return redirect(route('category.index'))->with(['success' => 'Kategori berhasil dihapus!']);
+        }
 
 }
