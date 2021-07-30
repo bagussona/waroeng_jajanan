@@ -12,6 +12,7 @@ class CategoryController extends Controller
         // $category = Category::with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
         // $parent = Category::getParent()->orderBy('name', 'DESC')->get();
         // return view('categories.index', compact('category', 'parent'));
+        return view('categories.index');
 
 
     }

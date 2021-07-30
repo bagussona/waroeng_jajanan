@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-    public function index(){
+public function index(){
         // $product = Product::with(['category'])->orderBy('created_at', 'DESC');
         // if (request()->q != ''){
         //     $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
@@ -27,7 +27,8 @@ class ProductController extends Controller
 
     public function create(){
     //     $category = Category::orderBy('name', 'DESC')->get();
-    //     return view('products.create', compact('category'));
+        // return view('products.create', compact('category'));
+        return view('products.create');
 
 
     }

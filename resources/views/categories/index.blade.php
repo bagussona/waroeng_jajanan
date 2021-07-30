@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>List Kategori</title>
+    <title>Kategori - {{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')
@@ -19,30 +19,32 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Kategori Baru</h4>
+                            <h4 class="card-title">Tambah Kategori Baru</h4>
                         </div>
                         <div class="card-body">
 
                             <form action="{{ route('category.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">Kategori</label>
+                                    <label for="name">Nama Kategori</label>
                                     <input type="text" name="name" class="form-control" required>
                                     <p class="text-danger">{{ $errors->first('name') }}</p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="parent_id">Kategori</label>
+                                {{-- <div class="form-group"> --}}
+                                    {{-- <label for="parent_id">Kategori</label> --}}
                                     <!-- VARIABLE $PARENT PADA METHOD INDEX KITA GUNAKAN DISINI -->
                                     <!-- UNTUK MENAMPILKAN DATA CATEGORY YANG PARENT_ID NYA NULL -->
                                     <!-- UNTUK DIPILIH SEBAGAI PARENT TAPI SIFATNYA OPTIONAL -->
-                                    <select name="parent_id" class="form-control">
-                                        <option value="">None</option>
-                                        @foreach ($parent as $row)
-                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <p class="text-danger">{{ $errors->first('name') }}</p>
-                                </div>
+                                    {{-- <select name="parent_id" class="form-control"> --}}
+                                        {{-- <option value="">None</option> --}}
+                                        {{-- @foreach ($parent as $row) --}}
+                                        {{-- <option value="{{ $row->id }}">{{ $row->name }}</option> --}}
+                                        {{-- <option value="1">[row->name]</option> --}}
+                                        {{-- @endforeach --}}
+                                    {{-- </select> --}}
+                                    {{-- <p class="text-danger">{{ $errors->first('name') }}</p> --}}
+                                    {{-- <p class="text-danger">{{ $errors->first('name') }}</p> --}}
+                                {{-- </div> --}}
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-sm">Tambah</button>
                                 </div>
@@ -76,48 +78,57 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Status</th>
+                                            {{-- <th>Status</th> --}}
                                             <th>Kategori</th>
-                                            <th>Parent</th>
+                                            {{-- <th>Parent</th> --}}
                                             <th>Created At</th>
+                                            <th>Updated At</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                       	<!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $CATEGORY -->
-                                        @forelse ($category as $val)
+                                        {{-- @forelse ($category as $val) --}}
                                         <tr>
-                                            <td>new arrival</td>
-                                            <td><strong>{{ $val->name }}</strong></td>
+                                            {{-- <td>new arrival</td> --}}
+                                            {{-- <td><strong>{{ $val->name }}</strong></td> --}}
+                                            <td><strong>[val->name]</strong></td>
 
                                           	<!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
-                                            <td>{{ $val->parent ? $val->parent->name:'-' }}</td>
+                                            {{-- <td>{{ $val->parent ? $val->parent->name:'-' }}</td> --}}
+                                            {{-- <td>['parent']</td> --}}
 
                                             <!-- FORMAT TANGGAL KETIKA KATEGORI DIINPUT SESUAI FORMAT INDONESIA -->
-                                            <td>{{ $val->created_at->format('d-m-Y') }}</td>
+                                            {{-- <td>{{ $val->created_at->format('d-m-Y') }}</td> --}}
+                                            <td>[2021/7/30]</td>
+                                            {{-- <td>{{ $val->updated->format('d-m-Y') }}</td> --}}
+                                            <td>[2021/7/30]</td>
                                             <td>
 
                                                 <!-- FORM ACTION UNTUK METHOD DELETE -->
-                                                <form action="{{ route('category.destroy', $val->id) }}" method="post">
+                                                {{-- <form action="{{ route('category.destroy', $val->id) }}" method="post"> --}}
+                                                <form action="" method="POST">
                                                     <!-- KONVERSI DARI @ CSRF & @ METHOD AKAN DIJELASKAN DIBAWAH -->
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('category.edit', $val->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                    {{-- <a href="{{ route('category.edit', $val->id) }}" class="btn btn-warning btn-sm">Edit</a> --}}
+                                                    <a href="" class="btn btn-warning btn-sm">Edit</a>
                                                     <button class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
                                         <!-- JIKA DATA CATEGORY KOSONG, MAKA AKAN DIRENDER KOLOM DIBAWAH INI  -->
-                                        @empty
+                                        {{-- @empty --}}
                                         <tr>
                                             <td colspan="5" class="text-center">Tidak ada data</td>
                                         </tr>
-                                        @endforelse
+                                        {{-- @endforelse --}}
                                     </tbody>
                                 </table>
                             </div>
                             <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
-                            {!! $category->links() !!}
+                            {{-- {!! $category->links() !!} --}}
+                            [pagination]
                         </div>
                     </div>
                 </div>

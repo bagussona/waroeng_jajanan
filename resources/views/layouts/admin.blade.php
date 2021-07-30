@@ -4,9 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<meta name="description" content="Footwear_Shop - Aplikasi Ecommerce">
-	<meta name="author" content="Footwear">
-  <meta name="keyword" content="jual beli sepatu lokal dan luar negri asli!">
+	<meta name="description" content="Waroeng Jajanan">
 
   	<!-- PERHATIKAN BAGIAN INI, APAPUN YANG DIAPIT OLEH (@)SECTION('TITLE') PADA VIEW YANG MENGGUNAKAN MASTER INI, MAKA AKAN ME-REPLACE CODE DIBAWAH -->
   	<!-- TITLE MENJADI KATA KUNCI, JADI JIKA MENGGUNAKAN KEY TITLE PADA (@)YIELD, MAKA GUNAKAN KEY TITLE PADA (@)SECTION -->
@@ -42,7 +40,7 @@
 
     <footer class="app-footer">
         <div>
-            <a href="{{ route('home') }}">footwear_shop</a>
+            <a href="{{ route('home') }}">Waroeng Jajanan</a>
             <span>&copy; 2021</span>
         </div>
         <div class="ml-auto">

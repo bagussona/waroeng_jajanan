@@ -20,7 +20,7 @@
                                 List Product
 
                                 <!-- BUAT TOMBOL UNTUK MENGARAHKAN KE HALAMAN ADD PRODUK -->
-                                <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
+                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
                             </h4>
                         </div>
                         <div class="card-body">
@@ -35,7 +35,7 @@
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
 
                             <!-- BUAT FORM UNTUK PENCARIAN, METHODNYA ADALAH GET -->
-                            <form action="{{ route('product.index') }}" method="get">
+                            <form action="{{ route('products.index') }}" method="get">
                                 <div class="input-group mb-3 col-md-3 float-right">
                                     <!-- KEMUDIAN NAME-NYA ADALAH Q YANG AKAN MENAMPUNG DATA PENCARIAN -->
                                     {{-- <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}"> --}}
@@ -51,11 +51,13 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>Image</th>
                                             <th>Produk</th>
                                             <th>Harga</th>
+                                            <th>Harga Supplier</th>
+                                            <th>Supplier</th>
                                             <th>Created At</th>
-                                            <th>Status</th>
+                                            <th>Stock</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -71,12 +73,14 @@
                                                 <img src="" width="100px" height="100px" alt="">
                                             </td>
                                             <td>
-                                                <strong> [name] </strong><br>
+                                                <strong> [product->name] </strong><br>
                                                 <!-- ADAPUN NAMA KATEGORINYA DIAMBIL DARI HASIL RELASI PRODUK DAN KATEGORI -->
                                                 <label>kategori: <span class="badge badge-info">[category->name]</span></label><br>
-                                                <label>pcs: <span class="badge badge-info">[pcs]</span></label>
+                                                <label>description: <span class="badge badge-info">[description]</span></label>
                                             </td>
                                             <td>Rp 0</td>
+                                            <td>Rp 0</td>
+                                            <td>[supplier]</td>
                                             <td>[created_at]</td>
 
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
@@ -94,11 +98,11 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        @empty
+                                        {{-- @empty --}}
                                         <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                            <td colspan="8" class="text-center">Tidak ada data</td>
                                         </tr>
-                                        @endforelse
+                                        {{-- @endforelse --}}
                                     </tbody>
                                 </table>
                             </div>

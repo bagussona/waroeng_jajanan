@@ -3,7 +3,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="{{ asset('ecommerce/img/logo/logo-tookoo-dil.png')}}" width="130" height="29" alt="Footwear_Shop">
+        <img class="navbar-brand-full" src="{{ asset('ecommerce/img/logo/logo-waroeng-jajanan.png')}}" width="80" height="30" alt="Waroeng Jajanan">
         <img class="navbar-brand-minimized" src="{{ asset('assets/dw-01/img/brand/sygnet.svg') }}" width="30" height="30" alt="CoreUI Logo">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
@@ -17,7 +17,7 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img class="img-avatar" src="{{ asset('assets/img/avatars/6-1.jpg') }}" alt="admin@admin.com.sg">
+                <img class="img-avatar" src="{{ asset('assets/img/avatars/6-1.jpg') }}" alt="admin@waroengjajanan.com">
             </a>
         <div class="dropdown-menu dropdown-menu-right">
             <div class="dropdown-header text-center">

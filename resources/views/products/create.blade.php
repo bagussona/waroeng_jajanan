@@ -14,7 +14,7 @@
         <div class="animated fadeIn">
 
           	<!-- TAMBAHKAN ENCTYPE="" KETIKA MENGIRIMKAN FILE PADA FORM -->
-            <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" >
+            <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data" >
                 @csrf
                 <div class="row">
                     <div class="col-md-8">
@@ -26,6 +26,7 @@
                                 <div class="form-group">
                                     <label for="name">Nama Produk</label>
                                     <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                                    {{-- <p class="text-danger">{{ $errors->first('name') }}</p> --}}
                                     <p class="text-danger">{{ $errors->first('name') }}</p>
                                 </div>
                                 <div class="form-group">
@@ -42,10 +43,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="status">Status</label>
+                                    <label for="status">Supplier</label>
                                     <select name="status" class="form-control" required>
-                                        <option value="1" {{ old('status') == '1' ? 'selected':'' }}>Publish</option>
-                                        <option value="0" {{ old('status') == '0' ? 'selected':'' }}>Draft</option>
+                                        <option value="Wandi Grosir">[supplier->name]</option>
+                                        {{-- <option value="0" {{ old('status') == '0' ? 'selected':'' }}>Draft</option> --}}
                                     </select>
                                     <p class="text-danger">{{ $errors->first('status') }}</p>
                                 </div>
@@ -55,25 +56,35 @@
                                     <!-- DATA KATEGORI DIGUNAKAN DISINI, SEHINGGA SETIAP PRODUK USER BISA MEMILIH KATEGORINYA -->
                                     <select name="category_id" class="form-control">
                                         <option value="">Pilih</option>
-                                        @foreach ($category as $row)
-                                        <option value="{{ $row->id }}" {{ old('category_id') == $row->id ? 'selected':'' }}>{{ $row->name }}</option>
-                                        @endforeach
+                                        {{-- @foreach ($category as $row) --}}
+                                        {{-- <option value="{{ $row->id }}" {{ old('category_id') == $row->id ? 'selected':'' }}>{{ $row->name }}</option> --}}
+                                        <option value="1">[kategori->name]</option>
+                                        {{-- @endforeach --}}
                                     </select>
                                     <p class="text-danger">{{ $errors->first('category_id') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Harga</label>
-                                    <input type="number" name="price" class="form-control" value="{{ old('price') }}" required>
+                                    <label for="price">Harga Pcs</label>
+                                    {{-- <input type="number" name="price" class="form-control" value="{{ old('price') }}" required> --}}
+                                    <input type="number" name="price" class="form-control" value="price" required>
                                     <p class="text-danger">{{ $errors->first('price') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="weight">Berat</label>
-                                    <input type="number" name="weight" class="form-control" value="{{ old('weight') }}" required>
+                                    <label for="price">Harga Pcs Supplier</label>
+                                    {{-- <input type="number" name="price" class="form-control" value="{{ old('price') }}" required> --}}
+                                    <input type="number" name="price_supplier" class="form-control" value="price_supplier" required>
+                                    <p class="text-danger">{{ $errors->first('price_supplier') }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight">Stock</label>
+                                    {{-- <input type="number" name="weight" class="form-control" value="{{ old('weight') }}" required> --}}
+                                    <input type="number" name="weight" class="form-control" value="weight" required>
                                     <p class="text-danger">{{ $errors->first('weight') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Foto Produk</label>
-                                    <input type="file" name="image" class="form-control" value="{{ old('image') }}" required>
+                                    {{-- <input type="file" name="image" class="form-control" value="{{ old('image') }}" required> --}}
+                                    <input type="file" name="image" class="form-control" value="image" required>
                                     <p class="text-danger">{{ $errors->first('image') }}</p>
                                 </div>
                                 <div class="form-group">

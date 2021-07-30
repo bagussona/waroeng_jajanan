@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 
 ##dikomen dlu krn sdg maintenance!
@@ -32,15 +32,21 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 //     'prefix' => 'administrator',
 //     'middleware' => 'auth'
 // ], function() {
-    Route::get('/home', 'Web\HomeController@index')->name('home');
+    Route::get('/admin', 'Web\HomeController@index')->name('home'); //index admin
 
-    Route::get('/category', 'Web\CategoryController@index')->name('category.index');
+    Route::get('/category', 'Web\CategoryController@index')->name('category.index'); //index category
     Route::post('/category', 'Web\CategoryController@store')->name('category.store');
     Route::get('/category/{category_id}/edit', 'Web\CategoryController@edit')->name('category.edit');
     Route::put('/category/{category_id}', 'Web\CategoryController@edit')->name('category.update');
     Route::delete('/category/{category_id}', 'Web\CategoryController@destroy')->name('category.destroy');
 
-    Route::resource('product', 'Web\ProductController');
+    Route::get('/products', 'Web\ProductController@index')->name('products.index'); //index product
+    Route::get('/products/show', 'Web\ProductController@create')->name('products.create');
+    Route::post('/products/show', 'Web\ProductController@store')->name('products.store');
+    Route::get('/products/{products_id}/edit', 'Web\ProductController@edit')->name('products.edit');
+    Route::put('/products/{products_id}', 'Web\ProductController@edit')->name('products.update');
+    Route::delete('/products/{products_id}', 'Web\ProductController@destroy')->name('products.destroy');
+    // Route::resource('product', 'Web\ProductController');
 
 // });
 
