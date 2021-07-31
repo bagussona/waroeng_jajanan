@@ -29,7 +29,6 @@ class SupplyController extends Controller
     public function edit($id){
         $supplier = Supplier::find($id); //Query track by ID
 
-        // dd($category);
         return view('supplier.edit', compact('supplier'));
 
     }
@@ -45,8 +44,6 @@ class SupplyController extends Controller
             'name' => $request->name,
         ]);
 
-        // dd($category);
-
         return redirect(route('supplier.index'))->with(['success' => 'Supplier berhasil di update!']);
 
     }
@@ -56,6 +53,6 @@ class SupplyController extends Controller
 
         Supplier::where('id', $id)->delete();
 
-           return redirect(route('supplier.index'))->with(['success' => 'Supplier berhasil dihapus!']);
-        }
+        return redirect(route('supplier.index'))->with(['success' => 'Supplier berhasil dihapus!']);
+    }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Category;
-use App\Product;
 use App\ProductAdmin;
 use App\Supplier;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-public function index(){
+
+    public function index(){
         $product = ProductAdmin::with(['category', 'supplier'])->orderBy('created_at', 'DESC');
 
         if (request()->q != ''){
@@ -32,14 +33,54 @@ public function index(){
 
         return view('products.create', compact('category', 'supplier'));
 
-
     }
 
     public function store(Request $request){
 
-            $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+        $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
 
-            ProductAdmin::create([
+        ProductAdmin::create([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'supplier_id' => $request->get('supplier_id'),
+            'category_id' => $request->get('category_id'),
+            'price_supplier' => $request->get('price_supplier'),
+            'stock' => $request->get('stock'),
+            'price' => $request->get('price'),
+            'image' => $response,
+        ]);
+
+        return redirect(route('products.index'))->with(['success' => 'Produk berhasil ditambahkan!' ]);
+
+    }
+
+    public function edit($id){
+        $product = ProductAdmin::find($id);
+        $category = Category::orderBy('name', 'DESC')->get();
+        $supplier = Supplier::orderBy('name', 'DESC')->get();
+
+        return view('products.edit', compact('product', 'category', 'supplier'));
+
+    }
+
+    public function update(Request $request, $id){
+        // dd($request);
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'description' => 'required',
+            'supplier_id' => 'required',
+            'category_id' => 'required',
+            'price_supplier' => 'required|integer',
+            'stock' => 'required|integer',
+            'price' => 'required|integer',
+            'image' => 'image|mimes:png,jpeg,jpg' //IMAGE BISA NULLABLE
+        ]);
+
+        if (empty($_FILES['image']['tmp_name']) ) {
+
+            $product = ProductAdmin::find($id);
+            // dd($product->image);
+            $product->update([
                 'name' => $request->get('name'),
                 'description' => $request->get('description'),
                 'supplier_id' => $request->get('supplier_id'),
@@ -47,63 +88,42 @@ public function index(){
                 'price_supplier' => $request->get('price_supplier'),
                 'stock' => $request->get('stock'),
                 'price' => $request->get('price'),
-                'image' => $response,
-            ]);
+                'image' => $product->image
+                ]);
+            } else {
 
-            return redirect(route('products.index'))->with(['success' => 'Produk berhasil ditambahkan!' ]);
+                $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                // dd($response);
+                $product = ProductAdmin::find($id);
+                $product->update([
+                    'name' => $request->get('name'),
+                    'description' => $request->get('description'),
+                    'supplier_id' => $request->get('supplier_id'),
+                    'category_id' => $request->get('category_id'),
+                    'price_supplier' => $request->get('price_supplier'),
+                    'stock' => $request->get('stock'),
+                    'price' => $request->get('price'),
+                    'image' => $response
+                    ]);
 
+            }
 
+            // dd($product);
 
-        }
+        return redirect(route('products.index'))->with(['success' => 'Produk berhasil di update!']);
 
-        public function edit($id){
-            $product = ProductAdmin::find($id);
-            $category = Category::orderBy('name', 'DESC')->get();
+    }
 
-            return view('products.edit', compact('product', 'category'));
+    public function destroy($id){
+        $product = ProductAdmin::find($id);
+        $product->delete();
 
-        }
+        return redirect(route('products.index'))->with(['success' => 'Produk Sudah Dihapus']);
 
-        public function update(Request $request, $id){
-            // dd($request);
-            // $this->validate($request, [
-            //     'name' => 'required|string|max:100',
-            //     'description' => 'required',
-            //     'category_id' => 'required|exists:categories,id',
-            //     'price' => 'required|integer',
-            //     'weight' => 'required|integer',
-            //     'image' => 'nullable|image|mimes:png,jpeg,jpg' //IMAGE BISA NULLABLE
-            // ]);
+    }
 
-            // $product = Product::find($id);
-            //     $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-            //     // dd($response);
+    ## transfer from warehouse to display store
 
-            // $product->update([
-            //     'name' => $request->name,
-            //     'description' => $request->description,
-            //     'category_id' => $request->category_id,
-            //     'price' => $request->price,
-            //     'weight' => $request->weight,
-            //     'image' => $response
-            // ]);
-            // return redirect(route('product.index'))->with(['success' => 'Produk berhasil di update!']);
+    $
 
-
-
-        }
-
-        public function destroy($id){
-            $product = Product::find($id);
-            // // \Cloudinary\Uploader::destroy($id);
-            $product->delete();
-
-            return redirect(route('product.index'))->with(['success' => 'Produk Sudah Dihapus']);
-
-
-        }
-
-        // public function destroyImage(){
-        //     $cloudinary->uploadApi()->destroy('filename');
-        // }
 }

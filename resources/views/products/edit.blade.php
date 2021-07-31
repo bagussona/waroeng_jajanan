@@ -14,7 +14,7 @@
         <div class="animated fadeIn">
 
           	<!-- PASTIKAN MENGIRIMKAN ID PADA ROUTE YANG DIGUNAKAN -->
-            <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data" >
+            <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data" >
                 @csrf
               	<!-- KARENA UPDATE MAKA KITA GUNAKAN DIRECTIVE DIBAWAH INI -->
                 @method('PUT')
@@ -45,14 +45,14 @@
                             <div class="card-body">
                                 <div class="form-group">
 
-                                    <label for="supplier">Supplier</label>
-                                    <select name="supplier" class="form-control" required>
-                                        <option value="wandi_grosir">Wandi Grosir</option>
+                                    <label for="supplier_id">Supplier</label>
+                                    <select name="supplier_id" class="form-control" required>
                                         <option value="">Pilih Supplier</option>
-                                        <option value="warjan">Waroeng Jajanan</option>
-                                        {{-- <option value="0" {{ old('supplier') == '0' ? 'selected':'' }}>Draft</option> --}}
+                                        @foreach ($supplier as $row)
+                                        <option value="{{ $row->id }}" {{ $product->supplier_id == $row->id ? 'selected' :'' }}>{{ $row->name }}</option>
+                                        @endforeach
                                     </select>
-                                    <p class="text-danger">{{ $errors->first('supplier') }}</p>
+                                    <p class="text-danger">{{ $errors->first('supplier_id') }}</p>
 
                                 </div>
                                 <div class="form-group">
@@ -100,7 +100,7 @@
                                     <p class="text-danger">{{ $errors->first('image') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-primary btn-sm">Update</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                 </div>
                             </div>
                         </div>

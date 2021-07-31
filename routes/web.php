@@ -53,7 +53,7 @@ Auth::routes(['verify' => true]);
     Route::get('/admin/products/show', 'Web\ProductController@create')->name('products.create');
     Route::post('/admin/products/show', 'Web\ProductController@store')->name('products.store');
     Route::get('/admin/products/{products_id}/edit', 'Web\ProductController@edit')->name('products.edit');
-    Route::put('/admin/products/{products_id}', 'Web\ProductController@edit')->name('products.update');
+    Route::put('/admin/products/{products_id}/edit', 'Web\ProductController@update')->name('products.update');
     Route::delete('/admin/products/{products_id}', 'Web\ProductController@destroy')->name('products.destroy');
 
 // });
