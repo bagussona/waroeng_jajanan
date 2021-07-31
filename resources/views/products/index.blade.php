@@ -64,51 +64,51 @@
                                     <tbody>
                                         <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
                                         <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
-                                        {{-- @forelse ($product as $row) --}}
+                                        @forelse ($product as $row)
                                         <tr>
                                             <td>
                                                 <!-- TAMPILKAN GAMBAR DARI FOLDER PUBLIC/STORAGE/PRODUCTS -->
                                                 {{-- <img src="{{ asset('storage/products/' . $row->image) }}" width="100px" height="100px" alt="{{ $row->name }}"> --}}
-                                                {{-- <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}"> --}}
-                                                <img src="" width="100px" height="100px" alt="">
+                                                <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}">
+                                                {{-- <img src="" width="100px" height="100px" alt=""> --}}
                                             </td>
                                             <td>
-                                                <strong> [product->name] </strong><br>
+                                                <strong> {{ $row->name }} </strong><br>
                                                 <!-- ADAPUN NAMA KATEGORINYA DIAMBIL DARI HASIL RELASI PRODUK DAN KATEGORI -->
-                                                <label>kategori: <span class="badge badge-info">[category->name]</span></label><br>
-                                                <label>description: <span class="badge badge-info">[description]</span></label>
+                                                <label>kategori: <span class="badge badge-info">{{ $row->category->name }}</span></label><br>
+                                                {{-- <label>description: <span class="badge badge-info">{!! $row->description !!}</span></label> --}}
                                             </td>
-                                            <td>Rp 0</td>
-                                            <td>Rp 0</td>
-                                            <td>[supplier]</td>
-                                            <td>[created_at]</td>
+                                            <td>Rp. {{ number_format($row->price) }}</td>
+                                            <td>Rp. {{ number_format($row->price_supplier) }}</td>
+                                            <td>{{ $row->supplier }}</td>
+                                            <td>{{ $row->created_at->format('d-m-Y') }}</td>
 
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
                                             {{-- <td>{!! $row->status_label !!}</td> --}}
-                                            <td>[stok]</td>
+                                            <td>{{ $row->stock }}</td>
                                             <td>
                                                 <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
-                                                {{-- <form action="{{ route('product.destroy', $row->id) }}" method="post"> --}}
-                                                <form action="" method="POST">
+                                                <form action="{{ route('products.destroy', $row->id) }}" method="post">
+                                                {{-- <form action="" method="POST"> --}}
                                                     @csrf
                                                     @method('DELETE')
-                                                    {{-- <a href="{{ route('product.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a> --}}
-                                                    <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                                    <a href="{{ route('products.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                    {{-- <a href="" class="btn btn-warning btn-sm">Edit</a> --}}
+                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
-                                        {{-- @empty --}}
+                                        @empty
                                         <tr>
                                             <td colspan="8" class="text-center">Tidak ada data</td>
                                         </tr>
-                                        {{-- @endforelse --}}
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
                             <!-- MEMBUAT LINK PAGINASI JIKA ADA -->
-                            {{-- {!! $product->links() !!} --}}
-                            [pagination]
+                            {!! $product->links() !!}
+                            {{-- [pagination] --}}
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Nama Produk</label>
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Insert new product" required>
                                     {{-- <p class="text-danger">{{ $errors->first('name') }}</p> --}}
                                     <p class="text-danger">{{ $errors->first('name') }}</p>
                                 </div>
@@ -33,7 +33,7 @@
                                     <label for="description">Deskripsi</label>
 
                                     <!-- TAMBAHKAN ID YANG NNTINYA DIGUNAKAN UTK MENGHUBUNGKAN DENGAN CKEDITOR -->
-                                    <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
+                                    <textarea name="description" id="description" class="form-control">Insert deskripsi..</textarea>
                                     <p class="text-danger">{{ $errors->first('description') }}</p>
                                 </div>
                             </div>
@@ -43,48 +43,51 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="status">Supplier</label>
-                                    <select name="status" class="form-control" required>
-                                        <option value="Wandi Grosir">[supplier->name]</option>
-                                        {{-- <option value="0" {{ old('status') == '0' ? 'selected':'' }}>Draft</option> --}}
+                                    <label for="supplier">Supplier</label>
+                                    <select name="supplier" class="form-control" required>
+                                        <option value="">Pilih Supplier</option>
+                                        <option value="wandi_grosir">Wandi Grosir</option>
+                                        <option value="warjan">Waroeng Jajanan</option>
+                                        {{-- <option value="0" {{ old('supplier') == '0' ? 'selected':'' }}>Draft</option> --}}
                                     </select>
-                                    <p class="text-danger">{{ $errors->first('status') }}</p>
+                                    <p class="text-danger">{{ $errors->first('supplier') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="category_id">Kategori</label>
 
                                     <!-- DATA KATEGORI DIGUNAKAN DISINI, SEHINGGA SETIAP PRODUK USER BISA MEMILIH KATEGORINYA -->
                                     <select name="category_id" class="form-control">
-                                        <option value="">Pilih</option>
-                                        {{-- @foreach ($category as $row) --}}
-                                        {{-- <option value="{{ $row->id }}" {{ old('category_id') == $row->id ? 'selected':'' }}>{{ $row->name }}</option> --}}
-                                        <option value="1">[kategori->name]</option>
-                                        {{-- @endforeach --}}
+                                        <option value="">Pilih Category</option>
+                                        @foreach ($category as $row)
+                                        <option value="{{ $row->id }}" {{ old('category_id') == $row->id ? 'selected':'' }}>{{ $row->name }}</option>
+                                        {{-- <option value="{{ $row->name }}">{{ $row->name }}</option> --}}
+                                        {{-- <option value="1">[kategori->name]</option> --}}
+                                        @endforeach
                                     </select>
-                                    <p class="text-danger">{{ $errors->first('category_id') }}</p>
+                                    {{-- <p class="text-danger">{{ $errors->first('category_id') }}</p> --}}
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Harga Pcs</label>
-                                    {{-- <input type="number" name="price" class="form-control" value="{{ old('price') }}" required> --}}
-                                    <input type="number" name="price" class="form-control" value="price" required>
-                                    <p class="text-danger">{{ $errors->first('price') }}</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Harga Pcs Supplier</label>
-                                    {{-- <input type="number" name="price" class="form-control" value="{{ old('price') }}" required> --}}
-                                    <input type="number" name="price_supplier" class="form-control" value="price_supplier" required>
+                                    <label for="price_supplier">Harga Pcs Supplier</label>
+                                    <input type="number" name="price_supplier" class="form-control" placeholder="0 /Pcs" required>
+                                    {{-- <input type="number" name="price_supplier" class="form-control" placeholder="price_supplier" required> --}}
                                     <p class="text-danger">{{ $errors->first('price_supplier') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="weight">Stock</label>
+                                    <label for="stock">Stock</label>
                                     {{-- <input type="number" name="weight" class="form-control" value="{{ old('weight') }}" required> --}}
-                                    <input type="number" name="weight" class="form-control" value="weight" required>
-                                    <p class="text-danger">{{ $errors->first('weight') }}</p>
+                                    <input type="number" name="stock" class="form-control" placeholder="banyaknya prdocut (tidak per dusbox)" required>
+                                    <p class="text-danger">{{ $errors->first('stock') }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Harga Pcs Display</label>
+                                    <input type="number" name="price" class="form-control" placeholder="0 /Pcs" required>
+                                    {{-- <input type="number" name="price" class="form-control" value="price" required> --}}
+                                    <p class="text-danger">{{ $errors->first('price') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Foto Produk</label>
-                                    {{-- <input type="file" name="image" class="form-control" value="{{ old('image') }}" required> --}}
-                                    <input type="file" name="image" class="form-control" value="image" required>
+                                    <input type="file" name="image" class="form-control" required>
+                                    {{-- <input type="file" name="image" class="form-control" value="image" required> --}}
                                     <p class="text-danger">{{ $errors->first('image') }}</p>
                                 </div>
                                 <div class="form-group">

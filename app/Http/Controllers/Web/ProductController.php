@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Product;
+use App\ProductAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -13,55 +14,51 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
 public function index(){
-        // $product = Product::with(['category'])->orderBy('created_at', 'DESC');
-        // if (request()->q != ''){
-        //     $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
-        // }
-        // $product = $product->paginate(10);
-        // return view('products.index', compact('product'));
-        return view('products.index');
+        $product = ProductAdmin::with(['category'])->orderBy('created_at', 'DESC');
 
+        if (request()->q != ''){
+            $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
+        }
 
+        $product = $product->paginate(10);
+        return view('products.index', compact('product'));
 
     }
 
     public function create(){
-    //     $category = Category::orderBy('name', 'DESC')->get();
-        // return view('products.create', compact('category'));
-        return view('products.create');
+        $category = Category::orderBy('name', 'DESC')->get();
+
+        return view('products.create', compact('category'));
 
 
     }
 
     public function store(Request $request){
 
-            // $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-            // $product = Product::create([
-            //     'name' => $request->name,
-            //     'slug' => $request->name,
-            //     'category_id' => $request->category_id,
-            //     'description' => $request->description,
-            //     'image' => $response,
-            //     'price' => $request->price,
-            //     'weight' => $request->weight,
-            //     'status' => $request->status,
-            // ]);
+            $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
 
-            // // dd($product);
-            // // dd($response->getRealPath());
+            ProductAdmin::create([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'supplier' => $request->get('supplier'),
+                'category_id' => $request->get('category_id'),
+                'price' => $request->get('price'),
+                'stock' => $request->get('stock'),
+                'price_supplier' => $request->get('price_supplier'),
+                'image' => $response,
+            ]);
 
-            // return redirect(route('product.index'))->with(['success' => 'Produk berhasil ditambahkan!' ]);
+            return redirect(route('products.index'))->with(['success' => 'Produk berhasil ditambahkan!' ]);
 
 
 
         }
 
         public function edit($id){
-            // $product = Product::find($id);
-            // $category = Category::orderBy('name', 'DESC')->get();
-            // return view('products.edit', compact('product', 'category'));
+            $product = ProductAdmin::find($id);
+            $category = Category::orderBy('name', 'DESC')->get();
 
-
+            return view('products.edit', compact('product', 'category'));
 
         }
 
@@ -95,11 +92,11 @@ public function index(){
         }
 
         public function destroy($id){
-            // $product = Product::find($id);
+            $product = Product::find($id);
             // // \Cloudinary\Uploader::destroy($id);
-            // $product->delete();
+            $product->delete();
 
-            // return redirect(route('product.index'))->with(['success' => 'Produk Sudah Dihapus']);
+            return redirect(route('product.index'))->with(['success' => 'Produk Sudah Dihapus']);
 
 
         }

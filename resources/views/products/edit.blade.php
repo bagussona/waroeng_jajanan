@@ -14,7 +14,7 @@
         <div class="animated fadeIn">
 
           	<!-- PASTIKAN MENGIRIMKAN ID PADA ROUTE YANG DIGUNAKAN -->
-            <form action="{{ route('product.update', $product->id) }}" method="post" enctype="multipart/form-data" >
+            <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data" >
                 @csrf
               	<!-- KARENA UPDATE MAKA KITA GUNAKAN DIRECTIVE DIBAWAH INI -->
                 @method('PUT')
@@ -24,7 +24,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Edit Produk</h4>
+                                <h4 class="card-title">Update Produk</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
@@ -44,12 +44,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select name="status" class="form-control" required>
-                                        <option value="1" {{ $product->status == '1' ? 'selected':'' }}>Publish</option>
-                                        <option value="0" {{ $product->status == '0' ? 'selected':'' }}>Draft</option>
+
+                                    <label for="supplier">Supplier</label>
+                                    <select name="supplier" class="form-control" required>
+                                        <option value="wandi_grosir">Wandi Grosir</option>
+                                        <option value="">Pilih Supplier</option>
+                                        <option value="warjan">Waroeng Jajanan</option>
+                                        {{-- <option value="0" {{ old('supplier') == '0' ? 'selected':'' }}>Draft</option> --}}
                                     </select>
-                                    <p class="text-danger">{{ $errors->first('status') }}</p>
+                                    <p class="text-danger">{{ $errors->first('supplier') }}</p>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="category_id">Kategori</label>
@@ -61,15 +65,27 @@
                                     </select>
                                     <p class="text-danger">{{ $errors->first('category_id') }}</p>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="price">Harga</label>
-                                    <input type="number" name="price" class="form-control" value="{{ $product->price }}" required>
-                                    <p class="text-danger">{{ $errors->first('price') }}</p>
+                                    <label for="price_supplier">Harga Pcs Supplier</label>
+                                    <input type="number" name="price_supplier" class="form-control" value="{{ $product->price_supplier }}" required>
+                                    {{-- <input type="number" name="price_supplier" class="form-control" placeholder="0 /Pcs" required> --}}
+                                    {{-- <input type="number" name="price_supplier" class="form-control" placeholder="price_supplier" required> --}}
+                                    <p class="text-danger">{{ $errors->first('price_supplier') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="weight">Berat</label>
-                                    <input type="number" name="weight" class="form-control" value="{{ $product->weight }}" required>
-                                    <p class="text-danger">{{ $errors->first('weight') }}</p>
+                                    <label for="stock">Stock</label>
+                                    <input type="number" name="stock" class="form-control" value="{{ $product->stock }}" required>
+                                    {{-- <input type="number" name="weight" class="form-control" value="{{ old('weight') }}" required> --}}
+                                    {{-- <input type="number" name="stock" class="form-control" placeholder="insert stock" required> --}}
+                                    <p class="text-danger">{{ $errors->first('stock') }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Harga Pcs Display</label>
+                                    <input type="number" name="price" class="form-control" value="{{ $product->price }}" required>
+                                    {{-- <input type="number" name="price" class="form-control" placeholder="0 /Pcs" required> --}}
+                                    {{-- <input type="number" name="price" class="form-control" value="price" required> --}}
+                                    <p class="text-danger">{{ $errors->first('price') }}</p>
                                 </div>
 
                               	<!-- GAMBAR TIDAK LAGI WAJIB, JIKA DIISI MAKA GAMBAR AKAN DIGANTI, JIKA DIBIARKAN KOSONG MAKA GAMBAR TIDAK AKAN DIUPDATE -->
