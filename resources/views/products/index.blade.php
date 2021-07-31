@@ -80,12 +80,12 @@
                                             </td>
                                             <td>Rp. {{ number_format($row->price) }}</td>
                                             <td>Rp. {{ number_format($row->price_supplier) }}</td>
-                                            <td>{{ $row->supplier }}</td>
+                                            <td>{{ $row->supplier->name }}</td>
                                             <td>{{ $row->created_at->format('d-m-Y') }}</td>
 
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
                                             {{-- <td>{!! $row->status_label !!}</td> --}}
-                                            <td>{{ $row->stock }}</td>
+                                            <td>{{ $row->stock }} Pcs</td>
                                             <td>
                                                 <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
                                                 <form action="{{ route('products.destroy', $row->id) }}" method="post">
@@ -108,7 +108,6 @@
                             </div>
                             <!-- MEMBUAT LINK PAGINASI JIKA ADA -->
                             {!! $product->links() !!}
-                            {{-- [pagination] --}}
                         </div>
                     </div>
                 </div>

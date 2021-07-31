@@ -43,14 +43,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="supplier">Supplier</label>
-                                    <select name="supplier" class="form-control" required>
+                                    <label for="supplier_id">Supplier</label>
+                                    <select name="supplier_id" class="form-control" required>
                                         <option value="">Pilih Supplier</option>
-                                        <option value="wandi_grosir">Wandi Grosir</option>
-                                        <option value="warjan">Waroeng Jajanan</option>
-                                        {{-- <option value="0" {{ old('supplier') == '0' ? 'selected':'' }}>Draft</option> --}}
+                                        @foreach ($supplier as $row)
+
+                                        <option value="{{ $row->id }}" {{old('supplier_id') == $row->id ? 'selected' :''}}>{{ $row->name }}</option>
+                                        @endforeach
+
                                     </select>
-                                    <p class="text-danger">{{ $errors->first('supplier') }}</p>
+                                    <p class="text-danger">{{ $errors->first('supplier_id') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="category_id">Kategori</label>

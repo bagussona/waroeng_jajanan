@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use App\Product;
 use App\ProductAdmin;
+use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
 public function index(){
-        $product = ProductAdmin::with(['category'])->orderBy('created_at', 'DESC');
+        $product = ProductAdmin::with(['category', 'supplier'])->orderBy('created_at', 'DESC');
 
         if (request()->q != ''){
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
@@ -27,8 +28,9 @@ public function index(){
 
     public function create(){
         $category = Category::orderBy('name', 'DESC')->get();
+        $supplier = Supplier::orderBy('name', 'DESC')->get();
 
-        return view('products.create', compact('category'));
+        return view('products.create', compact('category', 'supplier'));
 
 
     }
@@ -40,11 +42,11 @@ public function index(){
             ProductAdmin::create([
                 'name' => $request->get('name'),
                 'description' => $request->get('description'),
-                'supplier' => $request->get('supplier'),
+                'supplier_id' => $request->get('supplier_id'),
                 'category_id' => $request->get('category_id'),
-                'price' => $request->get('price'),
-                'stock' => $request->get('stock'),
                 'price_supplier' => $request->get('price_supplier'),
+                'stock' => $request->get('stock'),
+                'price' => $request->get('price'),
                 'image' => $response,
             ]);
 
