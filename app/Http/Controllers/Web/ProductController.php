@@ -124,6 +124,4 @@ class ProductController extends Controller
 
     ## transfer from warehouse to display store
 
-    $
-
 }

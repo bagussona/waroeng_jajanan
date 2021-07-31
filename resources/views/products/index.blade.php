@@ -21,6 +21,7 @@
 
                                 <!-- BUAT TOMBOL UNTUK MENGARAHKAN KE HALAMAN ADD PRODUK -->
                                 <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
+                                {{-- <a href="{{ route('products.datastore') }}" class="btn btn-lighting btn-sm float-right">Transfer</a> --}}
                             </h4>
                         </div>
                         <div class="card-body">
@@ -96,7 +97,11 @@
                                                     {{-- <a href="" class="btn btn-warning btn-sm">Edit</a> --}}
                                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
-                                            </td>
+                                                {{-- <form action="{{ route('products.edit', $row->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus fa-lg"></i></button>
+                                                </form>
+                                            </td> --}}
                                         </tr>
                                         @empty
                                         <tr>

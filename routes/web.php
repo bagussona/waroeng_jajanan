@@ -54,11 +54,17 @@ Auth::routes(['verify' => true]);
     Route::post('/admin/products/show', 'Web\ProductController@store')->name('products.store');
     Route::get('/admin/products/{products_id}/edit', 'Web\ProductController@edit')->name('products.edit');
     Route::put('/admin/products/{products_id}/edit', 'Web\ProductController@update')->name('products.update');
-    Route::delete('/admin/products/{products_id}', 'Web\ProductController@destroy')->name('products.destroy');
+    Route::delete('/admin/products/{products_id}/delete', 'Web\ProductController@destroy')->name('products.destroy');
+
+    //Store Management
+    Route::get('/admin/store', 'Web\SpbController@index')->name('datastore.index');
+    Route::post('/admin/store', 'Web\SpbController@store')->name('datastore.store');
+    Route::post('/admin/store/bbk', 'Web\SpbController@store')->name('datastore.bbk');
+    Route::delete('/admin/store/{spb_id}/delete', 'Web\SpbController@destroy')->name('datastore.destroy');
 
 // });
 
-// Route::get('/', 'Ecommerce\FrontController@index')->name('front.index')->middleware('verified');
+//Toko Display
 Route::get('/', 'Ecommerce\FrontController@index')->name('front.index'); //index guest
 Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact'); //index contact pengaduan
 
