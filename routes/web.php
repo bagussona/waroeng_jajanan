@@ -59,7 +59,8 @@ Auth::routes(['verify' => true]);
     //Store Management
     Route::get('/admin/store', 'Web\SpbController@index')->name('datastore.index');
     Route::post('/admin/store', 'Web\SpbController@store')->name('datastore.store');
-    Route::post('/admin/store/bbk', 'Web\SpbController@store')->name('datastore.bbk');
+    Route::post('/admin/store/bbk', 'Web\SpbController@bbk')->name('datastore.bbk');
+    // Route::get('/admin/store/bbk', 'Web\SpbController@getDataBBK');
     Route::delete('/admin/store/{spb_id}/delete', 'Web\SpbController@destroy')->name('datastore.destroy');
 
 // });
@@ -73,8 +74,8 @@ Route::group([
 ], function () {
 
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home
-Route::get('/category/{name}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
-Route::get('/product/{name}', 'Ecommerce\FrontController@show')->name('front.show_product');
+Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
+Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
 
 Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');
 Route::get('/cart', 'Ecommerce\CartController@listCart')->name('front.list_cart');

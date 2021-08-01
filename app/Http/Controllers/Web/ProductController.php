@@ -41,6 +41,7 @@ class ProductController extends Controller
 
         ProductAdmin::create([
             'name' => $request->get('name'),
+            'slug' => $request->get('name'),
             'description' => $request->get('description'),
             'supplier_id' => $request->get('supplier_id'),
             'category_id' => $request->get('category_id'),

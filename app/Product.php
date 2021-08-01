@@ -2,13 +2,18 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     protected $fillable = [
-        'name', 'category_id', 'description', 'image', 'price', 'stock', 'supplier_id'
+        'name', 'slug', 'category', 'description', 'image', 'price', 'stock', 'supplier'
     ];
+
+    public function setSlugAttribute($value){
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     public function category(){
         return $this->belongsTo(Category::class);

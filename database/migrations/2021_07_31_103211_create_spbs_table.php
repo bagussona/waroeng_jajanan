@@ -17,6 +17,7 @@ class CreateSpbsTable extends Migration
             $table->bigIncrements('id');
             $table->string('author');
             $table->string('name');
+            $table->string('slug');
             $table->text('description')->nullable();
             $table->string('supplier');
             $table->string('category');

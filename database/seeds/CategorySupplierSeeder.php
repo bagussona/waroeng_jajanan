@@ -14,15 +14,18 @@ class CategorySupplierSeeder extends Seeder
     public function run()
     {
         Category::create([
-            'name' => 'Bolu Cake'
+            'name' => 'Bolu Cake',
+            'slug' => 'bolu-cake'
         ]);
 
         Category::create([
-            'name' => 'Biskuit'
+            'name' => 'Biskuit',
+            'slug' => 'biskuit'
         ]);
 
         Category::create([
-            'name' => 'Kerupuk'
+            'name' => 'Kerupuk',
+            'slug' => 'kerupuk'
         ]);
 
         Supplier::create([

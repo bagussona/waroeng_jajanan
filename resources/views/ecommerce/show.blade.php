@@ -10,11 +10,11 @@
 		<div class="banner_inner d-flex align-items-center">
 			<div class="container">
 				<div class="banner_content text-center">
-                    <h2>[produk->name]</h2>
+                    <h2>{{ $products->name}}</h2>
 					<div class="page_link">
                         <a href="{{ url('/') }}">Home</a>
-                        {{-- <a href="#">{{ $product->name }}</a> --}}
-                        <a href="#">[product->name]</a>
+                        <a href="#">{{ $products->name }}</a>
+                        {{-- <a href="#">[product->name]</a> --}}
 					</div>
 				</div>
 			</div>
@@ -30,8 +30,8 @@
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									{{-- <img class="d-block w-100" src="{{ $product->image }}" alt="{{ $product->name }}"> --}}
-									<img class="d-block w-100" src="" alt="">
+									<img class="d-block w-100" src="{{ $products->image }}" alt="{{ $products->name }}">
+									{{-- <img class="d-block w-100" src="" alt=""> --}}
 								</div>
 							</div>
 						</div>
@@ -39,15 +39,15 @@
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						{{-- <h3>{{ $product->name }}</h3> --}}
-						<h3>[product->name]</h3>
-                        {{-- <h2>Rp {{ number_format($product->price) }}</h2> --}}
-                        <h2>Rp 0 }}</h2>
+						<h3>{{ $products->name }}</h3>
+						{{-- <h3>[product->name]</h3> --}}
+                        <h2>Rp {{ number_format($products->price) }}</h2>
+                        {{-- <h2>Rp 0 }}</h2> --}}
 						<ul class="list">
 							<li>
 								<a class="active" href="#">
-                                    {{-- <span>Kategori</span> : {{ $product->category->name }}</a> --}}
-                                    <span>Kategori</span> : [product->category->name]</a>
+                                    <span>Kategori</span> : {{ $products->category }}</a>
+                                    {{-- <span>Kategori</span> : [product->category->name]</a> --}}
 							</li>
 						</ul>
 						<p></p>
@@ -57,8 +57,8 @@
 							<label for="qty">Quantity:</label>
 							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
 
-							{{-- <input type="hidden" name="product_id" value="{{ $product->id }}" class="form-control"> --}}
-							<input type="hidden" name="product_id" value="" class="form-control">
+							<input type="hidden" name="product_id" value="{{ $products->id }}" class="form-control">
+							{{-- <input type="hidden" name="product_id" value="" class="form-control"> --}}
 
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button">
@@ -85,28 +85,32 @@
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item">
-					<a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Description</a>
+					<a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Specification</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Specification</a>
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Description</a>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="color: black">
-					{{-- {!! $product->description !!} --}}
-					[product->description]
-				</div>
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="color: black">
+
+
+                    {!! $products->description !!}
+					{{-- [product->description] --}}
+
+
+                </div>
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<div class="table-responsive">
 						<table class="table">
 							<tbody>
 								<tr>
 									<td>
-										<h5>Berat</h5>
+										<h5>Stock</h5>
 									</td>
 									<td>
-                                        {{-- <h5>{{ $product->weight }} gr</h5> --}}
-                                        <h5>[product->stock]</h5>
+                                        <h5>{{ $products->stock }} /pcs</h5>
+                                        {{-- <h5>[product->stock]</h5> --}}
 									</td>
 								</tr>
 								<tr>
@@ -114,8 +118,8 @@
 										<h5>Harga</h5>
 									</td>
 									<td>
-										{{-- <h5>Rp {{ number_format($product->price) }}</h5> --}}
-										<h5>Rp 0</h5>
+										<h5>Rp {{ number_format($products->price) }}</h5>
+										{{-- <h5>Rp 0</h5> --}}
 									</td>
 								</tr>
 								<tr>
@@ -123,8 +127,8 @@
 										<h5>Kategori</h5>
 									</td>
 									<td>
-										{{-- <h5>{{ $product->category->name }}</h5> --}}
-										<h5>[product->category->name]</h5>
+										<h5>{{ $products->category }}</h5>
+										{{-- <h5>[product->category->name]</h5> --}}
 									</td>
 								</tr>
 							</tbody>

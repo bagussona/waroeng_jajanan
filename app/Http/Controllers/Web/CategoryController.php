@@ -19,9 +19,9 @@ class CategoryController extends Controller
             'name' => 'required|string|max:50|unique:categories'
             ]);
 
-        Category::create([
-            'name' => $request->get('name'),
-        ]);
+        $request->request->add(['slug' => $request->name]);
+
+        Category::create($request->except('_token'));
 
         return redirect(route('category.index'))->with(['success' => 'Kategori baru ditambahkan!']);
     }

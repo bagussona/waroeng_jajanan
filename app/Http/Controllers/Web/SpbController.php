@@ -48,15 +48,52 @@ class SpbController extends Controller
         }
 
         public function bbk(){
-            Spb::all();
+            // $databbk = Spb::all();
+            $author = Auth::user()->email;
 
-            // $stock_display = $request->datastore_stock;
-            // $stock_gudang = $data[0]['stock'];
+            // $bbk = [];
+            $data_bbk = Spb::where('author', $author)->get();
+            foreach ($data_bbk as $databbk) {
 
-            // $stock_akhir = $stock_gudang - $stock_display;
-        // ProductAdmin::where('name', $name)->update('stock', $stock_akhir);
+                    Product::create([
+                        'name' => $databbk['name'],
+                        'slug' => $databbk['slug'],
+                        'description' => $databbk['description'],
+                        'supplier' => $databbk['supplier'],
+                        'category' => $databbk['category'],
+                        'stock' => $databbk['stock'],
+                        'price' => $databbk['price'],
+                        'image' => $databbk['image'],
+                    ]);
 
-    }
+            }
+
+            return redirect(route('datastore.index'))->with(['success' => 'Berhasil di bbk!' ]);
+
+        }
+
+        // public function bbk(){
+        //     $databbk = $this->getdataBbk();
+        //     // $author = $databbk;
+        //     // dd($databbk);
+        //     foreach ($databbk as $bbm) {
+        //         // dd($bbm);
+        //         Product::create([
+        //             'name' => $bbm['name'],
+        //             'description' => $bbm['description'],
+        //             'supplier' => $bbm['supplier'],
+        //             'category' => $bbm['category'],
+        //             'stock' => $bbm['stock'],
+        //             'price' => $bbm['price'],
+        //             'image' => $bbm['image'],
+        //         ]);
+        //     }
+
+
+            // $authorsbbk = Spb::where('author', $author)->get();
+
+            // return redirect(route('datastore.index'))->with(['success' => 'Berhasil di bbk!' ]);
+    // }
 
     public function destroy($id){
         // dd($id);

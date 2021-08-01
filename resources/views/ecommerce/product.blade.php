@@ -40,42 +40,42 @@
                             </select>
                         </div>
                         <div class="right_page ml-auto">
-                            {{-- Pagination --}}
-                            [pagination]
+                            Pagination
+                            {{-- [pagination] --}}
                         </div>
                     </div>
                     <div class="latest_product_inner row">
 
                       	<!-- PROSES LOOPING DATA PRODUK, SAMA DENGAN CODE YANG ADDA DIHALAMAN HOME -->
-                        {{-- @forelse ($products as $row) --}}
+                        @forelse ($products as $row)
                         <div class="col-lg-3 col-md-3 col-sm-6">
                             <div class="f_p_item">
                                 <div class="f_p_img">
-                                    {{-- <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->name }}"> --}}
-                                    <img class="img-fluid" src="" alt="">
+                                    <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->name }}">
+                                    {{-- <img class="img-fluid" src="" alt=""> --}}
                                     <div class="p_icon">
-                                        {{-- <a href="{{ url('/product/' . $row->slug) }}"> --}}
-                                        <a href="">
+                                        <a href="{{ url('/product/' . $row->slug) }}">
+                                        {{-- <a href=""> --}}
                                             <i class="lnr lnr-cart"></i>
                                         </a>
                                     </div>
                                 </div>
-                                {{-- <a href="{{ url('/product/' . $row->slug) }}"> --}}
+                                <a href="{{ url('/product/' . $row->slug) }}">
                                 <a href="">
-                                    {{-- <h4>{{ $row->name }}</h4> --}}
-                                    <h4>[row name]</h4>
+                                    <h4>{{ $row->name }}</h4>
+                                    {{-- <h4>[row name]</h4> --}}
                                 </a>
-                                {{-- <h5>Rp {{ number_format($row->price) }}</h5> --}}
-                                <h5>Rp 0</h5>
+                                <h5>Rp {{ number_format($row->price) }}</h5>
+                                {{-- <h5>Rp 0</h5> --}}
                             </div>
                         </div>
-                        {{-- @empty --}}
+                        @empty
 
                         <div class="col-md-12">
                             <h3 class="text-center">Tidak ada produk</h3>
                         </div>
 
-                        {{-- @endforelse --}}
+                        @endforelse
                       <!-- PROSES LOOPING DATA PRODUK, SAMA DENGAN CODE YANG ADDA DIHALAMAN HOME -->
                     </div>
                 </div>
@@ -89,28 +89,14 @@
                                 <ul class="list">
 
                                   	<!-- PROSES LOOPING DATA KATEGORI -->
-                                    {{-- @foreach ($categories as $category) --}}
+                                    @foreach ($categories as $category)
                                     <li>
 
                                       	<!-- MODIFIKASI BAGIAN INI -->
-                                        {{-- <strong><a href="{{ url('/category/' . $category->slug) }}">{{ $category->name }}</a></strong> --}}
-                                        <strong><a href="">[category->name]</a></strong>
-                                        <!-- MODIFIKASI BAGIAN INI -->
-
-                                        <!-- JIKA CHILDNYA ADA, MAKA KATEGORI INI AKAN MENG-EXPAND DATA DIBAWAHNYA -->
-                                        {{-- <a href="{{ $category->child_count > 0 ? '#':url('/category/' . $category->slug) }}">{{ $category->name }}</a> --}}
-
-                                      	<!-- PROSES LOOPING DATA CHILD KATEGORI -->
-                                        {{-- @foreach ($category->child as $child) --}}
-                                        <ul class="list" style="display: block">
-                                            <li>
-                                                {{-- <a href="{{ url('/category/' . $child->slug) }}">{{ $child->name }}</a> --}}
-                                                <a href="">[child->name]</a>
-                                            </li>
-                                        </ul>
-                                        {{-- @endforeach --}}
+                                        <strong><a href="{{ url('/category/' . $category->slug) }}">{{ $category->name }}</a></strong>
+\
                                     </li>
-                                    {{-- @endforeach --}}
+                                    @endforeach
 
                                 </ul>
                             </div>
@@ -121,8 +107,8 @@
 
           	<!-- GENERATE PAGINATION PRODUK -->
             <div class="row">
-                {{-- {{ $products->links() }} --}}
-                [product->links]
+                {{ $products->links() }}
+                {{-- [product->links] --}}
             </div>
         </div>
     </section>

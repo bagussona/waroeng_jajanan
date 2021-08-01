@@ -37,31 +37,46 @@
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login / Register</a>
                             <ul class="dropdown-menu">
-                                {{-- <div class="list-group"> --}}
                                     <li class="nav-link">
                                         <a href="{{ route('login') }}" class="nav-link">Sign In</a>
                                     </li>
                                     <li class="nav-link">
                                         <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
                                     </li>
-                                    {{-- </div> --}}
                             </ul>
                         </li>
                     </ul>
                         @endguest
 
                         @auth
-                        <div class="float-right">
+                        {{-- <div class="float-right">
                             <p>Welcome! {{ Auth::user()->name }}</p>
-                        </div>
+                        </div> --}}
 
                         <div class="float-right">
-                            {{-- <p>WA/SMS: (+62)82128796431</p> --}}
-                            <form action="{{ route('logout') }}" method="POST">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{-- <img class="img-avatar" src="{{ asset('assets/img/avatars/6-1.jpg') }}" alt="admin@waroengjajanan.com"> --}}
+                                <strong>Welcome! {{ Auth::user()->name }}</strong>
+                                </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-header text-center">
+                                    <strong>Welcome! {{ Auth::user()->name }}</strong>
+                                </div>
+                                <div class="divider"></div>
+                                <a class="dropdown-item text-center" href="{{ route('home') }}">
+                                    <strong><i class="fa fa-user"></i> Dashboard</strong>
+                                </a>
+                                <a class="dropdown-item text-center" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <strong><i class="fa fa-lock"></i> Sign Out</strong>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
-                                {{-- <button class="btn btn-lighting" type="submit" value="sign-out"><img src="{{ asset('ecommerce/img/elements/box-arrow-right.svg')}}" alt=""></button> --}}
-                                <button class="btn btn-lighting" type="submit">Sign Out</button>
                             </form>
+                            </div>
                         </div>
                         @endauth
 				</div>
@@ -92,14 +107,13 @@
                                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
                                     <hr>
 									<hr>
+                                    @auth
 									<li class="nav-item">
 										<a href="{{ route('front.UserProfile') }}" class="icons">
 											<i class="fa fa-user" aria-hidden="true"></i>
 										</a>
 									</li>
 									<hr>
-                                    @auth
-
 
 									<li class="nav-item">
                                         <a href="{{ route('front.notfound') }}" class="icons">

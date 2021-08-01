@@ -507,13 +507,13 @@ a {
 .banner_area {
   position: relative;
   z-index: 1;
-  min-height: 395px; }
+  min-height: 535px; }
   .banner_area .banner_inner {
     position: relative;
     overflow: hidden;
     width: 100%;
-    min-height: 395px;
-    background: url(../img/breadcrumb/checkout-bg.jpg) no-repeat center bottom;
+    min-height: 535px;
+    background: url(../img/breadcrumb/checkout-bg.png) no-repeat center bottom;
     background-size: contain;
     z-index: 1; }
     .banner_area .banner_inner .overlay {
@@ -534,7 +534,7 @@ a {
         font-weight: 500;
         margin-top: 120px; }
       .banner_area .banner_inner .banner_content .page_link a {
-        font-size: 14px;
+        font-size: 18px;
         color: #ffffff;
         font-family: "Roboto", sans-serif;
         margin-right: 32px;
@@ -542,7 +542,7 @@ a {
         .banner_area .banner_inner .banner_content .page_link a:before {
           content: "\e87a";
           font-family: 'Linearicons-Free';
-          font-size: 14px;
+          font-size: 18px;
           position: absolute;
           right: -25px;
           top: 50%;

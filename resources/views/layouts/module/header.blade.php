@@ -24,7 +24,7 @@
                 <strong>Welcome! {{ Auth::user()->name }}</strong>
             </div>
             <div class="divider"></div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route('front.UserProfile') }}">
                 <i class="fa fa-user"></i> Profile
             </a>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
