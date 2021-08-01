@@ -16,6 +16,7 @@ class CreateProductAdminsTable extends Migration
         Schema::create('product_admins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('slug');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('category_id');

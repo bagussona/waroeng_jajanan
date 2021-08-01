@@ -62,15 +62,15 @@
 
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button">
-								<i class="lnr lnr-chevron-up"></i>
+								<i class="fa fa-plus no-float btn-up-cart"></i>
 							</button>
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
 							 class="reduced items-count" type="button">
-								<i class="lnr lnr-chevron-down"></i>
+								<i class="fa fa-minus no-float btn-down-cart"></i>
 							</button>
 						</div>
 						<div class="card_area">
-							<button class="main_btn">Add to Cart</button>
+							<button type="submit" class="main_btn">Add to Cart</button>
 						</div>
 						</form>
 					</div>

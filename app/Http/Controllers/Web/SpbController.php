@@ -30,18 +30,24 @@ class SpbController extends Controller
 
         $data = ProductAdmin::where('name', $name)->get();
 
+        $data_stock_warehouse = $data[0]['stock'];
+        $stock_transfer = $request->get('datastore_stock');
+
         // dd($data[0]['supplier']['name']);
         Spb::create([
             'author' => Auth::user()->email,
             'name' => $request->get('datastore_name'),
+            'slug' => $data[0]['slug'],
             'description' => $data[0]['description'],
             'supplier' => $data[0]['supplier']['name'],
             'category' => $data[0]['category']['name'],
-            'stock' => $request->get('datastore_stock'),
+            'stock' => $stock_transfer,
             'price' => $data[0]['price'],
             'image' => $data[0]['image']
             ]);
 
+            $stock_warehouse = $data_stock_warehouse - $stock_transfer;
+            ProductAdmin::where('name', $name)->update(['stock' => $stock_warehouse]);
 
             return redirect(route('datastore.index'))->with(['success' => 'Produk berhasil di BBK!' ]);
 
@@ -68,37 +74,27 @@ class SpbController extends Controller
 
             }
 
+            Spb::where('author', $author)->delete();
+
             return redirect(route('datastore.index'))->with(['success' => 'Berhasil di bbk!' ]);
 
         }
 
-        // public function bbk(){
-        //     $databbk = $this->getdataBbk();
-        //     // $author = $databbk;
-        //     // dd($databbk);
-        //     foreach ($databbk as $bbm) {
-        //         // dd($bbm);
-        //         Product::create([
-        //             'name' => $bbm['name'],
-        //             'description' => $bbm['description'],
-        //             'supplier' => $bbm['supplier'],
-        //             'category' => $bbm['category'],
-        //             'stock' => $bbm['stock'],
-        //             'price' => $bbm['price'],
-        //             'image' => $bbm['image'],
-        //         ]);
-        //     }
-
-
-            // $authorsbbk = Spb::where('author', $author)->get();
-
-            // return redirect(route('datastore.index'))->with(['success' => 'Berhasil di bbk!' ]);
-    // }
-
     public function destroy($id){
         // dd($id);
+        $spb = Spb::where('id', $id)->get();
+        // dd($spb[0]['name']);
+        $bbk_name = $spb[0]['name'];
+        $bbk_stock = $spb[0]['stock'];
 
-        $spb = Spb::where('id', $id)->delete();
+        $product = ProductAdmin::where('name', $bbk_name)->get();
+        // dd($product[0]['stock']);
+        $stock_warehouse = $product[0]['stock'];
+
+        $spb_stock_cancel = $stock_warehouse + $bbk_stock;
+        ProductAdmin::where('name', $bbk_name)->update(['stock' => $spb_stock_cancel]);
+
+        Spb::where('id', $id)->delete();
 
         return redirect(route('datastore.index'))->with(['success' => 'Spb berhasil dihapus!' ]);
     }

@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Order;
-use App\OrderDetail;
+use App\OrderHistory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Cookie;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -29,44 +30,51 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request){
-        // $this->validate($request, [
-        //     'product_id' => 'required|exists:products,id',
-        //     'qty' => 'required|integer'
-        // ]);
 
-        // $carts = json_decode($request->cookie('dw-carts'), true);
+        $uid = Auth::user()->id;
+        // dd($uid);
+        // dd($request->product_id);
+        $this->validate($request, [
+            'product_id' => 'required|exists:products,id',
+            'qty' => 'required|integer'
+        ]);
 
-        //   //CEK JIKA CARTS TIDAK NULL DAN PRODUCT_ID ADA DIDALAM ARRAY CARTS
-        // if ($carts && array_key_exists($request->product_id, $carts)){
-        //       //MAKA UPDATE QTY-NYA BERDASARKAN PRODUCT_ID YANG DIJADIKAN KEY ARRAY
-        //     $carts[$request->product_id]['qty'] += $request->qty;
-        // } else {
-        // //SELAIN ITU, BUAT QUERY UNTUK MENGAMBIL PRODUK BERDASARKAN PRODUCT_ID
-        // $product = Product::find($request->product_id);
-        // //TAMBAHKAN DATA BARU DENGAN MENJADIKAN PRODUCT_ID SEBAGAI KEY DARI ARRAY CARTS
-        // $carts[$request->product_id] = [
-        //     'qty' => $request->qty,
-        //     'product_id' => $product->id,
-        //     'product_name' => $product->name,
-        //     'product_price' => $product->price,
-        //     'product_image' => $product->image
-        // ];
-        // }
+        $qty = $request->get('qty');
+        // dd($qty);
+        $data_produk = Product::find($request->product_id);
+            // dd($data_produk->name);
 
-        //     //BUAT COOKIE-NYA DENGAN NAME DW-CARTS
-        //     //JANGAN LUPA UNTUK DI-ENCODE KEMBALI, DAN LIMITNYA 2800 MENIT ATAU 48 JAM
-        //     $cookie = cookie('dw-carts', json_encode($carts), 2880);
-        //     //STORE KE BROWSER UNTUK DISIMPAN
-        //     // return redirect()->back()->cookie($cookie);
-        //     return redirect()->back()->with(['success' => 'Produk Ditambahkan ke Keranjang'])->cookie($cookie);
+            $name = $data_produk->name;
+            $price = $data_produk->price;
+            $subtotal = $qty * $price;
+            // dd($subtotal);
 
+            Order::create([
+                'tanggal' => date('Y-m-d'),
+                'keterangan' => 'Belum Bayar',
+                'name' => $name,
+                'qty' => $request->qty,
+                'price' => $price,
+                'subtotal' => $subtotal,
+                'user_id' => $uid
+            ]);
 
+            OrderHistory::create([
+                'tanggal' => date('Y-m-d'),
+                'keterangan' => 'Belum Bayar',
+                'name' => $name,
+                'qty' => $request->qty,
+                'price' => $price,
+                'subtotal' => $subtotal,
+                'user_id' => $uid
+            ]);
+
+            return redirect()->back()->with(['success' => 'Produk Ditambahkan ke Keranjang']);
 
     }
 
 
-    public function checkout()
-    {
+    public function checkout(){
     //QUERY UNTUK MENGAMBIL SEMUA DATA PROPINSI
     // $provinces = Province::orderBy('created_at', 'DESC')->get();
     // $getQty = $this->showQtyCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH

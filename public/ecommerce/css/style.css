@@ -3321,7 +3321,7 @@ h6 {
     width: 76px;
     border: 1px solid #eeeeee;
     border-radius: 3px;
-    padding-left: 10px; }
+    padding-left: 30px; }
   .product_count button {
     display: block;
     border: none;
@@ -3336,9 +3336,10 @@ h6 {
     .product_count button:hover {
       color: #222222; }
   .product_count .increase {
-    top: -4px; }
+    bottom: 6px; }
   .product_count .reduced {
-    bottom: -1px; }
+    left: 70px;
+    bottom: 6px; }
 
 .product_description_area {
   padding-bottom: 120px;
