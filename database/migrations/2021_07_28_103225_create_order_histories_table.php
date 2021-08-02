@@ -14,14 +14,12 @@ class CreateOrderHistoriesTable extends Migration
     public function up()
     {
         Schema::create('order_histories', function (Blueprint $table) {
-            $table->id();
-            $table->string('tanggal')->nullable();
-            $table->string('image')->nullable();
-            $table->string('name')->nullable();
-            $table->integer('qty')->nullable();
-            $table->integer('price')->nullable();
+            $table->bigIncrements('id');
+            $table->string('invoice')->unique();
+            $table->string('customer_id');
+            $table->string('customer_name');
+            $table->string('customer_phone');
             $table->integer('subtotal')->nullable()->default(0);
-            $table->string('user_id');
             $table->timestamps();
         });
     }

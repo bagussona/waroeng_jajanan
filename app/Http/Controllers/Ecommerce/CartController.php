@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Order;
+use App\OrderDetail;
 use App\OrderHistory;
 use App\User;
 use Illuminate\Support\Str;
@@ -53,16 +54,6 @@ class CartController extends Controller
             // dd($subtotal);
 
             Order::create([
-                'tanggal' => date('Y-m-d'),
-                'image' => $image,
-                'name' => $name,
-                'qty' => $qty,
-                'price' => $price,
-                'subtotal' => $subtotal,
-                'user_id' => $uid
-            ]);
-
-            OrderHistory::create([
                 'tanggal' => date('Y-m-d'),
                 'image' => $image,
                 'name' => $name,
@@ -135,81 +126,64 @@ class CartController extends Controller
 
     public function processCheckout(Request $request)
     {
+        $email = $request->get('email');
         // //VALIDASI DATANYA
-        // $this->validate($request, [
-        //     'name' => 'required|string|max:100',
-        //     'nohape' => 'required',
-        //     'email' => 'required|email',
-        // ]);
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+        ]);
 
         // //INISIASI DATABASE TRANSACTION
         // //DATABASE TRANSACTION BERFUNGSI UNTUK MEMASTIKAN SEMUA PROSES SUKSES UNTUK KEMUDIAN DI COMMIT AGAR DATA BENAR BENAR DISIMPAN, JIKA TERJADI ERROR MAKA KITA ROLLBACK AGAR DATANYA SELARAS
-        // DB::beginTransaction();
-        // try {
-        //     //CHECK DATA CUSTOMER BERDASARKAN EMAIL
-        //     $customer = Customer::where('email', $request->email)->first();
-        //     //JIKA DIA TIDAK LOGIN DAN DATA CUSTOMERNYA ADA
-        //     if (!auth()->check() && $customer) {
-        //         //MAKA REDIRECT DAN TAMPILKAN INSTRUKSI UNTUK LOGIN
-        //         return redirect()->back()->with(['error' => 'Silahkan Login Terlebih Dahulu']);
-        //     }
+        DB::beginTransaction();
+        try {
+            //CHECK DATA CUSTOMER BERDASARKAN EMAIL
+            $customer = User::where('email', $email)->first();
 
-        //     //AMBIL DATA KERANJANG
-        //     $carts = $this->getCarts();
-        //     //HITUNG SUBTOTAL BELANJAAN
-        //     $subtotal = collect($carts)->sum(function($q) {
-        //         return $q['qty'] * $q['product_price'];
-        //     });
+        //AMBIL DATA KERANJANG
+        $carts = Order::all();
+        $subtotal = collect($carts)->sum(function($q) {
+            return $q['subtotal'];
+        });
 
-        //     //SIMPAN DATA CUSTOMER BARU
-        //     $customer = Customer::create([
-        //         'name' => $request->customer_name,
-        //         'email' => $request->email,
-        //         'phone_number' => $request->customer_phone,
-        //         'address' => $request->customer_address,
-        //         'district_id' => $request->district_id,
-        //         'status' => false
-        //     ]);
 
-        //     //SIMPAN DATA ORDER
-        //     $order = Order::create([
-        //         'invoice' => Str::random(4) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
-        //         'customer_id' => $customer->id,
-        //         'customer_name' => $customer->name,
-        //         'customer_phone' => $request->customer_phone,
-        //         'customer_address' => $request->customer_address,
-        //         'district_id' => $request->district_id,
-        //         'subtotal' => $subtotal
-        //     ]);
+            //SIMPAN DATA ORDER
+            $order = OrderHistory::create([
+                'invoice' => Str::random(4) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
+                'customer_id' => $customer->id,
+                'customer_name' => $request->get('name'),
+                'customer_phone' => $request->nohape,
+                'subtotal' => $subtotal
+            ]);
 
-        //     //LOOPING DATA DI CARTS
-        //     foreach($carts as $row) {
-        //         //AMBIL DATA PRODUK BERDASARKAN PRODUCT_ID
-        //         $product = Product::find($row['product_id']);
-        //         //SIMPAN DETAIL ORDER
-        //         OrderDetail::create([
-        //             'order_id' => $order->id,
-        //             'product_id' => $row['product_id'],
-        //             'price' => $row['product_price'],
-        //             'qty' => $row['qty'],
-        //             'weight' => $product->weight
-        //         ]);
-        //     }
+            //LOOPING DATA DI CARTS
+            foreach($carts as $row) {
+                //AMBIL DATA PRODUK BERDASARKAN PRODUCT_ID
+                $product = Product::find($row['id']);
+                //SIMPAN DETAIL ORDER
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'name' => $row['name'],
+                    'price' => $row['price'],
+                    'qty' => $row['qty']
+                ]);
+            }
 
-        //     //TIDAK TERJADI ERROR, MAKA COMMIT DATANYA UNTUK MENINFORMASIKAN BAHWA DATA SUDAH FIX UNTUK DISIMPAN
-        //     DB::commit();
+            //TIDAK TERJADI ERROR, MAKA COMMIT DATANYA UNTUK MENINFORMASIKAN BAHWA DATA SUDAH FIX UNTUK DISIMPAN
+            DB::commit();
 
-        //     $carts = [];
-        //     //KOSONGKAN DATA KERANJANG DI COOKIE
-        //     $cookie = cookie('dw-carts', json_encode($carts), 2880);
-        //     //REDIRECT KE HALAMAN FINISH TRANSAKSI
-        //     return redirect(route('front.finish_checkout', $order->invoice))->cookie($cookie);
-        // } catch (\Exception $e) {
-        //     //JIKA TERJADI ERROR, MAKA ROLLBACK DATANYA
-        //     DB::rollback();
-        //     //DAN KEMBALI KE FORM TRANSAKSI SERTA MENAMPILKAN ERROR
-        //     return redirect()->back()->with(['error' => $e->getMessage()]);
-        // }
+
+            //KOSONGKAN DATA KERANJANG
+
+            Order::where('user_id', $customer->id)->delete();
+
+            //REDIRECT KE HALAMAN FINISH TRANSAKSI
+            return redirect(route('front.finish_checkout', $order->invoice));
+        } catch (\Exception $e) {
+            //JIKA TERJADI ERROR, MAKA ROLLBACK DATANYA
+            DB::rollback();
+            //DAN KEMBALI KE FORM TRANSAKSI SERTA MENAMPILKAN ERROR
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
 
 
 
@@ -218,13 +192,13 @@ class CartController extends Controller
     public function checkoutFinish($invoice)
     {
     // //AMBIL DATA PESANAN BERDASARKAN INVOICE
-    // $order = Order::with(['district.city'])->where('invoice', $invoice)->first();
+    $order = OrderHistory::where('invoice', $invoice)->first();
 
     // $getQty = $this->showQtyCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
     // $jmlQty = $getQty;
 
     // //LOAD VIEW checkout_finish.blade.php DAN PASSING DATA ORDER
-    // return view('ecommerce.checkout_finish', compact('order', 'jmlQty'));
+    return view('ecommerce.checkout_finish', compact('order'));
 
 
 
@@ -245,7 +219,6 @@ class CartController extends Controller
     }
 
     public function notfound(){
-        // $nothing = "awkwkwkwk.803716578";
         return view('ecommerce.notfound');
     }
 

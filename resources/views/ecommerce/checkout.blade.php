@@ -47,12 +47,12 @@
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <label for="nohape">No Telp</label>
-                            <input type="text" class="form-control" id="number" name="nohape" value="{{ $user->nohape }}" required disabled>
+                            <input type="text" class="form-control" id="number" name="nohape" value="{{ $user->nohape }}" required readonly>
                             <p class="text-danger">{{ $errors->first('nohape') }}</p>
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required disabled>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required readonly>
                             <p class="text-danger">{{ $errors->first('email') }}</p>
                         </div>
 
@@ -87,7 +87,11 @@
 									</a>
 								</li>
 							</ul>
-              <button type="submit" class="main_btn">Bayar Pesanan</button>
+                            <ul class="list px-1 py-3">
+                                <li class="list-inline-item px-5">
+                                    <button type="submit" class="main_btn">Bayar Pesanan</button>
+                                </li>
+                            </ul>
               </form>
 						</div>
 					</div>

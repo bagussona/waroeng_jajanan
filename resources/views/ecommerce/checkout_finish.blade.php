@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-<title>tookoodil - confirm checkout</title>
+<title>Confirm Checkout - {{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 					<h2>Pesanan Diterima</h2>
 					<div class="page_link">
             <a href="{{ url('/') }}">Home</a>
-						<a href="">Invoice</a>
+						<a href="#">Invoice</a>
 					</div>
 				</div>
 			</div>
@@ -51,11 +51,13 @@
 						<ul class="list">
 							<li>
 								<a href="#">
-                  <span>Alamat</span> : {{ $order->customer_address }}</a>
+                  <span>Alamat</span> : [order->customer->address]</a>
+                  {{-- <span>Alamat</span> : {{ $order->customer_address }}</a> --}}
 							</li>
 							<li>
 								<a href="#">
-                  <span>Kota</span> : {{ $order->district->city->name }}</a>
+                  {{-- <span>Kota</span> : {{ $order->district->city->name }}</a> --}}
+                  <span>Kota</span> : [order->district->city->name]</a>
 							</li>
 							<li>
 								<a href="#">
