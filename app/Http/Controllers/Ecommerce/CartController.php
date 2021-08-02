@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Order;
 use App\OrderHistory;
+use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Cookie;
@@ -44,6 +45,8 @@ class CartController extends Controller
         $data_produk = Product::find($request->product_id);
             // dd($data_produk->name);
 
+            $image = $data_produk->image;
+            $stock = $data_produk->stock;
             $name = $data_produk->name;
             $price = $data_produk->price;
             $subtotal = $qty * $price;
@@ -51,9 +54,9 @@ class CartController extends Controller
 
             Order::create([
                 'tanggal' => date('Y-m-d'),
-                'keterangan' => 'Belum Bayar',
+                'image' => $image,
                 'name' => $name,
-                'qty' => $request->qty,
+                'qty' => $qty,
                 'price' => $price,
                 'subtotal' => $subtotal,
                 'user_id' => $uid
@@ -61,13 +64,17 @@ class CartController extends Controller
 
             OrderHistory::create([
                 'tanggal' => date('Y-m-d'),
-                'keterangan' => 'Belum Bayar',
+                'image' => $image,
                 'name' => $name,
-                'qty' => $request->qty,
+                'qty' => $qty,
                 'price' => $price,
                 'subtotal' => $subtotal,
                 'user_id' => $uid
             ]);
+
+            $stock_dicart = $stock - $qty;
+
+                Product::find($request->product_id)->update(['stock' => $stock_dicart]);
 
             return redirect()->back()->with(['success' => 'Produk Ditambahkan ke Keranjang']);
 
@@ -75,37 +82,28 @@ class CartController extends Controller
 
 
     public function checkout(){
-    //QUERY UNTUK MENGAMBIL SEMUA DATA PROPINSI
-    // $provinces = Province::orderBy('created_at', 'DESC')->get();
-    // $getQty = $this->showQtyCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
-    // $jmlQty = $getQty;
-    // // dd($jmlQty);
-    // $carts = $this->getCarts(); //MENGAMBIL DATA CART
-    // //MENGHITUNG SUBTOTAL DARI KERANJANG BELANJA (CART)
-    // $subtotal = collect($carts)->sum(function($q) {
-    //     return $q['qty'] * $q['product_price'];
-    // });
-    // //ME-LOAD VIEW CHECKOUT.BLADE.PHP DAN PASSING DATA PROVINCES, CARTS DAN SUBTOTAL
-    // return view('ecommerce.checkout', compact('provinces', 'carts', 'subtotal', 'jmlQty'));
-
-
+        $uid = Auth::user()->id;
+        //MENGAMBIL DATA
+        $user = User::find($uid);
+        $carts = Order::all();
+        // //MENGHITUNG SUBTOTAL DARI KERANJANG BELANJA (CART)
+        $subtotal = collect($carts)->sum(function($q) {
+            return $q['subtotal'];
+        });
+        // //ME-LOAD VIEW CHECKOUT.BLADE.PHP DAN PASSING DATA PROVINCES, CARTS DAN SUBTOTAL
+        return view('ecommerce.checkout', compact('carts', 'subtotal', 'user'));
 
     }
 
     public function listCart()
     {
-        //MENGAMBIL DATA DARI COOKIE
-        // $carts = json_decode(request()->cookie('dw-carts'), true);
 
-        // $getQty = $this->showQtyCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
-        // $jmlQty = $getQty;
+        $carts = Order::all();
+        $subtotal = collect($carts)->sum(function($q) {
+            return $q['subtotal'];
+        });
 
-        // //UBAH ARRAY MENJADI COLLECTION, KEMUDIAN GUNAKAN METHOD SUM UNTUK MENGHITUNG SUBTOTAL
-        // $subtotal = collect($carts)->sum(function($q) {
-        //     return $q['qty'] * $q['product_price']; //SUBTOTAL TERDIRI DARI QTY * PRICE
-        // });
-        // //LOAD VIEW CART.BLADE.PHP DAN PASSING DATA CARTS DAN SUBTOTAL
-        // return view('ecommerce.cart', compact('carts', 'subtotal', 'jmlQty'));
+        return view('ecommerce.cart', compact('carts', 'subtotal'));
 
 
     }
@@ -135,39 +133,13 @@ class CartController extends Controller
 
     }
 
-    public function getCity()
-    {
-        // //QUERY UNTUK MENGAMBIL DATA KOTA / KABUPATEN BERDASARKAN PROVINCE_ID
-        // $cities = City::where('province_id', request()->province_id)->get();
-        // //KEMBALIKAN DATANYA DALAM BENTUK JSON
-        // return response()->json(['status' => 'success', 'data' => $cities]);
-
-
-
-    }
-
-    public function getDistrict()
-    {
-        // //QUERY UNTUK MENGAMBIL DATA KECAMATAN BERDASARKAN CITY_ID
-        // $districts = District::where('city_id', request()->city_id)->get();
-        // //KEMUDIAN KEMBALIKAN DATANYA DALAM BENTUK JSON
-        // return response()->json(['status' => 'success', 'data' => $districts]);
-
-
-
-    }
-
     public function processCheckout(Request $request)
     {
         // //VALIDASI DATANYA
         // $this->validate($request, [
-        //     'customer_name' => 'required|string|max:100',
-        //     'customer_phone' => 'required',
+        //     'name' => 'required|string|max:100',
+        //     'nohape' => 'required',
         //     'email' => 'required|email',
-        //     'customer_address' => 'required|string',
-        //     'province_id' => 'required|exists:provinces,id',
-        //     'city_id' => 'required|exists:cities,id',
-        //     'district_id' => 'required|exists:districts,id'
         // ]);
 
         // //INISIASI DATABASE TRANSACTION

@@ -30,7 +30,7 @@
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img class="d-block w-100" src="{{ $products->image }}" alt="{{ $products->name }}">
+									<img class="rounded mx-auto d-block w-75" src="{{ $products->image }}" alt="{{ $products->name }}">
 									{{-- <img class="d-block w-100" src="" alt=""> --}}
 								</div>
 							</div>
@@ -60,11 +60,11 @@
 							<input type="hidden" name="product_id" value="{{ $products->id }}" class="form-control">
 							{{-- <input type="hidden" name="product_id" value="" class="form-control"> --}}
 
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )  &amp;&amp; sst < {{ $products->stock }}) result.value++;return false;"
 							 class="increase items-count" type="button">
 								<i class="fa fa-plus no-float btn-up-cart"></i>
 							</button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
 							 class="reduced items-count" type="button">
 								<i class="fa fa-minus no-float btn-down-cart"></i>
 							</button>

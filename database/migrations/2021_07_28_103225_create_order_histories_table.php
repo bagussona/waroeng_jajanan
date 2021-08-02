@@ -16,7 +16,7 @@ class CreateOrderHistoriesTable extends Migration
         Schema::create('order_histories', function (Blueprint $table) {
             $table->id();
             $table->string('tanggal')->nullable();
-            $table->string('keterangan')->nullable();
+            $table->string('image')->nullable();
             $table->string('name')->nullable();
             $table->integer('qty')->nullable();
             $table->integer('price')->nullable();

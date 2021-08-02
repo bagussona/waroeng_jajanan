@@ -36,29 +36,30 @@
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<tr>
+							<tr style="text-align: center">
 								<th scope="col">Product</th>
 								<th scope="col">Price</th>
 								<th scope="col">Quantity</th>
 								<th scope="col">Total</th>
+								<th scope="col">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
               <!-- LOOPING DATA DARI VARIABLE CARTS -->
                             @forelse ($carts as $row)
-							<tr>
+							<tr style="text-align: center">
 								<td>
 									<div class="media">
 										<div class="d-flex">
-                                            <img src="{{ $row['product_image'] }}" width="100px" height="100px" alt="{{ $row['product_name'] }}">
+                                            <img src="{{ $row['image'] }}" width="100px" height="100px" alt="{{ $row['name'] }}">
 										</div>
 										<div class="media-body">
-                                            <p>{{ $row['product_name'] }}</p>
+                                            <p>{{ $row['name'] }}</p>
 										</div>
 									</div>
 								</td>
 								<td>
-                                    <h5>Rp {{ number_format($row['product_price']) }}</h5>
+                                    <h5>Rp {{ number_format($row['price']) }}</h5>
 								</td>
 								<td>
 									<div class="product_count">
@@ -72,101 +73,45 @@
 
 										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 										 class="increase items-count" type="button">
-											<i class="lnr lnr-chevron-up"></i>
+											<i class="fa fa-plus no-float btn-up-cart"></i>
 										</button>
 										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
 										 class="reduced items-count" type="button">
-											<i class="lnr lnr-chevron-down"></i>
+											<i class="fa fa-minus no-float btn-down-cart"></i>
 										</button>
 									</div>
 								</td>
 								<td>
-                                    <h5>Rp {{ number_format($row['product_price'] * $row['qty']) }}</h5>
+                                    <h5>Rp {{ number_format($row['subtotal']) }}</h5>
 								</td>
+                                <td>
+                                    <button class="gray_btn">Update Cart</button>
+                                    {{-- <button class="gray_btn">Clear Cart</button> --}}
+                                </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4">Tidak ada belanjaan</td>
+                                <td colspan="5">Tidak ada jajanan</td>
                             </tr>
                             @endforelse
-							<tr class="bottom_button">
-                                <td>
-                                    <button class="gray_btn">Update Cart</button>
-                                    <button class="gray_btn">Clear Cart</button>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             </form>
 							<tr>
-								<td>
-
+								<td colspan="4">
+									<h5 style="text-align: right">Subtotal</h5>
 								</td>
 								<td>
-
-								</td>
-								<td>
-									<h5>Subtotal</h5>
-								</td>
-								<td>
-                                    <h5>Rp {{ number_format($subtotal) }}</h5>
+                                    <h3 style="text-align: right">Rp {{ number_format($subtotal) }}.00,-</h3>
 								</td>
 							</tr>
-							{{-- <tr class="shipping_area">
-								<td></td>
-								<td></td>
-								<td>
-									<h5>Shipping</h5>
-								</td>
-								<td>
-									<div class="shipping_box">
-										<ul class="list">
-											<li>
-												<a href="#">Flat Rate: $5.00</a>
-											</li>
-											<li>
-												<a href="#">Free Shipping</a>
-											</li>
-											<li>
-												<a href="#">Flat Rate: $10.00</a>
-											</li>
-											<li class="active">
-												<a href="#">Local Delivery: $2.00</a>
-											</li>
-										</ul>
-										<h6>Calculate Shipping
-											<i class="fa fa-caret-down" aria-hidden="true"></i>
-										</h6>
-										<select class="shipping_select">
-											<option value="1">Bangladesh</option>
-											<option value="2">India</option>
-											<option value="4">Pakistan</option>
-										</select>
-										<select class="shipping_select">
-											<option value="1">Select a State</option>
-											<option value="2">Select a State</option>
-											<option value="4">Select a State</option>
-										</select>
-										<input type="text" placeholder="Postcode/Zipcode">
-										<a class="gray_btn" href="#">Update Details</a>
-									</div>
-								</td>
-							</tr> --}}
 							<tr class="out_button_area">
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-									<div class="checkout_btn_inner">
-										{{-- <a class="gray_btn" href="#">Continue Shopping</a>
-										<a class="main_btn" href="#">Proceed to checkout</a> --}}
-
-                                        <a class="gray_btn" href="{{ route('front.product') }}">Continue Shopping</a>
-                                        <a class="main_btn" href="{{ route('front.checkout') }}">Proceed to checkout</a>
-									</div>
-								</td>
-							</tr>
+								<td colspan="4" style="text-align: right">
+                                        <a class="gray_btn" href="{{ route('front.product') }}">Jajan Lagi?</a>
+                                </td>
+                                <td style="text-align: right">
+                                    <a class="main_btn" href="{{ route('front.checkout') }}">Checkout</a>
+                                </td>
+                            </tr>
 						</tbody>
 					</table>
 				</div>

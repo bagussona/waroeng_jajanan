@@ -3511,7 +3511,8 @@ h6 {
   vertical-align: middle;
   align-self: center; }
   .cart_inner .table tbody tr td .media .d-flex {
-    padding-right: 30px; }
+    padding-right: 35px;
+    padding-left: 35px; }
     .cart_inner .table tbody tr td .media .d-flex img {
       border: 1px solid #eeeeee;
       border-radius: 3px; }
@@ -3529,12 +3530,12 @@ h6 {
     margin-bottom: 0px; }
     .cart_inner .table tbody tr td .product_count input {
       width: 100px;
-      padding-left: 30px;
+      padding-left: 45px;
       height: 40px;
       outline: none;
       box-shadow: none; }
     .cart_inner .table tbody tr td .product_count .increase {
-      top: -2px; }
+      top: 8px; }
       .cart_inner .table tbody tr td .product_count .increase:before {
         content: "";
         height: 40px;
@@ -3548,11 +3549,12 @@ h6 {
         height: 1px;
         width: 30px;
         position: absolute;
-        left: -3px;
-        top: 22px;
+        left: 5px;
+        top: 5px;
         background: #eeeeee; }
     .cart_inner .table tbody tr td .product_count .reduced {
-      bottom: -6px; }
+      left: 5px;
+        bottom: 5px; }
 .cart_inner .table tbody tr.bottom_button .gray_btn {
   line-height: 38px;
   background: #f9f9ff;
