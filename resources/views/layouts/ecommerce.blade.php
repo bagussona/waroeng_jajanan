@@ -38,10 +38,10 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login / Register</a>
                             <ul class="dropdown-menu">
                                     <li class="nav-link">
-                                        <a href="{{ route('login') }}" class="nav-link">Sign In</a>
+                                        <i class="fa fa-sign-out"></i><a href="{{ route('login') }}" class="nav-link">Sign In</a>
                                     </li>
                                     <li class="nav-link">
-                                        <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
+                                        <i class="fa fa-user-plus"></i><a href="{{ route('register') }}" class="nav-link">Sign Up</a>
                                     </li>
                             </ul>
                         </li>
