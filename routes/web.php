@@ -28,10 +28,10 @@ Auth::routes(['verify' => true]);
 // });
 
 
-// Route::group([
-//     'prefix' => 'administrator',
-//     'middleware' => 'auth'
-// ], function() {
+Route::group([
+    'middleware' => ['verified', 'role:admin']
+], function () {
+
     Route::get('/admin', 'Web\HomeController@index')->name('home'); //index admin
 
     //Category Management
@@ -63,14 +63,14 @@ Auth::routes(['verify' => true]);
     // Route::get('/admin/store/bbk', 'Web\SpbController@getDataBBK');
     Route::delete('/admin/store/{spb_id}/delete', 'Web\SpbController@destroy')->name('datastore.destroy');
 
-// });
+});
 
 //Toko Display
 Route::get('/', 'Ecommerce\FrontController@index')->name('front.index'); //index guest
 Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact'); //index contact pengaduan
 
 Route::group([
-    'middleware' => ['verified']
+    'middleware' => ['verified', 'role:admin|customer']
 ], function () {
 
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home

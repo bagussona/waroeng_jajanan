@@ -8,39 +8,26 @@
 @section('content')
 <div>
     <div class="row">1</div>
-</div>
-<div>
     <div class="row">2</div>
-</div>
-<div>
     <div class="row">3</div>
-</div>
-<div>
     <div class="row">4</div>
-</div>
-<div>
     <div class="row">5</div>
-</div>
-<div>
     <div class="row">6</div>
 </div>
 <div class="container emp-profile mt-4">
     <form method="post">
         <div class="row justify-content-center">
-            <div class="col-md-4">
+            <div class="col-md-4 justify-content-center">
                 <div class="profile-img">
-                    <img src="{{ asset('assets/img/avatars/6-1.jpg') }}" alt="" width="40%" class="rounded-circle" align="center"/>
+                    <img src="{{ $profile->avatar }}" alt="" width="40%" class="rounded-circle" align="center"/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                             <h5>
-                                Janneth Hogdston
+                                {{ $profile->name}}
                             </h5>
-                            <h6>
-                                Member Gold** [V.I.P]
-                            </h6>
-                            {{-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> --}}
+                            <p class="proile-rating">Registered_as: <span> [role] </span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -59,15 +46,10 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p></p>
-                    <p>Barang</p>
-                    <a href="">Wishlist</a><br/>
-                    <a href="">Loved</a><br/>
-                    <p></p>
                     <p>Pesanan Saya</p>
                     <a href="">Belum Bayar</a><br/>
-                    <a href="">Dikemas</a><br/>
-                    <a href="">Dikirim</a><br/>
-                    <a href="">Beri Penilaian</a><br/>
+                    <a href="{{ route('front.notfound') }}">Beri Penilaian</a><br/>
+                    <a href="">Sudah Bayar</a><br/>
                 </div>
             </div>
             <div class="col-md-8">
@@ -78,7 +60,7 @@
                                         <label>User Id</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>1</p>
+                                        <p>{{ $profile->id }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -86,7 +68,7 @@
                                         <label>Name</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Janneth Hodgston</p>
+                                        <p>{{ $profile->name }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -94,7 +76,7 @@
                                         <label>Email</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>janet@email.com.sg</p>
+                                        <p>{{ $profile->email }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -102,7 +84,7 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>+(62) 82128796431</p>
+                                        <p>{{ $profile->nohape }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -110,7 +92,7 @@
                                         <label>Gender</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Female</p>
+                                        <p>{{ $profile->gender }}</p>
                                     </div>
                                 </div>
                     </div>

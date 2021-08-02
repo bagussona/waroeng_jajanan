@@ -66,7 +66,7 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data){
-        return User::create([
+        $customer = User::create([
             'name' => $data['name'],
             'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
             'email' => $data['email'],
@@ -74,6 +74,10 @@ class RegisterController extends Controller
             'gender' => 'Undefined',
             'password' => Hash::make($data['password']),
         ]);
+
+        $customer->assignRole('customer');
+
+        return $customer;
     }
 
 }

@@ -193,12 +193,13 @@ class CartController extends Controller
     {
     // //AMBIL DATA PESANAN BERDASARKAN INVOICE
     $order = OrderHistory::where('invoice', $invoice)->first();
+    $order_details = User::where('name', $order->customer_name)->get();
 
     // $getQty = $this->showQtyCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
     // $jmlQty = $getQty;
 
     // //LOAD VIEW checkout_finish.blade.php DAN PASSING DATA ORDER
-    return view('ecommerce.checkout_finish', compact('order'));
+    return view('ecommerce.checkout_finish', compact('order', 'order_details'));
 
 
 

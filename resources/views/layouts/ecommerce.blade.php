@@ -49,28 +49,49 @@
                         @endguest
 
                         @auth
-                        {{-- <div class="float-right">
-                            <p>Welcome! {{ Auth::user()->name }}</p>
-                        </div> --}}
 
                         <div class="float-right">
 
                             <li class="nav-item dropdown">
+                                <strong>Hi.. 👋</strong>
+                                {{-- <strong>{{ Auth::user()->name }}</strong> --}}
                                 <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{-- <img class="img-avatar" src="{{ asset('assets/img/avatars/6-1.jpg') }}" alt="admin@waroengjajanan.com"> --}}
-                                <strong>Welcome! {{ Auth::user()->name }}</strong>
-                                </a>
+                                <img class="img-avatar" style="width: 20px; height: 20px;" src="{{ Auth::user()->avatar }}" alt="admin@waroengjajanan.com">
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-header text-center">
-                                    <strong>Welcome! {{ Auth::user()->name }}</strong>
+                                <div class="dropdown-header text-left">
+                                    <strong>Signed in as</strong><br>
+                                    <strong>{{ Auth::user()->name }}</strong>
+                                    <div class="divider"> <hr> </div>
                                 </div>
-                                <div class="divider"></div>
-                                <a class="dropdown-item text-center" href="{{ route('home') }}">
-                                    <strong><i class="fa fa-user"></i> Dashboard</strong>
+
+                                {{-- @if(Auth::check()) --}}
+                                @if (Auth::user()->roles)
+                                <a class="dropdown-item text-left" href="{{ route('home') }}">
+                                    <i class="fa fa-bar-chart"></i><strong> Dashboard</strong>
                                 </a>
-                                <a class="dropdown-item text-center" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    @endif
+                                {{-- @endif --}}
+                                <div class="divider"></div>
+                                <a class="dropdown-item text-left" href="{{ route('front.UserProfile') }}">
+                                    <i class="fa fa-user"></i><strong> Your Profile</strong>
+                                </a>
+                                <div class="divider"></div>
+                                <a class="dropdown-item text-left" href="{{ route('front.notfound') }}">
+                                    <i class="fa fa-heart"></i><strong> Your Loved</strong>
+                                </a>
+                                <div class="divider"></div>
+                                <a class="dropdown-item text-left" href="{{ route('front.notfound') }}">
+                                    <i class="fa fa-envelope"></i><strong> Your Message</strong>
+                                </a>
+                                <div class="divider"></div>
+
+                                <div class="dropdown-header text-left">
+                                <div class="divider"> <hr> </div>
+                                </div>
+                                <a class="dropdown-item text-left" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                <strong><i class="fa fa-lock"></i> Sign Out</strong>
+                                <strong><i class="fa fa-sign-out"></i></strong><strong> Sign Out </strong>
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

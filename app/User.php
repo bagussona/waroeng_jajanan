@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -51,4 +52,13 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasMany(User::class);
     }
 
+    // public function isAdmin(){
+    //     foreach ($this->roles()->get() as $role)
+    //     {
+    //         if ($role->name == 'Admin')
+    //         {
+    //             return true;
+    //         }
+    //     }
+    // }
 }

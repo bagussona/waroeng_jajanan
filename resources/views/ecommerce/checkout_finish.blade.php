@@ -51,17 +51,17 @@
 						<ul class="list">
 							<li>
 								<a href="#">
-                  <span>Alamat</span> : [order->customer->address]</a>
-                  {{-- <span>Alamat</span> : {{ $order->customer_address }}</a> --}}
+                  {{-- <span>Produk</span> : [order->customer->address]</a> --}}
+                  <span>Name</span> : {{ $order->customer_name }}</a>
 							</li>
 							<li>
 								<a href="#">
-                  {{-- <span>Kota</span> : {{ $order->district->city->name }}</a> --}}
-                  <span>Kota</span> : [order->district->city->name]</a>
+                  <span>Email</span> : {{ $order_details[0]['email'] }}</a>
+                  {{-- <span>No Telp</span> : [order->district->city->name]</a> --}}
 							</li>
 							<li>
 								<a href="#">
-									<span>Country</span> : Indonesia</a>
+									<span>No Telp</span> : {{ $order_details[0]['nohape'] }}</a>
 							</li>
 						</ul>
 					</div>
