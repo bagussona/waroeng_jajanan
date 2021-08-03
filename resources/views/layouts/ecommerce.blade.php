@@ -70,25 +70,38 @@
                                 <a class="dropdown-item text-left" href="{{ route('home') }}">
                                     <i class="fa fa-bar-chart"></i><strong> Dashboard</strong>
                                 </a>
-                                    @endif
+                                <div class="dropdown-header text-left">
+                                <div class="divider"> <hr> </div>
+                                </div>
+                                @endif
                                 {{-- @endif --}}
                                 <div class="divider"></div>
                                 <a class="dropdown-item text-left" href="{{ route('front.UserProfile') }}">
-                                    <i class="fa fa-user"></i><strong> Your Profile</strong>
+                                    <i class="fa fa-user"></i><strong> Profile</strong>
                                 </a>
                                 <div class="divider"></div>
                                 <a class="dropdown-item text-left" href="{{ route('front.notfound') }}">
-                                    <i class="fa fa-heart"></i><strong> Your Loved</strong>
+                                    <i class="fa fa-heart"></i><strong> Loved</strong>
                                 </a>
                                 <div class="divider"></div>
                                 <a class="dropdown-item text-left" href="{{ route('front.notfound') }}">
-                                    <i class="fa fa-envelope"></i><strong> Your Message</strong>
+                                    <i class="fa fa-shopping-cart"></i><strong> Orders</strong>
+                                </a>
+                                <div class="divider"></div>
+                                </a>
+                                <div class="divider"></div>
+                                <a class="dropdown-item text-left" href="{{ route('front.notfound') }}">
+                                    <i class="fa fa-envelope"></i><strong> Message</strong>
                                 </a>
                                 <div class="divider"></div>
 
                                 <div class="dropdown-header text-left">
-                                <div class="divider"> <hr> </div>
+                                    <div class="divider"> <hr> </div>
                                 </div>
+                                <div class="divider"></div>
+                                <a class="dropdown-item text-left" href="{{ route('front.notfound') }}">
+                                    <i class="fa fa-cog"></i><strong> Settings</strong>
+                                </a>
                                 <a class="dropdown-item text-left" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 <strong><i class="fa fa-sign-out"></i></strong><strong> Sign Out </strong>
