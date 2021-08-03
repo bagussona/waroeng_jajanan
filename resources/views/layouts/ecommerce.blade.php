@@ -21,24 +21,27 @@
 	<link rel="stylesheet" href="{{ asset('ecommerce/css/responsive.css') }}">
 </head>
 
-<body>
+<body onload="realtimeClock()">
 	<!--================Header Menu Area =================-->
 	<header class="header_area">
 		<div class="top_menu row m0">
-			<div class="container-fluid">
-				<div class="float-left">
-					<p>WA/SMS: (+62)82128796431</p>
+            <div class="container-fluid">
+                <div class="float-left">
+                    <p><i class="fa fa-whatsapp"></i>  +6282128796431</p>
 				</div>
+                <div class="float-left">
+                    <div id="clock"></div>
+                </div>
 				<div class="float-right">
 					<ul class="right_side">
 						{{-- <li><a href="login.html">Login/Register</a></li> --}}
                         @guest
 
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login / Register</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sign-in"></i> Sign In</a>
                             <ul class="dropdown-menu">
                                     <li class="nav-link">
-                                        <i class="fa fa-sign-out"></i><a href="{{ route('login') }}" class="nav-link">Sign In</a>
+                                        <i class="fa fa-sign-in"></i><a href="{{ route('login') }}" class="nav-link">Sign In</a>
                                     </li>
                                     <li class="nav-link">
                                         <i class="fa fa-user-plus"></i><a href="{{ route('register') }}" class="nav-link">Sign Up</a>
@@ -178,37 +181,6 @@
 
     @yield('content')
 
-    {{-- <!--================ Subscription Area ================-->
-	<section class="subscription-area section_gap">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="section-title text-center">
-                        <h2>Subscribe for Our Newsletter</h2>
-                        <span>We won’t send any kind of spam</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div id="mc_embed_signup">
-                        <form target="_blank" novalidate action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&id=92a4423d01"
-                            method="get" class="subscription relative">
-                            <input type="email" name="EMAIL" placeholder="Email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'"
-                                required="">
-                            <!-- <div style="position: absolute; left: -5000px;">
-                                <input type="text" name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="">
-                            </div> -->
-                            <button type="submit" class="newsl-btn">Get Started</button>
-                            <div class="info"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--================ End Subscription Area ================--> --}}
-
 	<!--================ start footer Area  =================-->
 	<footer class="footer-area section_gap">
 		<div class="container">
@@ -316,6 +288,7 @@
 	<script src="{{ asset('ecommerce/vendors/counter-up/jquery.counterup.js') }}"></script>
 	<script src="{{ asset('ecommerce/js/mail-script.js') }}"></script>
 	<script src="{{ asset('ecommerce/js/theme.js') }}"></script>
+    <script src="{{ asset('ecommerce/js/clock.js') }}"></script>
 @yield('js')
 </body>
 </html>

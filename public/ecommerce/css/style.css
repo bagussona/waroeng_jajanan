@@ -408,6 +408,29 @@ a {
       margin-top: -6px;
       right: 20px; }
 
+      #clock {
+        position: absolute;
+        line-height: 40px;
+        color: #777777;
+        font-size: 12px;
+        font-family: "Roboto", sans-serif;
+        font-weight: normal;
+        /* margin-left: 0px; */
+        width: 72%;
+        text-align: center;
+        text-transform: uppercase; }
+      #clock-logo {
+        position: absolute;
+        line-height: 40px;
+        color: #777777;
+        font-size: 12px;
+        font-family: "Roboto", sans-serif;
+        font-weight: normal;
+        /* margin-left: 0px; */
+        width: 66.5%;
+        text-align: center;
+        text-transform: uppercase; }
+
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 /* Home Banner Area css
