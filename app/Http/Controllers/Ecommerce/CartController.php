@@ -101,35 +101,29 @@ class CartController extends Controller
     // dd($id_product);
     $uid = Auth::user()->id;
 
-    Order::where('user_id', $uid)->where('id', $id_product)->update(['qty' => $req_qty]);
+    $order = Order::where('user_id', $uid)->where('id', $id_product)->get();
+    $order_name = $order[0]['name'];
+    $order_price = $order[0]['price'];
+    $order_qty = $order[0]['qty'];
 
-
-    $oldqty = Order::where('user_id', $uid)->where('id', $id_product)->get();
-    $orders_name = $oldqty[0]['name'];
-    $orders_price = $oldqty[0]['price'];
-    $orders_qty = $oldqty[0]['qty']; //order qty
-
-    $product = Product::where('name', $orders_name)->get();
+    $product = Product::where('name', $order_name)->get();
     $product_stock = $product[0]['stock'];
 
-    if ($req_qty > $orders_qty) {
-        $addition = $req_qty - $orders_qty;
-        $new_qty_greaterthan = $orders_qty + $addition;
+    $pengembalian_stock = $product_stock + $order_qty;
+    $subtotal = $req_qty * $order_price;
 
-        $addition_product_stock = $product_stock - $addition;
-        Product::where('name', $orders_name)->update(['stock' => $addition_product_stock]);
+    Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
 
-        $subtotal_new_addition = $orders_price * $new_qty_greaterthan;
-        Order::where('user_id', $uid)->where('id', $id_product)->update(['subtotal' => $subtotal_new_addition]);
-    } else {
-        $substraction = $orders_qty - $req_qty;
+    Order::where('user_id', $uid)->where('id', $id_product)->update(['qty' => $req_qty, 'subtotal' => $subtotal]);
 
-        $substraction_product_stock = $product_stock - $substraction;
-        Product::where('name', $orders_name)->update(['stock' => $substraction_product_stock]);
+    $new_qty = Order::where('user_id', $uid)->where('id', $id_product)->get();
+    $qty = $new_qty[0]['qty'];
+    $new_stock = Product::where('name', $order_name)->get();
+    $stock = $new_stock[0]['stock'];
 
-        $subtotal_new_substraction = $orders_price * $substraction;
-        Order::where('user_id', $uid)->where('id', $id_product)->update(['subtotal' => $subtotal_new_substraction]);
-    }
+    $updated_stock = $stock - $qty;
+
+    Product::where('name', $order_name)->update(['stock' => $updated_stock]);
 
     return redirect()->back();
 
