@@ -27,7 +27,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'roles'
     ];
 
     /**
@@ -52,13 +52,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasMany(User::class);
     }
 
-    // public function isAdmin(){
-    //     foreach ($this->roles()->get() as $role)
-    //     {
-    //         if ($role->name == 'Admin')
-    //         {
-    //             return true;
-    //         }
-    //     }
-    // }
+    //This will add 'role_names' to your 'User', when converted to JSON/Array/etc
+    protected $appends = ['role_names'];
+
+    //Accessible via '$user->role_names', or 'user.role_names' in JSON
+    public function getRoleNamesAttribute(){
+        return $this->roles->pluck('name');
+    }
 }

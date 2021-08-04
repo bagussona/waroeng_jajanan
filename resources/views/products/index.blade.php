@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
-                                List Product
+                                Warehouse - List Product
 
                                 <!-- BUAT TOMBOL UNTUK MENGARAHKAN KE HALAMAN ADD PRODUK -->
                                 <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
@@ -58,6 +58,7 @@
                                             <th>Harga Supplier</th>
                                             <th>Supplier</th>
                                             <th>Created At</th>
+                                            <th>Updated At</th>
                                             <th>Stock</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -83,6 +84,7 @@
                                             <td>Rp. {{ number_format($row->price_supplier) }}</td>
                                             <td>{{ $row->supplier->name }}</td>
                                             <td>{{ $row->created_at->format('d-m-Y') }}</td>
+                                            <td>{{ $row->updated_at->format('d-m-Y') }}</td>
 
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
                                             {{-- <td>{!! $row->status_label !!}</td> --}}

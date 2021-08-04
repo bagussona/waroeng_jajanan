@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item">Surat Pemindahan Barang</li>
-        <li class="breadcrumb-item active">BBK</li>
+        <li class="breadcrumb-item active">BBM</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -20,11 +20,11 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Bukti Barang Keluar</h4>
+                            <h4 class="card-title">Bukti Barang Masuk</h4>
                         </div>
                         <div class="card-body">
 
-                            <form action="{{ route('datastore.store') }}" method="post">
+                            <form action="{{ route('datastore.bbm') }}" method="post">
                                 @csrf
                                 <label for="datastore_name">Nama Barang</label>
                                 <select name="datastore_name" class="form-control" required>
@@ -65,7 +65,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">List BBK - {{ Auth::user()->name }}</h4>
+                            <h4 class="card-title">List BBM - {{Auth::user()->name }}</h4>
                         </div>
                         <div class="card-body">
                           	<!-- KETIKA ADA SESSION SUCCESS  -->
@@ -113,7 +113,7 @@
                                             <td>
 
                                                 <!-- FORM ACTION UNTUK METHOD DELETE -->
-                                                <form action="{{ route('datastore.destroyBBK', $val->id) }}" method="POST">
+                                                <form action="{{ route('datastore.destroyBBM', $val->id) }}" method="POST">
                                                     <!-- KONVERSI DARI @ CSRF & @ METHOD AKAN DIJELASKAN DIBAWAH -->
                                                     @csrf
                                                     @method('DELETE')
@@ -130,23 +130,23 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <form action="{{ route('datastore.bbk') }}" method="post">
+                            <form action="{{ route('datastore.bbmWarehouse') }}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-primary btn-sm float-right">BBK</button>
+                                @method('PUT')
+                                <button type="submit" class="btn btn-primary btn-sm float-right">BBM</button>
                             </form>
                             <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
                             {{-- {!! $supplier->links() !!} --}}
                         </div>
                     </div>
                 </div>
-                @endif
                 <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
-                @if (Auth::user()->role_names[0] == 'staff')
+                @elseif (Auth::user()->role_names[0] == 'staff')
                                 <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
                                 <div class="col-md-8">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Cart - List BBK</h4>
+                                            <h4 class="card-title">Cart - List BBM</h4>
                                         </div>
                                         <div class="card-body">
                                               <!-- KETIKA ADA SESSION SUCCESS  -->
@@ -177,24 +177,24 @@
                                                     </thead>
                                                     <tbody>
                                                           <!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $SUPPLIER -->
-                                                        @forelse ($spb as $val)
+                                                        @forelse ($spb as $value)
                                                         <tr>
                                                             {{-- <td>new arrival</td> --}}
-                                                            <td><strong>{{ $val->name }}</strong></td>
+                                                            <td><strong>{{ $value->name }}</strong></td>
 
                                                               <!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
 
                                                             <!-- FORMAT TANGGAL KETIKA KATEGORI DIINPUT SESUAI FORMAT INDONESIA -->
-                                                            <td>{{ number_format($val->price) }}</td>
-                                                            <td>{{ $val->category }}</td>
-                                                            <td>{{ $val->supplier }}</td>
-                                                            <td>{{ $val->stock }}</td>
-                                                            <td>{{ $val->author }}</td>
-                                                            <td>{{ $val->keterangan }}</td>
+                                                            <td>{{ number_format($value->price) }}</td>
+                                                            <td>{{ $value->category }}</td>
+                                                            <td>{{ $value->supplier }}</td>
+                                                            <td>{{ $value->stock }}</td>
+                                                            <td>{{ $value->author }}</td>
+                                                            <td>{{ $value->keterangan }}</td>
                                                             <td>
 
                                                                 <!-- FORM ACTION UNTUK METHOD DELETE -->
-                                                                <form action="{{ route('datastore.destroyBBK', $val->id) }}" method="POST">
+                                                                <form action="{{ route('datastore.destroyBBM', $value->id) }}" method="POST">
                                                                     <!-- KONVERSI DARI @ CSRF & @ METHOD AKAN DIJELASKAN DIBAWAH -->
                                                                     @csrf
                                                                     @method('DELETE')
@@ -211,9 +211,9 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <form action="{{ route('datastore.bbk') }}" method="post">
+                                            <form action="{{ route('datastore.bbm') }}" method="post">
                                                 @csrf
-                                                <button type="submit" class="btn btn-primary btn-sm float-right">BBK</button>
+                                                <button type="submit" class="btn btn-primary btn-sm float-right">BBM</button>
                                             </form>
                                             <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
                                             {{-- {!! $supplier->links() !!} --}}
@@ -222,9 +222,9 @@
                                 </div>
                                 <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
                                 @endif
-            </div>
-        </div>
-    </div>
+                        </div>
+                    </div>
+                </div>
 </main>
 
 @endsection

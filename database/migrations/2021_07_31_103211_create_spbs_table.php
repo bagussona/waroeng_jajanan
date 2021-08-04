@@ -16,6 +16,7 @@ class CreateSpbsTable extends Migration
         Schema::create('spbs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('author');
+            $table->string('keterangan');
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();

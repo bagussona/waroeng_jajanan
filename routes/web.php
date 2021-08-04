@@ -29,7 +29,7 @@ Auth::routes(['verify' => true]);
 
 
 Route::group([
-    'middleware' => ['verified', 'role:admin']
+    'middleware' => ['verified', 'role:admin|staff']
 ], function () {
 
     Route::get('/admin', 'Web\HomeController@index')->name('home'); //index admin
@@ -60,8 +60,12 @@ Route::group([
     Route::get('/admin/store', 'Web\SpbController@index')->name('datastore.index');
     Route::post('/admin/store', 'Web\SpbController@store')->name('datastore.store');
     Route::post('/admin/store/bbk', 'Web\SpbController@bbk')->name('datastore.bbk');
+    Route::put('/admin/store/bbmWarehouse', 'Web\SpbController@bbmWarehouse')->name('datastore.bbmWarehouse');
     // Route::get('/admin/store/bbk', 'Web\SpbController@getDataBBK');
-    Route::delete('/admin/store/{spb_id}/delete', 'Web\SpbController@destroy')->name('datastore.destroy');
+    Route::delete('/admin/store/{spb_id}/BBK/delete', 'Web\SpbController@destroy')->name('datastore.destroyBBK');
+    Route::delete('/admin/store/{spb_id}/BBM/delete', 'Web\SpbController@destroyBBM')->name('datastore.destroyBBM');
+    Route::get('/admin/store/bbm', 'Web\SpbController@bbmindex')->name('datastore.bbmindex');
+    Route::post('/admin/store/bbm', 'Web\SpbController@bbm')->name('datastore.bbm');
 
 });
 
@@ -70,7 +74,7 @@ Route::get('/', 'Ecommerce\FrontController@index')->name('front.index'); //index
 Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact'); //index contact pengaduan
 
 Route::group([
-    'middleware' => ['verified', 'role:admin|customer']
+    'middleware' => ['verified', 'role:admin|staff|customer']
 ], function () {
 
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home

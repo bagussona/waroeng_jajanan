@@ -4,7 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="img/favicon.png" type="image/png">
+	{{-- <link rel="icon" href="{{asset('favicon.ico')}}"> --}}
+    <link rel="icon" href="{{ asset('favicon.ico') }}" />
 
     @yield('title')
 
@@ -56,7 +57,7 @@
                         <div class="float-right">
 
                             <li class="nav-item dropdown">
-                                <strong>Hi.. 👋</strong>
+                                <strong>Selamat Datang.. 👋</strong>
                                 {{-- <strong>{{ Auth::user()->name }}</strong> --}}
                                 <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <img class="img-avatar" style="width: 20px; height: 20px;" src="{{ Auth::user()->avatar }}" alt="admin@waroengjajanan.com">
@@ -69,7 +70,8 @@
                                 </div>
 
                                 {{-- @if(Auth::check()) --}}
-                                @if (Auth::user()->roles)
+                                {{-- @if (Auth::user()->roles->name == 'admin') --}}
+                                @if (Auth::user()->role_names[0] == 'admin' || Auth::user()->role_names[0] == 'staff')
                                 <a class="dropdown-item text-left" href="{{ route('home') }}">
                                     <i class="fa fa-bar-chart"></i><strong> Dashboard</strong>
                                 </a>

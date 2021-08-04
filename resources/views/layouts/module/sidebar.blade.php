@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('datastore.index') }}">
+                <a class="nav-link" href="{{ route('datastore.bbm') }}">
                     <i class="nav-icon icon-puzzle"></i> BBM
                 </a>
             </li>
