@@ -19,18 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 class CartController extends Controller
 {
 
-    private function getCarts()
-    {
-        // $carts = json_decode(request()->cookie('dw-carts'), true);
-        // // $carts = $this->getCarts();
-        // $carts = $carts != '' ? $carts:[];
-        // // dd($carts);
-        // return $carts;
-
-
-
-    }
-
     public function addToCart(Request $request){
 
         $uid = Auth::user()->id;
@@ -73,6 +61,11 @@ class CartController extends Controller
 
 
     public function checkout(){
+
+        $getQty = new FrontController();
+        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $licart = $getQty->notificationCart();
+
         $uid = Auth::user()->id;
         //MENGAMBIL DATA
         $user = User::find($uid);
@@ -82,50 +75,90 @@ class CartController extends Controller
             return $q['subtotal'];
         });
         // //ME-LOAD VIEW CHECKOUT.BLADE.PHP DAN PASSING DATA PROVINCES, CARTS DAN SUBTOTAL
-        return view('ecommerce.checkout', compact('carts', 'subtotal', 'user'));
+        return view('ecommerce.checkout', compact('carts', 'subtotal', 'user', 'licart'));
 
     }
 
-    public function listCart()
-    {
+    public function listCart(){
+
+        $getQty = new FrontController();
+        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $licart = $getQty->notificationCart();
 
         $carts = Order::all();
         $subtotal = collect($carts)->sum(function($q) {
             return $q['subtotal'];
         });
 
-        return view('ecommerce.cart', compact('carts', 'subtotal'));
-
-
-    }
-
-    public function updateCart(Request $request)
-    {
-    // //AMBIL DATA DARI COOKIE
-    // $carts = json_decode(request()->cookie('dw-carts'), true);
-    // //KEMUDIAN LOOPING DATA PRODUCT_ID, KARENA NAMENYA ARRAY PADA VIEW SEBELUMNYA
-    // //MAKA DATA YANG DITERIMA ADALAH ARRAY SEHINGGA BISA DI-LOOPING
-    // foreach ($request->product_id as $key => $row) {
-    //     //DI CHECK, JIKA QTY DENGAN KEY YANG SAMA DENGAN PRODUCT_ID = 0
-    //     if ($request->qty[$key] == 0) {
-    //         //MAKA DATA TERSEBUT DIHAPUS DARI ARRAY
-    //         unset($carts[$row]);
-    //     } else {
-    //         //SELAIN ITU MAKA AKAN DIPERBAHARUI
-    //         $carts[$row]['qty'] = $request->qty[$key];
-    //     }
-    // }
-    // //SET KEMBALI COOKIE-NYA SEPERTI SEBELUMNYA
-    // $cookie = cookie('dw-carts', json_encode($carts), 2880);
-    // //DAN STORE KE BROWSER.
-    // return redirect()->back()->cookie($cookie);
-
-
+        return view('ecommerce.cart', compact('carts', 'subtotal', 'licart'));
 
     }
 
-    public function processCheckout(Request $request)
-    {
+    public function updateCart(Request $request){
+
+    $req_qty = $request->qty;
+    $id_product = $request->id;
+    // dd($id_product);
+    $uid = Auth::user()->id;
+
+    Order::where('user_id', $uid)->where('id', $id_product)->update(['qty' => $req_qty]);
+
+
+    $oldqty = Order::where('user_id', $uid)->where('id', $id_product)->get();
+    $orders_name = $oldqty[0]['name'];
+    $orders_price = $oldqty[0]['price'];
+    $orders_qty = $oldqty[0]['qty']; //order qty
+
+    $product = Product::where('name', $orders_name)->get();
+    $product_stock = $product[0]['stock'];
+
+    if ($req_qty > $orders_qty) {
+        $addition = $req_qty - $orders_qty;
+        $new_qty_greaterthan = $orders_qty + $addition;
+
+        $addition_product_stock = $product_stock - $addition;
+        Product::where('name', $orders_name)->update(['stock' => $addition_product_stock]);
+
+        $subtotal_new_addition = $orders_price * $new_qty_greaterthan;
+        Order::where('user_id', $uid)->where('id', $id_product)->update(['subtotal' => $subtotal_new_addition]);
+    } else {
+        $substraction = $orders_qty - $req_qty;
+
+        $substraction_product_stock = $product_stock - $substraction;
+        Product::where('name', $orders_name)->update(['stock' => $substraction_product_stock]);
+
+        $subtotal_new_substraction = $orders_price * $substraction;
+        Order::where('user_id', $uid)->where('id', $id_product)->update(['subtotal' => $subtotal_new_substraction]);
+    }
+
+    return redirect()->back();
+
+    }
+
+    public function destroyCart(Request $request){
+        // dd($request->product_id);
+
+        $id_order = $request->product_id;
+
+        $order = Order::where('id', $id_order)->get();
+        $order_name = $order[0]['name'];
+        $order_qty = $order[0]['qty'];
+
+        $product = Product::where('name', $order_name)->get();
+        $product_stock = $product[0]['stock'];
+
+        $pengembalian_stock = $product_stock + $order_qty;
+
+        Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
+
+        Order::where('id', $id_order)->delete();
+
+        return redirect()->back();
+
+    }
+
+    public function processCheckout(Request $request){
+
         $email = $request->get('email');
         // //VALIDASI DATANYA
         $this->validate($request, [
@@ -185,33 +218,19 @@ class CartController extends Controller
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
 
-
-
     }
 
-    public function checkoutFinish($invoice)
-    {
+    public function checkoutFinish($invoice){
+
+    $getQty = new FrontController();
+    $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+    $licart = $getQty->notificationCart();
+
     // //AMBIL DATA PESANAN BERDASARKAN INVOICE
     $order = OrderHistory::where('invoice', $invoice)->first();
     $order_details = User::where('name', $order->customer_name)->get();
 
-    return view('ecommerce.checkout_finish', compact('order', 'order_details'));
-
-
-
-    }
-
-    public function showQtyCart(){
-        // $carts = $this->getCarts(); //MENGAMBIL DATA CART
-        // //MENGHITUNG SUBTOTAL DARI KERANJANG BELANJA (CART)
-        // // dd($carts);
-        // $arr = 0;
-        // foreach ($carts as $c){
-        // $arr = $arr + $c['qty'];
-        // }
-        // return $arr;
-
-
+    return view('ecommerce.checkout_finish', compact('order', 'order_details', 'licart'));
 
     }
 

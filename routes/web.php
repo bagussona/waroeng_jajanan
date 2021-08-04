@@ -84,6 +84,7 @@ Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.sho
 Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');
 Route::get('/cart', 'Ecommerce\CartController@listCart')->name('front.list_cart');
 Route::post('/cart/update', 'Ecommerce\CartController@updateCart')->name('front.update_cart');
+Route::delete('/cart/delete', 'Ecommerce\CartController@destroyCart')->name('front.delete_cart');
 
 Route::get('/checkout', 'Ecommerce\CartController@checkout')->name('front.checkout');
 

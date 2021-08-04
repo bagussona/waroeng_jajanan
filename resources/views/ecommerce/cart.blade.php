@@ -29,53 +29,56 @@
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
         <!-- KARENA MODULENYA AKAN DIKERJAKAN PADA SUB BAB SELANJUTNYA -->
         <!-- HANYA SAJA DEMI KEMUDAHAN PENULISAN MAKA SAYA MASUKKAN PADA BAGIAN INI -->
-                <form action="{{ route('front.update_cart') }}" method="post">
-                    @csrf
         <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
 
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr style="text-align: center">
-								<th scope="col">Product</th>
-								<th scope="col">Price</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Total</th>
-								<th scope="col">Aksi</th>
-							</tr>
-						</thead>
-						<tbody>
-              <!-- LOOPING DATA DARI VARIABLE CARTS -->
-                            @forelse ($carts as $row)
-							<tr style="text-align: center">
-								<td>
-									<div class="media">
-										<div class="d-flex">
-                                            <img src="{{ $row['image'] }}" width="100px" height="100px" alt="{{ $row['name'] }}">
-										</div>
-										<div class="media-body">
-                                            <p>{{ $row['name'] }}</p>
-										</div>
-									</div>
-								</td>
-								<td>
-                                    <h5>Rp {{ number_format($row['price']) }}</h5>
-								</td>
-								<td>
-									<div class="product_count">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr style="text-align: center">
+                        <th scope="col">Image</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col" colspan="2">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- LOOPING DATA DARI VARIABLE CARTS -->
+                    @forelse ($carts as $row)
+                    <tr style="text-align: center">
+                        <td>
+                            <div class="media justify-content-center">
+                                <div class="d-flex justify-content-center">
+                                    <img src="{{ $row['image'] }}" width="100px" height="100px" alt="{{ $row['name'] }}" class="rounded mx-auto d-block">
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: center">
+                            <div class="media-body">
+                                <p>{{ $row['name'] }}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>Rp {{ number_format($row['price']) }}</h5>
+                        </td>
+                        <td>
+                            <div class="product_count justify-content-center">
+
+                                <form action="{{ route('front.update_cart') }}" method="post">
+                                    @csrf
+
+                                <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
+                                <input type="hidden" name="id" value="{{ $row['id'] }}" class="form-control">
+                                <input type="text" name="qty" id="sst{{ $row['id'] }}" maxlength="12" value="{{ $row['qty'] }}" title="Quantity:" class="input-text qty">
+                                <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
 
 
-                    <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
-                                        <input type="text" name="qty[]" id="sst{{ $row['product_id'] }}" maxlength="12" value="{{ $row['qty'] }}" title="Quantity:" class="input-text qty">
-                                        <input type="hidden" name="product_id[]" value="{{ $row['product_id'] }}" class="form-control">
-                    <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
-
-
-										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-										 class="increase items-count" type="button">
+                                <button onclick="var result = document.getElementById('sst{{ $row['id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                class="increase items-count" type="button">
 											<i class="fa fa-plus no-float btn-up-cart"></i>
 										</button>
-										<button onclick="var result = document.getElementById('sst{{ $row['product_id'] }}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                    <button onclick="var result = document.getElementById('sst{{ $row['id'] }}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
 										 class="reduced items-count" type="button">
 											<i class="fa fa-minus no-float btn-down-cart"></i>
 										</button>
@@ -85,17 +88,24 @@
                                     <h5>Rp {{ number_format($row['subtotal']) }}</h5>
 								</td>
                                 <td>
-                                    <button class="gray_btn">Update Cart</button>
-                                    {{-- <button class="gray_btn">Clear Cart</button> --}}
+                                    <button class="btn btn_primary"><i class="fa fa-pencil-square-o"></i></button>
                                 </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5">Tidak ada jajanan</td>
-                            </tr>
-                            @endforelse
-                            </tr>
                             </form>
+                                <form action=" {{ route('front.delete_cart') }} " method="post">
+                                    <td>
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="product_id" value="{{ $row['id'] }}" class="form-control">
+                                        <button class="btn btn_danger"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                </form>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="5">Tidak ada jajanan</td>
+                                </tr>
+                                @endforelse
+                            </tr>
 							<tr>
 								<td colspan="4">
 									<h5 style="text-align: right">Subtotal</h5>

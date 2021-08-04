@@ -165,8 +165,8 @@
                                     <li class="nav-item">
                                         <a href="{{ route('front.list_cart') }}" class="icons">
                                             <i class="lnr lnr lnr-cart"><span class="badge bg-warning">
-                                                {{-- {{ $jmlQty }}</span></i> --}}
-                                                9</span></i>
+                                                {{ $licart }}</span></i>
+                                                {{-- 9</span></i> --}}
                                         </a>
                                     </li>
 									<hr>
