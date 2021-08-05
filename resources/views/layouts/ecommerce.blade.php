@@ -60,7 +60,7 @@
                                 <strong>Selamat Datang.. 👋</strong>
                                 {{-- <strong>{{ Auth::user()->name }}</strong> --}}
                                 <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-avatar" style="width: 20px; height: 20px;" src="{{ Auth::user()->avatar }}" alt="admin@waroengjajanan.com">
+                                <img class="rounded-circle" style="width: 25px; height: 25px;" src="{{ Auth::user()->avatar }}" alt="admin@waroengjajanan.com">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header text-left">
@@ -166,7 +166,6 @@
                                         <a href="{{ route('front.list_cart') }}" class="icons">
                                             <i class="lnr lnr lnr-cart"><span class="badge bg-warning">
                                                 {{ $licart }}</span></i>
-                                                {{-- 9</span></i> --}}
                                         </a>
                                     </li>
 									<hr>

@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <div class="profile-head">
                             <h5>
-                                {{ $profile->name}}
+                                {{ $profile->name }}
                             </h5>
                             <p class="proile-rating">Registered_as: <span> {{ $profile->role_names[0] }} </span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -39,7 +39,12 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                    Edit Profile
+                </button>
+
             </div>
         </div>
         <div class="row justify-content-center">
@@ -98,36 +103,110 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Alamat (1)</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Kp. Wanasari, RT/RW 005/026, Garut Kota, Garut. 44112</p>
-                                        <p>[Bagus Sonarangga]</p>
+                                    <div class="profile-head">
+                                        <h5>
+                                            SEGERA RILIS! FITUR ALAMAT AKAN DITAMBAHKAN NANTI.
+                                        </h5>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Alamat (2)</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Jl. Ciledug No.299, RT/RW 001/014, Garut Kota, Garut, 44112 </p>
-                                        <p>[Linda Firyani]</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Alamat (3)</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Pondok Programmer, Desa Tirtohargo Dsn, RT/RW 01/00, Kalangan, Gegunung, Tirtohargo, Kretek, 55772</p>
-                                        <p>[Bagus Sonarangga]</p>
-                                    </div>
-                            </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+          <h3 class="modal-title">Edit Profile</h3>
+      </div>
+      <form action="{{ route('front.UpdateProfile') }}" method="POST" enctype="multipart/form-data" >
+        @csrf
+        @method('PUT')
+
+        <!-- Modal body -->
+        <div class="container">
+            <div class="row pt-3">
+              <!-- left column -->
+              <div class="col-md-5">
+                <div class="text-center">
+                  <img src="{{ $profile->avatar }}" width="50%" class="rounded-circle" alt="avatar">
+                  <h6></h6>
+
+                  <input name="avatar" type="file" class="form-control">
+                </div>
+              </div>
+
+              <!-- edit form column -->
+              <div class="col-md-7 personal-info">
+                  <!-- KETIKA ADA SESSION SUCCESS  -->
+                  @if (session('success'))
+                  <!-- MAKA TAMPILKAN ALERT SUCCESS -->
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
+                <!-- KETIKA ADA SESSION ERROR  -->
+                @if (session('error'))
+                  <!-- MAKA TAMPILKAN ALERT DANGER -->
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+                <h3>Personal info</h3>
+
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Full Name:</label>
+                    <div class="col-lg">
+                      <input name="name" class="form-control" type="text" value="{{ $profile->name }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg">
+                      <input name="email" class="form-control" type="text" value="{{ $profile->email }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Phone:</label>
+                    <div class="col-md">
+                      <input name="nohape" class="form-control" type="text" value="{{ $profile->nohape }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Gender:</label>
+                    <div class="col-md-8">
+                        <select name="gender" class="form-control">
+                            <option value="Undefined">Pilih</option>
+                            <option value="{{ $profile->gender }}" {{ $profile->gender == $profile->gender ? 'selected':'' }}>{{ $profile->gender }}</option>
+                            <option value="Wanita">Wanita</option>
+                            <option value="Pria">Pria</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <span></span>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+
+    </div>
+    </div>
+      </div>
+    </div>
+  </div>
 @endsection

@@ -96,5 +96,6 @@ Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfou
 
 //ini profile
 Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile'); //index profile
+Route::put('/user/profile', 'UserProfile\UserProfileController@update')->name('front.UpdateProfile'); //update profile
 
 });
