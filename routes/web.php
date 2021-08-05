@@ -67,6 +67,11 @@ Route::group([
     Route::get('/admin/store/bbm', 'Web\SpbController@bbmindex')->name('datastore.bbmindex');
     Route::post('/admin/store/bbm', 'Web\SpbController@bbm')->name('datastore.bbm');
 
+    //Order Management
+    Route::get('/admin/orderan', 'UserProfile\UserProfileController@orderan')->name('orderan.index');
+    Route::post('/admin/orderan', 'UserProfile\UserProfileController@view')->name('orderan.view');
+    Route::put('/admin/orderan/done', 'UserProfile\UserProfileController@updateOrderan')->name('orderan.updateSelesai');
+
 });
 
 //Toko Display

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\UserProfile;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\FrontController;
+use App\OrderDetail;
+use App\OrderHistory;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,4 +71,42 @@ class UserProfileController extends Controller
         return view('user.user_contact', compact('licart'));
 
     }
+
+    public function orderan(){
+        $order_history = OrderHistory::all();
+
+        $status = 'Proses';
+        $order_detail = OrderHistory::where('status', $status)->get();
+
+        return view('orderan.index', compact('order_history', 'order_detail'));
+    }
+
+    public function view(Request $request){
+        // dd($request);
+        $this->validate($request, [
+            'invoice' => 'required|string'
+        ]);
+
+        $invoice = $request->get('invoice');
+        // dd($invoice);
+
+        $order_detail = OrderDetail::where('order_id', $invoice)->get();
+        $order_history = OrderHistory::where('invoice', $invoice)->get();
+        // dd($order_history);
+
+        return view('orderan.detail', compact('order_history', 'order_detail'));
+    }
+
+    public function updateOrderan(Request $request){
+        $this->validate($request, [
+            'invoice' => 'required|string'
+        ]);
+
+        $invoice = $request->get('invoice');
+            // dd($invoice);
+        OrderHistory::where('invoice', $invoice)->update(['status' => 'Selesai']);
+
+        return redirect()->back();
+    }
+
 }

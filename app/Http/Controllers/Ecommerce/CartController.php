@@ -179,7 +179,8 @@ class CartController extends Controller
                 'customer_id' => $customer->id,
                 'customer_name' => $request->get('name'),
                 'customer_phone' => $request->nohape,
-                'subtotal' => $subtotal
+                'subtotal' => $subtotal,
+                'status' => 'Proses'
             ]);
 
             //LOOPING DATA DI CARTS
@@ -188,7 +189,7 @@ class CartController extends Controller
                 $product = Product::find($row['id']);
                 //SIMPAN DETAIL ORDER
                 OrderDetail::create([
-                    'order_id' => $order->id,
+                    'order_id' => $order->invoice,
                     'name' => $row['name'],
                     'price' => $row['price'],
                     'qty' => $row['qty']

@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="{{ asset('ecommerce/vendors/jquery-ui/jquery-ui.css') }}">
 
 	<link rel="stylesheet" href="{{ asset('ecommerce/css/style.css') }}">
-	<link rel="stylesheet" href="{{ asset('ecommerce/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('ecommerce/css/responsive.css') }}">
 </head>
 
 <body onload="realtimeClock()">

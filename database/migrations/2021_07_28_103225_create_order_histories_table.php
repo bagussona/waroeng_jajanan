@@ -20,6 +20,7 @@ class CreateOrderHistoriesTable extends Migration
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->integer('subtotal')->nullable()->default(0);
+            $table->string('status');
             $table->timestamps();
         });
     }
