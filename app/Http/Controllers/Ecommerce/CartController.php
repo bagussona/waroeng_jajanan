@@ -175,7 +175,7 @@ class CartController extends Controller
 
             //SIMPAN DATA ORDER
             $order = OrderHistory::create([
-                'invoice' => Str::random(4) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
+                'invoice' => Str::random(3) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
                 'customer_id' => $customer->id,
                 'customer_name' => $request->get('name'),
                 'customer_phone' => $request->nohape,

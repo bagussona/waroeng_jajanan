@@ -89,7 +89,7 @@
                                     <i class="fa fa-heart"></i><strong> Loved</strong>
                                 </a>
                                 <div class="divider"></div>
-                                <a class="dropdown-item text-left" href="{{ route('front.notfound') }}">
+                                <a class="dropdown-item text-left" href="{{ route('front.UserOrderanku') }}">
                                     <i class="fa fa-shopping-cart"></i><strong> Orders</strong>
                                 </a>
                                 <div class="divider"></div>

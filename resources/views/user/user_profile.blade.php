@@ -3,6 +3,92 @@
 
 @section('title')
     <title>Profile - {{ env('APP_NAME') }}</title>
+
+<style>
+
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 50%;
+    height: 50%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 50%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.profile-head .pf-tabs{
+    margin-bottom:5%;
+}
+.profile-head .pf-tabs .pf-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .pf-tabs .pf-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    /* color: #0062cc; */
+}
+
+#home{
+    color: #818182;
+}
+</style>
 @endsection
 
 @section('content')
@@ -10,16 +96,13 @@
     <div class="row">1</div>
     <div class="row">2</div>
     <div class="row">3</div>
-    <div class="row">4</div>
-    <div class="row">5</div>
-    <div class="row">6</div>
 </div>
 <div class="container emp-profile mt-4">
     <form method="post">
         <div class="row justify-content-center">
             <div class="col-md-4 justify-content-center">
                 <div class="profile-img">
-                    <img src="{{ $profile->avatar }}" alt="" width="40%" class="rounded-circle" align="center"/>
+                    <img src="{{ $profile->avatar }}" width="20%" class="rounded-circle" align="center"/>
                 </div>
             </div>
             <div class="col-md-6">
@@ -51,10 +134,14 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p></p>
+                    <p>Profile Detail</p>
+                    <a href="{{ route('front.UserProfile')}}">{{ $profile->name }}</a><br/>
+                </div>
+                <div class="profile-work">
+                    <p></p>
                     <p>Pesanan Saya</p>
-                    <a href="">Belum Bayar</a><br/>
+                    <a href="{{ route('front.UserOrderanku')}}">Riwayat Jajananku</a><br/>
                     <a href="{{ route('front.notfound') }}">Beri Penilaian</a><br/>
-                    <a href="">Sudah Bayar</a><br/>
                 </div>
             </div>
             <div class="col-md-8">

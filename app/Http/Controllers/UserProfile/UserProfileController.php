@@ -109,4 +109,34 @@ class UserProfileController extends Controller
         return redirect()->back();
     }
 
+    public function orderanKu(){
+        $uid = Auth::user()->id;
+        $profile = User::find($uid);
+
+        $getQty = new FrontController();
+        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $licart = $getQty->notificationCart();
+
+        $uid = Auth::user()->id;
+        $order_detail = OrderHistory::where('customer_id', $uid)->get();
+
+        return view('user.user_order', compact('profile', 'licart', 'order_detail'));
+
+    }
+
+    public function viewCustomer(Request $request){
+        // dd($request);
+        $this->validate($request, [
+            'invoice' => 'required|string'
+        ]);
+
+        $invoice = $request->get('invoice');
+        // dd($invoice);
+
+        $order_detail = OrderDetail::where('order_id', $invoice)->get();
+        $order_history = OrderHistory::where('invoice', $invoice)->get();
+        // dd($order_history);
+
+        return view('orderan.detail', compact('order_history', 'order_detail'));
+    }
 }

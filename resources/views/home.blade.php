@@ -33,16 +33,16 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-danger">
-                                        <small class="text-muted">Pelanggan Baru (H-7)</small>
+                                        <small class="text-muted">Pelanggan</small>
                                         <br>
                                         <strong class="h4">0</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-primary">
-                                        <small class="text-muted">Perlu Dikirim</small>
+                                        <small class="text-muted">Prediksi Omset</small>
                                         <br>
-                                        <strong class="h4">0</strong>
+                                        <strong class="h4">Rp 0</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">

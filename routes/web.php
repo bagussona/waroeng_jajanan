@@ -82,25 +82,27 @@ Route::group([
     'middleware' => ['verified', 'role:admin|staff|customer']
 ], function () {
 
-Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home
-Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
-Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
+    Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home
+    Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
+    Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
 
-Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');
-Route::get('/cart', 'Ecommerce\CartController@listCart')->name('front.list_cart');
-Route::post('/cart/update', 'Ecommerce\CartController@updateCart')->name('front.update_cart');
-Route::delete('/cart/delete', 'Ecommerce\CartController@destroyCart')->name('front.delete_cart');
+    Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');
+    Route::get('/cart', 'Ecommerce\CartController@listCart')->name('front.list_cart');
+    Route::post('/cart/update', 'Ecommerce\CartController@updateCart')->name('front.update_cart');
+    Route::delete('/cart/delete', 'Ecommerce\CartController@destroyCart')->name('front.delete_cart');
 
-Route::get('/checkout', 'Ecommerce\CartController@checkout')->name('front.checkout');
+    Route::get('/checkout', 'Ecommerce\CartController@checkout')->name('front.checkout');
 
-Route::post('/checkout', 'Ecommerce\CartController@processCheckout')->name('front.store_checkout');
-Route::get('/checkout/{invoice}', 'Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
+    Route::post('/checkout', 'Ecommerce\CartController@processCheckout')->name('front.store_checkout');
+    Route::get('/checkout/{invoice}', 'Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
 
-// ini buat render di semua header
-Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfound'); //index notfound
+    // ini buat render di semua header
+    Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfound'); //index notfound
 
-//ini profile
-Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile'); //index profile
-Route::put('/user/profile', 'UserProfile\UserProfileController@update')->name('front.UpdateProfile'); //update profile
+    //ini profile
+    Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile'); //index profile
+    Route::get('/user/profile/order', 'UserProfile\UserProfileController@orderanKu')->name('front.UserOrderanku'); //index profile
+    Route::put('/user/profile', 'UserProfile\UserProfileController@update')->name('front.UpdateProfile'); //update profile
+    Route::post('/user/orderan', 'UserProfile\UserProfileController@viewCustomer')->name('front.OrderanView');
 
 });
