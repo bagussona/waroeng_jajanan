@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-6 text-right">
                                     {{-- <button class="btn btn-link px-0" type="button">Forgot password?</button> --}}
-                                    <a class="hot_deal_link" href="{{ route('front.notfound') }}"><button class="btn btn-link px-0" type="button">Forgot password?</button></a>
+                                    <a class="hot_deal_link" href="{{ route('password.update') }}"><button class="btn btn-link px-0" type="button">Forgot password?</button></a>
                                 </div>
                             </div>
                             <div class="row">
