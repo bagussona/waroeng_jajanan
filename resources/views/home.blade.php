@@ -4,7 +4,7 @@
 
 <!-- TAG YANG DIAPIT OLEH SECTION('TITLE') AKAN ME-REPLACE (@)YIELD('TITLE') PADA MASTER LAYOUTS -->
 @section('title')
-    <title>Dashboard</title>
+    <title>Dashboard - {{ env('APP_NAME') }}</title>
 @endsection
 
 <!-- TAG YANG DIAPIT OLEH SECTION('CONTENT') AKAN ME-REPLACE (@)YIELD('CONTENT') PADA MASTER LAYOUTS -->

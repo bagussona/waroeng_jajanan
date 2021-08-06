@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="color-scheme" content="light dark" />
     <meta name="supported-color-schemes" content="light dark" />
-    <title>VERIFY {{ env('APP_NAME') }}</title>
+    <title>Verify - {{ env('APP_NAME') }}</title>
     <style type="text/css" rel="stylesheet" media="all">
     /* Base ------------------------------ */
 
