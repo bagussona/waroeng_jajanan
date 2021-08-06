@@ -12,7 +12,6 @@
         padding-top: 7%;
         padding-left: 15%;
         padding-right: 15%;
-        padding-bottom: 1%;
     }
     .header-image{
         align-items: center;
@@ -31,16 +30,17 @@
     }
     .content-left{
         width: 25%;
+        padding-top: 1%;
         padding-left: 15%;
         /* padding-right: 5%; */
         padding-bottom: 1%;
     }
 
     .content-right{
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
+        /* display: flex; */
+        box-sizing: border-box;
         width: 50%;
+        height: auto;
         padding: 1%;
     }
     .profile-edit-btn{
@@ -53,18 +53,28 @@
         cursor: pointer;
     }
 
+    .card-sendiri{
+
+        margin: 8px;
+        width: 200px;
+        height: 200px;
+    }
+
     .card-deck{
         display: flex;
-        /* flex-wrap: wrap; */
-        /* flex-direction: row; */
-        width: 900px;;
-        height: 200px;
-        /* flex-wrap: wrap; */
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 900px;
+        height: auto;
     }
 
     .card-body{
+        margin-left: 15%;
         width: 200px;
-        flex: 0 0 0 1;
+        /* margin: 10px; */
+        /* background-color: #ECF0F1; */
+        box-shadow:rgba(0, 0, 0, 0.24) 0px 0px 8px;
+        /* flex: 0 0 0 1; */
     }
 
     .content-end{
@@ -78,11 +88,18 @@
             <img src="{{ $profile->avatar }}" class="rounded-circle" style="width: 100%; height: 100%; center">
         </div>
         <div class="header-name">
-            <div class="profile-head" style="margin-top: 1%; margin-bottom:1%; padding:1%; ">
-                <h5>{{ $profile->name }}</h5>
-                <p class="proile-rating">Registered_as: <span> {{ $profile->role_names[0] }} </span></p>
+            <div class="profile-head d-flex" style="padding-top: 2%; margin-bottom: 2%">
+                <div class="name-head" style="width: 70%; padding-left: 1%;">
+                    <h3>{{ $profile->name }}</h3>
+                    <h6>{{ $profile->email }}</h6>
+                    <h6>Phone: {{ $profile->nohape }}</h6>
+                </div>
+                <div class="name-middle" style="width: 30%; padding-right: 3%; text-align: right;">
+                    <p class="proile-rating">Registered_as: <span style="text-align-right"> {{ $profile->role_names[0] }} </span></p>
+                    <p class="proile-rating"><span style="text-align-right"> {{ $profile->gender }} * </span></p>
+                </div>
             </div>
-            <div class="nav-jajanan" style="margin-top: 1%; margin-bottom: 1%;">
+            <div class="nav-jajanan"">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Jajanan Ku</a>
@@ -98,22 +115,29 @@
 </div>
 <div class="container-content">
     <div class="content-wrapper d-flex">
-    <div class="content-left">
+        <div class="content-left">
+            <div class="content-left-title">
+                <span>Profile</span>
+            </div>
+            <div class="content-left-content">
+                <a href="{{ route('front.UserProfile')}}"><h4 style="color: #6c757d;">{{ $profile->name }}</h4></a><br/>
+            </div>
         <div class="content-left-title">
             <span>Pesanan Saya</span>
         </div>
         <div class="content-left-content">
-            <a href="{{ route('front.UserOrderanku')}}">Riwayat Jajananku</a><br/>
+            <a href="{{ route('front.UserProfile')}}">Riwayat Jajananku</a><br/>
             <a href="{{ route('front.notfound') }}">Beri Penilaian</a><br/>
         </div>
     </div>
     <div class="content-right">
         <div class="card-deck">
             @forelse ($order_detail as $val)
-            <div class="card">
+            <div class="card-sendiri">
                 <div class="card-body">
-                    <div class="title">
-                        <h5 class="card-title">{{ $val->status}}</h5>
+                    <div class="title d-flex">
+                        <h5 class="card-title" style="width: 70%;">{{ $val->status}}</h5>
+                        <span style="font-size: 10px; text-align: right;">{{date('Y-m-d', strtotime($val->created_at) )}}</span>
                     </div>
                     <div class="content">
                         <p class="card-text">Invoice: {{$val->invoice}}</p>

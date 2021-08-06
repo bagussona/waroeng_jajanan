@@ -101,7 +101,6 @@ Route::group([
 
     //ini profile
     Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile'); //index profile
-    Route::get('/user/profile/order', 'UserProfile\UserProfileController@orderanKu')->name('front.UserOrderanku'); //index profile
     Route::put('/user/profile', 'UserProfile\UserProfileController@update')->name('front.UpdateProfile'); //update profile
     Route::post('/user/orderan', 'UserProfile\UserProfileController@viewCustomer')->name('front.OrderanView');
 

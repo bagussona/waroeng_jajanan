@@ -1,207 +1,174 @@
 @extends('layouts.ecommerce')
-{{-- {{ url('profile/profile.css')}} --}}
-
 @section('title')
     <title>Profile - {{ env('APP_NAME') }}</title>
-
+@endsection
+@section('content')
 <style>
 
-.emp-profile{
-    padding: 3%;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    border-radius: 0.5rem;
-    background: #fff;
-}
-.profile-img{
-    text-align: center;
-}
-.profile-img img{
-    width: 50%;
-    height: 50%;
-}
-.profile-img .file {
-    position: relative;
-    overflow: hidden;
-    margin-top: -20%;
-    width: 50%;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    background: #212529b8;
-}
+    .container-profile{
+        margin: 0%;
+    }
+    .header-profile{
+        padding-top: 7%;
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+    .header-image{
+        align-items: center;
+        width: 15%;
+        height: 100%;
+        padding: 1%;
+    }
+    .header-name{
+        width: 70%;
+        height: 30%;
+        padding: 1%;
+    }
+    .header-profile-edit{
+        width: 15%;
+        height: 30%;
+    }
+    .content-left{
+        width: 25%;
+        padding-top: 1%;
+        padding-left: 15%;
+        /* padding-right: 5%; */
+        padding-bottom: 1%;
+    }
 
-.profile-head h5{
-    color: #333;
-}
-.profile-head h6{
-    color: #0062cc;
-}
-.profile-edit-btn{
-    border: none;
-    border-radius: 1.5rem;
-    width: 70%;
-    padding: 2%;
-    font-weight: 600;
-    color: #6c757d;
-    cursor: pointer;
-}
+    .content-right{
+        /* display: flex; */
+        box-sizing: border-box;
+        width: 50%;
+        height: auto;
+        padding: 1%;
+    }
+    .profile-edit-btn{
+        border: none;
+        border-radius: 1.5rem;
+        width: 70%;
+        padding: 2%;
+        font-weight: 600;
+        color: #6c757d;
+        cursor: pointer;
+    }
 
-.profile-head .pf-tabs{
-    margin-bottom:5%;
-}
-.profile-head .pf-tabs .pf-link{
-    font-weight:600;
-    border: none;
-}
-.profile-head .pf-tabs .pf-link.active{
-    border: none;
-    border-bottom:2px solid #0062cc;
-}
-.profile-work{
-    padding: 14%;
-    margin-top: -15%;
-}
-.profile-work p{
-    font-size: 12px;
-    color: #818182;
-    font-weight: 600;
-    margin-top: 10%;
-}
-.profile-work a{
-    text-decoration: none;
-    color: #495057;
-    font-weight: 600;
-    font-size: 14px;
-}
-.profile-work ul{
-    list-style: none;
-}
-.profile-tab label{
-    font-weight: 600;
-}
-.profile-tab p{
-    font-weight: 600;
-    /* color: #0062cc; */
-}
+    .card-sendiri{
 
-#home{
-    color: #818182;
-}
+        margin: 8px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .card-deck{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 900px;
+        height: auto;
+    }
+
+    .card-body{
+        margin-left: 15%;
+        width: 200px;
+        /* margin: 10px; */
+        /* background-color: #ECF0F1; */
+        box-shadow:rgba(0, 0, 0, 0.24) 0px 0px 8px;
+        /* flex: 0 0 0 1; */
+    }
+
+    .content-end{
+        width: 25%;
+    }
+
 </style>
-@endsection
-
-@section('content')
-<div>
-    <div class="row">1</div>
-    <div class="row">2</div>
-    <div class="row">3</div>
-</div>
-<div class="container emp-profile mt-4">
-    <form method="post">
-        <div class="row justify-content-center">
-            <div class="col-md-4 justify-content-center">
-                <div class="profile-img">
-                    <img src="{{ $profile->avatar }}" width="20%" class="rounded-circle" align="center"/>
+<div class="container-profile">
+    <div class="header-profile d-flex align-items-center">
+        <div class="header-image">
+            <img src="{{ $profile->avatar }}" class="rounded-circle" style="width: 100%; height: 100%; center">
+        </div>
+        <div class="header-name">
+            <div class="profile-head d-flex" style="padding-top: 2%; margin-bottom: 2%">
+                <div class="name-head" style="width: 70%; padding-left: 1%;">
+                    <h3>{{ $profile->name }}</h3>
+                    <h6>{{ $profile->email }}</h6>
+                    <h6>Phone: {{ $profile->nohape }}</h6>
+                </div>
+                <div class="name-middle" style="width: 30%; padding-right: 3%; text-align: right;">
+                    <p class="proile-rating">Registered_as: <span style="text-align-right"> {{ $profile->role_names[0] }} </span></p>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                            <h5>
-                                {{ $profile->name }}
-                            </h5>
-                            <p class="proile-rating">Registered_as: <span> {{ $profile->role_names[0] }} </span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Alamat</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-
-                <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-                    Edit Profile
-                </button>
-
+            <div class="nav-jajanan"">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Jajanan Ku</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <p></p>
-                    <p>Profile Detail</p>
-                    <a href="{{ route('front.UserProfile')}}">{{ $profile->name }}</a><br/>
-                </div>
-                <div class="profile-work">
-                    <p></p>
-                    <p>Pesanan Saya</p>
-                    <a href="{{ route('front.UserOrderanku')}}">Riwayat Jajananku</a><br/>
-                    <a href="{{ route('front.notfound') }}">Beri Penilaian</a><br/>
-                </div>
+        <div class="profile-edit" style="align-items: top;">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Edit Profile</button>
+        </div>
+    </div>
+</div>
+<div class="container-content">
+    <div class="content-wrapper d-flex">
+        <div class="content-left">
+            <div class="content-left-title">
+                <span>Profile</span>
             </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>User Id</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ $profile->id }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Name</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ $profile->name }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ $profile->email }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Phone</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ $profile->nohape }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Gender</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ $profile->gender }}</p>
-                                    </div>
-                                </div>
+            <div class="content-left-content">
+                <a href="{{ route('front.UserProfile')}}"><h4 style="color: #6c757d;">{{ $profile->name }}</h4></a><br/>
+            </div>
+        <div class="content-left-title">
+            <span>Pesanan Saya</span>
+        </div>
+        <div class="content-left-content">
+            <a href="{{ route('front.UserProfile')}}">Riwayat Jajananku</a><br/>
+            <a href="{{ route('front.notfound') }}">Beri Penilaian</a><br/>
+        </div>
+    </div>
+    <div class="content-right">
+        <div class="card-deck">
+            @forelse ($order_detail as $val)
+            <div class="card-sendiri">
+                <div class="card-body">
+                    <div class="title">
+                        <h5 class="card-title">{{ $val->status}}</h5>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="profile-head">
-                                        <h5>
-                                            SEGERA RILIS! FITUR ALAMAT AKAN DITAMBAHKAN NANTI.
-                                        </h5>
-                                    </div>
-                                </div>
+                    <div class="content">
+                        <p class="card-text">Invoice: {{$val->invoice}}</p>
+                        <p class="card-text"><small class="text-muted">Subtotal: {{$val->subtotal}}</small></p>
+                    </div>
+                    <div class="footer">
+                        <form action="{{ route('front.OrderanView') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="invoice" value="{{ $val->invoice }}">
+                        <p class="card-text" style="text-align: right"><button type="submit" class="btn btn-light">view</button></p>
+                        </form>
                     </div>
                 </div>
             </div>
+            @empty
+            <div class="empty-deck">
+                <h2>empty</h2>
+            </div>
+            @endforelse
         </div>
-    </form>
+    </div>
+    <div class="content-end">
+        <div class="content-right-end">
+            <span>Archived</span>
+        </div>
+        <div class="content-left-content">
+            <a href="#">Monthly</a><br/>
+            <a href="#">Years</a><br/>
+        </div>
+    </div>
+    </div>
 </div>
+
 
 
 

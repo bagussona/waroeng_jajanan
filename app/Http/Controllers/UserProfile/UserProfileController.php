@@ -21,7 +21,10 @@ class UserProfileController extends Controller
         $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty->notificationCart();
 
-        return view('user.user_profile', compact('profile', 'licart'));
+        $uid = Auth::user()->id;
+        $order_detail = OrderHistory::where('customer_id', $uid)->get();
+
+        return view('user.user_order', compact('profile', 'licart', 'order_detail'));
 
     }
 
@@ -107,21 +110,6 @@ class UserProfileController extends Controller
         OrderHistory::where('invoice', $invoice)->update(['status' => 'Selesai']);
 
         return redirect()->back();
-    }
-
-    public function orderanKu(){
-        $uid = Auth::user()->id;
-        $profile = User::find($uid);
-
-        $getQty = new FrontController();
-        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
-        $licart = $getQty->notificationCart();
-
-        $uid = Auth::user()->id;
-        $order_detail = OrderHistory::where('customer_id', $uid)->get();
-
-        return view('user.user_order', compact('profile', 'licart', 'order_detail'));
-
     }
 
     public function viewCustomer(Request $request){
