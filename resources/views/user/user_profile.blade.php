@@ -156,6 +156,9 @@
             </div>
             @endforelse
         </div>
+        <div class="page_linkers" style="padding-top: 5%;">
+        {{ $order_detail->links() }}
+        </div>
     </div>
     <div class="content-end">
         <div class="content-right-end">

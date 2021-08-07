@@ -13,20 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['verify' => true]);
-
-// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-
-
-##dikomen dlu krn sdg maintenance!
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 
 Route::group([
     'middleware' => ['verified', 'role:admin|staff']
@@ -61,7 +48,6 @@ Route::group([
     Route::post('/admin/store', 'Web\SpbController@store')->name('datastore.store');
     Route::post('/admin/store/bbk', 'Web\SpbController@bbk')->name('datastore.bbk');
     Route::put('/admin/store/bbmWarehouse', 'Web\SpbController@bbmWarehouse')->name('datastore.bbmWarehouse');
-    // Route::get('/admin/store/bbk', 'Web\SpbController@getDataBBK');
     Route::delete('/admin/store/{spb_id}/BBK/delete', 'Web\SpbController@destroy')->name('datastore.destroyBBK');
     Route::delete('/admin/store/{spb_id}/BBM/delete', 'Web\SpbController@destroyBBM')->name('datastore.destroyBBM');
     Route::get('/admin/store/bbm', 'Web\SpbController@bbmindex')->name('datastore.bbmindex');
@@ -96,12 +82,12 @@ Route::group([
     Route::post('/checkout', 'Ecommerce\CartController@processCheckout')->name('front.store_checkout');
     Route::get('/checkout/{invoice}', 'Ecommerce\CartController@checkoutFinish')->name('front.finish_checkout');
 
-    // ini buat render di semua header
+    // ini buat render semua yg belum dibikin view nya hehe
     Route::get('/notfound', 'Ecommerce\CartController@notfound')->name('front.notfound'); //index notfound
 
     //ini profile
     Route::get('/user/profile', 'UserProfile\UserProfileController@index')->name('front.UserProfile'); //index profile
     Route::put('/user/profile', 'UserProfile\UserProfileController@update')->name('front.UpdateProfile'); //update profile
-    Route::post('/user/orderan', 'UserProfile\UserProfileController@viewCustomer')->name('front.OrderanView');
+    Route::post('/user/profile/orderan', 'UserProfile\UserProfileController@viewCustomer')->name('front.OrderanView');
 
 });

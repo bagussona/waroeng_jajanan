@@ -22,9 +22,9 @@ class UserProfileController extends Controller
         $licart = $getQty->notificationCart();
 
         $uid = Auth::user()->id;
-        $order_detail = OrderHistory::where('customer_id', $uid)->get();
+        $order_detail = OrderHistory::where('customer_id', $uid)->paginate(8);
 
-        return view('user.user_order', compact('profile', 'licart', 'order_detail'));
+        return view('user.user_profile', compact('profile', 'licart', 'order_detail'));
 
     }
 
@@ -76,7 +76,7 @@ class UserProfileController extends Controller
     }
 
     public function orderan(){
-        $order_history = OrderHistory::all();
+        $order_history = OrderHistory::paginate(10);
 
         $status = 'Proses';
         $order_detail = OrderHistory::where('status', $status)->get();

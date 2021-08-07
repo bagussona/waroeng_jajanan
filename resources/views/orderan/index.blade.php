@@ -80,6 +80,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            {{ $order_history->links() }}
 
                         </div>
                     </div>

@@ -28,14 +28,14 @@
                                     <div class="callout callout-info">
                                         <small class="text-muted">Omset Harian</small>
                                         <br>
-                                        <strong class="h4">Rp 0</strong>
+                                        <strong class="h4">Rp. {{ $omset_daily }}</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-danger">
                                         <small class="text-muted">Pelanggan</small>
                                         <br>
-                                        <strong class="h4">0</strong>
+                                        <strong class="h4">{{ $registered }}</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -49,7 +49,7 @@
                                     <div class="callout callout-success">
                                         <small class="text-muted">Total Produk</small>
                                         <br>
-                                        <strong class="h4">0</strong>
+                                        <strong class="h4">{{ $product }}</strong>
                                     </div>
                                 </div>
                             </div>
