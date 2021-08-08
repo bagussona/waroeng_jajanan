@@ -37,6 +37,7 @@ Route::group([
 
     //Products Management
     Route::get('/admin/products', 'Web\ProductController@index')->name('products.index'); //index product
+    Route::get('/admin/products/display', 'Web\ProductController@display')->name('products.display'); //index product
     Route::get('/admin/products/show', 'Web\ProductController@create')->name('products.create');
     Route::post('/admin/products/show', 'Web\ProductController@store')->name('products.store');
     Route::get('/admin/products/{products_id}/edit', 'Web\ProductController@edit')->name('products.edit');

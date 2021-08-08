@@ -27,6 +27,19 @@ class ProductController extends Controller
 
     }
 
+    public function display(){
+        $display = Product::orderBy('created_at', 'DESC');
+
+        if (request()->q != ''){
+            $display = $display->where('name', 'LIKE', '%' . request()->q . '%');
+        }
+
+        $display = $display->paginate(10);
+        
+        return view('products.display', compact('display'));
+
+    }
+
     public function create(){
         $category = Category::orderBy('name', 'DESC')->get();
         $supplier = Supplier::orderBy('name', 'DESC')->get();
