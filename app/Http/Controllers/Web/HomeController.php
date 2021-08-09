@@ -37,6 +37,8 @@ class HomeController extends Controller
             return $q['subtotal'];
         });
 
-        return view('home', compact('registered', 'product', 'omset_daily'));
+        $transaction = OrderHistory::where('created_at', 'LIKE', '%' . $current_date . '%')->count();
+
+        return view('home', compact('registered', 'product', 'omset_daily', 'transaction'));
     }
 }

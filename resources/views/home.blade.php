@@ -40,9 +40,9 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-primary">
-                                        <small class="text-muted">Prediksi Omset</small>
+                                        <small class="text-muted">Transaksi Harian</small>
                                         <br>
-                                        <strong class="h4">Rp 0</strong>
+                                        <strong class="h4">{{ $transaction }} Transaksi</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
