@@ -38,6 +38,7 @@
                 </a>
             </li>
         </ul>
+        </li>
         <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">
             <i class="nav-icon icon-settings"></i> SPB
@@ -54,7 +55,29 @@
                 </a>
             </li>
         </ul>
-    </li>
+        </li>
+        <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">
+            <i class="nav-icon icon-settings"></i> Laporan
+        </a>
+        <ul class="nav-dropdown-items">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('reports.daily') }}">
+                    <i class="nav-icon icon-puzzle"></i> Akhiri Shift
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="nav-icon icon-puzzle"></i> Laporan Mingguan
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="nav-icon icon-puzzle"></i> Laporan Bulanan
+                </a>
+            </li>
+        </ul>
+        </li>
     <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">
             <i class="nav-icon icon-settings"></i> Pengaturan

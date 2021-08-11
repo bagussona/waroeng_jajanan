@@ -187,12 +187,14 @@ class CartController extends Controller
             foreach($carts as $row) {
                 //AMBIL DATA PRODUK BERDASARKAN PRODUCT_ID
                 $product = Product::find($row['id']);
+                $stl = $row['qty'] * $row['price'];
                 //SIMPAN DETAIL ORDER
                 OrderDetail::create([
                     'order_id' => $order->invoice,
                     'name' => $row['name'],
                     'price' => $row['price'],
-                    'qty' => $row['qty']
+                    'qty' => $row['qty'],
+                    'subtotal' => $stl
                 ]);
             }
 

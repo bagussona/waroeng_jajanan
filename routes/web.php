@@ -64,6 +64,7 @@ Route::group([
 //Toko Display
 Route::get('/', 'Ecommerce\FrontController@index')->name('front.index'); //index guest
 Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact'); //index contact pengaduan
+Route::get('/reports/daily', 'Web\ReportsController@index')->name('reports.daily');
 
 Route::group([
     'middleware' => ['verified', 'role:admin|staff|customer']
