@@ -59,12 +59,14 @@ Route::group([
     Route::post('/admin/orderan', 'UserProfile\UserProfileController@view')->name('orderan.view');
     Route::put('/admin/orderan/done', 'UserProfile\UserProfileController@updateOrderan')->name('orderan.updateSelesai');
 
+    //Reports Management
+    Route::get('/reports/daily', 'Web\ReportsController@index')->name('reports.daily');
+    Route::get('/reports/daily/pdf', 'Web\ReportsController@createPDF')->name('reports.pdf_daily');
 });
 
 //Toko Display
 Route::get('/', 'Ecommerce\FrontController@index')->name('front.index'); //index guest
 Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact'); //index contact pengaduan
-Route::get('/reports/daily', 'Web\ReportsController@index')->name('reports.daily');
 
 Route::group([
     'middleware' => ['verified', 'role:admin|staff|customer']

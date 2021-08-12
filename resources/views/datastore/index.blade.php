@@ -132,10 +132,10 @@
                             </div>
                             <form action="{{ route('datastore.bbk') }}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-primary btn-sm float-right">BBK</button>
+                                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-archive"></i> BBK</button>
                             </form>
-                            <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
-                            {{-- {!! $supplier->links() !!} --}}
+                            <button class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</button>
+                            <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
                         </div>
                     </div>
                 </div>
@@ -215,8 +215,8 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary btn-sm float-right">BBK</button>
                                             </form>
-                                            <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
-                                            {{-- {!! $supplier->links() !!} --}}
+                                            <button class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</button>
+                                            <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
                                         </div>
                                     </div>
                                 </div>

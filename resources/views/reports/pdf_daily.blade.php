@@ -2,11 +2,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="x-apple-disable-message-reformatting" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="color-scheme" content="light dark" />
     <meta name="supported-color-schemes" content="light dark" />
     <title>Report Daily - {{ env('APP_NAME') }}</title>
-
     <script src="https://kit.fontawesome.com/ba382d8b46.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style type="text/css" rel="stylesheet" media="all">
@@ -270,10 +269,7 @@
                     <div class="footer-main-content-middle-leftside" style="width: 20%; height: 50px;  line-height: 50px;"></div>
                     <div class="footer-main-content-middle-leftside" style="width: 60%; height: 50px;  line-height: 50px; text-align: center;">
                     <div class="footerbutton-main-content-middle">
-                        <form action="{{ route('reports.pdf_daily') }}" method="get">
-                            <button class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</button>
-                            @csrf
-                        </form>
+                        <button class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</button>
                         <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
                     </div>
                     </div>

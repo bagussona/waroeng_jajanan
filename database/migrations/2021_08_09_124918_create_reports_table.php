@@ -15,6 +15,12 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('tanggal');
+            $table->integer('total_laba_prediksi');
+            $table->integer('total_transaksi');
+            $table->integer('total_pendapatan_usaha');
+            $table->integer('total_pendapatan_masuk');
+            $table->integer('total_pendapatan_hutang');
             $table->timestamps();
         });
     }
