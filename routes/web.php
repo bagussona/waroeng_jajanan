@@ -61,6 +61,7 @@ Route::group([
 
     //Reports Management
     Route::get('/reports/daily', 'Web\ReportsController@index')->name('reports.daily');
+    Route::get('/reports/pdf/daily', 'Web\ReportsController@dummy')->name('reports.daily_pdf');
     Route::get('/reports/daily/pdf', 'Web\ReportsController@createPDF')->name('reports.pdf_daily');
 });
 

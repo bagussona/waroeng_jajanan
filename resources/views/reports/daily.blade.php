@@ -46,7 +46,7 @@
             padding-bottom: 2%;
         }
 
-        .header-main-content-middle, .toogletips-main-content-middle, .bodycontent-main-content-middle, .footer-main-content-middle, .bodytable-main-content-middle, .bodyfooter-main-content-middle{
+        .header-main-content-middle, .toogletips-main-content-middle, .bodycontent-main-content-middle, .footer-main-content-middle, .bodytable-main-content-middle, .bodyfooter-main-content-middle, .footerbutton-main-content-middle {
             display: flex;
             flex-direction: row;
         }
@@ -266,15 +266,18 @@
                     <div class="footer-main-content-middle-leftside" style="width: 60%; height: 50px;  line-height: 50px; text-align: center;">Export to: </div>
                     <div class="footer-main-content-middle-rightside" style="width: 20%; height: 50px; line-height: 50px;"></div>
                 </div>
-                <div class="footer-main-content-middle">
+                <div class="footer-main-content-middle" style="justify-content-center;">
                     <div class="footer-main-content-middle-leftside" style="width: 20%; height: 50px;  line-height: 50px;"></div>
-                    <div class="footer-main-content-middle-leftside" style="width: 60%; height: 50px;  line-height: 50px; text-align: center;">
-                    <div class="footerbutton-main-content-middle">
-                        <form action="{{ route('reports.pdf_daily') }}" method="get">
+                    <div class="footer-main-content-middle-leftside" style="width: 60%; height: 50px;  line-height: 50px; text-align: center; justify-content-center;">
+                    <div class="footerbutton-main-content-middle" style="align-content: center;">
+                        <form style="align-items: center; margin-left: 200px;" action="{{ route('reports.pdf_daily') }}" method="get">
+                        @csrf
                             <button class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</button>
-                            @csrf
                         </form>
-                        <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+                        <form style="align-items: center; margin-left: 5px;" action="#" method="get">
+                        @csrf
+                            <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+                        </form>
                     </div>
                     </div>
                     <div class="footer-main-content-middle-rightside" style="width: 20%; height: 50px; line-height: 50px;"></div>

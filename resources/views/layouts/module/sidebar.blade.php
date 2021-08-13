@@ -68,12 +68,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="nav-icon icon-puzzle"></i> Laporan Mingguan
+                    <i class="nav-icon icon-puzzle"></i> Laporan Bulanan
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="nav-icon icon-puzzle"></i> Laporan Bulanan
+                    <i class="nav-icon icon-puzzle"></i> Inquiry Transaksi
                 </a>
             </li>
         </ul>

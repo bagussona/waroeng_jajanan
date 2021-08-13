@@ -15,292 +15,220 @@
         @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;900&display=swap');
 
         body {
-            width: 100% !important;
-            height: 100%;
-            margin: 0;
-            padding: 0;
+            height: 297mm;
+            width: 210mm;
+        /* to centre page on screen*/
+            padding-right: 2%;
+            margin-left: auto;
+            margin-right: auto;
             -webkit-text-size-adjust: none;
             font-family: 'Nunito', sans-serif;
             color: #51545E;
-        }
-
-        .header-content{
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            background-color: #F4F4F7;
-            justify-content: center;
-            align-items: center;
-            max-width: 100%;
-            height: 70px;
-        }
-
-        .main-content{
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            /* align-items: center; */
-            max-width: 100%;
-            height: auto;
-            padding-bottom: 2%;
-        }
-
-        .header-main-content-middle, .toogletips-main-content-middle, .bodycontent-main-content-middle, .footer-main-content-middle, .bodytable-main-content-middle, .bodyfooter-main-content-middle{
-            display: flex;
-            flex-direction: row;
-        }
-
-        .body-main-content-middle{
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* #table-pendapatan{
-            border: 1px solid black;
-            border-collapse: collapse;
-        } */
-
-        .footer-content{
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            background-color: #F4F4F7;
-            justify-content: center;
-            align-items: center;
-            max-width: 100%;
-            height: 99px;
-        }
-
-        .footer-content-sign{
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
         }
 
     </style>
 </head>
 <body>
     <div class="container-wrapper">
-        <div class="header-content">
-            <div class="header-content-left" style="width: 25%;">
-            </div>
-            <div class="header-content-center" style="width: 50%;">
-                <a style="text-decoration: none;" href="{{ route('front.index') }}"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: bold; text-shadow: 0 1px 0 white;">{{ env('APP_NAME') }}</h2></a>
-            </div>
-            <div class="header-content-right" style="width: 25%;">
-            </div>
-        </div>
+        <table>
+            <tr>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+            </tr>
+            <tr>
+                <td style="width: 99.2125px; height: 50px; background-color: #F4F4F7;"></td>
+                <td style="width: 99.2125px; height: 50px; background-color: #F4F4F7;"></td>
+                <td colspan="3" style="height: 50px; background-color: #F4F4F7; text-align: center;">
+                    <a style="text-decoration: none;" href="{{ route('front.index') }}"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: bold; text-shadow: 0 1px 0 white; text-align: center; line-height: 50px;">{{ env('APP_NAME') }}</h2></a>
+                </td>
+                <td style="width: 99.2125px; height: 50px; background-color: #F4F4F7;"></td>
+                <td style="width: 99.2125px; height: 50px; background-color: #F4F4F7;"></td>
+            </tr>
+            <tr>
+                <td colspan="5" style="height: 75px;">Akhiri Shift, <small>{{ Auth::user()->name }}</small></td>
+                <td colspan="2" style="height: 75px; text-align: right;"><small>Tanggal: {{ date('Y-m-d') }} </small></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="5" style="border-top: double;"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="7" style="height: 25px;"></td>
+            </tr>
+            <tr>
+                <td colspan="6" style="height: 50px;">Pendapatan</td>
+                <td style="height: 50px;">Saldo</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 50px; text-align: center; color: #0000FF;">Pendapatan Usaha</td>
+                <td colspan="3" style="height: 50px;"></td>
+                <td colspan="2" style="height: 50px; text-align: center; border-top: solid 1px black; color: #0000FF;">IDR</td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                <table>
+                    <tr>
+                        <th style="height: 50px; width: 25px;"></th>
+                        <th style="height: 50px; width: 75px; text-align: center;">No.</th>
+                        <th style="height: 50px; width: 375px; text-align: left;">Produk yang terjual hari ini..</th>
+                        <th style="height: 50px; width: 75px; text-align: center;">Qty</th>
+                        <th style="height: 50px; width: 150px; text-align: center;">Subtotal</th>
+                        <th style="height: 50px; width: 25px;"></th>
+                    </tr>
+                    <tr>
+                        <?php $i = 1; ?>
+                        @forelse ($order_all as $val)
+                        <td style="height: 30px;"></td>
+                        <td style="font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px; text-align: center;">{{ $i++ }}</td>
+                        <td style="font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px; text-align: left;">{{ $val->products }}</td>
+                        <td style="font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px; text-align: center;">{{ $val->terjual }}</td>
+                        <td style="font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px; text-align: right;">{{ $val->subtotal }}</td>
+                        <td style="height: 30px;"></td>
+                    </tr>
+                    <tr>
+                        @empty
+                        <td colspan="6" style="height: 50px;"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: bold; text-shadow: 0 1px 0 white; margin: 0;">Belum ada yang terjual hari ini..</h2></td>
+                    </tr>
+                    @endforelse
+                </table>
+            </td>
+            </tr>
+            <tr>
+                <td style="height: 50px;"></td>
+                <td colspan="4" style="height: 50px; color: #0000FF;">Total Pendapatan Usaha: </td>
+                <td colspan="2" style="height: 50px; text-align: right; border-top: solid 1px black; border-bottom: solid 1px black; color: #0000FF;">{{ $total }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" style="height: 25px;"></td>
+            </tr>
+            <tr>
+                <td colspan="7" style="height: 50px;">Perhitungan</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 50px; text-align: center; color: #0000FF;">Pendapatan Masuk</td>
+                <td colspan="5" style="height: 50px;"></td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <table>
+                        <tr>
+                            <th style="height: 50px; width: 50px; text-align: center;">No.</th>
+                            <th style="height: 50px; width: 75px; text-align: center;">Status</th>
+                            <th style="height: 50px; width: 150px; text-align: center;">No Invoice</th>
+                            <th style="height: 50px; width: 200px; text-align: left;">Customer Name</th>
+                            <th style="height: 50px; width: 100px; text-align: center;">Phone</th>
+                            <th style="height: 50px; width: 125px; text-align: center;">Subtotal</th>
+                        </tr>
+                        <tr>
+                            <?php $i = 1; ?>
+                            @forelse ($order_history_selesai as $value)
+                            <td style="text-align: center; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $i++ }}</td>
+                            <td style="text-align: center; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $value->status }}</td>
+                            <td style="text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $value->invoice }}</td>
+                            <td style="text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $value->customer_name }}</td>
+                            <td style="text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $value->customer_phone }}</td>
+                            <td style="text-align: right; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $value->subtotal }}</td>
+                        </tr>
+                        <tr>
+                            @empty
+                            <td colspan="6" style="height: 50px;"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: bold; text-shadow: 0 1px 0 white; margin: 0;">Belum ada pendapatan masuk hari ini..</h2></td>
+                        </tr>
+                        @endforelse
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 50px;"></td>
+                <td colspan="4" style="height: 50px; color: #0000FF;">Total Pendapatan Masuk: </td>
+                <td colspan="2" style="height: 50px; text-align: right; border-top: solid 1px black; border-bottom: solid 1px black; color: #0000FF;">{{ $total_selesai }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" style="height: 25px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 50px; text-align: center; color: #0000FF;">Pendapatan Hutang</td>
+                <td colspan="5" style="height: 50px;"></td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <table>
+                        <tr>
+                            <th style="height: 50px; width: 50px; text-align: center;">No.</th>
+                            <th style="height: 50px; width: 75px; text-align: center;">Status</th>
+                            <th style="height: 50px; width: 150px; text-align: center;">No Invoice</th>
+                            <th style="height: 50px; width: 200px; text-align: left;">Customer Name</th>
+                            <th style="height: 50px; width: 100px; text-align: center;">Phone</th>
+                            <th style="height: 50px; width: 125px; text-align: center;">Subtotal</th>
+                        </tr>
+                        <tr>
+                            <?php $i = 1; ?>
+                            @forelse ($order_history_proses as $q)
+                            <td style="text-align: center; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $i++ }}</td>
+                            <td style="text-align: center; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $q->status }}</td>
+                            <td style="text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $q->invoice }}</td>
+                            <td style="text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $q->customer_name }}</td>
+                            <td style="text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $q->customer_phone }}</td>
+                            <td style="text-align: right; font-family: 'Nunito Sans', sans-serif; font-size: 14px; height: 30px;">{{ $q->subtotal }}</td>
+                        </tr>
+                        <tr>
+                            @empty
+                            <td colspan="6" style="height: 50px;"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: bold; text-shadow: 0 1px 0 white; margin: 0;">Belum ada pendapatan hutang hari ini..</h2></td>
+                        </tr>
+                        @endforelse
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 50px;"></td>
+                <td colspan="4" style="height: 50px; color: #0000FF;">Total Pendapatan Hutang: </td>
+                <td colspan="2" style="height: 50px; text-align: right; border-top: solid 1px black; border-bottom: solid 1px black; color: #0000FF;">{{ $total_proses }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" style="height: 50px;"></td>
+            </tr>
+            <tr>
+                <td colspan="5">Total Pendapatan Usaha : </td>
+                <td colspan="2" style="text-align: right;">Rp. {{ $total }}</td>
+            </tr>
+            <tr>
+                <td colspan="5">Total Pendapatan Masuk : </td>
+                <td colspan="2" style="text-align: right;">Rp. {{ $total_selesai }}</td>
+            </tr>
+            <tr>
+                <td colspan="5">Total Pendapatan Hutang : </td>
+                <td colspan="2" style="text-align: right;">Rp. {{ $total_proses }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" style="height: 25px;"></td>
+            </tr>
+            <tr>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+                <th style="width: 99.2125px; background-color: #F4F4F7;"></th>
+            </tr>
+            <tr>
+                <td style="width: 99.2125px; height: 75px; background-color: #F4F4F7;"></td>
+                <td style="width: 99.2125px; height: 75px; background-color: #F4F4F7;"></td>
+                <td colspan="3" style="height: 75px; background-color: #F4F4F7; text-align: center;">
+                    <a style="text-decoration: none;" href="{{ route('front.index') }}"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: bold; text-shadow: 0 1px 0 white; margin: 5px;">© 2021 {{ env('APP_NAME') }}. All rights reserved.</h2></a>
+                    <a style="text-decoration: none;" href="#"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: bold; text-shadow: 0 1px 0 white; margin: 5px;">Bantul City, DI Yogyakarta</h2></a>
+                    <a style="text-decoration: none;" href="#"><h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: bold; text-shadow: 0 1px 0 white; margin: 5px;">Koperasi Pondok</h2></a>
+                </td>
+                <td style="width: 99.2125px; height: 75px; background-color: #F4F4F7;"></td>
+                <td style="width: 99.2125px; height: 75px; background-color: #F4F4F7;"></td>
+            </tr>
+
+        </table>
     </div>
-
-    <div class="container-wrapper">
-        <div class="main-content">
-            <div class="main-content-left" style="width: 25%;">
-            </div>
-            <div class="main-content-middle" style="width: 50%;">
-                <div class="header-main-content-middle" style="margin-bottom: 3%;">
-                    <div class="header-main-content-middle-leftside" style="width: 80%; height: 80px; line-height: 80px;"> Akhiri Shift, {{ Auth::user()->name }}<hr style="height:1px;width:84%;border:none;color:#333;background-color:#333;margin-left:150px;margin-right:0px;" /></div>
-                    <div class="header-main-content-middle-rightside" style="width: 20%; height: 80px; line-height: 80px; text-align: right;"> Tanggal: {{date('Y-m-d')}}<hr style="height:1px;width:30%;border:none;color:#333;background-color:#333;margin-left:0px;margin-right: 50px;" /></div>
-                </div>
-                <div class="body-main-content-middle">
-                    <div class="toogletips-main-content-middle"  style="height: 50px;">
-                        <div class="toogletips-main-content-middle-leftside" style="width: 80%; height: 30px; line-height: 30px;">Pendapatan</div>
-                        <div class="toogletips-main-content-middle-leftside" style="width: 20%; height: 30px; line-height: 30px;">Saldo<hr style="height:1px;border:none;color:#333;background-color:#333;" /></div>
-                    </div>
-                    <div class="bodycontent-main-content-middle"  style="height: 50px;">
-                        <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                        <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">Pendapatan Usaha:</div>
-                        <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px; text-align: center; color: #0000FF;"> IDR</div>
-                    </div>
-                    <div class="bodytable-main-content-middle" style="height: auto;">
-                        <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                        <div class="body-main-content-middle-rightside" style="width: 95% height: 50px;">
-                            <table id="table-pendapatan" style="width: 100%;">
-                                <tr style="text-align: center;">
-                                    <th style="height: 30px; width: 50px; padding-bottom: 2%;">No.</th>
-                                    <th style="height: 30px; width: 700px; padding-bottom: 2%;">Produk yang terjual hari ini..</th>
-                                    <th style="height: 30px; width: 100px; padding-bottom: 2%;">Qty</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">Subtotal</th>
-                                </tr>
-                                <tr>
-                                    <?php $i = 1; ?>
-                                    @forelse ($order_all as $val)
-                                    <td style="text-align: center; font-family: 'Nunito Sans', sans-serif;">{{ $i++ }}</td>
-                                    <td style="text-align: left; font-family: 'Nunito Sans', sans-serif;">{{ $val->products }} ...</td>
-                                    <td style="text-align: center; font-family: 'Nunito Sans', sans-serif;">{{ $val->terjual }}</td>
-                                    <td style="text-align: right; font-family: 'Nunito Sans', sans-serif;">{{ $val->subtotal }}</td>
-                                </tr>
-                                <tr>
-                                    {{ $order_all->links() }}
-                                </tr>
-                                <tr>
-                                    @empty
-                                </tr>
-                                @endforelse
-                            </table>
-                            <div class="bodycontent-main-content-middle"  style="height: 50px; margin-top: 2%; margin-bottom: 2%;">
-                                <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                                <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_all->links() }}</div>
-                                <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px; text-align: center; color: #0000FF;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bodyfooter-main-content-middle" style="margin-bottom: 5%;">
-                        <div class="bodfooter-main-content-middle-leftside" style="width: 10%; height: 50px; line-height: 50px;">
-                        </div>
-                        <div class="bodyfooter-main-content-middle-center" style="width: 70%; height: 50px; line-height: 50px; color: #0000FF;">Total pendapatan Usaha: </div>
-                        <div class="bodyfooter-main-content-middle-rightside" style="width: 20%; height: 50px; text-align: right; color: #0000FF;"><hr style="height:1px;border:none;color:#333;background-color:#333;" />{{ $total }}<hr style="height:1px;border:none;color:#333;background-color:#333;" /></div>
-                    </div>
-                </div>
-                <div class="body-main-content-middle">
-                    <div class="toogletips-main-content-middle"  style="height: 50px;">
-                        <div class="toogletips-main-content-middle-leftside" style="width: 80%; height: 30px; line-height: 30px;">Perhitungan</div>
-                        <div class="toogletips-main-content-middle-leftside" style="width: 20%; height: 30px; line-height: 30px;"></div>
-                    </div>
-                    <div class="bodycontent-main-content-middle"  style="height: 50px;">
-                        <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                        <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">Pendapatan Masuk:</div>
-                        <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px;"></div>
-                    </div>
-                    <div class="bodytable-main-content-middle" style="height: auto;">
-                        <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                        <div class="body-main-content-middle-rightside" style="width: 95% height: 50px;">
-                            <table id="table-pendapatan" style="width: 100%;">
-                                <tr style="text-align: center;">
-                                    <th style="height: 30px; width: 50px; padding-bottom: 2%;">No.</th>
-                                    <th style="height: 30px; width: 100px; padding-bottom: 2%;">Status</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">No Invoice</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">Customer Name</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">Customer Phone</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">Subtotal</th>
-                                </tr>
-                                <tr>
-                                    <?php $i = 1; ?>
-                                    @forelse ($order_history_selesai as $val)
-                                    <td style="text-align: center; font-family: 'Nunito Sans', sans-serif;">{{ $i++ }}</td>
-                                    <td style="text-align: center; font-family: 'Nunito Sans', sans-serif;">{{ $val->status }}</td>
-                                    <td style="text-align: left; font-family: 'Nunito Sans', sans-serif;">{{ $val->invoice }}</td>
-                                    <td style="text-align: left; font-family: 'Nunito Sans', sans-serif;">{{ $val->customer_name }}</td>
-                                    <td style="text-align: right; font-family: 'Nunito Sans', sans-serif;">{{ $val->customer_phone }}</td>
-                                    <td style="text-align: right; font-family: 'Nunito Sans', sans-serif;">{{ $val->subtotal }}</td>
-                                </tr>
-                                <tr>
-                                    @empty
-                                </tr>
-                                @endforelse
-                            </table>
-                            <div class="bodycontent-main-content-middle"  style="height: 50px; margin-top: 2%; margin-bottom: 2%;">
-                                <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                                <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_history_selesai->links() }}</div>
-                                <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px; text-align: center; color: #0000FF;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bodyfooter-main-content-middle" style="margin-bottom: 5%;">
-                        <div class="bodfooter-main-content-middle-leftside" style="width: 10%; height: 50px; line-height: 50px;">
-                        </div>
-                        <div class="bodyfooter-main-content-middle-center" style="width: 70%; height: 50px; line-height: 50px; color: #0000FF;">Total Pendapatan Masuk: </div>
-                        <div class="bodyfooter-main-content-middle-rightside" style="width: 20%; height: 50px; text-align: right; color: #0000FF;"><hr style="height:1px;border:none;color:#333;background-color:#333;" />{{ $total_selesai }}<hr style="height:1px;border:none;color:#333;background-color:#333;" /></div>
-                    </div>
-                    <div class="bodycontent-main-content-middle"  style="height: 50px;">
-                        <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                        <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">Pendapatan Hutang:</div>
-                        <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px;"></div>
-                    </div>
-                    <div class="bodytable-main-content-middle" style="height: auto;">
-                        <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                        <div class="body-main-content-middle-rightside" style="width: 95% height: 50px;">
-                            <table id="table-pendapatan" style="width: 100%;">
-                                <tr style="text-align: center;">
-                                    <th style="height: 30px; width: 50px; padding-bottom: 2%;">No.</th>
-                                    <th style="height: 30px; width: 100px; padding-bottom: 2%;">Status</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">No Invoice</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">Customer Name</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">Customer Phone</th>
-                                    <th style="height: 30px; width: 300px; padding-bottom: 2%;">Subtotal</th>
-                                </tr>
-                                <tr>
-                                    <?php $i = 1; ?>
-                                    @forelse ($order_history_proses as $val)
-                                    <td style="text-align: center; font-family: 'Nunito Sans', sans-serif;">{{ $i++ }}</td>
-                                    <td style="text-align: center; font-family: 'Nunito Sans', sans-serif;">{{ $val->status }}</td>
-                                    <td style="text-align: left; font-family: 'Nunito Sans', sans-serif;">{{ $val->invoice }}</td>
-                                    <td style="text-align: left; font-family: 'Nunito Sans', sans-serif;">{{ $val->customer_name }}</td>
-                                    <td style="text-align: right; font-family: 'Nunito Sans', sans-serif;">{{ $val->customer_phone }}</td>
-                                    <td style="text-align: right; font-family: 'Nunito Sans', sans-serif;">{{ $val->subtotal }}</td>
-                                </tr>
-                                <tr>
-                                    @empty
-                                </tr>
-                                @endforelse
-                            </table>
-                            <div class="bodycontent-main-content-middle"  style="height: 50px; margin-top: 2%; margin-bottom: 2%;">
-                                <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                                <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_history_proses->links() }}</div>
-                                <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px; text-align: center; color: #0000FF;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bodyfooter-main-content-middle" style="margin-bottom: 5%;">
-                        <div class="bodfooter-main-content-middle-leftside" style="width: 10%; height: 50px; line-height: 50px;">
-                        </div>
-                        <div class="bodyfooter-main-content-middle-center" style="width: 70%; height: 50px; line-height: 50px; color: #0000FF;">Total Pendapatan Hutang: </div>
-                        <div class="bodyfooter-main-content-middle-rightside" style="width: 20%; height: 50px; text-align: right; color: #0000FF;"><hr style="height:1px;border:none;color:#333;background-color:#333;" />{{ $total_proses }}<hr style="height:1px;border:none;color:#333;background-color:#333;" /></div>
-                    </div>
-                    <div class="toogletips-main-content-middle"  style="height: 50px;">
-                        <div class="toogletips-main-content-middle-leftside" style="width: 80%; height: 30px; line-height: 30px;"><strong> Total Pendapatan Usaha ...</strong></div>
-                        <div class="toogletips-main-content-middle-leftside" style="width: 20%; height: 30px; line-height: 30px; text-align: right;">Rp. {{ $total }}</div>
-                    </div>
-                    <div class="toogletips-main-content-middle"  style="height: 50px;">
-                        <div class="toogletips-main-content-middle-leftside" style="width: 80%; height: 30px; line-height: 30px;"><strong> Total Pendapatan Masuk ...</strong></div>
-                        <div class="toogletips-main-content-middle-leftside" style="width: 20%; height: 30px; line-height: 30px; text-align: right;">Rp. {{ $total_selesai }}</div>
-                    </div>
-                    <div class="toogletips-main-content-middle"  style="height: 50px;">
-                        <div class="toogletips-main-content-middle-leftside" style="width: 80%; height: 30px; line-height: 30px;"><strong> Total Pendapatan Hutang ...</strong></div>
-                        <div class="toogletips-main-content-middle-leftside" style="width: 20%; height: 30px; line-height: 30px; text-align: right;">Rp. {{ $total_proses }}</div>
-                    </div>
-                </div>
-
-                <div class="footer-main-content-middle">
-                    <div class="footer-main-content-middle-leftside" style="width: 20%; height: 50px;  line-height: 50px;"></div>
-                    <div class="footer-main-content-middle-leftside" style="width: 60%; height: 50px;  line-height: 50px; text-align: center;">Export to: </div>
-                    <div class="footer-main-content-middle-rightside" style="width: 20%; height: 50px; line-height: 50px;"></div>
-                </div>
-                <div class="footer-main-content-middle">
-                    <div class="footer-main-content-middle-leftside" style="width: 20%; height: 50px;  line-height: 50px;"></div>
-                    <div class="footer-main-content-middle-leftside" style="width: 60%; height: 50px;  line-height: 50px; text-align: center;">
-                    <div class="footerbutton-main-content-middle">
-                        <button class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</button>
-                        <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
-                    </div>
-                    </div>
-                    <div class="footer-main-content-middle-rightside" style="width: 20%; height: 50px; line-height: 50px;"></div>
-                </div>
-            </div>
-            <div class="main-content-right" style="width: 25%;">
-            </div>
-        </div>
-    </div>
-
-    <div class="container-wrapper">
-        <div class="footer-content">
-            <div class="footer-content-left" style="width: 25%;">
-            </div>
-            <div class="footer-content-center" style="width: 50%;">
-                <div class="footer-content-sign">
-                    <div class="footer-content-header">
-                        <h2 style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: bold; text-shadow: 0 1px 0 white;">© 2021 {{ env('APP_NAME') }}. All rights reserved.</h2>
-                    </div>
-                    <div class="footer-content-end" style="justify-content: center; align-items: center; text-align: center;">
-                        <span style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: bold; text-shadow: 0 1px 0 white;">Bantul City, D.I Yogyakarta</span><br />
-                        <span style="text-align: center; color: #A8AAAF; font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: bold; text-shadow: 0 1px 0 white;">Koperasi Pondok</span>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-content-right" style="width: 25%;">
-            </div>
-        </div>
-    </div>
-
-
 </body>
 </html>
