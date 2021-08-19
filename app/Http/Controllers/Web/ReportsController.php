@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\OrderDetail;
 use App\OrderHistory;
+use App\Report;
 use Barryvdh\DomPDF\Facade as PDF;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
@@ -107,6 +108,11 @@ class ReportsController extends Controller
 
         return $dompdf->download('pdf_daily.pdf');
 
+    }
+
+    public function inquiry(Request $request){
+
+        return view('reports.inquiry');
     }
 
 }
