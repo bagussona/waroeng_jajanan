@@ -17,13 +17,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">
-                                Inquiry
-
-                                <!-- BUAT TOMBOL UNTUK MENGARAHKAN KE HALAMAN ADD PRODUK -->
-                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
-                                {{-- <a href="{{ route('products.datastore') }}" class="btn btn-lighting btn-sm float-right">Transfer</a> --}}
-                            </h4>
+                            <h4 class="card-title">Inquiry</h4>
                         </div>
                         <div class="card-body">
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
