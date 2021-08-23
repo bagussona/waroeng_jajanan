@@ -45,7 +45,7 @@ class SpbController extends Controller
             'slug' => $data[0]['slug'],
             'description' => $data[0]['description'],
             'supplier' => $data[0]['supplier']['name'],
-            'category' => $data[0]['category']['name'],
+            'category' => $data[0]['category']['slug'],
             'stock' => $stock_transfer,
             'price' => $data[0]['price'],
             'image' => $data[0]['image']

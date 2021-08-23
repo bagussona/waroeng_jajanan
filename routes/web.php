@@ -69,12 +69,12 @@ Route::group([
 //Toko Display
 Route::get('/', 'Ecommerce\FrontController@index')->name('front.index'); //index guest
 Route::get('/user/contact', 'UserProfile\UserProfileController@contactUs')->name('front.UserContact'); //index contact pengaduan
+Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home
 
 Route::group([
     'middleware' => ['verified', 'role:admin|staff|customer']
 ], function () {
 
-    Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product'); //index home
     Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
     Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
 

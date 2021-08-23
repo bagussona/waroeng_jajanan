@@ -40,8 +40,7 @@
                             </select>
                         </div>
                         <div class="right_page ml-auto">
-                            Pagination
-                            {{-- [pagination] --}}
+                            {{ $products->links() }}
                         </div>
                     </div>
                     <div class="latest_product_inner row">
@@ -52,10 +51,8 @@
                             <div class="f_p_item">
                                 <div class="f_p_img">
                                     <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->name }}">
-                                    {{-- <img class="img-fluid" src="" alt=""> --}}
                                     <div class="p_icon">
                                         <a href="{{ url('/product/' . $row->slug) }}">
-                                        {{-- <a href=""> --}}
                                             <i class="lnr lnr-cart"></i>
                                         </a>
                                     </div>
@@ -63,10 +60,8 @@
                                 <a href="{{ url('/product/' . $row->slug) }}">
                                 <a href="">
                                     <h4>{{ $row->name }}</h4>
-                                    {{-- <h4>[row name]</h4> --}}
                                 </a>
                                 <h5>Rp {{ number_format($row->price) }}</h5>
-                                {{-- <h5>Rp 0</h5> --}}
                             </div>
                         </div>
                         @empty
@@ -93,7 +88,7 @@
                                     <li>
 
                                       	<!-- MODIFIKASI BAGIAN INI -->
-                                        <strong><a href="{{ url('/category/' . $category->slug) }}">{{ $category->name }}</a></strong>
+                                        <strong><a href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a></strong>
 \
                                     </li>
                                     @endforeach
@@ -108,7 +103,6 @@
           	<!-- GENERATE PAGINATION PRODUK -->
             <div class="row">
                 {{ $products->links() }}
-                {{-- [product->links] --}}
             </div>
         </div>
     </section>

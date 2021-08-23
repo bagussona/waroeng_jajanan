@@ -40,14 +40,17 @@ class FrontController extends Controller
 
     public function categoryProduct($slug)
     {
+        // dd($slug);
         $getQty = $this->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty;
-       //JADI QUERYNYA ADALAH KITA CARI DULU KATEGORI BERDASARKAN SLUG, SETELAH DATANYA DITEMUKAN
-       //MAKA SLUG AKAN MENGAMBIL DATA PRODUCT YANG BERELASI MENGGUNAKAN METHOD PRODUCT() YANG TELAH DIDEFINISIKAN PADA FILE CATEGORY.PHP SERTA DIURUTKAN BERDASARKAN CREATED_AT DAN DI-LOAD 12 DATA PER SEKALI LOAD
-       $products = Category::where('slug', $slug)->first()->product()->orderBy('created_at', 'DESC')->paginate(12);
+        //JADI QUERYNYA ADALAH KITA CARI DULU KATEGORI BERDASARKAN SLUG, SETELAH DATANYA DITEMUKAN
+        //MAKA SLUG AKAN MENGAMBIL DATA PRODUCT YANG BERELASI MENGGUNAKAN METHOD PRODUCT() YANG TELAH DIDEFINISIKAN PADA FILE CATEGORY.PHP SERTA DIURUTKAN BERDASARKAN CREATED_AT DAN DI-LOAD 12 DATA PER SEKALI LOAD
+        $products = Product::where('category', $slug)->orderBy('created_at', 'DESC')->paginate(12);
+        // dd($products);
+        $categories = Category::orderBy('name', 'ASC')->get();
 
         //LOAD VIEW YANG SAMA YAKNI PRODUCT.BLADE.PHP KARENA TAMPILANNYA AKAN KITA BUAT SAMA JUGA
-        return view('ecommerce.product', compact('products', 'licart'));
+        return view('ecommerce.product', compact('products', 'licart', 'categories'));
 
 
 
