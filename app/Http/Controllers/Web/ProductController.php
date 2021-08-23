@@ -35,7 +35,7 @@ class ProductController extends Controller
         }
 
         $display = $display->paginate(10);
-        
+
         return view('products.display', compact('display'));
 
     }
@@ -50,7 +50,14 @@ class ProductController extends Controller
 
     public function store(Request $request){
 
-        $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+        $response = cloudinary()->upload($request->file('image')->getRealPath(), [
+            'folder' => 'product',
+            'transformation' => [
+                'width => 600',
+                'height => 600',
+                'quality => 50'
+            ]
+        ])->getSecurePath();
 
         ProductAdmin::create([
             'name' => $request->get('name'),
@@ -106,7 +113,10 @@ class ProductController extends Controller
                 ]);
             } else {
 
-                $response = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                $response = cloudinary()->upload($request->file('image')->getRealPath(), [
+                    'folder' => 'product',
+                    'transformation' => '[width => 600, height => 600]',
+                ])->getSecurePath();
                 // dd($response);
                 $product = ProductAdmin::find($id);
                 $product->update([

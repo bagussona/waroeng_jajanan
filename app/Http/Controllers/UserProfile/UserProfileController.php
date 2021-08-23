@@ -36,10 +36,7 @@ class UserProfileController extends Controller
             'name' => 'required|string|max:100',
             'nohape' => 'required|string',
             'gender' => 'required|string',
-            'avatar' => 'nullable|image|mimes:png,jpg,jpeg'
         ]);
-
-        if (empty($_FILES['avatar']['tmp_name'])) {
 
             $profile = User::find($uid);
             $profile->update([
@@ -47,20 +44,7 @@ class UserProfileController extends Controller
                 'email' => $request->get('email'),
                 'nohape' => $request->get('nohape'),
                 'gender' => $request->get('gender'),
-                'avatar' => $profile->avatar
             ]);
-        } else {
-                $response = cloudinary()->upload($request->file('avatar')->getRealPath())->getSecurePath();
-
-                $profile = User::find($uid);
-                $profile->update([
-                    'name' => $request->get('name'),
-                    'email' => $request->get('email'),
-                    'nohape' => $request->get('nohape'),
-                    'gender' => $request->get('gender'),
-                    'avatar' => $response
-                ]);
-            }
 
             return redirect(route('front.UserProfile'))->with(['success' => 'Profile berhasil di update!']);
     }
@@ -127,4 +111,37 @@ class UserProfileController extends Controller
 
         return view('orderan.detail', compact('order_history', 'order_detail'));
     }
+
+    public function crop(Request $request){
+        $uid = Auth::user()->id;
+
+        $this->validate($request, [
+            'avatar' => 'required|image|mimes:png,jpg,jpeg'
+        ]);
+
+        $response = cloudinary()->upload($request->file('avatar')->getRealPath(), [
+            'folder' => 'profile',
+            'transformation' => [
+                'quality' => 50,
+                'fetch_format' => 'auto'
+                ]
+        ])->getSecurePath();
+        // $response = $this->update($request);
+
+        if($response){
+
+            $avatar = User::find($uid);
+            $avatar->update([
+                'avatar' => $response
+            ]);
+
+            return response()->json(['status'=>1, 'msg'=>'Image has been cropped successfully.']);
+        } else {
+
+            return response()->json(['status'=>0, 'msg'=>'Something went wrong, try again later']);
+
+        }
+
+    }
+
 }

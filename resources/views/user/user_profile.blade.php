@@ -172,11 +172,6 @@
     </div>
 </div>
 
-
-
-
-
-
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -196,10 +191,10 @@
               <!-- left column -->
               <div class="col-md-5">
                 <div class="text-center">
-                  <img src="{{ $profile->avatar }}" width="50%" class="rounded-circle" alt="avatar">
+                  <img src="{{ $profile->avatar }}" width="50%" class="rounded-circle image-profile" alt="avatar">
                   <h6></h6>
 
-                  <input name="avatar" type="file" class="form-control">
+                  <input name="avatar" id="avatar" type="file" class="form-control">
                 </div>
               </div>
 
@@ -266,4 +261,5 @@
       </div>
     </div>
   </div>
+
 @endsection

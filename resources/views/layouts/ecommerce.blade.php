@@ -20,6 +20,9 @@
 
 	<link rel="stylesheet" href="{{ asset('ecommerce/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('ecommerce/css/responsive.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('ecommerce/css/ijaboCropTool.min.css') }}">
+
 </head>
 
 <body onload="realtimeClock()">
@@ -110,7 +113,7 @@
                                 <a class="dropdown-item text-left" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 <strong><i class="fa fa-sign-out"></i></strong><strong> Sign Out </strong>
-                            </a>
+                                </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -156,7 +159,7 @@
 
 									<li class="nav-item">
                                         <a href="{{ route('front.notfound') }}" class="icons">
-											<i class="fa fa-heart-o" aria-hidden="true"><span class="badge bg-warning"> {{ 0 }} </span></i>
+											<i class="fa fa-heart-o" aria-hidden="true"><span class="badge bg-warning">0</span></i>
                                         </a>
                                     </li>
 
@@ -197,13 +200,12 @@
 						<h6 class="footer_title">Subscribe {{ env('APP_NAME')}} </h6>
 						<p>Dapatkan kabar terbaru mengenai jajanan yang akan di display!</p>
 						<div id="mc_embed_signup">
-							<form target="_blank" action=""
-							 method="get" class="subscribe_form relative">
+							<form target="_blank" action="" method="get" class="subscribe_form relative">
 								<div class="input-group d-flex flex-row">
 									<input name="email" placeholder="email address.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input yur email.. '"
 									 required="" type="email">
 									<button class="btn sub-btn">
-										<span class="lnr lnr-arrow-right"></span>
+                                        <span class="lnr lnr-arrow-right"></span>
 									</button>
 								</div>
 								<div class="mt-10 info"></div>
@@ -290,6 +292,27 @@
 	<script src="{{ asset('ecommerce/js/mail-script.js') }}"></script>
 	<script src="{{ asset('ecommerce/js/theme.js') }}"></script>
     <script src="{{ asset('ecommerce/js/clock.js') }}"></script>
+    <script src="{{ asset('ecommerce/js/ijaboCropTool.min.js') }}"></script>
+
+    <script>
+        $('#avatar').ijaboCropTool({
+           preview : '.image-profile',
+           setRatio:1,
+           allowedExtensions: ['jpg', 'jpeg','png'],
+           buttonsText:['CROP','QUIT'],
+           buttonsColor:['#30bf7d','#ee5155', -15],
+           processUrl:'{{ route("crop") }}',
+           withCSRF:['_token','{{ csrf_token() }}'],
+           onSuccess:function(message, element, status){
+              alert(message);
+           },
+           onError:function(message, element, status){
+             alert(message);
+           }
+        });
+   </script>
+
+
 @yield('js')
 </body>
 </html>

@@ -7,8 +7,9 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Product;
 use App\Category;
 use App\Order;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -38,8 +39,7 @@ class FrontController extends Controller
 
     }
 
-    public function categoryProduct($slug)
-    {
+    public function categoryProduct($slug){
         // dd($slug);
         $getQty = $this->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty;
@@ -52,12 +52,9 @@ class FrontController extends Controller
         //LOAD VIEW YANG SAMA YAKNI PRODUCT.BLADE.PHP KARENA TAMPILANNYA AKAN KITA BUAT SAMA JUGA
         return view('ecommerce.product', compact('products', 'licart', 'categories'));
 
-
-
     }
 
-    public function show($slug)
-    {
+    public function show($slug){
 
     $getQty = $this->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
     $licart = $getQty;
