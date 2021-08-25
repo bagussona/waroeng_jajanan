@@ -64,6 +64,7 @@ Route::group([
     Route::get('/reports/pdf/daily', 'Web\ReportsController@dummy')->name('reports.daily_pdf');
     Route::get('/reports/daily/pdf', 'Web\ReportsController@createPDF')->name('reports.pdf_daily');
     Route::get('/reports/inquiry', 'Web\ReportsController@inquiry')->name('reports.inquiry');
+    Route::post('/reports/inquiry', 'Web\ReportsController@inquiryPost')->name('reports.inquiryPost');
 });
 
     //Toko Display

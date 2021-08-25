@@ -21,7 +21,6 @@
 
                                 <!-- BUAT TOMBOL UNTUK MENGARAHKAN KE HALAMAN ADD PRODUK -->
                                 <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
-                                {{-- <a href="{{ route('products.datastore') }}" class="btn btn-lighting btn-sm float-right">Transfer</a> --}}
                             </h4>
                         </div>
                         <div class="card-body">
@@ -39,8 +38,7 @@
                             <form action="{{ route('products.index') }}" method="get">
                                 <div class="input-group mb-3 col-md-3 float-right">
                                     <!-- KEMUDIAN NAME-NYA ADALAH Q YANG AKAN MENAMPUNG DATA PENCARIAN -->
-                                    {{-- <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}"> --}}
-                                    <input type="text" name="q" class="form-control" placeholder="Cari..." value="">
+                                    <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}">
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary" type="button">Cari</button>
                                     </div>
@@ -70,15 +68,12 @@
                                         <tr>
                                             <td>
                                                 <!-- TAMPILKAN GAMBAR DARI FOLDER PUBLIC/STORAGE/PRODUCTS -->
-                                                {{-- <img src="{{ asset('storage/products/' . $row->image) }}" width="100px" height="100px" alt="{{ $row->name }}"> --}}
                                                 <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}">
-                                                {{-- <img src="" width="100px" height="100px" alt=""> --}}
                                             </td>
                                             <td>
                                                 <strong> {{ $row->name }} </strong><br>
                                                 <!-- ADAPUN NAMA KATEGORINYA DIAMBIL DARI HASIL RELASI PRODUK DAN KATEGORI -->
                                                 <label>kategori: <span class="badge badge-info">{{ $row->category->name }}</span></label><br>
-                                                {{-- <label>description: <span class="badge badge-info">{!! $row->description !!}</span></label> --}}
                                             </td>
                                             <td>Rp. {{ number_format($row->price) }}</td>
                                             <td>Rp. {{ number_format($row->price_supplier) }}</td>
@@ -87,23 +82,15 @@
                                             <td>{{ $row->updated_at->format('d-m-Y') }}</td>
 
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
-                                            {{-- <td>{!! $row->status_label !!}</td> --}}
                                             <td>{{ $row->stock }} Pcs</td>
                                             <td>
                                                 <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
                                                 <form action="{{ route('products.destroy', $row->id) }}" method="post">
-                                                {{-- <form action="" method="POST"> --}}
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{ route('products.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                                    {{-- <a href="" class="btn btn-warning btn-sm">Edit</a> --}}
                                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
-                                                {{-- <form action="{{ route('products.edit', $row->id) }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus fa-lg"></i></button>
-                                                </form>
-                                            </td> --}}
                                         </tr>
                                         @empty
                                         <tr>

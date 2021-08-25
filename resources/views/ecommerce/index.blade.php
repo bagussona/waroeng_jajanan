@@ -42,25 +42,20 @@
 							<div class="f_p_img">
                 <!-- KEMUDIAN TAMPILKAN IMAGENYA DARI FOLDER /PUBLIC/STORAGE/PRODUCTS -->
                 <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->slug }}">
-                {{-- <img class="img-fluid" src="" alt=""> --}}
 								<div class="p_icon">
 									<a href="{{ url('/product/' . $row->slug) }}">
-									{{-- <a href=""> --}}
 										<i class="lnr lnr-cart"></i>
 									</a>
 								</div>
 							</div>
               <!-- KETIKA PRODUK INI DIKLIK MAKA AKAN DIARAHKAN KE URL DIBAWAH -->
               <!-- HANYA SAJA URL TERSEBUT BELUM DISEDIAKAN PADA ARTIKEL KALI INI -->
-              <a href="{{ url('/product/' . $row->slug) }}">
-              {{-- <a href=""> --}}
+                <a href="{{ url('/product/' . $row->slug) }}">
                 <!-- TAMPILKAN NAMA PRODUK -->
                  <h4>{{ $row->name }}</h4>
-                 {{-- <h4></h4> --}}
-							</a>
+			    </a>
               <!-- TAMPILKAN HARGA PRODUK -->
               <h5>Rp {{ number_format($row->price) }}</h5>
-              {{-- <h5>Rp. 0</h5> --}}
 						</div>
 					</div>
           @empty
@@ -83,12 +78,10 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="hot_deal_box">
-						{{-- <img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt=""> --}}
 						<img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt="">
 						<div class="content">
 							<h1>Paling banyak dicari!</h1>
-							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
-                            <h2>Jajan Yuk!</h2>
+                            <a style="text-decoration: none; color: #FFFFFF;" href="{{ route('front.notfound') }}"><h2>Jajan Yuk!</h2></a>
 						</div>
 						<a class="hot_deal_link" href="{{ route('front.notfound') }}"></a>
 					</div>
@@ -99,8 +92,7 @@
 						<img class="img-fluid" src="{{ asset('ecommerce/img/product/hot_deals/deal1.jpg') }}" alt="">
 						<div class="content">
 							<h1>Paling banyak dibeli!</h1>
-							{{-- <p><a href="{{ route('front.listLoved') }}">shop now</a></p> --}}
-                            <h2>Jajan Yuk!</h2>
+                            <a style="text-decoration: none; color: #FFFFFF;" href="{{ route('front.notfound') }}"><h2>Jajan Yuk!</h2></a>
 						</div>
 						<a class="hot_deal_link" href="{{ route('front.notfound') }}"></a>
 					</div>

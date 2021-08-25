@@ -35,12 +35,6 @@
 
                                 </select>
 
-                                {{-- <div class="form-group">
-                                    <label for="datastore_stock">Stock Warehouse</label>
-                                    <input type="text" name="datastore_stock" class="form-control" placeholder="{{ $row->stock }}" disabled>
-                                    <p class="text-danger">{{ $errors->first('datastore_stock') }}</p>
-                                </div> --}}
-
                                 <p class="text-danger">{{ $errors->first('datastore_name') }}</p>
 
 

@@ -202,10 +202,9 @@
 						<div id="mc_embed_signup">
 							<form target="_blank" action="" method="get" class="subscribe_form relative">
 								<div class="input-group d-flex flex-row">
-									<input name="email" placeholder="email address.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input yur email.. '"
-									 required="" type="email">
-									<button class="btn sub-btn">
-                                        <span class="lnr lnr-arrow-right"></span>
+									<input name="email" placeholder="email address.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input yur email.. '" required="" type="email">
+                                    <button disabled class="btn sub-btn">
+                                        <span class="lnr lnr-arrow-right" onclick="myFunction()"></span>
 									</button>
 								</div>
 								<div class="mt-10 info"></div>
@@ -310,8 +309,14 @@
              alert(message);
            }
         });
+
    </script>
 
+    <script>
+    function myFunction() {
+        alert("Maaf nih! Mending jangan deh, email gw udh penuh soalnya akwwkk. ttd: bagus");
+        }
+    </script>
 
 @yield('js')
 </body>
