@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Kategori - {{ env('APP_NAME') }}</title>
+    <title>Orderan - {{ env('APP_NAME') }}</title>
 @endsection
 
 @section('content')

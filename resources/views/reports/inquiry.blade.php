@@ -8,8 +8,9 @@
 
 <main class="main">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">Reports</li>
-        <li class="breadcrumb-item active">Inquiry</li>
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item">Laporan</li>
+        <li class="breadcrumb-item active">Inquiry Transaksi</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -17,7 +18,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Inquiry</h4>
+                            <h4 class="card-title" style="margin-bottom: 0;">Inquiry</h4>
                         </div>
                         <div class="card-body">
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
@@ -32,7 +33,7 @@
 
                             <form action="{{ route('reports.inquiry') }}" method="get">
                                 <div class="container-wrapper d-flex flex-row">
-                                <div class="header-inquiry d-flex flex-column" style="width: 50%; padding-bottom: 30px; padding-left: 15px;">
+                                <div class="header-inquiry d-flex flex-column" style="width: 50%; padding-bottom: 25px; padding-left: 15px;">
                                     <label for="header-name"">Group by</label>
                                     <div class="header-inquiry-name d-flex flex-row">
                                     <label for="inquiry_name" style="margin-left: 15px; margin-right: 15px; margin-bottom: 0; width: 100px; height: 30px; line-height: 30px;">Name:</label>
@@ -48,22 +49,24 @@
                                     <label for="header-date" style="margin-top: 15px;">Periode / Tahun</label>
                                     <div class="header-inquiry-date d-flex flex-row">
                                         <label for="datepickerform" style="margin-left: 15px; margin-right: 15px; margin-bottom: 0; width: 100px; height: 35px; line-height: 35px;">Periode: </label>
-                                            <input id="datepickerfrom" name="datepickerfrom" width="250" />
+                                        <input id="datepickerfrom" name="datepickerfrom" width="250" />
                                         <script>
                                             $('#datepickerfrom').datepicker({
                                                 uiLibrary: 'bootstrap4'
                                             });
                                         </script>
                                         <label for="datepickerto" style="margin-left: 5px; margin-right: 5px; margin-bottom: 0; height: 35px; line-height: 35px;">s/d: </label>
-                                            <input id="datepickerto" name="datepickerto" width="250" />
+                                        <input id="datepickerto" name="datepickerto" width="250" />
                                         <script>
                                             $('#datepickerto').datepicker({
                                                 uiLibrary: 'bootstrap4'
                                             });
                                         </script>
                                     </div>
+                                    <label for="information" style="margin-left: 15px; margin-top: 10px; margin-bottom: 0; font-size: 9px;">* ketentuan inquiry, 1 hari = 24 jam</label>
+                                    <label for="information" style="margin-left: 15px; margin-top: 5px; margin-bottom: 0; font-size: 9px;">* e.g : 2021-01-01 s.d 2021-01-02 (1 hari)</label>
                                 </div>
-                                <div class="header-inquiry-type d-flex flex-column" style="width: 50%; padding-bottom: 30px; padding-right: 15px;">
+                                <div class="header-inquiry-type d-flex flex-column" style="width: 50%; padding-bottom: 25px; padding-right: 15px;">
                                     <label for="header-name">Inquiry berdasarkan</label>
                                     <div class="header-inquiry-status d-flex flex-row">
                                     <label for="inquiry_status" style="width: 100px; height: 30px; line-height: 30px; margin-left: 15px; margin-right: 15px; margin-bottom: 0;">Status:</label>
@@ -93,83 +96,99 @@
                             </div>
                         </form>
 
-                            <hr style="margin: 30px;">
+                            <hr style="margin: 0 15px 25px 15px;">
 
                             <!-- TABLE UNTUK MENAMPILKAN DATA PRODUK -->
                             <div class="container-wrapper">
-                                <div class="header_content_snacks d-flex flex-row">
-                                    <div class="header_menu_left" style="width: 40%; height: 50px;">
-                                        @foreach ($result as $var)
-                                        <div class="customer_invoice d-flex flex-row">
-                                            <div class="content d-flex flex-column">
-                                                <div class="content-1 d-flex flex-row">
-                                                    <label for="invoice" style="width: 75px; margin-bottom: 5px; height: 20px; line-height: 20px;">Invoice</label>
-                                                    <label for="invoice" style="width: 25px; margin-bottom: 5px; height: 20px; line-height: 20px; text-align: center;">:</label>
-                                                    <span style="margin-bottom: 5px; height: 20px; line-height: 20px;">{{ $var->invoice }}</span>
-                                                </div>
-                                                <div class="content-2 d-flex flex-row">
-                                                    <label for="customer_name" style="width: 75px; margin-bottom: 5px; height: 20px; line-height: 20px;">Pelanggan</label>
-                                                    <label for="customer_name" style="width: 25px; margin-bottom: 5px; height: 20px; line-height: 20px; text-align: center;">:</label>
-                                                    <span style="margin-bottom: 5px; height: 20px; line-height: 20px;">{{ $var->customer_name }}</span>
-                                                </div>
+                                <div class="wrapper d-flex flex-row">
+                                <div class="content1" style="width: 76%;">
+                                <table class="styled-table"style="border-collapse: collapse; margin: 0 0 25px 0; font-size: 0.9em; font-family: sans-serif; min-width: 400px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);">
+                                    <thead>
+                                    <tr style="background-color: #009879; color: #ffffff;">
+                                        <th style="padding: 12px 15px; text-align: center; width: 100px;">Invoice</th>
+                                        <th style="padding: 12px 15px; text-align: center; width: 100px;">Tanggal</th>
+                                        <th style="padding: 12px 15px; text-align: center; width: 250px;">Nama Pelanggan</th>
+                                        <th style="padding: 12px 15px; text-align: center;">No HP</th>
+                                        <th style="padding: 12px 15px; text-align: center; width: 125px;">Subtotal</th>
+                                        <th style="padding: 12px 15px; text-align: center; width: 125px;">Telah Bayar</th>
+                                        <th style="padding: 12px 15px; text-align: center; width: 125px;">Sisa Hutang</th>
+                                        <th style="padding: 12px 15px; text-align: center; width: 100px;">Status</th>
+                                        <th style="padding: 12px 15px; text-align: center;">Aksi</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse ($results as $result)
+                                    <tr style="border-bottom: 1px solid #dddddd;">
+                                        <td style="padding: 5px 15px; text-align: left;">{{ $result->invoice }}</td>
+                                        <td style="padding: 5px 15px; text-align: left;">{{ date('Y-m-d', strtotime($result->created_at)) }}</td>
+                                        <td style="padding: 5px 15px; text-align: left;">{{ $result->customer_name }}</td>
+                                        <td style="padding: 5px 15px; text-align: left;">{{ $result->customer_phone }}</td>
+                                        <td style="padding: 5px 15px; text-align: right;">{{ $result->subtotal }}</td>
+                                        <td style="padding: 5px 15px; text-align: right;">{{ $result->telah_bayar }}</td>
+                                        <td style="padding: 5px 15px; text-align: right;">{{ $result->sisa_hutang }}</td>
+                                        <td style="padding: 5px 15px; text-align: center;">{{ $result->status }}</td>
+                                        {{-- <form action="{{ route('reports.inquiryDetails') }}" method="get"> --}}
+                                        {{-- <input type="hidden" name="invoice_loop" value="{{ $result->invoice }}"> --}}
+                                        <td style="padding: 5px 15px;"><button id="details" class="btn btn-light"> details </button></td>
+                                        {{-- </form> --}}
+                                    </tr>
+                                    <tr>
+                                        @empty
+                                    </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                                </div>
+                                <div class="content2" style="width: 24%">
+                                    <div class="card_deck d-flex flex-column" style="width: 385px; height: 325px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);">
+                                        <div class="heading_card_deck">
+                                            <h2 style="background-color: #009879; color: #ffffff; font-size: 0.9rem; font-family: sans-serif; text-align: center; padding: 12px 15px;"><strong>Details Orderan</strong></h2>
+                                        </div>
+                                        <div class="header_card_deck d-flex flex-column">
+                                            <div class="invoice d-flex flex-row">
+                                                <label for="invoice_name" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 50px; font-size: 0.8rem; text-align: left;">Invoice</label>
+                                                <label for="invoice_quote" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 15px; font-size: 0.8rem; text-align: left;">:</label>
+                                                <label for="invoice" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 200px; font-size: 0.8rem; text-align: left;">AncS-1628333138</label>
+                                                <label for="invoice_date" style="margin-bottom: 0; margin-right: 10px; padding: 5px 0 5px 0; width: 75px; font-size: 0.8rem; text-align: right;"><small>2021-01-01</small></label>
+                                            </div>
+                                            <div class="name d-flex flex-row">
+                                                <label for="name" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 50px; font-size: 0.8rem; text-align: left;">Nama</label>
+                                                <label for="name_quote" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 15px; font-size: 0.8rem; text-align: left;">:</label>
+                                                <label for="name" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 200px; font-size: 0.8rem; text-align: left;">Velianatami Nur Febrianti</label>
                                             </div>
                                         </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="header_menu_center" style="width: 20%; height: 50px;">
-                                        @foreach ($result as $var)
-                                        <div class="customer_date">
-                                            <div class="content d-flex flex-column">
-                                                <div class="content-1 d-flex flex-row">
-                                                    <label for="date" style="width: 75px; margin-bottom: 5px; height: 20px; line-height: 20px;">Tanggal</label>
-                                                    <label for="date" style="width: 25px; margin-bottom: 5px; height: 20px; line-height: 20px; text-align: center;">:</label>
-                                                    <span style="margin-bottom: 5px; height: 20px; line-height: 20px;">{{ date('Y-m-d', strtotime($var->created_at)) }}</span>
-                                                </div>
-                                                <div class="content-2 d-flex flex-row">
-                                                    <label for="receiver" style="width: 75px; margin-bottom: 5px; height: 20px; line-height: 20px;">Periode</label>
-                                                    <label for="receiver" style="width: 25px; margin-bottom: 5px; height: 20px; line-height: 20px; text-align: center;">:</label>
-                                                    <span style="margin-bottom: 5px; height: 20px; line-height: 20px;">{{ $periode }}</span>
-                                                </div>
+                                        <hr style="margin: 0 15px 0 15px; height: 5px;">
+                                        <div class="content_card_deck d-flex flex-column" style="height: 250px;">
+                                            <div class="content d-flex flex-row">
+                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Chocho Pie</label>
+                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
+                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
+                                            </div>
+                                            <div class="content d-flex flex-row">
+                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Beng-beng</label>
+                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
+                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
+                                            </div>
+                                            <div class="content d-flex flex-row">
+                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Go rio-rio</label>
+                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
+                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
+                                            </div>
+                                            <div class="content d-flex flex-row">
+                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Mie Gelas</label>
+                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
+                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
                                             </div>
                                         </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="header_menu_right" style="width: 40%; height: 50px;">
-                                        @foreach ($result as $var)
-                                        <div class="customer_status">
-                                            <div class="content d-flex flex-column">
-                                                <div class="content-1 d-flex flex-row" style="margin-left: 380px;">
-                                                    <label for="status" style="width: 100px; margin-bottom: 5px; height: 20px; line-height: 20px;">Status</label>
-                                                    <label for="status" style="width: 25px; margin-bottom: 5px; height: 20px; line-height: 20px; text-align: center;">:</label>
-                                                    <span style="margin-bottom: 5px; height: 20px; line-height: 20px;">{{ $var->status }}</span>
-                                                </div>
-                                                <div class="content-2 d-flex flex-row" style="margin-left: 380px;">
-                                                    <label for="payment" style="width: 100px; margin-bottom: 5px; height: 20px; line-height: 20px;">Pembayaran</label>
-                                                    <label for="payment" style="width: 25px; margin-bottom: 5px; height: 20px; line-height: 20px; text-align: center;">:</label>
-                                                    <span style="margin-bottom: 5px; height: 20px; line-height: 20px;">Tunai/ Non-tunai</span>
-                                                </div>
-                                            </div>
+                                        <hr style="margin: 0 15px 0 15px; height: 5px;">
+                                        <div class="footer_card_deck">
+                                            <label for="total" style="width: 385px; margin-bottom: 0; padding: 0 15px 0 15px; text-align: right; height: 50px; line-height: 50px;"><strong>Rp. 400000</strong></label>
                                         </div>
-                                        @endforeach
                                     </div>
                                 </div>
-                                <hr style="margin: 2%;">
-                                <div class="main-content-snacks d-flex flex-row">
-                                    <div class="content-snacks-left" style="width: 50%; height: 240px;">
-                                        <div class="content-1" style="background-color: #fffaaf"></div>
-                                    </div>
-                                    <div class="content-snacks-right" style="width: 50%; height: 240px;">
-                                        <div class="content-1" style="background-color: #fffa0f"></div>
-                                    </div>
-                                </div>
-                                <div class="footer-content-snacks">
-                                    <div class="footer-content" style="text-align: center;">
-                                        <!-- MEMBUAT LINK PAGINASI JIKA ADA -->
-                                        {{ $result->links() }}
-                                    </div>
                                 </div>
                             </div>
-                            {{-- {!! $product->links() !!} --}}
+                            {!! $results->links() !!}
                         </div>
                     </div>
                 </div>
@@ -177,4 +196,29 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('js')
+<script>
+    //KETIKA SELECT BOX DENGAN ID province_id DIPILIH
+    $('#province_id').on('change', function() {
+        //MAKA AKAN MELAKUKAN REQUEST KE URL /API/CITY
+        //DAN MENGIRIMKAN DATA PROVINCE_ID
+        $.ajax({
+            url: "{{ url('/api/city') }}",
+            type: "GET",
+            data: { province_id: $(this).val() },
+            success: function(html){
+                //SETELAH DATA DITERIMA, SELEBOX DENGAN ID CITY_ID DI KOSONGKAN
+                $('#city_id').empty()
+                //KEMUDIAN APPEND DATA BARU YANG DIDAPATKAN DARI HASIL REQUEST VIA AJAX
+                //UNTUK MENAMPILKAN DATA KABUPATEN / KOTA
+                $('#city_id').append('<option value="">Pilih Kabupaten/Kota</option>')
+                $.each(html.data, function(key, item) {
+                    $('#city_id').append('<option value="'+item.id+'">'+item.name+'</option>')
+                })
+            }
+        });
+    })
+</script>
 @endsection

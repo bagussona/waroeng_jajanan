@@ -20,7 +20,10 @@ class CreateOrderHistoriesTable extends Migration
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->integer('subtotal')->nullable()->default(0);
+            $table->integer('telah_bayar')->nullable()->default(0);
+            $table->integer('sisa_hutang')->nullable()->default(0);
             $table->string('status');
+            $table->string('operator');
             $table->timestamps();
         });
     }

@@ -154,13 +154,13 @@ class CartController extends Controller
     public function processCheckout(Request $request){
 
         $email = $request->get('email');
-        // //VALIDASI DATANYA
+        //VALIDASI DATANYA
         $this->validate($request, [
             'name' => 'required|string|max:100',
         ]);
 
-        // //INISIASI DATABASE TRANSACTION
-        // //DATABASE TRANSACTION BERFUNGSI UNTUK MEMASTIKAN SEMUA PROSES SUKSES UNTUK KEMUDIAN DI COMMIT AGAR DATA BENAR BENAR DISIMPAN, JIKA TERJADI ERROR MAKA KITA ROLLBACK AGAR DATANYA SELARAS
+        //INISIASI DATABASE TRANSACTION
+        //DATABASE TRANSACTION BERFUNGSI UNTUK MEMASTIKAN SEMUA PROSES SUKSES UNTUK KEMUDIAN DI COMMIT AGAR DATA BENAR BENAR DISIMPAN, JIKA TERJADI ERROR MAKA KITA ROLLBACK AGAR DATANYA SELARAS
         DB::beginTransaction();
         try {
             //CHECK DATA CUSTOMER BERDASARKAN EMAIL
@@ -180,7 +180,10 @@ class CartController extends Controller
                 'customer_name' => $request->get('name'),
                 'customer_phone' => $request->nohape,
                 'subtotal' => $subtotal,
-                'status' => 'Proses'
+                'telah_bayar' => 0,
+                'sisa_hutang' => $subtotal,
+                'status' => 'Proses',
+                'operator' => 'unauthorized'
             ]);
 
             //LOOPING DATA DI CARTS

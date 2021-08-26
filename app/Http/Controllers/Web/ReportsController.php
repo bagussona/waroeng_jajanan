@@ -85,7 +85,6 @@ class ReportsController extends Controller
         });
         // dd($total);
 
-
         $selesai = 'Selesai';
         $order_history_selesai = OrderHistory::where('status', $selesai)->where('created_at', 'LIKE', '%' . $current_date . '%')->paginate(5);
         $proses = 'Proses';
@@ -101,9 +100,6 @@ class ReportsController extends Controller
             return $q['subtotal'];
         });
 
-        // view()->share('order_all', $order_all);
-
-        // $dompdf = new Dompdf();
         $dompdf = PDF::loadView('reports.pdf_daily', compact('order_all', 'total', 'total_selesai', 'total_proses', 'order_history_selesai', 'order_history_proses'));
 
         return $dompdf->download('pdf_daily.pdf');
@@ -127,7 +123,6 @@ class ReportsController extends Controller
                 $var4 = request()->inquiry_invoice_date;
                 $var5 = request()->inquiry_type_product;
                 $var6 = request()->inquiry_status;
-                $var7 = request()->invoice_loop;
 
                 // dd($var0, $var1, $var2, $var3, $var4, $var5);
 
@@ -147,16 +142,26 @@ class ReportsController extends Controller
                     // dd($result_invoice);
                 }
 
-                $result = OrderHistory::whereBetween('created_at', [$new_datepickerfrom, $new_datepickerto])
+                $results = OrderHistory::whereBetween('created_at', [$new_datepickerfrom, $new_datepickerto])
                 ->where('customer_name', 'LIKE', '%' . $new_customer_name . '%')
                 ->where('status', 'LIKE', '%' . $new_status . '%')
-                ->paginate(1);
+                ->paginate(6);
 
                 // dd($result);
-                $result->appends(request()->all())->links();
-                $snacks = OrderDetail::where('order_id', $var7)->get();
+                $results->appends(request()->all())->links();
+                // dd($results);
 
-        return view('reports.inquiry', compact('customer_name', 'product_order', 'status_order', 'result', 'result_invoice', 'snacks', 'periode'));
+
+        return view('reports.inquiry', compact('customer_name', 'product_order', 'status_order', 'results', 'result_invoice', 'periode'));
+    }
+
+    public function inquiryDetails(){
+
+        $var7 = request()->invoice_loop;
+        $snacks = OrderDetail::where('order_id', $var7)->get();
+
+        return response()->json(['status' => 'success', 'data' => $snacks]);
+        // dd($snacks);
     }
 
     public function inquiryPost(Request $request){

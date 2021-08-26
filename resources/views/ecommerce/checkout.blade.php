@@ -89,7 +89,7 @@
 							</ul>
                             <ul class="list px-1 py-3">
                                 <li class="list-inline-item px-5">
-                                    <button type="submit" class="main_btn">Bayar Pesanan</button>
+                                    <button type="submit" class="main_btn">Konfirmasi Pesanan</button>
                                 </li>
                             </ul>
               </form>

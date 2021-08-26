@@ -8,7 +8,8 @@
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active">Product</li>
+        <li class="breadcrumb-item">Product</li>
+        <li class="breadcrumb-item active">Product Display</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">

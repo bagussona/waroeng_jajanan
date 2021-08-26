@@ -22,9 +22,18 @@ class UserProfileController extends Controller
         $licart = $getQty->notificationCart();
 
         $uid = Auth::user()->id;
+
+        $order_history_hutang_count = OrderHistory::where('customer_id', $uid)->get();
+        $sudah_bayar = collect($order_history_hutang_count)->sum(function($q) {
+            return $q['subtotal'];
+        });
+        $sisa_hutang = collect($order_history_hutang_count)->sum(function($q) {
+            return $q['sisa_hutang'];
+        });
+
         $order_detail = OrderHistory::where('customer_id', $uid)->paginate(8);
 
-        return view('user.user_profile', compact('profile', 'licart', 'order_detail'));
+        return view('user.user_profile', compact('profile', 'licart', 'order_detail', 'sisa_hutang', 'sudah_bayar'));
 
     }
 
@@ -85,13 +94,17 @@ class UserProfileController extends Controller
     }
 
     public function updateOrderan(Request $request){
+
+        // dd($request);
         $this->validate($request, [
-            'invoice' => 'required|string'
+            'invoice' => 'required|string',
+            'subtotal' => 'required|string'
         ]);
 
         $invoice = $request->get('invoice');
+        $subtotal = $request->get('subtotal');
             // dd($invoice);
-        OrderHistory::where('invoice', $invoice)->update(['status' => 'Selesai']);
+        OrderHistory::where('invoice', $invoice)->update(['telah_bayar' => $subtotal, 'sisa_hutang' => 0, 'status' => 'Selesai', 'operator' => Auth::user()->name]);
 
         return redirect()->back();
     }

@@ -499,7 +499,6 @@
                                 No Invoice : {{ $order_history[0]['invoice'] }}
 
                                 @foreach ($order_detail as $val)
-                                    {{-- {{ $val->name }} --}}
                                     <tr>
                                         <td width="80%" class="purchase_item" style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 15px; color: #51545E; line-height: 18px; padding: 10px 0;"><span class="f-fallback">{{ $val->name }}</span></td>
                                         <td class="align-right" width="20%" style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; text-align: right;" align="right"><span class="f-fallback" style="text-align: left"> {{ $val->qty }} x</span><span class="f-fallback"> <strong>{{ $val->price }}</strong></span></td>
@@ -532,6 +531,7 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="invoice" value="{{ $order_history[0]['invoice'] }}">
+                                        <input type="hidden" name="subtotal" value="{{ $order_history[0]['subtotal'] }}">
                                   <td align="center" style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px;">
                                     <button class="f-fallback button button--blue" target="_blank" style="color: #FFF; border-color: #3869d4; border-style: solid; border-width: 10px 18px; background-color: #3869D4; display: inline-block; text-decoration: none; border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16); -webkit-text-size-adjust: none; box-sizing: border-box;">Selesai</button>
                                   </td>
