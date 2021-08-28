@@ -152,14 +152,14 @@
                                                 <label id="invoice_date" for="invoice_date" style="margin-bottom: 0; margin-right: 10px; padding: 5px 0 5px 0; width: 75px; font-size: 0.8rem; text-align: right;"><small></small></label>
                                             </div>
                                         </div>
-                                        <hr style="margin: 15px; height: 5px;">
-                                        <div class="content_card_deck d-flex flex-column" style="height: 250px;">
+                                        <hr id="boundary-line" style="margin: 15px; height: 5px;">
+                                        <!-- <div class="content_card_deck d-flex flex-column" style="height: 250px;">
                                             <div class="content d-flex flex-row">
                                                 <label id="product_name" for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;"></label>
                                                 <label id="amount" for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;"></label>
                                                 <label id="subtotal" for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong></strong></label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <hr style="margin: 0 15px 0 15px; height: 5px;">
                                         <div class="footer_card_deck">
                                             <label id="grand_total" for="total" style="width: 385px; margin-bottom: 0; padding: 0 15px 0 15px; text-align: right; height: 50px; line-height: 50px;"><strong>Total. </strong></label>
@@ -181,38 +181,23 @@
 @section('js')
 <script>
 
-    const testClick = val => {
+  const insertAfter = (referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
 
-        const invoice = document.getElementById('invoice');
-        const invoice_date = document.getElementById('invoice_date');
-        const product_name = document.getElementById('product_name');
-        const amount = document.getElementById('amount');
-        const subtotal = document.getElementById('subtotal');
-        const total = document.getElementById('grand_total')
+  var hr = document.getElementById('boundary-line');
 
+  const testClick = val => {
+      axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`)
+      .then(res => {
+        (res.data.data).map(invoice_data => {
+          var invoice = createSeveralElements(invoice_data);
 
-        axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`)
-        .then(res => {
-            total.innerText = `Rp. ${res.data.total}`;
-            // console.log(res.data.total);
-
-            (res.data.data).map(el  => {
-                // console.log(res.data.total);
-
-                const arr = [invoice.innerText = el.order_id,
-                invoice_date.innerText = el.created_at,
-                product_name.innerText = el.name,
-                amount.innerText = "x" + el.qty,
-                subtotal.innerHTML = el.subtotal,
-            ]
-
-            console.log(el);
-            // console.log(res.data.data);
+          insertAfter(hr, invoice);
         })
-
-        })
-        .catch(err => console.log(err));
-    };
+      })
+      .catch(err => console.log(err));
+  };
 
 </script>
 @endsection
