@@ -71,7 +71,7 @@
                                     <div class="header-inquiry-status d-flex flex-row">
                                     <label for="inquiry_status" style="width: 100px; height: 30px; line-height: 30px; margin-left: 15px; margin-right: 15px; margin-bottom: 0;">Status:</label>
                                         <select name="inquiry_status">
-                                            <option value="">Status</option>
+                                            <option value="">All</option>
                                             @foreach ( $status_order as $status )
                                             <option value="{{ $status->status }}">{{ $status->status }}</option>
                                             @endforeach
@@ -129,7 +129,7 @@
                                         <td style="padding: 5px 15px; text-align: center;">{{ $result->status }}</td>
                                         {{-- <form action="{{ route('reports.inquiryDetails') }}" method="get"> --}}
                                         {{-- <input type="hidden" name="invoice_loop" value="{{ $result->invoice }}"> --}}
-                                        <td style="padding: 5px 15px;"><button id="details" class="btn btn-light"> details </button></td>
+                                        <td style="padding: 5px 15px;"><button id="details" class="btn btn-light" value="{{ $result->invoice }}" onclick="testClick(this.value)"> details </button></td>
                                         {{-- </form> --}}
                                     </tr>
                                     <tr>
@@ -142,47 +142,27 @@
                                 <div class="content2" style="width: 24%">
                                     <div class="card_deck d-flex flex-column" style="width: 385px; height: 325px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);">
                                         <div class="heading_card_deck">
-                                            <h2 style="background-color: #009879; color: #ffffff; font-size: 0.9rem; font-family: sans-serif; text-align: center; padding: 12px 15px;"><strong>Details Orderan</strong></h2>
+                                            <h2 style="background-color: #009879; color: #ffffff; font-size: 0.9rem; font-family: sans-serif; text-align: center; padding: 12px 15px;"><strong>Detail Orderan</strong></h2>
                                         </div>
                                         <div class="header_card_deck d-flex flex-column">
                                             <div class="invoice d-flex flex-row">
-                                                <label for="invoice_name" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 50px; font-size: 0.8rem; text-align: left;">Invoice</label>
+                                                <label id="invoice_name" for="invoice_name" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 50px; font-size: 0.8rem; text-align: left;">Invoice</label>
                                                 <label for="invoice_quote" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 15px; font-size: 0.8rem; text-align: left;">:</label>
-                                                <label for="invoice" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 200px; font-size: 0.8rem; text-align: left;">AncS-1628333138</label>
-                                                <label for="invoice_date" style="margin-bottom: 0; margin-right: 10px; padding: 5px 0 5px 0; width: 75px; font-size: 0.8rem; text-align: right;"><small>2021-01-01</small></label>
-                                            </div>
-                                            <div class="name d-flex flex-row">
-                                                <label for="name" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 50px; font-size: 0.8rem; text-align: left;">Nama</label>
-                                                <label for="name_quote" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 15px; font-size: 0.8rem; text-align: left;">:</label>
-                                                <label for="name" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 200px; font-size: 0.8rem; text-align: left;">Velianatami Nur Febrianti</label>
+                                                <label id="invoice" for="invoice" style="margin-bottom: 0; margin-left: 10px; padding: 5px 0 5px 0; width: 200px; font-size: 0.8rem; text-align: left;"></label>
+                                                <label id="invoice_date" for="invoice_date" style="margin-bottom: 0; margin-right: 10px; padding: 5px 0 5px 0; width: 75px; font-size: 0.8rem; text-align: right;"><small></small></label>
                                             </div>
                                         </div>
-                                        <hr style="margin: 0 15px 0 15px; height: 5px;">
+                                        <hr style="margin: 15px; height: 5px;">
                                         <div class="content_card_deck d-flex flex-column" style="height: 250px;">
                                             <div class="content d-flex flex-row">
-                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Chocho Pie</label>
-                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
-                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
-                                            </div>
-                                            <div class="content d-flex flex-row">
-                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Beng-beng</label>
-                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
-                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
-                                            </div>
-                                            <div class="content d-flex flex-row">
-                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Go rio-rio</label>
-                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
-                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
-                                            </div>
-                                            <div class="content d-flex flex-row">
-                                                <label for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;">Mie Gelas</label>
-                                                <label for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;">x1</label>
-                                                <label for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong>100000</strong></label>
+                                                <label id="product_name" for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;"></label>
+                                                <label id="amount" for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;"></label>
+                                                <label id="subtotal" for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong></strong></label>
                                             </div>
                                         </div>
                                         <hr style="margin: 0 15px 0 15px; height: 5px;">
                                         <div class="footer_card_deck">
-                                            <label for="total" style="width: 385px; margin-bottom: 0; padding: 0 15px 0 15px; text-align: right; height: 50px; line-height: 50px;"><strong>Rp. 400000</strong></label>
+                                            <label id="grand_total" for="total" style="width: 385px; margin-bottom: 0; padding: 0 15px 0 15px; text-align: right; height: 50px; line-height: 50px;"><strong>Total. </strong></label>
                                         </div>
                                     </div>
                                 </div>
@@ -200,25 +180,39 @@
 
 @section('js')
 <script>
-    //KETIKA SELECT BOX DENGAN ID province_id DIPILIH
-    $('#province_id').on('change', function() {
-        //MAKA AKAN MELAKUKAN REQUEST KE URL /API/CITY
-        //DAN MENGIRIMKAN DATA PROVINCE_ID
-        $.ajax({
-            url: "{{ url('/api/city') }}",
-            type: "GET",
-            data: { province_id: $(this).val() },
-            success: function(html){
-                //SETELAH DATA DITERIMA, SELEBOX DENGAN ID CITY_ID DI KOSONGKAN
-                $('#city_id').empty()
-                //KEMUDIAN APPEND DATA BARU YANG DIDAPATKAN DARI HASIL REQUEST VIA AJAX
-                //UNTUK MENAMPILKAN DATA KABUPATEN / KOTA
-                $('#city_id').append('<option value="">Pilih Kabupaten/Kota</option>')
-                $.each(html.data, function(key, item) {
-                    $('#city_id').append('<option value="'+item.id+'">'+item.name+'</option>')
-                })
-            }
-        });
-    })
+
+    const testClick = val => {
+
+        const invoice = document.getElementById('invoice');
+        const invoice_date = document.getElementById('invoice_date');
+        const product_name = document.getElementById('product_name');
+        const amount = document.getElementById('amount');
+        const subtotal = document.getElementById('subtotal');
+        const total = document.getElementById('grand_total')
+
+
+        axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`)
+        .then(res => {
+            total.innerText = `Rp. ${res.data.total}`;
+            // console.log(res.data.total);
+
+            (res.data.data).map(el  => {
+                // console.log(res.data.total);
+
+                const arr = [invoice.innerText = el.order_id,
+                invoice_date.innerText = el.created_at,
+                product_name.innerText = el.name,
+                amount.innerText = "x" + el.qty,
+                subtotal.innerHTML = el.subtotal,
+            ]
+
+            console.log(el);
+            // console.log(res.data.data);
+        })
+
+        })
+        .catch(err => console.log(err));
+    };
+
 </script>
 @endsection

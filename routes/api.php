@@ -21,5 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'Api\UserController@login'); //[All User]
 Route::post('register', 'Api\UserController@register'); //[Customer]
 
-Route::get('/reports/inquiry', 'Web\ReportsController@inquiryDetails');
-
+Route::middleware(['cors'])->group(function () {
+    Route::get('/reports/inquiry/{invoice_loop}', 'Web\ReportsController@inquiryDetails');
+});

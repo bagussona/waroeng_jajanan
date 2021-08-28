@@ -155,12 +155,31 @@ class ReportsController extends Controller
         return view('reports.inquiry', compact('customer_name', 'product_order', 'status_order', 'results', 'result_invoice', 'periode'));
     }
 
-    public function inquiryDetails(){
+    public function inquiryDetails($invoice_loop){
+        // dd($invoice_loop);
+        // $var7 = request()->invoice_loop;
+        // $var7 = $request->get('invoice_loop');
+        $snacks = OrderDetail::where('order_id', $invoice_loop)->get();
+        $data = [];
+        foreach ($snacks as $snack) {
+            // dd($snack->order_id);
+            $data[] = [
+                'order_id' => $snack->order_id,
+                'name' => $snack->name,
+                'price' => $snack->price,
+                'qty' => $snack->qty,
+                'subtotal' => $snack->subtotal,
+                'created_at' => date('Y-m-d', strtotime($snack->created_at))
+            ];
+        }
 
-        $var7 = request()->invoice_loop;
-        $snacks = OrderDetail::where('order_id', $var7)->get();
+        $total = collect($data)->sum(function($q) {
+            return $q['subtotal'];
+        });
 
-        return response()->json(['status' => 'success', 'data' => $snacks]);
+
+
+        return response()->json(['status' => 'success', 'data' => $data, 'total' => $total]);
         // dd($snacks);
     }
 
