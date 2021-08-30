@@ -6,6 +6,19 @@
             </a>
         </li>
 
+        <li class="nav-title">MANAJEMEN USER</li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-settings"></i> Pengguna
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('members.index') }}">
+                        <i class="nav-icon icon-puzzle"></i> Semua Pengguna
+                    </a>
+                </li>
+            </ul>
+            </li>
         <li class="nav-title">MANAJEMEN PRODUK</li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('category.index') }}">

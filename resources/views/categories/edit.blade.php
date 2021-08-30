@@ -21,14 +21,12 @@
                         <div class="card-body">
                           	<!-- ROUTINGNYA MENGIRIMKAN ID CATEGORY YANG AKAN DIEDIT -->
                             <form action="{{ route('category.update', $category->id) }}" method="POST">
-                            {{-- <form action="" method="POST"> --}}
                                 @csrf
                                 @method('PUT')
 
                                 <div class="form-group">
                                     <label for="name">Kategori</label>
                                     <input type="text" name="name" class="form-control" placeholder="{{ $category->name }}" required>
-                                    {{-- <input type="text" name="name" class="form-control" value="[category->name]" required> --}}
                                     <p class="text-danger">{{ $errors->first('name') }}</p>
                                 </div>
 

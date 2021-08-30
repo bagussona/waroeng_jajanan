@@ -267,8 +267,8 @@
 			<div class="row footer-bottom d-flex justify-content-between align-items-center">
 				<p class="col-lg-12 footer-text text-center">
                     Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                    All rights reserved | This template is made with
-                    <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://daengweb.id" target="_blank">Daengweb</a> and rebuild by <a href="https://github.com/bagussona">Bagus</a>
+                    All rights reserved | This template is rebuild with
+                    <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://github.com/bagussona">Bagus</a>
 				</p>
 			</div>
 		</div>

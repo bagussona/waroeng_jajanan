@@ -183,41 +183,4 @@ class ReportsController extends Controller
         // dd($snacks);
     }
 
-    public function inquiryPost(Request $request){
-        // dd($request);
-
-        //converting
-        $var1 = $request->get('datepickerfrom');
-        $var2 = $request->get('datepickerto');
-        $var3 = $request->get('inquiry_invoice_string');
-        $var4 = $request->get('inquiry_invoice_date');
-        $var5 = $request->get('invoice_loop');
-
-        //result $request
-        $new_datepickerfrom = date('Y-m-d', strtotime($var1));
-        $new_datepickerto = date('Y-m-d', strtotime($var2));
-        $new_invoice = $var3 . "-" . $var4;
-        $new_customer_name = $request->get('inquiry_name');
-        $new_status = $request->get('inquiry_status');
-        $new_product = $request->get('inquiry_type_product');
-
-
-        if ($new_invoice !== '') {
-            $result_invoice = OrderHistory::where('invoice', 'LIKE', '%' . $new_invoice . '%')->get();
-            // dd($result_invoice);
-        }
-
-        $result = OrderHistory::whereBetween('created_at', [$new_datepickerfrom, $new_datepickerto])
-        ->where('customer_name', 'LIKE', '%' . $new_customer_name . '%')
-        ->where('status', 'LIKE', '%' . $new_status . '%')
-        ->paginate(1);
-
-        // dd($result);
-        $snacks = OrderDetail::where('order_id', $var5)->get();
-
-        // dd($result, $result_invoice);
-
-        // dd($new_datepickerfrom, $new_datepickerto, $new_invoice, $new_customer_name, $new_status, $new_product);
-    }
-
 }

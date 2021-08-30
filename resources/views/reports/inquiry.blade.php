@@ -181,7 +181,7 @@
 @section('js')
 <script>
 
-  const insertAfter = (referenceNode, newNode) {
+  const insertAfter = (referenceNode, newNode) => {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
 
@@ -192,9 +192,6 @@
   const testClick = async val => {
       await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`)
       .then(res => {
-        // (res.data.data).map(invoice_data => {
-        //   var invoice = createSeveralElements(invoice_data);
-
         //   insertAfter(hr, invoice);
         // })
         invoice_data.push(createSeveralElements(res.data.data[0]));
