@@ -21,6 +21,9 @@ Route::group([
 
     Route::get('/admin', 'Web\HomeController@index')->name('home'); //index admin
 
+    //User Management
+    Route::get('/admin/users', 'Web\MemberController@index')->name('members.index'); //index member
+
     //Category Management
     Route::get('/admin/category', 'Web\CategoryController@index')->name('category.index'); //index category
     Route::post('/admin/category', 'Web\CategoryController@store')->name('category.store');
@@ -64,7 +67,6 @@ Route::group([
     Route::get('/reports/pdf/daily', 'Web\ReportsController@dummy')->name('reports.daily_pdf');
     Route::get('/reports/daily/pdf', 'Web\ReportsController@createPDF')->name('reports.pdf_daily');
     Route::get('/reports/inquiry', 'Web\ReportsController@inquiry')->name('reports.inquiry');
-    Route::post('/reports/inquiry', 'Web\ReportsController@inquiryPost')->name('reports.inquiryPost');
 });
 
     //Toko Display

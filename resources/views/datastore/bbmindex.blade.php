@@ -127,10 +127,10 @@
                             <form action="{{ route('datastore.bbmWarehouse') }}" method="post">
                                 @csrf
                                 @method('PUT')
-                                <button type="submit" class="btn btn-primary btn-sm float-right">BBM</button>
+                                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-archive"></i> BBM</button>
+                                <button class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</button>
+                                <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
                             </form>
-                            <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
-                            {{-- {!! $supplier->links() !!} --}}
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,6 @@
                                                           <!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $SUPPLIER -->
                                                         @forelse ($spb as $value)
                                                         <tr>
-                                                            {{-- <td>new arrival</td> --}}
                                                             <td><strong>{{ $value->name }}</strong></td>
 
                                                               <!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
@@ -210,7 +209,6 @@
                                                 <button type="submit" class="btn btn-primary btn-sm float-right">BBM</button>
                                             </form>
                                             <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
-                                            {{-- {!! $supplier->links() !!} --}}
                                         </div>
                                     </div>
                                 </div>

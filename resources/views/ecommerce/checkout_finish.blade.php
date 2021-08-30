@@ -51,13 +51,11 @@
 						<ul class="list">
 							<li>
 								<a href="#">
-                  {{-- <span>Produk</span> : [order->customer->address]</a> --}}
                   <span>Name</span> : {{ $order->customer_name }}</a>
 							</li>
 							<li>
 								<a href="#">
                   <span>Email</span> : {{ $order_details[0]['email'] }}</a>
-                  {{-- <span>No Telp</span> : [order->district->city->name]</a> --}}
 							</li>
 							<li>
 								<a href="#">

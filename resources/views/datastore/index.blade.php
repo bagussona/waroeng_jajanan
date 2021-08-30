@@ -179,7 +179,6 @@
                                                           <!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $SUPPLIER -->
                                                         @forelse ($spb as $val)
                                                         <tr>
-                                                            {{-- <td>new arrival</td> --}}
                                                             <td><strong>{{ $val->name }}</strong></td>
 
                                                               <!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
