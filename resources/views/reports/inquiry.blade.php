@@ -181,23 +181,32 @@
 @section('js')
 <script>
 
-  const insertAfter = (referenceNode, newNode) => {
+  const insertAfter = (referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
 
   var hr = document.getElementById('boundary-line');
 
-  const testClick = val => {
-      axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`)
-      .then(res => {
-        console.log(res);
-        (res.data.data).map(invoice_data => {
-          var invoice = createSeveralElements(invoice_data);
+  const elementList = [];
 
-          insertAfter(hr, invoice);
-        })
-      })
-      .catch(err => console.log(err));
+  const testClick = async val => {
+    const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
+    //   .then(res => {
+    //     const invoice_data = [];
+    //     // (res.data.data).map(invoice_data => {
+    //     //   var invoice = createSeveralElements(invoice_data);
+
+    //     //   insertAfter(hr, invoice);
+    //     // })
+    //     invoice_data.push(createSeveralElements(res.data.data[0]));
+
+    //     // invoice_data.map(el => insertAfter(hr, ))
+    //   })
+    //   .catch(err => console.log(err));
+
+    await elementList.push(result_data.res.data.data[0]);
+    
+    elementList.map(el => insertAfter(hr, el));
   };
 
 </script>
