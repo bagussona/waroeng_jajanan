@@ -181,33 +181,32 @@
 @section('js')
 <script>
 
-  const insertAfter = (referenceNode, newNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  }
 
-  var hr = document.getElementById('boundary-line');
+    const insertAfter = (referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
 
-  const elementList = [];
+    var hr = document.getElementById('boundary-line');
 
-  const testClick = async val => {
-    const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
-    //   .then(res => {
-    //     const invoice_data = [];
-    //     // (res.data.data).map(invoice_data => {
-    //     //   var invoice = createSeveralElements(invoice_data);
+    var elementList = null;
 
-    //     //   insertAfter(hr, invoice);
-    //     // })
-    //     invoice_data.push(createSeveralElements(res.data.data[0]));
+    const testClick = async val => {
+        const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
+        var invoice_data = result_data.data.data[0];
+        
+        if (elementList != null) {
+            insertAfter(hr, createSeveralElements(invoice_data));
+        } else {
+            var invoice_detail_container = document.getElementById('invoice-detail-container');
 
-    //     // invoice_data.map(el => insertAfter(hr, ))
-    //   })
-    //   .catch(err => console.log(err));
-
-    await elementList.push(result_data.res.data.data[0]);
-    
-    elementList.map(el => insertAfter(hr, el));
-  };
+            if (invoice_detail_container) {
+                document.getElementById('product-name').innerText = invoice_data.product_name;
+                document.getElementById('amount').innerText = invoice_data.qty;
+                document.getElementById('subtotal').innerText = invoice_data.subtotal;
+                
+            }
+        }
+    };
 
 </script>
 @endsection
