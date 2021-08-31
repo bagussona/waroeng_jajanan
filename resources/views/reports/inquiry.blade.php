@@ -153,13 +153,9 @@
                                             </div>
                                         </div>
                                         <hr id="boundary-line" style="margin: 15px; height: 5px;">
-                                        <!-- <div class="content_card_deck d-flex flex-column" style="height: 250px;">
-                                            <div class="content d-flex flex-row">
-                                                <label id="product_name" for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;"></label>
-                                                <label id="amount" for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;"></label>
-                                                <label id="subtotal" for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong></strong></label>
-                                            </div>
-                                        </div> -->
+                                        <div id="invoice-list-container" style="height: auto; width: 100%; display: flex; flex-direction: column;">
+
+                                        </div>
                                         <hr style="margin: 0 15px 0 15px; height: 5px;">
                                         <div class="footer_card_deck">
                                             <label id="grand_total" for="total" style="width: 385px; margin-bottom: 0; padding: 0 15px 0 15px; text-align: right; height: 50px; line-height: 50px;"><strong>Total. </strong></label>
@@ -184,6 +180,10 @@
     const insertAfter = (referenceNode, newNode) => {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
+
+    // const insertAfter = (referenceNode, newNode) => {
+    //     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    // }
 
     var hr = document.getElementById('boundary-line');
 
@@ -233,6 +233,12 @@
         // }
 
         console.log(elementList);
+        const axios_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
+        const invoice_list_container = document.getElementById('invoice-list-container');
+
+        var results_data = (axios_data.data.data).map(result => createSeveralElements(result));
+
+        results_data.map(result => invoice_list_container.appendChild(result));
     };
 
     window.onbeforeunload(sessionStorage.setItem('element-list', null))
