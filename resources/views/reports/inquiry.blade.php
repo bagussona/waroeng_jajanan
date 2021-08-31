@@ -153,9 +153,13 @@
                                             </div>
                                         </div>
                                         <hr id="boundary-line" style="margin: 15px; height: 5px;">
-                                        <div id="invoice-list-container" style="height: auto; width: 100%; display: flex; flex-direction: column;">
-
-                                        </div>
+                                        <!-- <div class="content_card_deck d-flex flex-column" style="height: 250px;">
+                                            <div class="content d-flex flex-row">
+                                                <label id="product_name" for="product" style="margin-bottom: 0; padding: 5px 15px; width: 235px; font-size: 11px;"></label>
+                                                <label id="amount" for="qty" style="margin-bottom: 0; padding: 5px 15px; width: 50px; text-align: right; font-size: 11px;"></label>
+                                                <label id="subtotal" for="subtotal" style="margin-bottom: 0; padding: 5px 15px; width: 100px; text-align: right; font-size: 11px;"><strong></strong></label>
+                                            </div>
+                                        </div> -->
                                         <hr style="margin: 0 15px 0 15px; height: 5px;">
                                         <div class="footer_card_deck">
                                             <label id="grand_total" for="total" style="width: 385px; margin-bottom: 0; padding: 0 15px 0 15px; text-align: right; height: 50px; line-height: 50px;"><strong>Total. </strong></label>
@@ -177,70 +181,32 @@
 @section('js')
 <script>
 
+
     const insertAfter = (referenceNode, newNode) => {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
 
-    // const insertAfter = (referenceNode, newNode) => {
-    //     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    // }
-
     var hr = document.getElementById('boundary-line');
 
-    var elementList = sessionStorage.getItem('element-list');
+    var elementList = null;
 
     const testClick = async val => {
+        const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
+        var invoice_data = result_data.data.data[0];
 
-        var emptyNode = document.createElement('div');
-        var currentNode = null;
-
-        if (elementList == 'null') {
-            var testNode = document.createElement('p');
-
-
-            currentNode = testNode;
-            // await sessionStorage.setItem('element-list', )
-            insertAfter(hr, currentNode);
-            sessionStorage.setItem('element-list', 'not null');
-            // const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
-            // var invoice_data = (result_data.data.data).map(invoice => invoice);
-
-            // elementList = invoice_data.map(el => createSeveralElements(el));
-            // elementList.map(el => insertAfter(hr, el));
+        if (elementList != null) {
+            insertAfter(hr, createSeveralElements(invoice_data));
         } else {
-            currentNode.parentNode.replaceChild(emptyNode);
-            // insertAfter(hr, emptyNode);
+            var invoice_detail_container = document.getElementById('invoice-detail-container');
+
+            if (invoice_detail_container) {
+                document.getElementById('product-name').innerText = invoice_data.product_name;
+                document.getElementById('amount').innerText = invoice_data.qty;
+                document.getElementById('subtotal').innerText = invoice_data.subtotal;
+
+            }
         }
-        // console.log(elementList == 'null');
-
-        // insertAfter(hr, elementList.map(div => div));
-        // // console.log(elementList)
-        // if (elementList == null) {
-        //     // insertAfter(hr, createSeveralElements(invoice_data));
-        //     elementList = createSeveralElements(invoice_data);
-        //     insertAfter(hr, elementList);
-        // } else if (elementList != null) {
-        //     var invoice_detail_container = document.getElementById('invoice-detail-container');
-
-        //     console.log(invoice_detail_container);
-
-        //     if (invoice_detail_container) {
-        //         document.getElementById('product-name').innerText = invoice_data.product_name;
-        //         document.getElementById('amount').innerText = invoice_data.qty;
-        //         document.getElementById('subtotal').innerText = invoice_data.subtotal;
-
-        //     }
-        // }
-
-        console.log(elementList);
-        const axios_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
-        const invoice_list_container = document.getElementById('invoice-list-container');
-
-        var results_data = (axios_data.data.data).map(result => createSeveralElements(result));
-
-        results_data.map(result => invoice_list_container.appendChild(result));
     };
 
-    window.onbeforeunload(sessionStorage.setItem('element-list', null))
 </script>
 @endsection
