@@ -182,7 +182,7 @@
 <script>
 
 
-    const insertAfter = (referenceNode, newNode) {
+    const insertAfter = (referenceNode, newNode) => {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
 
