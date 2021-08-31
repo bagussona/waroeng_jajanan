@@ -193,7 +193,7 @@
     const testClick = async val => {
         const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
         var invoice_data = result_data.data.data[0];
-        
+
         if (elementList != null) {
             insertAfter(hr, createSeveralElements(invoice_data));
         } else {
@@ -203,7 +203,7 @@
                 document.getElementById('product-name').innerText = invoice_data.product_name;
                 document.getElementById('amount').innerText = invoice_data.qty;
                 document.getElementById('subtotal').innerText = invoice_data.subtotal;
-                
+
             }
         }
     };
