@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -43,16 +45,20 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'string|required|max:50',
-            'email' => 'string|required|email|unique:users',
-            'password' => 'required', 'string', 'min:8', 'confirmed'
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|min:8|confirmed'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
 
         $register = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password'))
+            'password' => Hash::make($request->get('password'))
         ]);
 
         $register->assignRole('staff');

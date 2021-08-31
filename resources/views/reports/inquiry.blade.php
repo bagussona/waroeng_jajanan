@@ -181,13 +181,13 @@
 @section('js')
 <script>
 
-  const insertAfter = (referenceNode, newNode) {
+  const insertAfter = (referenceNode, newNode) => {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
 
   var hr = document.getElementById('boundary-line');
 
-  const elementList = [];
+  var elementList = null;
 
   const testClick = async val => {
     const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
@@ -203,10 +203,12 @@
     //     // invoice_data.map(el => insertAfter(hr, ))
     //   })
     //   .catch(err => console.log(err));
-
-    await elementList.push(result_data.res.data.data[0]);
-    
-    elementList.map(el => insertAfter(hr, el));
+    if (result_data.data.status == 'success') {
+        elementList = result_data.data.data[0]
+    }
+    // console.log(result_data.data.status);
+    insertAfter(hr, createSeveralElements(elementList))
+    // console.log(result_data);
   };
 
 </script>

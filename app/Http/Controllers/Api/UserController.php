@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function login(Request $request){
         // $logged_in = true;
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
@@ -25,7 +25,7 @@ class UserController extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        $logged_in = Auth::user()->username;
+        $logged_in = Auth::user()->email;
 
         return response()->json(compact('logged_in', 'token'), 200);
     }
@@ -33,7 +33,6 @@ class UserController extends Controller
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
-            'username' => 'required|string|unique:users',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8|confirmed'
         ]);

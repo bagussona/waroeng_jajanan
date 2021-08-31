@@ -159,7 +159,10 @@
                                 <label for="password_confirmation" class="form__label">Confirm Password..</label>
                             </div>
                             <div class="form__group" style="margin-left: 40%;">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Tambah</button>
+                                <form action="{{ route('members.store') }}" method="post">
+                                @csrf
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Tambah</button>
+                                </form>
                             </div>
                         </div>
                     </div>

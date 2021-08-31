@@ -23,6 +23,7 @@ Route::group([
 
     //User Management
     Route::get('/admin/users', 'Web\MemberController@index')->name('members.index'); //index member
+    Route::post('/admin/users', 'Web\MemberController@store')->name('members.store');
 
     //Category Management
     Route::get('/admin/category', 'Web\CategoryController@index')->name('category.index'); //index category
