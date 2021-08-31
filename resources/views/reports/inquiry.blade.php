@@ -181,32 +181,60 @@
 @section('js')
 <script>
 
-
     const insertAfter = (referenceNode, newNode) => {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
 
     var hr = document.getElementById('boundary-line');
 
-    var elementList = null;
+    var elementList = sessionStorage.getItem('element-list');
 
     const testClick = async val => {
-        const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
-        var invoice_data = result_data.data.data[0];
 
-        if (elementList != null) {
-            insertAfter(hr, createSeveralElements(invoice_data));
+        var emptyNode = document.createElement('div');
+        var currentNode = null;
+
+        if (elementList == 'null') {
+            var testNode = document.createElement('p');
+
+
+            currentNode = testNode;
+            // await sessionStorage.setItem('element-list', )
+            insertAfter(hr, currentNode);
+            sessionStorage.setItem('element-list', 'not null');
+            // const result_data = await axios.get(`http://127.0.0.1:8000/api/reports/inquiry/${val}`);
+            // var invoice_data = (result_data.data.data).map(invoice => invoice);
+
+            // elementList = invoice_data.map(el => createSeveralElements(el));
+            // elementList.map(el => insertAfter(hr, el));
         } else {
-            var invoice_detail_container = document.getElementById('invoice-detail-container');
-
-            if (invoice_detail_container) {
-                document.getElementById('product-name').innerText = invoice_data.product_name;
-                document.getElementById('amount').innerText = invoice_data.qty;
-                document.getElementById('subtotal').innerText = invoice_data.subtotal;
-
-            }
+            currentNode.parentNode.replaceChild(emptyNode);
+            // insertAfter(hr, emptyNode);
         }
+        // console.log(elementList == 'null');
+
+        // insertAfter(hr, elementList.map(div => div));
+        // // console.log(elementList)
+        // if (elementList == null) {
+        //     // insertAfter(hr, createSeveralElements(invoice_data));
+        //     elementList = createSeveralElements(invoice_data);
+        //     insertAfter(hr, elementList);
+        // } else if (elementList != null) {
+        //     var invoice_detail_container = document.getElementById('invoice-detail-container');
+
+        //     console.log(invoice_detail_container);
+
+        //     if (invoice_detail_container) {
+        //         document.getElementById('product-name').innerText = invoice_data.product_name;
+        //         document.getElementById('amount').innerText = invoice_data.qty;
+        //         document.getElementById('subtotal').innerText = invoice_data.subtotal;
+
+        //     }
+        // }
+
+        console.log(elementList);
     };
 
+    window.onbeforeunload(sessionStorage.setItem('element-list', null))
 </script>
 @endsection
