@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\OrderHistory;
 use App\ProductAdmin;
 use App\User;
+use App\Http\Controllers\UserProfile\UserProfileController;
 
 class HomeController extends Controller
 {
@@ -37,8 +38,12 @@ class HomeController extends Controller
             return $q['subtotal'];
         });
 
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
         $transaction = OrderHistory::where('created_at', 'LIKE', '%' . $current_date . '%')->count();
 
-        return view('home', compact('registered', 'product', 'omset_daily', 'transaction'));
+        return view('home', compact('registered', 'product', 'omset_daily', 'transaction', 'ob'));
     }
 }
