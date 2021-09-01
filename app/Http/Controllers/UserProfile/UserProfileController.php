@@ -71,10 +71,12 @@ class UserProfileController extends Controller
     public function orderan(){
         $order_history = OrderHistory::paginate(10);
 
+        $ob = $this->orderanCount();
+
         $status = 'Proses';
         $order_detail = OrderHistory::where('status', $status)->get();
 
-        return view('orderan.index', compact('order_history', 'order_detail'));
+        return view('orderan.index', compact('order_history', 'order_detail', 'ob'));
     }
 
     public function view(Request $request){
@@ -82,6 +84,7 @@ class UserProfileController extends Controller
         $this->validate($request, [
             'invoice' => 'required|string'
         ]);
+
 
         $invoice = $request->get('invoice');
         // dd($invoice);
@@ -155,6 +158,14 @@ class UserProfileController extends Controller
 
         }
 
+    }
+
+    public function orderanCount(){
+
+        $status = 'Proses';
+        $order_count = OrderHistory::where('status', $status)->count();
+
+        return $order_count;
     }
 
 }

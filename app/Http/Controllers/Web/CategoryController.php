@@ -5,13 +5,18 @@ namespace App\Http\Controllers\Web;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserProfile\UserProfileController;
 
 class CategoryController extends Controller
 {
     public function index(){
         $category = Category::all();
 
-        return view('categories.index', compact('category'));
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
+        return view('categories.index', compact('category', 'ob'));
     }
 
     public function store(Request $request){
@@ -29,8 +34,12 @@ class CategoryController extends Controller
     public function edit($id){
         $category = Category::find($id); //Query track by ID
 
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
         // dd($category);
-        return view('categories.edit', compact('category'));
+        return view('categories.edit', compact('category', 'ob'));
 
     }
 

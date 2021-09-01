@@ -116,7 +116,7 @@
                                             <td>{{ $user->gender }}</td>
                                             <td>{{ $user->role_names[0] }}</td>
                                             <td>
-                                                <button class="btn btn-info btn-sm">View</button>
+                                                <a href="{{ url('/admin/users/' . $user->id ) }}"> <button class="btn btn-info btn-sm">View</button></a>
                                                 <button class="btn btn-danger btn-sm">Delete</button>
                                             </td>
                                         </tr>
@@ -142,6 +142,8 @@
                             <h4 class="card-title" style="text-align: center; margin-bottom: 0;">Tambah Staff</h4>
                         </div>
                         <div class="card-body">
+                            <form action="{{ route('members.post') }}" method="post">
+                                @csrf
                             <div class="form__group field">
                                 <input type="input" class="form__field" placeholder="Input your name.." name="name" id='name' required />
                                 <label for="name" class="form__label">Name..</label>
@@ -160,6 +162,7 @@
                             </div>
                             <div class="form__group" style="margin-left: 40%;">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Tambah</button>
+                            </form>
                             </div>
                         </div>
                     </div>

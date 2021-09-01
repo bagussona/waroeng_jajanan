@@ -8,9 +8,7 @@ use App\ProductAdmin;
 use App\Supplier;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\UserProfile\UserProfileController;
 
 class ProductController extends Controller
 {
@@ -24,7 +22,11 @@ class ProductController extends Controller
 
         $product = $product->paginate(10);
 
-        return view('products.index', compact('product'));
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
+        return view('products.index', compact('product', 'ob'));
 
     }
 
@@ -37,7 +39,11 @@ class ProductController extends Controller
 
         $display = $display->paginate(10);
 
-        return view('products.display', compact('display'));
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
+        return view('products.display', compact('display', 'ob'));
 
     }
 
@@ -45,7 +51,11 @@ class ProductController extends Controller
         $category = Category::orderBy('name', 'DESC')->get();
         $supplier = Supplier::orderBy('name', 'DESC')->get();
 
-        return view('products.create', compact('category', 'supplier'));
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
+        return view('products.create', compact('category', 'supplier', 'ob'));
 
     }
 
@@ -54,11 +64,13 @@ class ProductController extends Controller
         $response = cloudinary()->upload($request->file('image')->getRealPath(), [
             'folder' => 'product',
             'transformation' => [
-                'width => 600',
-                'height => 600',
-                'quality => 50'
+                'width' => 600,
+                'height' => 600,
+                'quality' => 50
             ]
         ])->getSecurePath();
+
+        // dd($response);
 
         ProductAdmin::create([
             'name' => $request->get('name'),
@@ -81,7 +93,11 @@ class ProductController extends Controller
         $category = Category::orderBy('name', 'DESC')->get();
         $supplier = Supplier::orderBy('name', 'DESC')->get();
 
-        return view('products.edit', compact('product', 'category', 'supplier'));
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
+        return view('products.edit', compact('product', 'category', 'supplier', 'ob'));
 
     }
 
@@ -116,7 +132,10 @@ class ProductController extends Controller
 
                 $response = cloudinary()->upload($request->file('image')->getRealPath(), [
                     'folder' => 'product',
-                    'transformation' => '[width => 600, height => 600]',
+                    'transformation' => [
+                        'width' => 600,
+                        'height' => 600
+                ],
                 ])->getSecurePath();
                 // dd($response);
                 $product = ProductAdmin::find($id);

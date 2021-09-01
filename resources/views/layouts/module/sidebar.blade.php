@@ -33,6 +33,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('orderan.index') }}">
                 <i class="nav-icon icon-drop"></i> Orderan
+                <span style="margin-left: 15px;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ $ob }}
+                </span>
             </a>
         </li>
         <li class="nav-item nav-dropdown">
