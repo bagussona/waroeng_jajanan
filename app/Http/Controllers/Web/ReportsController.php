@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\UserProfile\UserProfileController;
 
 class ReportsController extends Controller
 {
@@ -70,7 +71,11 @@ class ReportsController extends Controller
             return $q['subtotal'];
         });
 
-        return view('reports.daily', compact('order_all', 'total', 'total_selesai', 'total_proses', 'order_history_selesai', 'order_history_proses'));
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
+        return view('reports.daily', compact('order_all', 'total', 'total_selesai', 'total_proses', 'order_history_selesai', 'order_history_proses', 'ob'));
     }
 
     public function createPDF(){
@@ -151,8 +156,11 @@ class ReportsController extends Controller
                 $results->appends(request()->all())->links();
                 // dd($results);
 
+                $getQty = new UserProfileController();
+                $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+                $ob = $getQty->orderanCount();
 
-        return view('reports.inquiry', compact('customer_name', 'product_order', 'status_order', 'results', 'result_invoice', 'periode'));
+        return view('reports.inquiry', compact('customer_name', 'product_order', 'status_order', 'results', 'result_invoice', 'periode', 'ob'));
     }
 
     public function inquiryDetails($invoice_loop){

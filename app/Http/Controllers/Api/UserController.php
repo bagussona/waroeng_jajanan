@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function login(Request $request){
         // $logged_in = true;
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
@@ -33,7 +33,6 @@ class UserController extends Controller
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
-            'username' => 'required|string|unique:users',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8|confirmed'
         ]);
@@ -44,11 +43,14 @@ class UserController extends Controller
 
         $user = User::create([
             'name' => $request->get('name'),
-            'username' => $request->get('username'),
             'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
             'email' => $request->get('email'),
+            'nohape' => 026244112,
+            'gender' => 'Undefined',
             'password' => Hash::make($request->get('password'))
         ]);
+
+        $user->assignRole('customer');
 
         return response()->json(['msg' => 'berhasil mendaftar'], 201);
     }

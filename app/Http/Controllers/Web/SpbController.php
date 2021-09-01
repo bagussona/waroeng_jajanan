@@ -11,6 +11,7 @@ use App\Spb;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserProfile\UserProfileController;
 
 class SpbController extends Controller
 {
@@ -24,7 +25,11 @@ class SpbController extends Controller
 
         $spb_admin = Spb::all();
 
-        return view('datastore.index', compact('spb', 'data', 'spb_admin'));
+        $getQty = new UserProfileController();
+        $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $ob = $getQty->orderanCount();
+
+        return view('datastore.index', compact('spb', 'data', 'spb_admin', 'ob'));
 
     }
 
@@ -112,7 +117,11 @@ class SpbController extends Controller
             $spb_admin = Spb::all();
             // dd($spb_admin);
 
-            return view('datastore.bbmindex', compact('spb', 'data', 'spb_admin'));
+            $getQty = new UserProfileController();
+            $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+            $ob = $getQty->orderanCount();
+
+            return view('datastore.bbmindex', compact('spb', 'data', 'spb_admin', 'ob'));
 
         }
 

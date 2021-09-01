@@ -15,7 +15,6 @@
 						<h3>Waroeng Jajanan untuk
 							<br />Semuanya!</h3>
 						<a class="white_bg_btn" href="{{ route('front.product') }}">Jajan Yuk!</a>
-						{{-- <a class="white_bg_btn" href="{{ route('front.index') }}">View Collection</a> --}}
 					</div>
 				</div>
 			</div>
@@ -40,7 +39,6 @@
 					<div class="col col1">
 						<div class="f_p_item">
 							<div class="f_p_img">
-                <!-- KEMUDIAN TAMPILKAN IMAGENYA DARI FOLDER /PUBLIC/STORAGE/PRODUCTS -->
                 <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->slug }}">
 								<div class="p_icon">
 									<a href="{{ url('/product/' . $row->slug) }}">
