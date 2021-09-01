@@ -129,7 +129,7 @@
                                         <td style="padding: 5px 15px; text-align: center;">{{ $result->status }}</td>
                                         {{-- <form action="{{ route('reports.inquiryDetails') }}" method="get"> --}}
                                         {{-- <input type="hidden" name="invoice_loop" value="{{ $result->invoice }}"> --}}
-                                        <td style="padding: 5px 15px;"><button id="details" class="btn btn-light" value="{{ $result->invoice }}" onclick="testClick(this.value)"> details </button></td>
+                                        <td style="padding: 5px 15px;"><button id="details" class="btn btn-light" value="{{ $result->invoice }}"> details </button></td>
                                         {{-- </form> --}}
                                     </tr>
                                     <tr>
@@ -154,7 +154,7 @@
                                         </div>
                                         <hr id="boundary-line" style="margin: 15px; height: 5px;">
                                         <div id="invoice-list-container" style="height: auto; width: 100%; display: flex; flex-direction: column;">
-
+                                            
                                         </div>
                                         <hr style="margin: 0 15px 0 15px; height: 5px;">
                                         <div class="footer_card_deck">
@@ -182,6 +182,7 @@
     //     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     // }
 
+    var detail_button = document.getElementById('details');
     var hr = document.getElementById('boundary-line');
 
     var elementList = null;
@@ -194,6 +195,11 @@
 
         results_data.map(result => invoice_list_container.appendChild(result));
     };
+
+    detail_button.onclick = e => {
+        testClick(e.target.value);
+        e.preventDefault();
+    }
 
 </script>
 @endsection
