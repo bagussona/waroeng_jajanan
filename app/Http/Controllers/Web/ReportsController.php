@@ -46,7 +46,8 @@ class ReportsController extends Controller
 
         $current_date = date('Y-m-d');
 
-        $order_all = DB::table('order_details')->select('name as products', 'price', DB::raw("SUM(qty) as terjual", "SUM(subtotal) as subtotal"))->groupBy('products', 'price')->havingRaw('SUM(qty) * price > 1', [2500])->where('created_at', 'LIKE', '%' . "$current_date" . '%')->get();
+        $order_all = DB::table('order_details')->select('name as products', 'price', DB::raw('SUM(qty) as terjual, SUM(subtotal) as subtotal'))->groupBy('products', 'price')->havingRaw('SUM(qty) * price > 1')->where('created_at', 'LIKE', '%' . $current_date . '%')->get();
+        // $order_all = DB::table('order_details')->select('name as products', 'price', DB::raw("SUM(qty) as terjual", "SUM(subtotal) as subtotal"))->groupBy('products', 'price')->havingRaw('SUM(qty) * price > 1', [2500])->where('created_at', 'LIKE', '%' . "$current_date" . '%')->get();
         // dd($order_all);
 
         $order_details = OrderDetail::where('created_at', 'LIKE', '%' . $current_date . '%')->get();
