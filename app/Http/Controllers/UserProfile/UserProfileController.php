@@ -147,9 +147,6 @@ class UserProfileController extends Controller
 
         OrderHistory::where('invoice', $invoice)->update(['sisa_hutang' => 0, 'sisa_hutang' => 0, 'status' => 'Batal', 'operator' => Auth::user()->name]);
 
-
-        OrderDetail::where('order_id'. $invoice)->delete();
-
         return redirect()->back();
     }
 
