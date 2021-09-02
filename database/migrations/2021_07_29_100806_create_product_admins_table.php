@@ -20,9 +20,9 @@ class CreateProductAdminsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('category_id');
-            $table->integer('price_supplier')->nullable();
-            $table->integer('price');
-            $table->integer('stock');
+            $table->integer('price_supplier')->nullable()->default(0);
+            $table->integer('price')->default(0);
+            $table->integer('stock')->default(0);
             $table->string('image');
             $table->timestamps();
         });

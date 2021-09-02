@@ -16,11 +16,11 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('tanggal');
-            $table->integer('total_laba_prediksi');
-            $table->integer('total_transaksi');
-            $table->integer('total_pendapatan_usaha');
-            $table->integer('total_pendapatan_masuk');
-            $table->integer('total_pendapatan_hutang');
+            $table->integer('total_laba_prediksi')->default(0);
+            $table->integer('total_transaksi')->default(0);
+            $table->integer('total_pendapatan_usaha')->default(0);
+            $table->integer('total_pendapatan_masuk')->default(0);
+            $table->integer('total_pendapatan_hutang')->default(0);
             $table->timestamps();
         });
     }

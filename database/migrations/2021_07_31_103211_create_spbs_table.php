@@ -22,8 +22,8 @@ class CreateSpbsTable extends Migration
             $table->text('description')->nullable();
             $table->string('supplier');
             $table->string('category');
-            $table->integer('price');
-            $table->integer('stock');
+            $table->integer('price')->default(0);
+            $table->integer('stock')->default(0);
             $table->string('image');
             $table->timestamps();
         });

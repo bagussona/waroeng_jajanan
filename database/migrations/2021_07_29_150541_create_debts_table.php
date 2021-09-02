@@ -18,8 +18,8 @@ class CreateDebtsTable extends Migration
             $table->string('tanggal')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('name')->nullable();
-            $table->integer('qty')->nullable();
-            $table->integer('price')->nullable();
+            $table->integer('qty')->nullable()->default(0);
+            $table->integer('price')->nullable()->default(0);
             $table->integer('subtotal')->nullable()->default(0);
             $table->string('user_id');
             $table->timestamps();

@@ -18,8 +18,8 @@ class CreateOrdersTable extends Migration
             $table->string('tanggal')->nullable();
             $table->string('image')->nullable();
             $table->string('name')->nullable();
-            $table->integer('qty')->nullable();
-            $table->integer('price')->nullable();
+            $table->integer('qty')->default(0)->nullable();
+            $table->integer('price')->default(0)->nullable();
             $table->integer('subtotal')->nullable()->default(0);
             $table->string('user_id');
             $table->timestamps();
