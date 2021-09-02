@@ -35,7 +35,7 @@ class FrontController extends Controller
         $products = Product::orderBy('created_at', 'DESC')->paginate(12);
 
         if(request()->q != ""){
-            $products = Product::where('name', 'LIKE', '%' . request()->q . '%' )->paginate(5)->setPath('');
+            $products = Product::where('slug', 'LIKE', '%' . request()->q . '%' )->paginate(5)->setPath('');
         }
 
         $categories = Category::orderBy('name', 'ASC')->get();

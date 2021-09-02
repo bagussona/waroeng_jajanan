@@ -18,7 +18,7 @@ class MemberController extends Controller
      */
     public function index(){
         // dd($users);
-        $users = User::paginate(10);
+        $users = User::orderBy('created_at')->paginate(10);
         // dd($users);
         $getQty = new UserProfileController();
         $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH

@@ -99,6 +99,7 @@
                                             <th>No HP</th>
                                             <th>Gender</th>
                                             <th>Role</th>
+                                            <th>Verified</th>
                                             <th style="width: 140px;">Aksi</th>
                                         </tr>
                                     </thead>
@@ -115,6 +116,7 @@
                                             <td>{{ $user->nohape }}</td>
                                             <td>{{ $user->gender }}</td>
                                             <td>{{ $user->role_names[0] }}</td>
+                                            <td>{{ date('Y-m-d', strtotime($user->email_verified_at)) }}</td>
                                             <td>
                                                 <a href="{{ url('/admin/users/' . $user->id ) }}"> <button class="btn btn-info btn-sm">View</button></a>
                                                 <button class="btn btn-danger btn-sm">Delete</button>
