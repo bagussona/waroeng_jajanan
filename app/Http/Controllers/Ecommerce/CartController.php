@@ -81,11 +81,12 @@ class CartController extends Controller
 
     public function listCart(){
 
+        $uid = Auth::user()->id;
         $getQty = new FrontController();
         $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty->notificationCart();
 
-        $carts = Order::all();
+        $carts = Order::where('user_id', $uid)->get();
         $subtotal = collect($carts)->sum(function($q) {
             return $q['subtotal'];
         });
