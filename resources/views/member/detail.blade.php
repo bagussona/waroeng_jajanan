@@ -165,10 +165,11 @@
                                     <ul class="list-group vw-100">
                                         @foreach ($orders as $order)
                                         <li class="list-group-item d-flex flex-row">
-                                            <span style="font-size: 11px;">{{ date('d/m/Y', strtotime($order->created_at)) }}</span>
-                                            <p style="font-size: 16px; margin-left: 15px; margin-bottom: 0;">{{ $order->invoice }}</p>
+                                            <span style="font-size: 11px; width: 100px;">{{ date('d/m/Y', strtotime($order->created_at)) }}</span>
+                                            <p style="font-size: 16px; width: 200px; margin-left: 15px; margin-right: 15px; margin-bottom: 0;">{{ $order->invoice }}</p>
                                             <span style="margin-left: 5px; margin-right: 5px; width: 50px; color: #ffffff;">:</span>
-                                            <span style="margin-left: 70%;" class="badge bg-primary rounded-pill">{{ $order->subtotal }}</span>
+                                            <span style="margin-left: 250px; margin-right: 200px; width: 75px; font-size: 16px; margin-bottom: 0;" class="badge bg-primary rounded-pill"><small> {{ $order->status }} </small></span>
+                                            <span style="width: 150px; text-align: right;">Rp. {{ $order->subtotal }}</span>
                                         </li>
                                         @endforeach
                                     </ul>

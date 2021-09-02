@@ -131,9 +131,6 @@
                                     <td style="text-align: right; font-family: 'Nunito Sans', sans-serif;">{{ $val->subtotal }}</td>
                                 </tr>
                                 <tr>
-                                    {{ $order_all->links() }}
-                                </tr>
-                                <tr>
                                     @empty
                                 </tr>
                                 @endforelse

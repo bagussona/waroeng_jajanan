@@ -16,7 +16,7 @@
             <div class="row">
 
                 <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">List Orderan</h4>
@@ -39,7 +39,7 @@
                                     <thead>
                                         <tr>
                                             <th>Invoice</th>
-                                            <th>Customer_id</th>
+                                            <th>_id</th>
                                             <th>Customer_name</th>
                                             <th>Customer_phone</th>
                                             <th>Subtotal</th>
@@ -87,7 +87,7 @@
                 </div>
                 <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Orderan Masuk</h4>
@@ -97,11 +97,11 @@
                             <div class="table-responsive">
                                 <table class="table table-hover table-bordered">
                                     <thead>
-                                        <tr>
+                                        <tr style="text-align: center;">
                                             <th>Invoice</th>
-                                            <th>Customer Name</th>
+                                            <th>Name</th>
                                             <th>Status</th>
-                                            <th>Aksi</th>
+                                            <th colspan="2">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -118,7 +118,14 @@
                                                 <input type="hidden" name="invoice" value="{{ $val->invoice }}">
                                                 <button type="submit" class="btn btn-info btn-sm">View</button>
                                             </form>
-                                        </td>
+                                           </td>
+                                           <td ">
+                                            <form action="{{ route('orderan.batal') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="invoice" value="{{ $val->invoice }}">
+                                                <button type="submit" class="btn btn-danger btn-sm">Batal</button>
+                                            </form>
+                                            </td>
                                       </tr>
                                       <tr>
                                         @empty

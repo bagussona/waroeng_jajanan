@@ -63,6 +63,7 @@ Route::group([
     Route::get('/admin/orderan', 'UserProfile\UserProfileController@orderan')->name('orderan.index');
     Route::post('/admin/orderan', 'UserProfile\UserProfileController@view')->name('orderan.view');
     Route::put('/admin/orderan/done', 'UserProfile\UserProfileController@updateOrderan')->name('orderan.updateSelesai');
+    Route::post('/admin/orderan/batal', 'UserProfile\UserProfileController@batalOrderan')->name('orderan.batal');
 
     //Reports Management
     Route::get('/reports/daily', 'Web\ReportsController@index')->name('reports.daily');

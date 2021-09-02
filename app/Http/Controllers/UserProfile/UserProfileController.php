@@ -7,6 +7,7 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\FrontController;
 use App\OrderDetail;
 use App\OrderHistory;
+use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -108,6 +109,46 @@ class UserProfileController extends Controller
         $subtotal = $request->get('subtotal');
             // dd($invoice);
         OrderHistory::where('invoice', $invoice)->update(['telah_bayar' => $subtotal, 'sisa_hutang' => 0, 'status' => 'Selesai', 'operator' => Auth::user()->name]);
+
+        return redirect()->back();
+    }
+
+    public function batalOrderan(Request $request){
+
+        // dd($request);
+        $this->validate($request, [
+            'invoice' => 'required|string'
+        ]);
+
+        $invoice = $request->get('invoice');
+
+        ## Proses Rollback Belanjaan ##
+
+        $barangnya = OrderDetail::where('order_id', $invoice)->get();
+        $carts = [];
+        foreach ($barangnya as $barang) {
+            $carts[] = [
+                'order_id' => $barang['order_id'],
+                'name' => $barang['name'],
+                'qty' => $barang['qty']
+            ];
+            // dd($cart);
+        }
+
+        foreach ($carts as $cart) {
+            $old_data = Product::where('name', $cart['name'])->get();
+
+            $newstock = $cart['qty'] + $old_data[0]['stock'];
+
+            Product::where('name', $cart['name'])->update(['stock' => $newstock]);
+        }
+
+        ## End Rollback ##
+
+        OrderHistory::where('invoice', $invoice)->update(['sisa_hutang' => 0, 'sisa_hutang' => 0, 'status' => 'Batal', 'operator' => Auth::user()->name]);
+
+
+        OrderDetail::where('order_id'. $invoice)->delete();
 
         return redirect()->back();
     }
