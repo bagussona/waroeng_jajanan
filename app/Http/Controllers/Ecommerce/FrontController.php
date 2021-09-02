@@ -14,11 +14,10 @@ use Illuminate\Http\Request;
 class FrontController extends Controller
 {
     public function index(){
+        // dd(request()->all());
 
         $getQty = $this->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty;
-
-        $products = Product::orderBy('created_at', 'DESC')->paginate(10);
 
         $scroll = true;
 
@@ -32,7 +31,11 @@ class FrontController extends Controller
         $licart = $getQty;
 
         $products = Product::orderBy('created_at', 'DESC')->paginate(12);
-        // $categories = Category
+
+        if(request()->q != ""){
+            $products = Product::where('name', 'LIKE', '%' . request()->q . '%' )->paginate(5)->setPath('');
+        }
+
         $categories = Category::orderBy('name', 'ASC')->get();
 
         return view('ecommerce.product', compact('products', 'categories', 'licart'));
@@ -81,6 +84,6 @@ class FrontController extends Controller
 
     }
 
-    
+
 
 }

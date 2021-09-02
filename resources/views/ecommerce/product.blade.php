@@ -82,9 +82,11 @@
                 <div class="col-lg-9">
                     <div class="product_top_bar">
                         <div class="left_dorp">
+                            <form action="{{ route('front.product') }}" method="get">
                             <div class="search__container">
-                                <input class="search__input" type="text" placeholder="Search">
+                                <input name="q" class="search__input" type="text" placeholder="Search">
                             </div>
+                            </form>
                         </div>
                         <div class="right_page ml-auto">
                             {{ $products->links() }}
