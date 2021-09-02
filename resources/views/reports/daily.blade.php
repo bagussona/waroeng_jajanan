@@ -131,7 +131,7 @@
                                     <td style="text-align: right; font-family: 'Nunito Sans', sans-serif;">{{ $val->subtotal }}</td>
                                 </tr>
                                 <tr>
-                                    {{-- {{ $order_all->links() }} --}}
+                                    {{ $order_all->links() }}
                                 </tr>
                                 <tr>
                                     @empty
@@ -140,7 +140,7 @@
                             </table>
                             <div class="bodycontent-main-content-middle"  style="height: 50px; margin-top: 2%; margin-bottom: 2%;">
                                 <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                                {{-- <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_all->links() }}</div> --}}
+                                <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_all->links() }}</div>
                                 <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px; text-align: center; color: #0000FF;"></div>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                             </table>
                             <div class="bodycontent-main-content-middle"  style="height: 50px; margin-top: 2%; margin-bottom: 2%;">
                                 <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                                {{-- <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_history_selesai->links() }}</div> --}}
+                                <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_history_selesai->links() }}</div>
                                 <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px; text-align: center; color: #0000FF;"></div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@
                             </table>
                             <div class="bodycontent-main-content-middle"  style="height: 50px; margin-top: 2%; margin-bottom: 2%;">
                                 <div class="body-main-content-middle-leftside" style="width: 5%; height: 50px;"></div>
-                                {{-- <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_history_proses->links() }}</div> --}}
+                                <div class="body-main-content-middle-center" style="width: 65%; height: 50px; font-weight: bold; color: #0000FF;">{{ $order_history_proses->links() }}</div>
                                 <div class="body-main-content-middle-rightside" style="width: 30%; height: 50px; text-align: center; color: #0000FF;"></div>
                             </div>
                         </div>
