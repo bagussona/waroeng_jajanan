@@ -16,6 +16,8 @@ class FrontController extends Controller
     public function index(){
         // dd(request()->all());
 
+        $products = Product::orderBy('created_at', 'DESC')->paginate(10);
+
         $getQty = $this->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty;
 
