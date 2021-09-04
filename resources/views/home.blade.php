@@ -59,6 +59,13 @@
                                         <strong class="h4">{{ $duit_koperasi }}</strong>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="callout callout-success">
+                                        <small class="text-muted">Modal</small>
+                                        <br>
+                                        <strong class="h4">Rp. 969.000</strong>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
