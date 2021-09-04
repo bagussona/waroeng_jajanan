@@ -69,7 +69,7 @@ class CartController extends Controller
         $uid = Auth::user()->id;
         //MENGAMBIL DATA
         $user = User::find($uid);
-        $carts = Order::all();
+        $carts = Order::where('user_id', $uid)->get();
         // //MENGHITUNG SUBTOTAL DARI KERANJANG BELANJA (CART)
         $subtotal = collect($carts)->sum(function($q) {
             return $q['subtotal'];
