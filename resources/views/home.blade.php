@@ -56,7 +56,7 @@
                                     <div class="callout callout-success">
                                         <small class="text-muted">Total Duit Koperasi</small>
                                         <br>
-                                        <strong class="h4">{{ $duit_koperasi }}</strong>
+                                        <strong class="h4">Rp. {{ $duit_koperasi }}</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
