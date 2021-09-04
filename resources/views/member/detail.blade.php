@@ -191,9 +191,9 @@
                                         @foreach ($carts as $cart)
                                         <li class="list-group-item d-flex flex-row">
                                             <span style="font-size: 11px; width: 100px;">{{ date('d/m/Y', strtotime($cart->tanggal)) }}</span>
-                                            <p style="font-size: 16px; width: 200px; margin-left: 15px; margin-right: 15px; margin-bottom: 0;">{{ $cart->name }}</p>
+                                            <p style="font-size: 16px; width: 500px; margin-left: 15px; margin-right: 15px; margin-bottom: 0;">{{ $cart->name }}</p>
                                             <span style="margin-left: 5px; margin-right: 5px; width: 50px; color: #ffffff;">:</span>
-                                            <span style="margin-left: 250px; margin-right: 200px; width: 75px; font-size: 16px; margin-bottom: 0;" class="badge bg-primary rounded-pill"><small> {{ $cart->qty }} </small></span>
+                                            <span style="margin-left: 50px; margin-right: 50px; width: 75px; font-size: 16px; margin-bottom: 0;" class="badge bg-primary rounded-pill"><small> {{ $cart->qty }} </small></span>
                                             <span style="width: 150px; text-align: right;">Rp. {{ $cart->subtotal }}</span>
                                         </li>
                                         @endforeach
