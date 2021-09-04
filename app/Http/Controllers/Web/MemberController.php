@@ -7,6 +7,7 @@ use App\OrderHistory;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\UserProfile\UserProfileController;
+use App\Order;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -62,6 +63,7 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
+
         $profile = User::find($id);
         $orders = OrderHistory::where('customer_id', $id)->paginate(5);
 
@@ -78,7 +80,9 @@ class MemberController extends Controller
         $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $ob = $getQty->orderanCount();
 
-        return view('member.detail', compact('profile', 'orders', 'sisa_hutang', 'total_transaksi', 'ob'));
+        $carts = Order::where('user_id', $id)->paginate(5);
+
+        return view('member.detail', compact('profile', 'orders', 'sisa_hutang', 'total_transaksi', 'ob', 'carts'));
     }
 
     /**
