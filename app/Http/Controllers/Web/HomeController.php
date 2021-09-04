@@ -44,6 +44,14 @@ class HomeController extends Controller
 
         $transaction = OrderHistory::where('created_at', 'LIKE', '%' . $current_date . '%')->count();
 
-        return view('home', compact('registered', 'product', 'omset_daily', 'transaction', 'ob'));
+        $status = "Selesai";
+        $total_kas = OrderHistory::where('status', $status)->get();
+
+        // dd($subtotal);
+        $duit_koperasi = collect($total_kas)->sum(function($q) {
+            return $q['subtotal'];
+        });
+
+        return view('home', compact('registered', 'product', 'omset_daily', 'transaction', 'ob', 'duit_koperasi'));
     }
 }

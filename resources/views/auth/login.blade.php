@@ -52,10 +52,8 @@
 
                                 <div class="col-6">
                                     <input type="submit" class="btn btn-primary px-4" value="Login">
-                                    {{-- <button>Login</button> --}}
                                 </div>
                                 <div class="col-6 text-right">
-                                    {{-- <button class="btn btn-link px-0" type="button">Forgot password?</button> --}}
                                     <a class="hot_deal_link" href="{{ route('password.update') }}"><button class="btn btn-link px-0" type="button">Forgot password?</button></a>
                                 </div>
                             </div>
@@ -77,7 +75,6 @@
                 </div>
                 <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
                     <div class="card-body text-center">
-                        {{-- <p>hello world</p> --}}
                     </div>
                 </div>
             </div>

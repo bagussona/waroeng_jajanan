@@ -24,32 +24,39 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="callout callout-info">
                                         <small class="text-muted">Omset Harian</small>
                                         <br>
                                         <strong class="h4">Rp. {{ $omset_daily }}</strong>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="callout callout-danger">
                                         <small class="text-muted">Pelanggan</small>
                                         <br>
                                         <strong class="h4">{{ $registered }}</strong>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="callout callout-primary">
                                         <small class="text-muted">Transaksi Harian</small>
                                         <br>
                                         <strong class="h4">{{ $transaction }} Transaksi</strong>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="callout callout-success">
                                         <small class="text-muted">Total Produk</small>
                                         <br>
                                         <strong class="h4">{{ $product }}</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="callout callout-success">
+                                        <small class="text-muted">Total Duit Koperasi</small>
+                                        <br>
+                                        <strong class="h4">{{ $duit_koperasi }}</strong>
                                     </div>
                                 </div>
                             </div>
