@@ -40,7 +40,7 @@
                             @csrf
                         <div class="col-md-12 form-group p_star">
                             <label for="name">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="first" name="name" value="{{ $user->name }}" required>
+                            <input type="text" class="form-control" id="first" name="name" value="{{ $user->name }}" required readonly>
 
                             <!-- UNTUK MENAMPILKAN JIKA TERDAPAT ERROR VALIDASI -->
                             <p class="text-danger">{{ $errors->first('name') }}</p>

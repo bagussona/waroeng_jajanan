@@ -133,6 +133,7 @@ class CartController extends Controller
     public function destroyCart(Request $request){
         // dd($request->product_id);
 
+        $uid = Auth::user()->id;
         $id_order = $request->product_id;
 
         $order = Order::where('id', $id_order)->get();
@@ -146,7 +147,7 @@ class CartController extends Controller
 
         Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
 
-        Order::where('id', $id_order)->delete();
+        Order::where('id', $id_order)->where('user_id', $uid)->delete();
 
         return redirect()->back();
 
@@ -154,6 +155,7 @@ class CartController extends Controller
 
     public function processCheckout(Request $request){
 
+        $uid = Auth::user()->id;
         $email = $request->get('email');
         //VALIDASI DATANYA
         $this->validate($request, [
@@ -168,7 +170,7 @@ class CartController extends Controller
             $customer = User::where('email', $email)->first();
 
         //AMBIL DATA KERANJANG
-        $carts = Order::all();
+        $carts = Order::where('user_id', $uid)->get();
         $subtotal = collect($carts)->sum(function($q) {
             return $q['subtotal'];
         });
