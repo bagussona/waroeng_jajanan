@@ -63,7 +63,7 @@
                                     <div class="callout callout-success">
                                         <small class="text-muted">Modal</small>
                                         <br>
-                                        <strong class="h4">Rp. 969000</strong>
+                                        <strong class="h4">Rp. 974000</strong>
                                     </div>
                                 </div>
                             </div>

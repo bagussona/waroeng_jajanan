@@ -38,8 +38,11 @@
           @forelse($products as $row)
 					<div class="col col1">
 						<div class="f_p_item">
-							<div class="f_p_img">
-                <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->slug }}">
+                            <div class="f_p_img">
+                                <button type="button" class="btn btn-dark" style="position: absolute;" disabled>
+                                    Tersisa: {{ $row->stock}}
+                                </button>
+                                    <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->slug }}">
 								<div class="p_icon">
 									<a href="{{ url('/product/' . $row->slug) }}">
 										<i class="lnr lnr-cart"></i>
