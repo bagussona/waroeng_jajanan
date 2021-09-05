@@ -99,8 +99,8 @@
                         <div class="col-lg-3 col-md-3 col-sm-6">
                             <div class="f_p_item">
                                 <div class="f_p_img">
-                                    <button type="button" class="btn btn-product" style="position: absolute;" disabled>
-                                        Tersisa: {{ $row->stock }}
+                                    <button type="button" class="btn btn-primary" style="position: absolute;" disabled>
+                                       <strong> Tersisa: {{ $row->stock }} </strong>
                                     </button>
                                     <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->name }}">
                                     <div class="p_icon">

@@ -40,7 +40,7 @@
 						<div class="f_p_item">
                             <div class="f_p_img">
                                 <button type="button" class="btn btn-primary" style="position: absolute;" disabled>
-                                    Tersisa: {{ $row->stock}}
+                                  <strong>  Tersisa: {{ $row->stock}} </strong>
                                 </button>
                                     <img class="img-fluid" src="{{ $row->image }}" alt="{{ $row->slug }}">
 								<div class="p_icon">
