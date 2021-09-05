@@ -70,6 +70,8 @@ Route::group([
     Route::get('/reports/pdf/daily', 'Web\ReportsController@dummy')->name('reports.daily_pdf');
     Route::get('/reports/daily/pdf', 'Web\ReportsController@createPDF')->name('reports.pdf_daily');
     Route::get('/reports/inquiry', 'Web\ReportsController@inquiry')->name('reports.inquiry');
+
+    Route::delete('/cart/delete/{id}', 'Ecommerce\CartController@admindestroyCart')->name('front.admindelete_cart');
 });
 
     //Toko Display

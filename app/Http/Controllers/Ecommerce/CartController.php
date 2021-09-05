@@ -153,6 +153,28 @@ class CartController extends Controller
 
     }
 
+    public function admindestroyCart(Request $request){
+        // dd($request->product_id);
+
+        $id_order = $request->product_id;
+
+        $order = Order::where('id', $id_order)->get();
+        $order_name = $order[0]['name'];
+        $order_qty = $order[0]['qty'];
+
+        $product = Product::where('name', $order_name)->get();
+        $product_stock = $product[0]['stock'];
+
+        $pengembalian_stock = $product_stock + $order_qty;
+
+        Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
+
+        Order::where('id', $id_order)->delete();
+
+        return redirect()->back();
+
+    }
+
     public function processCheckout(Request $request){
 
         $uid = Auth::user()->id;
