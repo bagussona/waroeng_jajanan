@@ -16,7 +16,7 @@ class FrontController extends Controller
     public function index(){
         // dd(request()->all());
 
-        $products = Product::orderBy('created_at', 'DESC')->paginate(10);
+        $products = Product::orderBy('stock', 'DESC')->paginate(10);
 
         $getQty = $this->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty;
@@ -32,7 +32,7 @@ class FrontController extends Controller
         $getQty = $this->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty;
 
-        $products = Product::orderBy('created_at', 'DESC')->paginate(12);
+        $products = Product::orderBy('stock', 'DESC')->paginate(12);
 
         if(request()->q != ""){
             $products = Product::where('slug', 'LIKE', '%' . request()->q . '%' )->paginate(5)->setPath('');

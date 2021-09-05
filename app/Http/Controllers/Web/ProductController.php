@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
 
     public function index(){
-        $product = ProductAdmin::with(['category', 'supplier'])->orderBy('created_at', 'DESC');
+        $product = ProductAdmin::with(['category', 'supplier'])->orderBy('stock', 'ASC');
 
         if (request()->q != ''){
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
@@ -31,7 +31,7 @@ class ProductController extends Controller
     }
 
     public function display(){
-        $display = Product::orderBy('created_at', 'DESC');
+        $display = Product::orderBy('stock', 'ASC');
 
         if (request()->q != ''){
             $display = $display->where('name', 'LIKE', '%' . request()->q . '%');
