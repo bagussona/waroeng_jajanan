@@ -13,4 +13,5 @@ class Supplier extends Model
     public function productAdmins(){
         return $this->hasMany(Category::class);
     }
+    
 }
