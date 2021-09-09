@@ -82,7 +82,7 @@
     }
 
 </style>
-<div class="container-profile">
+<div class="container-fluid">
     <div class="header-profile d-flex align-items-center">
         <div class="header-image">
             <img src="{{ $profile->avatar }}" class="rounded-circle" style="width: 100%; height: 100%; center">
@@ -114,7 +114,7 @@
         </div>
     </div>
 </div>
-<div class="container-content">
+<div class="container-fluid">
     <div class="content-wrapper d-flex">
         <div class="content-left">
             <div class="content-left-title">
@@ -163,13 +163,6 @@
         </div>
     </div>
     <div class="content-end">
-        <div class="content-right-end">
-            <span>Archived</span>
-        </div>
-        <div class="content-left-content">
-            <a href="#">Monthly</a><br/>
-            <a href="#">Years</a><br/>
-        </div>
     </div>
     </div>
 </div>

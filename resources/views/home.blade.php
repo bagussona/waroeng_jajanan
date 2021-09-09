@@ -63,7 +63,7 @@
                                     <div class="callout callout-success">
                                         <small class="text-muted">Modal</small>
                                         <br>
-                                        <strong class="h4">Rp. 974000</strong>
+                                        <strong class="h4">Rp. 1964000</strong>
                                     </div>
                                 </div>
                             </div>
@@ -86,12 +86,12 @@
                         <div class="col-md-12 mb-4">
                             <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#pekan1" role="tab" aria-controls="pekan1">
+                                <a class="nav-link" data-toggle="tab" href="#pekan1" role="tab" aria-controls="pekan1">
                                 <i class="icon-calculator"></i> Pekan 1
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#pekan2" role="tab" aria-controls="pekan2">
+                                <a class="nav-link active" data-toggle="tab" href="#pekan2" role="tab" aria-controls="pekan2">
                                 <i class="icon-calculator"></i> Pekan 2
                                 </a>
                             </li>
@@ -107,7 +107,7 @@
                             </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="pekan1" role="tabpanel">
+                                <div class="tab-pane" id="pekan1" role="tabpanel">
 
                                     <div class="card-body">
                                         <div class="row">
@@ -157,7 +157,7 @@
                                     </div>
 
                                 </div>
-                                <div class="tab-pane" id="pekan2" role="tabpanel">
+                                <div class="tab-pane active" id="pekan2" role="tabpanel">
 
                                     <div class="card-body">
                                         <div class="row">
@@ -193,7 +193,7 @@
                                                 <div class="callout callout-success">
                                                     <small class="text-muted">Modal</small>
                                                     <br>
-                                                    <strong class="h4">Rp. 0</strong>
+                                                    <strong class="h4">Rp. 990000</strong>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -343,14 +343,14 @@
                                     <div class="callout callout-danger">
                                         <small class="text-muted">Investor</small>
                                         <br>
-                                        <strong class="h4">Rp. 0 x5</strong>
+                                        <strong class="h4">Rp. 0 /5 <small>Investor</small></strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-primary">
                                         <small class="text-muted">Gaji Karyawan</small>
                                         <br>
-                                        <strong class="h4">Rp. 0 x2</strong>
+                                        <strong class="h4">Rp. 0 /2 <small>Pengurus</small></strong>
                                     </div>
                                 </div>
                             </div>
