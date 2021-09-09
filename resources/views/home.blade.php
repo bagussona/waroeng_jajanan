@@ -79,7 +79,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Laporan Keuangan Pekanan
+                        <h4 style="margin-bottom: 0;" class="card-title">Laporan Keuangan Mingguan</h4>
                     </div>
                         <div class="card-body">
 
