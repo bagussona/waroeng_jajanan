@@ -35,8 +35,6 @@
                             <!-- BUAT FORM UNTUK PENCARIAN, METHODNYA ADALAH GET -->
                             <form action="{{ route('products.display') }}" method="get">
                                 <div class="input-group mb-3 col-md-3 float-right">
-                                    <!-- KEMUDIAN NAME-NYA ADALAH Q YANG AKAN MENAMPUNG DATA PENCARIAN -->
-                                    {{-- <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}"> --}}
                                     <input type="text" name="q" class="form-control" placeholder="Cari..." value="">
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary" type="button">Cari</button>
@@ -56,11 +54,10 @@
                                             <th>Created At</th>
                                             <th>Updated At</th>
                                             <th>Stock</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
-                                        <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
                                         @forelse ($display as $row)
                                         <tr>
                                             <td>
@@ -68,18 +65,21 @@
                                             </td>
                                             <td>
                                                 <strong> {{ $row->name }} </strong><br>
-                                                <!-- ADAPUN NAMA KATEGORINYA DIAMBIL DARI HASIL RELASI PRODUK DAN KATEGORI -->
                                                 <label>kategori: <span class="badge badge-info">{{ $row->category }}</span></label><br>
-                                                {{-- <label>description: <span class="badge badge-info">{!! $row->description !!}</span></label> --}}
                                             </td>
                                             <td>Rp. {{ number_format($row->price) }}</td>
                                             <td>{{ $row->supplier }}</td>
                                             <td>{{ $row->created_at->format('d-m-Y') }}</td>
                                             <td>{{ $row->updated_at->format('d-m-Y') }}</td>
-
-                                            <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
-                                            {{-- <td>{!! $row->status_label !!}</td> --}}
                                             <td>{{ $row->stock }} Pcs</td>
+                                            <td>
+                                                <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
+                                                <form action="{{ route('products.display.destroy', $row->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         @empty
                                         <tr>

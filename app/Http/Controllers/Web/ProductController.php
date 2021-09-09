@@ -166,6 +166,15 @@ class ProductController extends Controller
 
     }
 
+    public function destroyDisplay($id){
+
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect(route('products.display'))->with(['success' => 'Produk Sudah Dihapus']);
+
+    }
+
     ## transfer from warehouse to display store
 
 }

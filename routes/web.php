@@ -48,6 +48,7 @@ Route::group([
     Route::get('/admin/products/{products_id}/edit', 'Web\ProductController@edit')->name('products.edit');
     Route::put('/admin/products/{products_id}/edit', 'Web\ProductController@update')->name('products.update');
     Route::delete('/admin/products/{products_id}/delete', 'Web\ProductController@destroy')->name('products.destroy');
+    Route::delete('/admin/products/display/{products_id}/delete', 'Web\ProductController@destroyDisplay')->name('products.display.destroy');
 
     //Store Management
     Route::get('/admin/store', 'Web\SpbController@index')->name('datastore.index');

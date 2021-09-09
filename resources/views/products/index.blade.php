@@ -63,17 +63,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
-                                        <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
                                         @forelse ($product as $row)
                                         <tr>
                                             <td>
-                                                <!-- TAMPILKAN GAMBAR DARI FOLDER PUBLIC/STORAGE/PRODUCTS -->
                                                 <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}">
                                             </td>
                                             <td>
                                                 <strong> {{ $row->name }} </strong><br>
-                                                <!-- ADAPUN NAMA KATEGORINYA DIAMBIL DARI HASIL RELASI PRODUK DAN KATEGORI -->
                                                 <label>kategori: <span class="badge badge-info">{{ $row->category->name }}</span></label><br>
                                             </td>
                                             <td>Rp. {{ number_format($row->price) }}</td>
@@ -82,7 +78,6 @@
                                             <td>{{ $row->created_at->format('d-m-Y') }}</td>
                                             <td>{{ $row->updated_at->format('d-m-Y') }}</td>
 
-                                            <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
                                             <td>{{ $row->stock }} Pcs</td>
                                             <td>
                                                 <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
@@ -92,6 +87,7 @@
                                                     <a href="{{ route('products.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
+                                            </td>
                                         </tr>
                                         @empty
                                         <tr>
