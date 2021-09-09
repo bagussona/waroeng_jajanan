@@ -14,6 +14,7 @@ class ProductController extends Controller
 {
 
     public function index(){
+
         $product = ProductAdmin::with(['category', 'supplier'])->orderBy('stock', 'ASC');
 
         if (request()->q != ''){
@@ -31,6 +32,7 @@ class ProductController extends Controller
     }
 
     public function display(){
+
         $display = Product::orderBy('stock', 'ASC');
 
         if (request()->q != ''){
@@ -48,6 +50,7 @@ class ProductController extends Controller
     }
 
     public function create(){
+
         $category = Category::orderBy('name', 'DESC')->get();
         $supplier = Supplier::orderBy('name', 'DESC')->get();
 
@@ -70,8 +73,6 @@ class ProductController extends Controller
             ]
         ])->getSecurePath();
 
-        // dd($response);
-
         ProductAdmin::create([
             'name' => $request->get('name'),
             'slug' => $request->get('name'),
@@ -89,6 +90,7 @@ class ProductController extends Controller
     }
 
     public function edit($id){
+
         $product = ProductAdmin::find($id);
         $category = Category::orderBy('name', 'DESC')->get();
         $supplier = Supplier::orderBy('name', 'DESC')->get();
@@ -102,7 +104,7 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $id){
-        // dd($request);
+
         $this->validate($request, [
             'name' => 'required|string|max:100',
             'description' => 'required',
@@ -117,7 +119,6 @@ class ProductController extends Controller
         if (empty($_FILES['image']['tmp_name']) ) {
 
             $product = ProductAdmin::find($id);
-            // dd($product->image);
             $product->update([
                 'name' => $request->get('name'),
                 'description' => $request->get('description'),
@@ -137,7 +138,7 @@ class ProductController extends Controller
                         'height' => 600
                 ],
                 ])->getSecurePath();
-                // dd($response);
+
                 $product = ProductAdmin::find($id);
                 $product->update([
                     'name' => $request->get('name'),
@@ -148,17 +149,16 @@ class ProductController extends Controller
                     'stock' => $request->get('stock'),
                     'price' => $request->get('price'),
                     'image' => $response
-                    ]);
+                ]);
 
             }
-
-            // dd($product);
 
         return redirect(route('products.index'))->with(['success' => 'Produk berhasil di update!']);
 
     }
 
     public function destroy($id){
+
         $product = ProductAdmin::find($id);
         $product->delete();
 

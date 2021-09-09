@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\OrderDetail;
 use App\OrderHistory;
-use App\Report;
 use Barryvdh\DomPDF\Facade as PDF;
-use Dompdf\Dompdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\UserProfile\UserProfileController;
 

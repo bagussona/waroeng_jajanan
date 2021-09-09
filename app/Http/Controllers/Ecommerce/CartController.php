@@ -22,24 +22,21 @@ class CartController extends Controller
     public function addToCart(Request $request){
 
         $uid = Auth::user()->id;
-        // dd($uid);
-        // dd($request->product_id);
+
         $this->validate($request, [
             'product_id' => 'required|exists:products,id',
             'qty' => 'required|integer'
         ]);
 
         $qty = $request->get('qty');
-        // dd($qty);
+
         $data_produk = Product::find($request->product_id);
-            // dd($data_produk->name);
 
             $image = $data_produk->image;
             $stock = $data_produk->stock;
             $name = $data_produk->name;
             $price = $data_produk->price;
             $subtotal = $qty * $price;
-            // dd($subtotal);
 
             Order::create([
                 'tanggal' => date('Y-m-d'),
@@ -55,7 +52,7 @@ class CartController extends Controller
 
                 Product::find($request->product_id)->update(['stock' => $stock_dicart]);
 
-            return redirect()->back()->with(['success' => 'Produk Ditambahkan ke Keranjang']);
+        return redirect()->back()->with(['success' => 'Produk Ditambahkan ke Keranjang']);
 
     }
 
@@ -67,14 +64,15 @@ class CartController extends Controller
         $licart = $getQty->notificationCart();
 
         $uid = Auth::user()->id;
-        //MENGAMBIL DATA
+
         $user = User::find($uid);
+
         $carts = Order::where('user_id', $uid)->get();
-        // //MENGHITUNG SUBTOTAL DARI KERANJANG BELANJA (CART)
+
         $subtotal = collect($carts)->sum(function($q) {
             return $q['subtotal'];
         });
-        // //ME-LOAD VIEW CHECKOUT.BLADE.PHP DAN PASSING DATA PROVINCES, CARTS DAN SUBTOTAL
+
         return view('ecommerce.checkout', compact('carts', 'subtotal', 'user', 'licart'));
 
     }
@@ -82,6 +80,7 @@ class CartController extends Controller
     public function listCart(){
 
         $uid = Auth::user()->id;
+
         $getQty = new FrontController();
         $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty->notificationCart();
@@ -97,41 +96,40 @@ class CartController extends Controller
 
     public function updateCart(Request $request){
 
-    $req_qty = $request->qty;
-    $id_product = $request->id;
-    // dd($id_product);
-    $uid = Auth::user()->id;
+        $req_qty = $request->qty;
+        $id_product = $request->id;
 
-    $order = Order::where('user_id', $uid)->where('id', $id_product)->get();
-    $order_name = $order[0]['name'];
-    $order_price = $order[0]['price'];
-    $order_qty = $order[0]['qty'];
+        $uid = Auth::user()->id;
 
-    $product = Product::where('name', $order_name)->get();
-    $product_stock = $product[0]['stock'];
+        $order = Order::where('user_id', $uid)->where('id', $id_product)->get();
+        $order_name = $order[0]['name'];
+        $order_price = $order[0]['price'];
+        $order_qty = $order[0]['qty'];
 
-    $pengembalian_stock = $product_stock + $order_qty;
-    $subtotal = $req_qty * $order_price;
+        $product = Product::where('name', $order_name)->get();
+        $product_stock = $product[0]['stock'];
 
-    Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
+        $pengembalian_stock = $product_stock + $order_qty;
+        $subtotal = $req_qty * $order_price;
 
-    Order::where('user_id', $uid)->where('id', $id_product)->update(['qty' => $req_qty, 'subtotal' => $subtotal]);
+        Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
 
-    $new_qty = Order::where('user_id', $uid)->where('id', $id_product)->get();
-    $qty = $new_qty[0]['qty'];
-    $new_stock = Product::where('name', $order_name)->get();
-    $stock = $new_stock[0]['stock'];
+        Order::where('user_id', $uid)->where('id', $id_product)->update(['qty' => $req_qty, 'subtotal' => $subtotal]);
 
-    $updated_stock = $stock - $qty;
+        $new_qty = Order::where('user_id', $uid)->where('id', $id_product)->get();
+        $qty = $new_qty[0]['qty'];
+        $new_stock = Product::where('name', $order_name)->get();
+        $stock = $new_stock[0]['stock'];
 
-    Product::where('name', $order_name)->update(['stock' => $updated_stock]);
+        $updated_stock = $stock - $qty;
 
-    return redirect()->back();
+        Product::where('name', $order_name)->update(['stock' => $updated_stock]);
+
+        return redirect()->back();
 
     }
 
     public function destroyCart(Request $request){
-        // dd($request->product_id);
 
         $uid = Auth::user()->id;
         $id_order = $request->product_id;
@@ -154,7 +152,6 @@ class CartController extends Controller
     }
 
     public function admindestroyCart(Request $request){
-        // dd($request->product_id);
 
         $id_order = $request->product_id;
 
@@ -247,21 +244,22 @@ class CartController extends Controller
 
     public function checkoutFinish($invoice){
 
-    $getQty = new FrontController();
-    $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
-    $licart = $getQty->notificationCart();
+        $getQty = new FrontController();
+        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $licart = $getQty->notificationCart();
 
-    // //AMBIL DATA PESANAN BERDASARKAN INVOICE
-    $order = OrderHistory::where('invoice', $invoice)->first();
-    $order_details = User::where('name', $order->customer_name)->get();
+        //AMBIL DATA PESANAN BERDASARKAN INVOICE
+        $order = OrderHistory::where('invoice', $invoice)->first();
+        $order_details = User::where('name', $order->customer_name)->get();
 
-    return view('ecommerce.checkout_finish', compact('order', 'order_details', 'licart'));
+        return view('ecommerce.checkout_finish', compact('order', 'order_details', 'licart'));
 
     }
 
     public function notfound(){
-        return view('ecommerce.notfound');
-    }
 
+        return view('ecommerce.notfound');
+
+    }
 
 }
