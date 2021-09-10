@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Category;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\ProductAdmin;
-use App\Spb;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserProfile\UserProfileController;
+use App\SpbCart;
 
 class SpbController extends Controller
 {
@@ -21,9 +18,9 @@ class SpbController extends Controller
         $data = ProductAdmin::all();
 
         $author = Auth::user()->email;
-        $spb = Spb::where('keterangan', 'BBK')->where('author', $author)->get();
+        $spb = SpbCart::where('keterangan', 'BBK')->where('author', $author)->get();
 
-        $spb_admin = Spb::all();
+        $spb_admin = SpbCart::all();
 
         $getQty = new UserProfileController();
         $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
@@ -43,7 +40,7 @@ class SpbController extends Controller
         $stock_transfer = $request->get('datastore_stock');
 
         // dd($data[0]['supplier']['name']);
-        Spb::create([
+        SpbCart::create([
             'author' => Auth::user()->email,
             'keterangan' => 'BBK',
             'name' => $request->get('datastore_name'),
@@ -64,13 +61,12 @@ class SpbController extends Controller
     }
 
         public function bbk(){
-            // $databbk = Spb::all();
+
             $author = Auth::user()->email;
 
-            // $bbk = [];
-            $data_bbk = Spb::where('keterangan', 'BBK')->where('author', $author)->get();
+            $data_bbk = SpbCart::where('keterangan', 'BBK')->where('author', $author)->get();
             foreach ($data_bbk as $databbk) {
-                // dd($databbk['stock']);
+
                 $bbk_stock = $databbk['stock'];
                 $bbk_name = $databbk['name'];
 
@@ -78,7 +74,6 @@ class SpbController extends Controller
 
                     $product = Product::where('name', $bbk_name)->get();
                     $product_stock = $product[0]['stock'];
-                    // dd($product_stock);
 
                     $store_stock_new = $product_stock + $bbk_stock;
                     Product::where('name', $bbk_name)->update([
@@ -99,7 +94,7 @@ class SpbController extends Controller
 
             }
 
-            Spb::where('author', $author)->delete();
+            SpbCart::where('author', $author)->delete();
 
             return redirect(route('datastore.index'))->with(['success' => 'Berhasil di bbk!' ]);
 
@@ -111,10 +106,10 @@ class SpbController extends Controller
 
             $author = Auth::user()->email;
 
-            $spb = Spb::where('keterangan', 'BBM')->where('author', $author)->get();
+            $spb = SpbCart::where('keterangan', 'BBM')->where('author', $author)->get();
             // dd($spb);
 
-            $spb_admin = Spb::all();
+            $spb_admin = SpbCart::all();
             // dd($spb_admin);
 
             $getQty = new UserProfileController();
@@ -130,7 +125,7 @@ class SpbController extends Controller
             $data = ProductAdmin::where('name', $request->datastore_name)->get();
 
             // dd($data[0]['supplier']['name']);
-            Spb::create([
+            SpbCart::create([
                 'author' => Auth::user()->email,
                 'keterangan' => 'BBM',
                 'name' => $request->get('datastore_name'),
@@ -148,10 +143,10 @@ class SpbController extends Controller
         }
 
         public function bbmWarehouse(){
-            // $databbk = Spb::all();
+
             $author = Auth::user()->email;
 
-            $data_bbm = Spb::where('keterangan', 'BBM')->where('author', $author)->get();
+            $data_bbm = SpbCart::where('keterangan', 'BBM')->where('author', $author)->get();
             $bbm = [];
             foreach ($data_bbm as $databbm) {
                 // dd($databbm['stock']);
@@ -162,23 +157,21 @@ class SpbController extends Controller
             }
 
             foreach ($bbm as $value) {
-                // dd($value);
+
                 $bbm_name = $value['bbm_name'];
                 $bbm_stock = $value['bbm_stock'];
 
                 $data_stock_warehouse = ProductAdmin::where('name', $bbm_name)->get();
 
                 $store_stock = $data_stock_warehouse[0]['stock'];
-                // dd($store_stock);
 
                 $store_stock_new = $store_stock + $bbm_stock;
-                // dd($store_stock_new);
 
                 ProductAdmin::where('name', $bbm_name)->update(['stock' => $store_stock_new]);
 
                 }
 
-            Spb::where('author', $author)->delete();
+            SpbCart::where('author', $author)->delete();
 
             return redirect(route('datastore.bbmindex'))->with(['success' => 'Berhasil di bbm!' ]);
 
@@ -186,8 +179,8 @@ class SpbController extends Controller
 
     public function destroy($id){
         // dd($id);
-        $spb = Spb::where('id', $id)->get();
-        // dd($spb[0]['name']);
+        $spb = SpbCart::where('id', $id)->get();
+
         $bbk_name = $spb[0]['name'];
         $bbk_stock = $spb[0]['stock'];
 
@@ -198,7 +191,7 @@ class SpbController extends Controller
         $spb_stock_cancel = $stock_warehouse + $bbk_stock;
         ProductAdmin::where('name', $bbk_name)->update(['stock' => $spb_stock_cancel]);
 
-        Spb::where('id', $id)->delete();
+        SpbCart::where('id', $id)->delete();
 
         return redirect(route('datastore.index'))->with(['success' => 'Spb berhasil dihapus!' ]);
     }
@@ -206,7 +199,7 @@ class SpbController extends Controller
     public function destroyBBM($id){
         // dd($id);
 
-        Spb::where('id', $id)->delete();
+        SpbCart::where('id', $id)->delete();
 
         return redirect(route('datastore.bbmindex'))->with(['success' => 'Spb berhasil dihapus!' ]);
     }
