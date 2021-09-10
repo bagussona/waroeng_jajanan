@@ -130,6 +130,7 @@ class SpbController extends Controller
             $name = $request->datastore_name;
 
             $data = ProductAdmin::where('name', $name)->get();
+            // dd($data->price);
 
             // $data_stock_warehouse = $data[0]['stock'];
             $stock_transfer = $request->get('datastore_stock');
@@ -139,13 +140,13 @@ class SpbController extends Controller
                 'author' => Auth::user()->email,
                 'keterangan' => 'BBM',
                 'name' => $request->get('datastore_name'),
-                'slug' => $data[0]['slug'],
-                'description' => $data[0]['description'],
-                'supplier' => $data[0]['supplier']['name'],
-                'category' => $data[0]['category']['name'],
+                'slug' => $data->slug,
+                'description' => $data->description,
+                'supplier' => $data->supplier->name,
+                'category' => $data->category->name,
                 'stock' => $stock_transfer,
-                'price' => $data[0]['price'],
-                'image' => $data[0]['image']
+                'price' => $data->price,
+                'image' => $data->image
             ]);
 
             return redirect(route('datastore.bbmindex'))->with(['success' => 'Produk berhasil di BBM!' ]);
