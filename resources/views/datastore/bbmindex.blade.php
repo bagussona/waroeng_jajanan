@@ -11,6 +11,7 @@
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item">Surat Pemindahan Barang</li>
         <li class="breadcrumb-item active">BBM</li>
+        <li class="breadcrumb-item active">Maintenace On Progress</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -40,7 +41,7 @@
 
                                 <div class="form-group">
                                     <label for="datastore_stock">Stock Transfer</label>
-                                    <input type="text" name="datastore_stock" class="form-control" required>
+                                    <input type="text" name="datastore_stock" class="form-control" disabled required>
                                     <p class="text-danger">{{ $errors->first('datastore_stock') }}</p>
                                 </div>
 
