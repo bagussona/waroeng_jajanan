@@ -52,19 +52,19 @@ class HomeController extends Controller
             return $q['subtotal'];
         });
 
-        $pekan1 = OrderHistory::whereBetween('created_at', ['2021-09-03', '2021-09-09'])->get();
+        $pekan1 = OrderHistory::whereBetween('created_at', ['2021-09-02', '2021-09-09'])->where('status', '=', 'Selesai')->get();
         $duit_pekan1 = collect($pekan1)->sum(function($q) {
             return $q['subtotal'];
         });
-        $pekan2 = OrderHistory::whereBetween('created_at', ['2021-09-10', '2021-09-16'])->get();
+        $pekan2 = OrderHistory::whereBetween('created_at', ['2021-09-10', '2021-09-16'])->where('status', '=', 'Selesai')->get();
         $duit_pekan2 = collect($pekan2)->sum(function($q) {
             return $q['subtotal'];
         });
-        $pekan3 = OrderHistory::whereBetween('created_at', ['2021-09-17', '2021-09-23'])->get();
+        $pekan3 = OrderHistory::whereBetween('created_at', ['2021-09-17', '2021-09-23'])->where('status', '=', 'Selesai')->get();
         $duit_pekan3 = collect($pekan3)->sum(function($q) {
             return $q['subtotal'];
         });
-        $pekan4 = OrderHistory::whereBetween('created_at', ['2021-09-24', '2021-09-30'])->get();
+        $pekan4 = OrderHistory::whereBetween('created_at', ['2021-09-24', '2021-09-30'])->where('status', '=', 'Selesai')->get();
         $duit_pekan4 = collect($pekan4)->sum(function($q) {
             return $q['subtotal'];
         });
