@@ -115,7 +115,7 @@
                                                 <div class="callout callout-info">
                                                     <small class="text-muted">Total Penjualan</small>
                                                     <br>
-                                                    <strong class="h4">Rp. 1142000</strong>
+                                                    <strong class="h4">Rp. {{ $duit_pekan1 }}</strong>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -165,7 +165,7 @@
                                                 <div class="callout callout-info">
                                                     <small class="text-muted">Total Penjualan</small>
                                                     <br>
-                                                    <strong class="h4">Rp. 0</strong>
+                                                    <strong class="h4">Rp. {{ $duit_pekan2 }}</strong>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -200,7 +200,7 @@
                                                 <div class="callout callout-success">
                                                     <small class="text-muted">Pelanggan Daftar</small>
                                                     <br>
-                                                    <strong class="h4">0</strong>
+                                                    <strong class="h4">4</strong>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@
                                                 <div class="callout callout-info">
                                                     <small class="text-muted">Total Penjualan</small>
                                                     <br>
-                                                    <strong class="h4">Rp. 0</strong>
+                                                    <strong class="h4">Rp. {{ $duit_pekan3 }}</strong>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -265,7 +265,7 @@
                                                 <div class="callout callout-info">
                                                     <small class="text-muted">Total Penjualan</small>
                                                     <br>
-                                                    <strong class="h4">Rp. 0</strong>
+                                                    <strong class="h4">Rp. {{ $duit_pekan4 }}</strong>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">

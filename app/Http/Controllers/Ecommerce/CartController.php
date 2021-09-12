@@ -11,9 +11,7 @@ use App\OrderHistory;
 use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Cookie;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class CartController extends Controller
