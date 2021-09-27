@@ -69,22 +69,16 @@
                                 <div class="form-group">
                                     <label for="price_supplier">Harga Pcs Supplier</label>
                                     <input type="number" name="price_supplier" class="form-control" value="{{ $product->price_supplier }}" required>
-                                    {{-- <input type="number" name="price_supplier" class="form-control" placeholder="0 /Pcs" required> --}}
-                                    {{-- <input type="number" name="price_supplier" class="form-control" placeholder="price_supplier" required> --}}
                                     <p class="text-danger">{{ $errors->first('price_supplier') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="stock">Stock</label>
                                     <input type="number" name="stock" class="form-control" value="{{ $product->stock }}" required>
-                                    {{-- <input type="number" name="weight" class="form-control" value="{{ old('weight') }}" required> --}}
-                                    {{-- <input type="number" name="stock" class="form-control" placeholder="insert stock" required> --}}
                                     <p class="text-danger">{{ $errors->first('stock') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Harga Pcs Display</label>
                                     <input type="number" name="price" class="form-control" value="{{ $product->price }}" required>
-                                    {{-- <input type="number" name="price" class="form-control" placeholder="0 /Pcs" required> --}}
-                                    {{-- <input type="number" name="price" class="form-control" value="price" required> --}}
                                     <p class="text-danger">{{ $errors->first('price') }}</p>
                                 </div>
 

@@ -52,7 +52,7 @@ class UserController extends Controller
 
         $user->assignRole('customer');
 
-        return response()->json(['msg' => 'berhasil mendaftar'], 201);
+        return response()->json(['msg' => 'berhasil mendaftar, silahkan cek email anda utk verikasi akun.'], 201);
     }
 
 
