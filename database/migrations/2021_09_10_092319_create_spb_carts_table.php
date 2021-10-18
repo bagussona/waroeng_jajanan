@@ -19,7 +19,7 @@ class CreateSpbCartsTable extends Migration
             $table->string('keterangan')->default(0)->nullable();
             $table->string('name')->default(0)->nullable();
             $table->string('slug')->default(0)->nullable();
-            $table->text('description')->nullable()->default(0);
+            $table->text('description')->nullable();
             $table->string('supplier')->default(0)->nullable();
             $table->string('category')->default(0)->nullable();
             $table->integer('price')->default(0)->nullable();
