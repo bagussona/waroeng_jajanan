@@ -123,8 +123,6 @@ class SpbController extends Controller
         public function bbm(Request $request){
 
             $data = ProductAdmin::where('name', $request->datastore_name)->get();
-
-            // dd($data[0]['supplier']['name']);
             SpbCart::create([
                 'author' => Auth::user()->email,
                 'keterangan' => 'BBM',
@@ -149,7 +147,6 @@ class SpbController extends Controller
             $data_bbm = SpbCart::where('keterangan', 'BBM')->where('author', $author)->get();
             $bbm = [];
             foreach ($data_bbm as $databbm) {
-                // dd($databbm['stock']);
                 $bbm[] = [
                     'bbm_name' => $databbm['name'],
                     'bbm_stock' => $databbm['stock']
@@ -178,14 +175,14 @@ class SpbController extends Controller
         }
 
     public function destroy($id){
-        // dd($id);
+
         $spb = SpbCart::where('id', $id)->get();
 
         $bbk_name = $spb[0]['name'];
         $bbk_stock = $spb[0]['stock'];
 
         $product = ProductAdmin::where('name', $bbk_name)->get();
-        // dd($product[0]['stock']);
+
         $stock_warehouse = $product[0]['stock'];
 
         $spb_stock_cancel = $stock_warehouse + $bbk_stock;
@@ -197,10 +194,10 @@ class SpbController extends Controller
     }
 
     public function destroyBBM($id){
-        // dd($id);
 
         SpbCart::where('id', $id)->delete();
 
         return redirect(route('datastore.bbmindex'))->with(['success' => 'Spb berhasil dihapus!' ]);
     }
+
 }

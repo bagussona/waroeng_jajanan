@@ -53,28 +53,19 @@
                         </div>
                     </div>
                 </div>
-                <!-- BAGIAN INI AKAN MENG-HANDLE FORM INPUT NEW SUPPLIER  -->
-
                 @if (Auth::user()->role_names[0] == 'admin')
-                <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">List BBM - {{Auth::user()->name }}</h4>
                         </div>
                         <div class="card-body">
-                          	<!-- KETIKA ADA SESSION SUCCESS  -->
                             @if (session('success'))
-                              <!-- MAKA TAMPILKAN ALERT SUCCESS -->
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
-
-                            <!-- KETIKA ADA SESSION ERROR  -->
                             @if (session('error'))
-                              <!-- MAKA TAMPILKAN ALERT DANGER -->
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
-
                             <div class="table-responsive">
                                 <table class="table table-hover table-bordered">
                                     <thead>
@@ -90,15 +81,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      	<!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $SUPPLIER -->
                                         @forelse ($spb_admin as $val)
                                         <tr>
-                                            {{-- <td>new arrival</td> --}}
                                             <td><strong>{{ $val->name }}</strong></td>
-
-                                          	<!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
-
-                                            <!-- FORMAT TANGGAL KETIKA KATEGORI DIINPUT SESUAI FORMAT INDONESIA -->
                                             <td>{{ number_format($val->price) }}</td>
                                             <td>{{ $val->category }}</td>
                                             <td>{{ $val->supplier }}</td>
@@ -106,17 +91,13 @@
                                             <td>{{ $val->author }}</td>
                                             <td>{{ $val->keterangan }}</td>
                                             <td>
-
-                                                <!-- FORM ACTION UNTUK METHOD DELETE -->
                                                 <form action="{{ route('datastore.destroyBBM', $val->id) }}" method="POST">
-                                                    <!-- KONVERSI DARI @ CSRF & @ METHOD AKAN DIJELASKAN DIBAWAH -->
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
-                                        <!-- JIKA DATA SUPPLIER KOSONG, MAKA AKAN DIRENDER KOLOM DIBAWAH INI  -->
                                         @empty
                                         <tr>
                                             <td colspan="8" class="text-center">Tidak ada data</td>
@@ -135,89 +116,71 @@
                         </div>
                     </div>
                 </div>
-                <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
-                @elseif (Auth::user()->role_names[0] == 'staff')
-                                <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
-                                <div class="col-md-8">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Cart - List BBM</h4>
-                                        </div>
-                                        <div class="card-body">
-                                              <!-- KETIKA ADA SESSION SUCCESS  -->
-                                            @if (session('success'))
-                                              <!-- MAKA TAMPILKAN ALERT SUCCESS -->
-                                                <div class="alert alert-success">{{ session('success') }}</div>
-                                            @endif
-
-                                            <!-- KETIKA ADA SESSION ERROR  -->
-                                            @if (session('error'))
-                                              <!-- MAKA TAMPILKAN ALERT DANGER -->
-                                                <div class="alert alert-danger">{{ session('error') }}</div>
-                                            @endif
-
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Produk</th>
-                                                            <th>Harga</th>
-                                                            <th>Category</th>
-                                                            <th>Supplier</th>
-                                                            <th>Stock</th>
-                                                            <th>Author</th>
-                                                            <th>Keterangan</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                          <!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $SUPPLIER -->
-                                                        @forelse ($spb as $value)
-                                                        <tr>
-                                                            <td><strong>{{ $value->name }}</strong></td>
-
-                                                              <!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
-
-                                                            <!-- FORMAT TANGGAL KETIKA KATEGORI DIINPUT SESUAI FORMAT INDONESIA -->
-                                                            <td>{{ number_format($value->price) }}</td>
-                                                            <td>{{ $value->category }}</td>
-                                                            <td>{{ $value->supplier }}</td>
-                                                            <td>{{ $value->stock }}</td>
-                                                            <td>{{ $value->author }}</td>
-                                                            <td>{{ $value->keterangan }}</td>
-                                                            <td>
-
-                                                                <!-- FORM ACTION UNTUK METHOD DELETE -->
-                                                                <form action="{{ route('datastore.destroyBBM', $value->id) }}" method="POST">
-                                                                    <!-- KONVERSI DARI @ CSRF & @ METHOD AKAN DIJELASKAN DIBAWAH -->
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- JIKA DATA SUPPLIER KOSONG, MAKA AKAN DIRENDER KOLOM DIBAWAH INI  -->
-                                                        @empty
-                                                        <tr>
-                                                            <td colspan="8" class="text-center">Tidak ada data</td>
-                                                        </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <form action="{{ route('datastore.bbm') }}" method="post">
-                                                @csrf
-                                                <button type="submit" class="btn btn-primary btn-sm float-right">BBM</button>
-                                            </form>
-                                            <!-- FUNGSI INI AKAN SECARA OTOMATIS MEN-GENERATE TOMBOL PAGINATION  -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
+                @endif
+                @if (Auth::user()->role_names[0] == 'staff')
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Cart - List BBM</h4>
+                            </div>
+                            <div class="card-body">
+                                @if (session('success'))
+                                    <div class="alert alert-success">{{ session('success') }}</div>
                                 @endif
+                                @if (session('error'))
+                                    <div class="alert alert-danger">{{ session('error') }}</div>
+                                @endif
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Produk</th>
+                                                <th>Harga</th>
+                                                <th>Category</th>
+                                                <th>Supplier</th>
+                                                <th>Stock</th>
+                                                <th>Author</th>
+                                                <th>Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($spb as $value)
+                                            <tr>
+                                                <td><strong>{{ $value->name }}</strong></td>
+                                                <td>{{ number_format($value->price) }}</td>
+                                                <td>{{ $value->category }}</td>
+                                                <td>{{ $value->supplier }}</td>
+                                                <td>{{ $value->stock }}</td>
+                                                <td>{{ $value->author }}</td>
+                                                <td>{{ $value->keterangan }}</td>
+                                                <td>
+                                                    <form action="{{ route('datastore.destroyBBM', $value->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="8" class="text-center">Tidak ada data</td>
+                                            </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <form action="{{ route('datastore.bbmWarehouse') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-sm float-right">BBM</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    @endif
+            </div>
+        </div>
+    </div>
 </main>
 
 @endsection
