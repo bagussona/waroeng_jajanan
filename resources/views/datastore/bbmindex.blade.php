@@ -41,7 +41,7 @@
 
                                 <div class="form-group">
                                     <label for="datastore_stock">Stock Transfer</label>
-                                    <input type="text" name="datastore_stock" class="form-control" disabled required>
+                                    <input type="text" name="datastore_stock" class="form-control" required>
                                     <p class="text-danger">{{ $errors->first('datastore_stock') }}</p>
                                 </div>
 
