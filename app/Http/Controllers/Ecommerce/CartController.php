@@ -179,21 +179,19 @@ class CartController extends Controller
             'name' => 'required|string|max:100',
         ]);
 
-        //INISIASI DATABASE TRANSACTION
-        //DATABASE TRANSACTION BERFUNGSI UNTUK MEMASTIKAN SEMUA PROSES SUKSES UNTUK KEMUDIAN DI COMMIT AGAR DATA BENAR BENAR DISIMPAN, JIKA TERJADI ERROR MAKA KITA ROLLBACK AGAR DATANYA SELARAS
         DB::beginTransaction();
         try {
-            //CHECK DATA CUSTOMER BERDASARKAN EMAIL
+
             $customer = User::where('email', $email)->first();
 
-        //AMBIL DATA KERANJANG
-        $carts = Order::where('user_id', $uid)->get();
-        $subtotal = collect($carts)->sum(function($q) {
-            return $q['subtotal'];
-        });
+            $carts = Order::where('user_id', $uid)->get();
 
+            $subtotal = collect($carts)->sum(function($q) {
 
-            //SIMPAN DATA ORDER
+                return $q['subtotal'];
+
+            });
+
             $order = OrderHistory::create([
                 'invoice' => Str::random(4) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
                 'customer_id' => $customer->id,
@@ -206,12 +204,9 @@ class CartController extends Controller
                 'operator' => 'unauthorized'
             ]);
 
-            //LOOPING DATA DI CARTS
             foreach($carts as $row) {
-                //AMBIL DATA PRODUK BERDASARKAN PRODUCT_ID
-                $product = Product::find($row['id']);
                 $stl = $row['qty'] * $row['price'];
-                //SIMPAN DETAIL ORDER
+
                 OrderDetail::create([
                     'order_id' => $order->invoice,
                     'name' => $row['name'],
@@ -219,22 +214,18 @@ class CartController extends Controller
                     'qty' => $row['qty'],
                     'subtotal' => $stl
                 ]);
+
             }
 
-            //TIDAK TERJADI ERROR, MAKA COMMIT DATANYA UNTUK MENINFORMASIKAN BAHWA DATA SUDAH FIX UNTUK DISIMPAN
             DB::commit();
-
-
-            //KOSONGKAN DATA KERANJANG
 
             Order::where('user_id', $customer->id)->delete();
 
-            //REDIRECT KE HALAMAN FINISH TRANSAKSI
             return redirect(route('front.finish_checkout', $order->invoice));
         } catch (\Exception $e) {
-            //JIKA TERJADI ERROR, MAKA ROLLBACK DATANYA
+
             DB::rollback();
-            //DAN KEMBALI KE FORM TRANSAKSI SERTA MENAMPILKAN ERROR
+
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
 
@@ -246,7 +237,6 @@ class CartController extends Controller
         $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
         $licart = $getQty->notificationCart();
 
-        //AMBIL DATA PESANAN BERDASARKAN INVOICE
         $order = OrderHistory::where('invoice', $invoice)->first();
         $order_details = User::where('name', $order->customer_name)->get();
 

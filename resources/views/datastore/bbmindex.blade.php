@@ -172,6 +172,7 @@
                                 </div>
                                 <form action="{{ route('datastore.bbmWarehouse') }}" method="post">
                                     @csrf
+                                    @method('PUT')
                                     <button type="submit" class="btn btn-primary btn-sm float-right">BBM</button>
                                 </form>
                             </div>

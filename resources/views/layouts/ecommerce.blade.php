@@ -4,7 +4,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	{{-- <link rel="icon" href="{{asset('favicon.ico')}}"> --}}
     <link rel="icon" href="{{ asset('favicon.ico') }}" />
 
     @yield('title')
@@ -38,7 +37,6 @@
                 </div>
 				<div class="float-right">
 					<ul class="right_side">
-						{{-- <li><a href="login.html">Login/Register</a></li> --}}
                         @guest
 
                         <li class="nav-item submenu dropdown">
@@ -61,7 +59,6 @@
 
                             <li class="nav-item dropdown">
                                 <strong>Selamat Datang.. 👋</strong>
-                                {{-- <strong>{{ Auth::user()->name }}</strong> --}}
                                 <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle" style="width: 25px; height: 25px;" src="{{ Auth::user()->avatar }}" alt="admin@waroengjajanan.com">
                             </a>
@@ -71,9 +68,6 @@
                                     <strong>{{ Auth::user()->name }}</strong>
                                     <div class="divider"> <hr> </div>
                                 </div>
-
-                                {{-- @if(Auth::check()) --}}
-                                {{-- @if (Auth::user()->roles->name == 'admin') --}}
                                 @if (Auth::user()->role_names[0] == 'admin' || Auth::user()->role_names[0] == 'staff')
                                 <a class="dropdown-item text-left" href="{{ route('home') }}">
                                     <i class="fa fa-bar-chart"></i><strong> Dashboard</strong>
@@ -82,7 +76,6 @@
                                 <div class="divider"> <hr> </div>
                                 </div>
                                 @endif
-                                {{-- @endif --}}
                                 <div class="divider"></div>
                                 <a class="dropdown-item text-left" href="{{ route('front.UserProfile') }}">
                                     <i class="fa fa-user"></i><strong> Profile</strong>
@@ -314,7 +307,7 @@
 
     <script>
     function myFunction() {
-        alert("Maaf nih! Mending jangan deh, email gw udh penuh soalnya akwwkk. ttd: bagus");
+        alert("Maaf nih! Mending jangan deh, email ku udh penuh soalnya akwwkk. ttd: bagus");
         }
     </script>
 

@@ -31,7 +31,7 @@ class SpbController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->datastore_name);
+
         $name = $request->datastore_name;
 
         $data = ProductAdmin::where('name', $name)->get();
@@ -39,7 +39,6 @@ class SpbController extends Controller
         $data_stock_warehouse = $data[0]['stock'];
         $stock_transfer = $request->get('datastore_stock');
 
-        // dd($data[0]['supplier']['name']);
         SpbCart::create([
             'author' => Auth::user()->email,
             'keterangan' => 'BBK',
@@ -107,10 +106,8 @@ class SpbController extends Controller
             $author = Auth::user()->email;
 
             $spb = SpbCart::where('keterangan', 'BBM')->where('author', $author)->get();
-            // dd($spb);
 
             $spb_admin = SpbCart::all();
-            // dd($spb_admin);
 
             $getQty = new UserProfileController();
             $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
