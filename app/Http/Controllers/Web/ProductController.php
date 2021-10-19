@@ -18,10 +18,10 @@ class ProductController extends Controller
         $product = ProductAdmin::with(['category', 'supplier'])->orderBy('stock', 'ASC');
 
         if (request()->q != ''){
-            $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
+            $product = $product->where('slug', 'LIKE', '%' . request()->q . '%');
         }
 
-        $product = $product->paginate(10);
+        $product = $product->paginate(10)->setPath('');
 
         $getQty = new UserProfileController();
         $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
@@ -36,10 +36,10 @@ class ProductController extends Controller
         $display = Product::orderBy('stock', 'ASC');
 
         if (request()->q != ''){
-            $display = $display->where('name', 'LIKE', '%' . request()->q . '%');
+            $display = $display->where('slug', 'LIKE', '%' . request()->q . '%');
         }
 
-        $display = $display->paginate(10);
+        $display = $display->paginate(10)->setPath('');
 
         $getQty = new UserProfileController();
         $getQty->orderanCount(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
