@@ -121,7 +121,7 @@
                 <span>Profile</span>
             </div>
             <div class="content-left-content">
-                <a href="{{ route('front.UserProfile')}}"><h4 style="color: #6c757d;">{{ $profile->name }}</h4></a><br/>
+                <a href="{{ route('front.UserProfile')}}"><h4 style="color: #6c757d;">{{ $profile->username }}</h4></a><br/>
             </div>
         <div class="content-left-title">
             <span>Pesanan Saya</span>
@@ -213,6 +213,12 @@
                     <label class="col-lg-3 control-label">Full Name:</label>
                     <div class="col-lg">
                       <input name="name" class="form-control" type="text" value="{{ $profile->name }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Username:</label>
+                    <div class="col-lg">
+                      <input name="username" class="form-control" type="text" value="{{ $profile->username }}">
                     </div>
                   </div>
                   <div class="form-group">
