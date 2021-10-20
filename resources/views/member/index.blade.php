@@ -16,9 +16,9 @@
             font-family: inherit;
             width: 100%;
             border: 0;
-            border-bottom: 2px solid #9b9b9b;
+            border-bottom: 1px solid #9b9b9b;
             outline: 0;
-            font-size: 1.3rem;
+            font-size: 1rem;
             color: #000000;
             padding: 7px 0;
             background: transparent;
@@ -28,7 +28,7 @@
             color: transparent;
             }
             .form__field:placeholder-shown ~ .form__label {
-            font-size: 1.3rem;
+            font-size: 1rem;
             cursor: text;
             top: 20px;
         }
@@ -38,7 +38,7 @@
             top: 0;
             display: block;
             transition: 0.2s;
-            font-size: 1rem;
+            font-size: 0.7rem;
             color: #9b9b9b;
         }
 
@@ -47,7 +47,7 @@
             top: 0;
             display: block;
             transition: 0.2s;
-            font-size: 1rem;
+            font-size: 0.7rem;
             color: #11998e;
             font-weight: 700;
         }
@@ -78,15 +78,11 @@
                             <h4 class="card-title" style="margin-bottom: 0;">Daftar Pengguna</h4>
                         </div>
                         <div class="card-body">
-                          	<!-- KETIKA ADA SESSION SUCCESS  -->
                             @if (session('success'))
-                              <!-- MAKA TAMPILKAN ALERT SUCCESS -->
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
-                            <!-- KETIKA ADA SESSION ERROR  -->
                             @if (session('error'))
-                              <!-- MAKA TAMPILKAN ALERT DANGER -->
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
 
@@ -95,6 +91,7 @@
                                     <thead>
                                         <tr style="text-align: center;">
                                             <th>Name</th>
+                                            <th>Username</th>
                                             <th>Email</th>
                                             <th>No HP</th>
                                             <th>Gender</th>
@@ -104,14 +101,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      	<!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $SUPPLIER -->
                                         @forelse ($users as $user)
                                         <tr>
                                             <td><strong>{{ $user->name }}</strong></td>
-
-                                          	<!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
-
-                                            <!-- FORMAT TANGGAL KETIKA KATEGORI DIINPUT SESUAI FORMAT INDONESIA -->
+                                            <td>{{ $user->username }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->nohape }}</td>
                                             <td>{{ $user->gender }}</td>
@@ -122,7 +115,6 @@
                                                 <button class="btn btn-danger btn-sm">Delete</button>
                                             </td>
                                         </tr>
-                                        <!-- JIKA DATA SUPPLIER KOSONG, MAKA AKAN DIRENDER KOLOM DIBAWAH INI  -->
                                         @empty
                                         <tr>
                                             <td colspan="6" class="text-center">Tidak ada data</td>
@@ -136,8 +128,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST SUPPLIER  -->
-
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
@@ -151,8 +141,23 @@
                                 <label for="name" class="form__label">Name..</label>
                             </div>
                             <div class="form__group field">
+                                <input type="input" class="form__field" placeholder="Input your username.." name="username" id='username' required />
+                                <label for="username" class="form__label">Username..</label>
+                            </div>
+                            <div class="form__group field">
                                 <input type="input" class="form__field" placeholder="Input your email.." name="email" id='email' required />
                                 <label for="email" class="form__label">Email..</label>
+                            </div>
+                            <div class="form__group field">
+                                <input type="input" class="form__field" placeholder="Input your phone number.." name="nohape" id='nohape' required />
+                                <label for="nohape" class="form__label">No HP..</label>
+                            </div>
+                            <div class="form__group field">
+                                <select class="form__field" name="gender" id="gender">
+                                    <option value="">--- Pilih Gender ---</option>
+                                    <option value="Pria">Pria</option>
+                                    <option value="Wanita">Wanita</option>
+                                </select>
                             </div>
                             <div class="form__group field">
                                 <input type="password" class="form__field" placeholder="Input your password.." name="password" id='password' required />

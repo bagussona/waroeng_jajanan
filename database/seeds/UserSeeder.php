@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'name' => 'Administrator',
             'email' => 'admin@waroengjajanan.com',
+            'username' => 'admin',
             'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
             'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => bcrypt('adminadmin'),
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
         $staff1 = User::create([
             'name' => 'Bagus Sonarangga',
             'email' => 'bsona@waroengjajanan.com',
+            'username' => 'bsona',
             'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
             'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => bcrypt('Baguzt3aa'),
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
         $staff2 = User::create([
             'name' => 'Putra Krishna',
             'email' => 'putra.krishna@reform14.com',
+            'username' => 'putra',
             'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
             'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => bcrypt('Uzii332'),

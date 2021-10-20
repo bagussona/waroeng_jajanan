@@ -30,13 +30,18 @@ class MemberController extends Controller
         $this->validate($request, [
             'name' => 'string|required|max:50',
             'email' => 'string|required|email|unique:users',
+            'username' => 'string|required',
             'password' => 'required', 'string', 'min:8', 'confirmed'
         ]);
 
         $register = User::create([
             'name' => $request->get('name'),
+            'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
+            'username' => $request->get('username'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password'))
+            'password' => bcrypt($request->get('password')),
+            'nohape' => $request->get('nohape'),
+            'gender' => $request->get('gender')
         ]);
 
         $register->assignRole('staff');

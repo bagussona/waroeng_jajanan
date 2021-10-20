@@ -101,7 +101,15 @@
 									<h6 class="mb-0">Full Name</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->name }}" readonly>
+									<input type="text" class="form-control" value="{{ $profile->name }}">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Username</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" value="{{ $profile->username}}">
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -109,7 +117,7 @@
 									<h6 class="mb-0">Email</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->email}}" readonly>
+									<input type="text" class="form-control" value="{{ $profile->email}}">
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -117,7 +125,7 @@
 									<h6 class="mb-0">Phone</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->nohape }}" readonly>
+									<input type="text" class="form-control" value="{{ $profile->nohape }}">
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -125,7 +133,7 @@
 									<h6 class="mb-0">Gender</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->gender }}" disabled>
+									<input type="text" style="background-color: #fff" class="form-control" value="{{ $profile->gender }}" readonly>
 								</div>
 							</div>
 						</div>

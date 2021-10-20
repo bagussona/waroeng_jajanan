@@ -12,24 +12,16 @@
                     <div class="card-body">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    {{-- code.. --}}
                                 </div>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
-                                    {{-- code.. --}}
                                 </div>
-                                    {{-- code.. --}}
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{-- <div class="alert alert-danger" role="alert"> --}}
-                                        {{-- code.. --}}
-                                    {{-- </div> --}}
                                 </div>
-
                                 <div class="col-6">
-                                    {{-- code.. --}}
                                 </div>
                                 <div class="row">
                                     <div class="col-7">
@@ -41,7 +33,6 @@
                         </form>
                     </div>
                 </div>
-                {{-- <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%"> --}}
                 <div class="card text-white bg-primary py-5 d-md-down-none">
                     <div class="card-body text-center">
                         <h1>Sign Up</h1>
@@ -55,7 +46,12 @@
                                 </div>
                                     <input class="form-control" type="text" name="name" placeholder="Insert full name.." value="{{ old('name') }}" autofocus required>
                             </div>
-
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                </div>
+                                    <input class="form-control" type="text" name="username" placeholder="Insert username.." value="{{ old('username') }}" autofocus required>
+                            </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-envelope"></i></span>

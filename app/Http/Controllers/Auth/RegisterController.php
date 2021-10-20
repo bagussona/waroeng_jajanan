@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request;
-// use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Response;
 
 class RegisterController extends Controller
@@ -50,10 +49,10 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data){
-        // $input['email'] = Input::get('email');
 
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:100'],
+            'username' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -69,6 +68,7 @@ class RegisterController extends Controller
         $customer = User::create([
             'name' => $data['name'],
             'avatar' => 'https://res.cloudinary.com/tookoo-dil/image/upload/v1623985010/BTS-ID/user.png',
+            'username' => $data['username'],
             'email' => $data['email'],
             'nohape' => 026244112,
             'gender' => 'Undefined',

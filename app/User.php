@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'avatar', 'email', 'password', 'nohape', 'gender'
+        'name', 'avatar', 'username', 'email', 'password', 'nohape', 'gender'
     ];
 
     /**
@@ -59,5 +59,5 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function getRoleNamesAttribute(){
         return $this->roles->pluck('name');
     }
-    
+
 }
