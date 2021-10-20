@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\OrderHistory;
 use App\User;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\UserProfile\UserProfileController;
 use App\Order;
 use Illuminate\Http\Request;
@@ -22,6 +21,21 @@ class MemberController extends Controller
         $ob = $getQty->orderanCount();
 
         return view('member.index', compact('users', 'ob'));
+
+    }
+
+    public function update(Request $request, $id){
+
+        $user = User::find($id);
+        $user->update([
+            'name' => $request->get('name'),
+            'username' => $request->get('username'),
+            'email' => $request->get('email'),
+            'nohape' => $request->get('phone'),
+            'gender' => $request->get('gender'),
+        ]);
+
+        return redirect()->back()->with(['success' => 'Berhasil diupdate']);
 
     }
 

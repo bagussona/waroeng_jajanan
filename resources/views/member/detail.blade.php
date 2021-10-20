@@ -95,48 +95,57 @@
 				</div>
 				<div class="col-lg-8">
 					<div class="card">
-						<div class="card-body">
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Full Name</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->name }}">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Username</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->username}}">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Email</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->email}}">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Phone</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="{{ $profile->nohape }}">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Gender</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" style="background-color: #fff" class="form-control" value="{{ $profile->gender }}" readonly>
-								</div>
-							</div>
-						</div>
+                        <form action="{{ route('members.update', $profile->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input name="name" type="text" class="form-control" value="{{ $profile->name }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Username</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input name="username" type="text" class="form-control" value="{{ $profile->username}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input name="email" type="email" class="form-control" value="{{ $profile->email}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input name="phone" type="text" class="form-control" value="{{ $profile->nohape }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Gender</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input name="gender" type="text" style="background-color: #fff" class="form-control" value="{{ $profile->gender }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="row mb-12">
+                                    <div class="col-sm-12 float-right">
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 					</div>
 					<div class="row">
 						<div class="col-sm-6">
