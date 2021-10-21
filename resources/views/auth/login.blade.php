@@ -12,11 +12,6 @@
                     <div class="card-body">
                         <h1>Sign In</h1>
                         <p class="text-muted">Signing In your account</p>
-                        <!-- ACTIONNYA MENGARAH PADA URL /LOGIN -->
-                        <!-- UNTUK MENCARI TAU TUJUAN URI DARI ROUTE NAME DIBAWAH, PADA COMMAND LINE, KETIKKAN PHP ARTISAN ROUTE:LIST DAN CARI URI YANG MENGGUNAKAN METHOD POST -->
-                      	<!-- KARENA URI /LOGIN DENGAN METHOD GET DIGUNAKAN UNTUK ME-LOAD VIEW HALAMAN LOGIN -->
-                      	<!-- PENGGUNAAN ROUTE() APABILA ROUTING TERSEBUT MEMILIKI NAMA, ADAPUN NAMENYA ADA PADA COLOM NAME ROUTE:LIST -->
-                      	<!-- JIKA ROUTINGNYA TIDAK MEMILIKI NAMA, MAKA GUNAKAN HELPER URL() DAN DIDALAMNYA ADALAH URINYA. CONTOH URL('/LOGIN') -->
                           <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="input-group mb-3">
@@ -25,9 +20,7 @@
                                         <i class="icon-user"></i>
                                     </span>
                                 </div>
-
-                              	<!-- $errors->has('email') AKAN MENGECEK JIKA ADA ERROR DARI HASIL VALIDASI LARAVEL, SEMUA KEGAGALAN VALIDASI LARAVEL AKAN DISIMPAN KEDALAM VARIABLE $errors -->
-                                <input class="form-control @error('email') is-invalid @enderror"" type="text" name="email" placeholder="email" value="{{ old('email') }}" autofocus required>
+                                <input class="form-control @error('username') is-invalid @enderror"" type="text" name="username" placeholder="username" value="{{ old('username') }}" autofocus required>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -38,7 +31,7 @@
                                 <input class="form-control @error('password') is-invalid @enderror"" type="password" name="password" placeholder="Password" required>
                             </div>
                             <div class="row">
-                                    @error('email')
+                                    @error('username')
                                         <span class="alert alert-warning" role="alert">
                                             {{ $message }}
                                         </span>
