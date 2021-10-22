@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class CartController extends Controller
 {
@@ -37,21 +38,40 @@ class CartController extends Controller
 
         $qty = $request->get('qty');
 
-        $data_produk = Product::findOrFail($request->product_id);
+        $product = Product::findOrFail($request->product_id);
 
-        Order::create([
-            'tanggal' => date('Y-m-d'),
-            'image' => $data_produk->image,
-            'name' => $data_produk->name,
-            'qty' => $qty,
-            'price' => $data_produk->price,
-            'subtotal' => $data_produk->price * $qty,
-            'user_id' => $uid
-        ]);
+        if ($qty > $product->stock) {
+            return response()->json([
+                'status' => 'failed',
+                'msg' => 'Jumlah orderan yang diinginkan melebihi jumlah produk yang tersedia',
+            ], 400);
+        }
 
-        Product::findOrFail($request->product_id)->update([
-            'stock' => $data_produk->stock - $qty
-        ]);
+        DB::beginTransaction();
+        try {
+            Order::create([
+                'tanggal' => date('Y-m-d'),
+                'image' => $product->image,
+                'name' => $product->name,
+                'qty' => $qty,
+                'price' => $product->price,
+                'subtotal' => $product->price * $qty,
+                'user_id' => $uid
+            ]);
+
+            Product::findOrFail($request->product_id)->update([
+                'stock' => $product->stock - $qty
+            ]);
+
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'failed',
+                'msg' => 'Produk gagal ditambahkan ke keranjang',
+            ], 400);
+        }
 
         return response()->json([
             'status' => 'success',
@@ -71,18 +91,30 @@ class CartController extends Controller
         if ($qty > $product->stock) {
             return response()->json([
                 'status' => 'failed',
-                'msg' => 'Jumlah produk yang diinginkan melebihi jumlah produk yang tersedia',
+                'msg' => 'Jumlah orderan yang diinginkan melebihi jumlah produk yang tersedia',
             ], 400);
         }
 
-        Order::where('user_id', $uid)->where('id', $order_id)->update([
-            'qty' => $qty,
-            'subtotal' => $qty * $order->price
-        ]);
+        DB::beginTransaction();
+        try {
+            Order::where('user_id', $uid)->where('id', $order_id)->update([
+                'qty' => $qty,
+                'subtotal' => $qty * $order->price
+            ]);
 
-        Product::where('name', $order->name)->update([
-            'stock' => ($product->stock + $order->qty) - $qty
-        ]);
+            Product::where('name', $order->name)->update([
+                'stock' => ($product->stock + $order->qty) - $qty
+            ]);
+
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'failed',
+                'msg' => 'Jumlah orderan produk gagal diubah',
+            ], 400);
+        }
 
         return response()->json([
             'status' => 'success',
@@ -131,16 +163,11 @@ class CartController extends Controller
                 ]);
             }
 
-            DB::commit();
-
             Order::where('user_id', $customer->id)->delete();
 
-            return response()->json([
-                'status' => 'success',
-                'msg' => 'Check out orderan berhasil',
-            ]);
-        } catch (\Exception $e) {
+            DB::commit();
 
+        } catch (\Exception $e) {
             DB::rollback();
 
             return response()->json([
@@ -148,12 +175,16 @@ class CartController extends Controller
                 'msg' => 'Check out orderan gagal',
             ]);
         }
+
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Check out orderan berhasil',
+        ]);
     }
 
     public function checkoutFinish($invoice)
     {
         $order_details = OrderHistory::where('invoice', $invoice)->firstOrFail();
-        //$order_details = User::where('name', $order->customer_name)->get();
 
         return response()->json([
             'status' => 'success',
@@ -170,12 +201,23 @@ class CartController extends Controller
 
         $product = Product::where('name', (clone $order)->firstOrFail()->name)->firstOrFail();
 
-        Product::where('name', (clone $order)->firstOrFail()->name)->update([
-            'stock' => $product->stock + (clone $order)->firstOrFail()->qty
-        ]);
+        DB::beginTransaction();
+        try {
+            Product::where('name', (clone $order)->firstOrFail()->name)->update([
+                'stock' => $product->stock + (clone $order)->firstOrFail()->qty
+            ]);
 
-        (clone $order)->delete();
+            (clone $order)->delete();
 
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'failed',
+                'msg' => 'Orderan gagal dihapus dari keranjang',
+            ]);
+        }
         return response()->json([
             'status' => 'success',
             'msg' => 'Orderan berhasil dihapus dari keranjang',
