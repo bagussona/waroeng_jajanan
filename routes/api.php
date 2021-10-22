@@ -25,7 +25,7 @@ Route::get('email/verify/{id}', 'Api\VerificationController@verify')->name('veri
 Route::get('email/resend', 'Api\VerificationController@resend')->name('verification.resend');
 
 Route::group([
-    'middleware' => ['verified', 'role:admin|staff|customer']
+    'middleware' => ['jwt.verify', 'role:admin|staff|customer']
 ], function () {
 
     //Product
