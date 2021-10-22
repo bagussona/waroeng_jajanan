@@ -58,13 +58,11 @@ class CartController extends Controller
     public function checkout(){
 
         $getQty = new FrontController();
-        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $getQty->notificationCart();
         $licart = $getQty->notificationCart();
 
         $uid = Auth::user()->id;
-
         $user = User::find($uid);
-
         $carts = Order::where('user_id', $uid)->get();
 
         $subtotal = collect($carts)->sum(function($q) {
@@ -80,7 +78,7 @@ class CartController extends Controller
         $uid = Auth::user()->id;
 
         $getQty = new FrontController();
-        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $getQty->notificationCart();
         $licart = $getQty->notificationCart();
 
         $carts = Order::where('user_id', $uid)->get();
@@ -94,32 +92,24 @@ class CartController extends Controller
 
     public function updateCart(Request $request){
 
-        $req_qty = $request->qty;
-        $id_product = $request->id;
-
         $uid = Auth::user()->id;
 
-        $order = Order::where('user_id', $uid)->where('id', $id_product)->get();
+        $order = Order::where('user_id', $uid)->where('id', $request->id)->get();
         $order_name = $order[0]['name'];
-        $order_price = $order[0]['price'];
-        $order_qty = $order[0]['qty'];
 
         $product = Product::where('name', $order_name)->get();
-        $product_stock = $product[0]['stock'];
 
-        $pengembalian_stock = $product_stock + $order_qty;
-        $subtotal = $req_qty * $order_price;
+        $pengembalian_stock = $product[0]['stock'] + $order[0]['qty'];
+        $subtotal = $request->qty * $order[0]['price'];
 
         Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
 
-        Order::where('user_id', $uid)->where('id', $id_product)->update(['qty' => $req_qty, 'subtotal' => $subtotal]);
+        Order::where('user_id', $uid)->where('id', $request->id)->update(['qty' => $request->qty, 'subtotal' => $subtotal]);
 
-        $new_qty = Order::where('user_id', $uid)->where('id', $id_product)->get();
-        $qty = $new_qty[0]['qty'];
-        $new_stock = Product::where('name', $order_name)->get();
-        $stock = $new_stock[0]['stock'];
+        $qty = Order::where('user_id', $uid)->where('id', $request->id)->get();
+        $stock = Product::where('name', $order_name)->get();
 
-        $updated_stock = $stock - $qty;
+        $updated_stock = $stock[0]['stock'] - $qty[0]['qty'];
 
         Product::where('name', $order_name)->update(['stock' => $updated_stock]);
 
@@ -173,29 +163,20 @@ class CartController extends Controller
     public function processCheckout(Request $request){
 
         $uid = Auth::user()->id;
-        $email = $request->get('email');
-        //VALIDASI DATANYA
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-        ]);
 
         DB::beginTransaction();
         try {
 
-            $customer = User::where('email', $email)->first();
-
             $carts = Order::where('user_id', $uid)->get();
 
             $subtotal = collect($carts)->sum(function($q) {
-
                 return $q['subtotal'];
-
             });
 
             $order = OrderHistory::create([
-                'invoice' => Str::random(4) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
-                'customer_id' => $customer->id,
-                'customer_name' => $request->get('name'),
+                'invoice' => Str::random(4) . '-' . time(),
+                'customer_id' => Auth::user()->id,
+                'customer_name' => $request->name,
                 'customer_phone' => $request->nohape,
                 'subtotal' => $subtotal,
                 'telah_bayar' => 0,
@@ -219,9 +200,10 @@ class CartController extends Controller
 
             DB::commit();
 
-            Order::where('user_id', $customer->id)->delete();
+            Order::where('user_id', $uid)->delete();
 
             return redirect(route('front.finish_checkout', $order->invoice));
+
         } catch (\Exception $e) {
 
             DB::rollback();
@@ -234,7 +216,7 @@ class CartController extends Controller
     public function checkoutFinish($invoice){
 
         $getQty = new FrontController();
-        $getQty->notificationCart(); //MENGAMBIL DATA QTY YG SUDAH DI JUMLAH
+        $getQty->notificationCart();
         $licart = $getQty->notificationCart();
 
         $order = OrderHistory::where('invoice', $invoice)->first();

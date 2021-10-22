@@ -32,27 +32,21 @@
               @if (session('error'))
                   <div class="alert alert-danger">{{ session('error') }}</div>
               @endif
-
-
-            	<!-- REMOVE DULU VALUE ACTION-NYA JIKA INGIN MELIHATNYA DI BROWSER -->
-            	<!-- KARENA ROUTE NAME front.store_checkout BELUM DIBUAT -->
               <form class="row contact_form" action="{{ route('front.store_checkout') }}" method="post" novalidate="novalidate">
                             @csrf
                         <div class="col-md-12 form-group p_star">
                             <label for="name">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="first" name="name" value="{{ $user->name }}" required readonly>
-
-                            <!-- UNTUK MENAMPILKAN JIKA TERDAPAT ERROR VALIDASI -->
+                            <input style="background-color: #ffffff; border: 0;"type="text" class="form-control" id="first" name="name" value="{{ $user->name }}" required>
                             <p class="text-danger">{{ $errors->first('name') }}</p>
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <label for="nohape">No Telp</label>
-                            <input type="text" class="form-control" id="number" name="nohape" value="{{ $user->nohape }}" required readonly>
+                            <input style="background-color: #ffffff; border: 0;"type="text" class="form-control" id="number" name="nohape" value="{{ $user->nohape }}" required readonly>
                             <p class="text-danger">{{ $errors->first('nohape') }}</p>
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required readonly>
+                            <input style="background-color: #ffffff; border: 0;"type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required readonly>
                             <p class="text-danger">{{ $errors->first('email') }}</p>
                         </div>
 
