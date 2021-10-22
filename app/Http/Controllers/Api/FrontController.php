@@ -21,4 +21,16 @@ class FrontController extends Controller
 
     }
 
+    public function show($id){
+
+        $product = Product::where('id', $id)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Product Detail berhasil ditampilkan',
+            'data' => $product
+        ], 200);
+
+    }
+
 }
