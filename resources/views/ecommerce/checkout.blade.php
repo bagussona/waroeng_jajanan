@@ -36,7 +36,7 @@
                             @csrf
                         <div class="col-md-12 form-group p_star">
                             <label for="name">Nama Lengkap</label>
-                            <input style="background-color: #ffffff; border: 0;"type="text" class="form-control" id="first" name="name" value="{{ $user->name }}" required>
+                            <input style="background-color: #ffffff;"type="text" class="form-control" id="first" name="name" value="{{ $user->name }}" required>
                             <p class="text-danger">{{ $errors->first('name') }}</p>
                         </div>
                         <div class="col-md-6 form-group p_star">

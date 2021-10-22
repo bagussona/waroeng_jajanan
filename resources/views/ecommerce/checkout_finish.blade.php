@@ -55,11 +55,11 @@
 							</li>
 							<li>
 								<a href="#">
-                  <span>Email</span> : {{ $order_details[0]['email'] }}</a>
+                  <span>Email</span> : {{ $order_details->email }}</a>
 							</li>
 							<li>
 								<a href="#">
-									<span>No Telp</span> : {{ $order_details[0]['nohape'] }}</a>
+									<span>No Telp</span> : {{ $order_details->nohape }}</a>
 							</li>
 						</ul>
 					</div>

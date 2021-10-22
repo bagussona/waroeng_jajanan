@@ -220,7 +220,7 @@ class CartController extends Controller
         $licart = $getQty->notificationCart();
 
         $order = OrderHistory::where('invoice', $invoice)->first();
-        $order_details = User::where('name', $order->customer_name)->get();
+        $order_details = User::where('id', Auth::user()->id)->first();
 
         return view('ecommerce.checkout_finish', compact('order', 'order_details', 'licart'));
 
