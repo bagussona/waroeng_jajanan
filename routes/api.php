@@ -30,3 +30,13 @@ Route::get('product/displays', 'Api\FrontController@index');
 Route::middleware(['cors'])->group(function () {
     Route::get('/reports/inquiry/{invoice_loop}', 'Web\ReportsController@inquiryDetails');
 });
+
+// Order
+Route::get('carts', 'Api\CartController@show');
+Route::post('cart/add', 'Api\CartController@addToCart');
+Route::put('cart/update/{order_id}', 'Api\CartController@updateCart');
+Route::delete('cart/delete/{order_id}', 'Api\CartController@destroyCart');
+
+// Check out
+Route::post('cart/check-out', 'Api\CartController@processCheckout');
+Route::get('cart/check-out/{invoice}', 'Api\CartController@checkoutFinish');
