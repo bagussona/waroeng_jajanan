@@ -30,6 +30,10 @@ class CartController extends Controller
 
         $data_produk = Product::find($request->product_id);
 
+        if($qty > $data_produk->stock) {
+            return redirect()->back()->withErrors('Jumlah yang dimasukkan melebihi stok');
+        }
+
             $image = $data_produk->image;
             $stock = $data_produk->stock;
             $name = $data_produk->name;

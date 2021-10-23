@@ -53,12 +53,16 @@
 						<p></p>
 						<form action="{{ route('front.cart') }}" method="POST">
 							@csrf
+                            @if (session('errors'))
+                                @foreach ($errors->all() as $error)
+                                    <div style="color: red; font-weight: bold;">{{ $error }}</div>
+                                @endforeach
+                            @endif
 						<div class="product_count">
 							<label for="qty">Quantity:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<input type="text" name="qty" id="sst" maxlength="12" value="1" min="1" max="{{ $products->stock }}" title="Quantity:" class="input-text qty">
 
 							<input type="hidden" name="product_id" value="{{ $products->id }}" class="form-control">
-							{{-- <input type="hidden" name="product_id" value="" class="form-control"> --}}
 
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )  &amp;&amp; sst < {{ $products->stock }}) result.value++;return false;"
 							 class="increase items-count" type="button">
