@@ -9,6 +9,7 @@ use App\Order;
 use App\OrderDetail;
 use App\OrderHistory;
 use App\User;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -17,49 +18,52 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
 
-    public function addToCart(Request $request){
-
+    public function addToCart(Request $request)
+    {
         $uid = Auth::user()->id;
 
         $this->validate($request, [
             'product_id' => 'required|exists:products,id',
             'qty' => 'required|integer'
+        ], [
+            'qty.integer' => 'Jumlah yang dimasukkan harus angka'
         ]);
 
         $qty = $request->get('qty');
 
-        $data_produk = Product::find($request->product_id);
+        $product = Product::find($request->product_id);
 
-        if($qty > $data_produk->stock) {
+        if ($qty > $product->stock) {
             return redirect()->back()->withErrors('Jumlah yang dimasukkan melebihi stok');
         }
 
-            $image = $data_produk->image;
-            $stock = $data_produk->stock;
-            $name = $data_produk->name;
-            $price = $data_produk->price;
-            $subtotal = $qty * $price;
-
+        DB::beginTransaction();
+        try {
             Order::create([
                 'tanggal' => date('Y-m-d'),
-                'image' => $image,
-                'name' => $name,
-                'qty' => $qty,
-                'price' => $price,
-                'subtotal' => $subtotal,
+                'image' => $product->image,
+                'name' => $product->name,
+                'qty' => $product->qty,
+                'price' => $product->price,
+                'subtotal' => $product->subtotal,
                 'user_id' => $uid
             ]);
 
-            $stock_dicart = $stock - $qty;
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
 
-                Product::find($request->product_id)->update(['stock' => $stock_dicart]);
+            return redirect()->back()->withErrors('Terjadi kesalahan');
+        }
+
+        Product::find($request->product_id)->update(['stock' => $product->stock - $qty]);
 
         return redirect()->back()->with(['success' => 'Produk Ditambahkan ke Keranjang']);
-
     }
 
 
-    public function checkout(){
+    public function checkout()
+    {
 
         $getQty = new FrontController();
         $getQty->notificationCart();
@@ -69,15 +73,15 @@ class CartController extends Controller
         $user = User::find($uid);
         $carts = Order::where('user_id', $uid)->get();
 
-        $subtotal = collect($carts)->sum(function($q) {
+        $subtotal = collect($carts)->sum(function ($q) {
             return $q['subtotal'];
         });
 
         return view('ecommerce.checkout', compact('carts', 'subtotal', 'user', 'licart'));
-
     }
 
-    public function listCart(){
+    public function listCart()
+    {
 
         $uid = Auth::user()->id;
 
@@ -86,15 +90,15 @@ class CartController extends Controller
         $licart = $getQty->notificationCart();
 
         $carts = Order::where('user_id', $uid)->get();
-        $subtotal = collect($carts)->sum(function($q) {
+        $subtotal = collect($carts)->sum(function ($q) {
             return $q['subtotal'];
         });
 
         return view('ecommerce.cart', compact('carts', 'subtotal', 'licart'));
-
     }
 
-    public function updateCart(Request $request){
+    public function updateCart(Request $request)
+    {
 
         $uid = Auth::user()->id;
 
@@ -118,11 +122,10 @@ class CartController extends Controller
         Product::where('name', $order_name)->update(['stock' => $updated_stock]);
 
         return redirect()->back();
-
     }
 
-    public function destroyCart(Request $request){
-
+    public function destroyCart(Request $request)
+    {
         $uid = Auth::user()->id;
         $id_order = $request->product_id;
 
@@ -136,14 +139,20 @@ class CartController extends Controller
         $pengembalian_stock = $product_stock + $order_qty;
 
         Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
-
-        Order::where('id', $id_order)->where('user_id', $uid)->delete();
+        DB::beginTransaction();
+        try {
+            Order::where('id', $id_order)->where('user_id', $uid)->delete();
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('Terjadi kesalahan');
+        }
 
         return redirect()->back();
-
     }
 
-    public function admindestroyCart(Request $request){
+    public function admindestroyCart(Request $request)
+    {
 
         $id_order = $request->product_id;
 
@@ -161,10 +170,10 @@ class CartController extends Controller
         Order::where('id', $id_order)->delete();
 
         return redirect()->back();
-
     }
 
-    public function processCheckout(Request $request){
+    public function processCheckout(Request $request)
+    {
 
         $uid = Auth::user()->id;
 
@@ -173,7 +182,7 @@ class CartController extends Controller
 
             $carts = Order::where('user_id', $uid)->get();
 
-            $subtotal = collect($carts)->sum(function($q) {
+            $subtotal = collect($carts)->sum(function ($q) {
                 return $q['subtotal'];
             });
 
@@ -189,7 +198,7 @@ class CartController extends Controller
                 'operator' => 'unauthorized'
             ]);
 
-            foreach($carts as $row) {
+            foreach ($carts as $row) {
                 $stl = $row['qty'] * $row['price'];
 
                 OrderDetail::create([
@@ -199,7 +208,6 @@ class CartController extends Controller
                     'qty' => $row['qty'],
                     'subtotal' => $stl
                 ]);
-
             }
 
             DB::commit();
@@ -207,17 +215,16 @@ class CartController extends Controller
             Order::where('user_id', $uid)->delete();
 
             return redirect(route('front.finish_checkout', $order->invoice));
-
         } catch (\Exception $e) {
 
             DB::rollback();
 
-            return redirect()->back()->with(['error' => $e->getMessage()]);
+            return redirect()->back()->with(['error' => 'Terjadi kesalahan']);
         }
-
     }
 
-    public function checkoutFinish($invoice){
+    public function checkoutFinish($invoice)
+    {
 
         $getQty = new FrontController();
         $getQty->notificationCart();
@@ -227,13 +234,11 @@ class CartController extends Controller
         $order_details = User::where('id', Auth::user()->id)->first();
 
         return view('ecommerce.checkout_finish', compact('order', 'order_details', 'licart'));
-
     }
 
-    public function notfound(){
+    public function notfound()
+    {
 
         return view('ecommerce.notfound');
-
     }
-
 }
