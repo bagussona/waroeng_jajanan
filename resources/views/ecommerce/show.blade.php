@@ -60,7 +60,7 @@
                             @endif
 						<div class="product_count">
 							<label for="qty">Quantity:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" min="1" max="{{ $products->stock }}" title="Quantity:" class="input-text qty">
+							<input type="number" name="qty" id="sst" maxlength="12" value="1" min="1" max="{{ $products->stock }}" title="Quantity:" class="input-text qty" oninvalid="this.setCustomValidity('Jumlah yang dimasukkan melebihi stok')" oninput="this.setCustomValidity('')">
 
 							<input type="hidden" name="product_id" value="{{ $products->id }}" class="form-control">
 
@@ -74,7 +74,7 @@
 							</button>
 						</div>
 						<div class="card_area">
-							<button type="submit" class="main_btn">Add to Cart</button>
+							<button type="submit" id="handle_multiple_click" class="main_btn">Add to Cart</button>
 						</div>
 						</form>
 					</div>

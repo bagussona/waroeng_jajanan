@@ -285,6 +285,11 @@
 	<script src="{{ asset('ecommerce/js/theme.js') }}"></script>
     <script src="{{ asset('ecommerce/js/clock.js') }}"></script>
     <script src="{{ asset('ecommerce/js/ijaboCropTool.min.js') }}"></script>
+    <script>
+        window.onbeforeunload = function () {
+            document.getElementById('handle_multiple_click').disabled = true;
+        };
+    </script>
 
     <script>
         $('#avatar').ijaboCropTool({
