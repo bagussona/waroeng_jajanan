@@ -319,15 +319,23 @@
             let tabUrl = element.firstElementChild.href;
             if (tabUrl) {
                 let tab = tabUrl.split('/');
-                if(!nowUrl[4]) {
+                if(nowUrl.length == 4) {
                     if (nowUrl[3] == tab[3]) {
                         element.classList.add('active');
                     }
                 } else {
+                    if (nowUrl[3] == 'category') {
+                        navigation[1].classList.add('active');
+                    }
+
                     if (nowUrl[4] == tab[4] && tab[4] == 'contact') {
                         element.classList.add('active');
                     } else if (nowUrl[4] == tab[4] && tab[4] == 'profile') {
                         element.firstElementChild.firstElementChild.classList.add('active');
+                    } else if (nowUrl[4] != tab[4]) {
+                        if(nowUrl[4].split('?')[0] == tab[4]) {
+                            element.firstElementChild.firstElementChild.classList.add('active');
+                        }
                     }
                 }
             } else {

@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-
 class CartController extends Controller
 {
 
@@ -43,9 +42,9 @@ class CartController extends Controller
                 'tanggal' => date('Y-m-d'),
                 'image' => $product->image,
                 'name' => $product->name,
-                'qty' => $product->qty,
+                'qty' => $qty,
                 'price' => $product->price,
-                'subtotal' => $product->subtotal,
+                'subtotal' => $qty * $product->price,
                 'user_id' => $uid
             ]);
 
@@ -64,7 +63,6 @@ class CartController extends Controller
 
     public function checkout()
     {
-
         $getQty = new FrontController();
         $getQty->notificationCart();
         $licart = $getQty->notificationCart();
@@ -82,7 +80,6 @@ class CartController extends Controller
 
     public function listCart()
     {
-
         $uid = Auth::user()->id;
 
         $getQty = new FrontController();
@@ -99,7 +96,6 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-
         $uid = Auth::user()->id;
 
         $order = Order::where('user_id', $uid)->where('id', $request->id)->get();
@@ -153,7 +149,6 @@ class CartController extends Controller
 
     public function admindestroyCart(Request $request)
     {
-
         $id_order = $request->product_id;
 
         $order = Order::where('id', $id_order)->get();
@@ -174,13 +169,14 @@ class CartController extends Controller
 
     public function processCheckout(Request $request)
     {
-
         $uid = Auth::user()->id;
 
         DB::beginTransaction();
         try {
-
             $carts = Order::where('user_id', $uid)->get();
+            if($carts->isEmpty()) {
+                return redirect()->back()->withErrors('Belum memesan apapun');
+            }
 
             $subtotal = collect($carts)->sum(function ($q) {
                 return $q['subtotal'];
@@ -213,19 +209,17 @@ class CartController extends Controller
             DB::commit();
 
             Order::where('user_id', $uid)->delete();
-
-            return redirect(route('front.finish_checkout', $order->invoice));
         } catch (\Exception $e) {
-
             DB::rollback();
 
-            return redirect()->back()->with(['error' => 'Terjadi kesalahan']);
+            return redirect()->back()->withErrors('Terjadi kesalahan');
         }
+
+        return redirect(route('front.finish_checkout', $order->invoice));
     }
 
     public function checkoutFinish($invoice)
     {
-
         $getQty = new FrontController();
         $getQty->notificationCart();
         $licart = $getQty->notificationCart();
@@ -238,7 +232,6 @@ class CartController extends Controller
 
     public function notfound()
     {
-
         return view('ecommerce.notfound');
     }
 }
