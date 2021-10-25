@@ -33,14 +33,14 @@
 
                 <div class="table-responsive">
                     @if (session('success') || session('error'))
-                                    <div class="alert {{ session('success') ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show" role="alert">
-                                        {{ session('success') ?? session('error') }}
-                                        <button type="button" class="close" data-dismiss="alert"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                            @endif
+                        <div class="alert {{ session('success') ? 'alert-success' : 'alert-danger' }} alert-dismissible fade show"
+                            role="alert">
+                            {{ session('success') ?? session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <table class="table">
                         <thead>
                             <tr style="text-align: center">
@@ -81,25 +81,27 @@
                                                 <input type="hidden" name="id" value="{{ $cart['id'] }}"
                                                     class="form-control">
                                                 @foreach ($products as $product)
-                                                    <input type="number" name="qty" id="sst{{ $cart['id'] }}"
-                                                        maxlength="12" value="{{ $cart['qty'] }}" min="1"
-                                                        max="@if ($product['name'] == $cart['name']){{ $product['stock'] }}@endif" title="Quantity:"
-                                                        class="input-text qty"
-                                                        oninvalid="this.setCustomValidity('Jumlah yang dimasukkan melebihi stok')"
-                                                        oninput="this.setCustomValidity('')" autocomplete="off">
+                                                    @if ($product['name'] == $cart['name'])
+                                                        <input type="number" name="qty" id="sst{{ $cart['id'] }}"
+                                                            maxlength="12" value="{{ $cart['qty'] }}" min="1"
+                                                            max="{{ $product->stock }}" title="Quantity:"
+                                                            class="input-text qty"
+                                                            oninvalid="this.setCustomValidity('Jumlah yang dimasukkan melebihi stok')"
+                                                            oninput="this.setCustomValidity('')" autocomplete="off">
+                                                    @endif
                                                 @endforeach
-                                                <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
+                                                    <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
 
-                                                <button
-                                                    onclick="var result = document.getElementById('sst{{ $cart['id'] }}'); var sst = result.value; if( !isNaN( sst )  && sst < {{ $product->stock }}) result.value++;return false;"
-                                                    class="increase items-count" type="button">
-                                                    <i class="fa fa-plus no-float btn-up-cart"></i>
-                                                </button>
-                                                <button
-                                                    onclick="var result = document.getElementById('sst{{ $cart['id'] }}'); var sst = result.value; if( !isNaN( sst ) && sst > 1 ) result.value--;return false;"
-                                                    class="reduced items-count" type="button">
-                                                    <i class="fa fa-minus no-float btn-down-cart"></i>
-                                                </button>
+                                                    <button
+                                                        onclick="var result = document.getElementById('sst{{ $cart['id'] }}'); var sst = result.value; if( !isNaN( sst )  && sst < {{ $product->stock }}) result.value++;return false;"
+                                                        class="increase items-count" type="button">
+                                                        <i class="fa fa-plus no-float btn-up-cart"></i>
+                                                    </button>
+                                                    <button
+                                                        onclick="var result = document.getElementById('sst{{ $cart['id'] }}'); var sst = result.value; if( !isNaN( sst ) && sst > 1 ) result.value--;return false;"
+                                                        class="reduced items-count" type="button">
+                                                        <i class="fa fa-minus no-float btn-down-cart"></i>
+                                                    </button>
                                         </div>
                                     </td>
                                     <td>
@@ -119,33 +121,33 @@
                                         </td>
                                     </form>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5">Tidak ada jajanan</td>
+                                @empty
+                                    <tr>
+                                        <td colspan="5">Tidak ada jajanan</td>
+                                    </tr>
+                                @endforelse
                                 </tr>
-                            @endforelse
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <h5 style="text-align: right">Subtotal</h5>
-                                </td>
-                                <td>
-                                    <h3 style="text-align: right">Rp {{ number_format($subtotal) }}.00,-</h3>
-                                </td>
-                            </tr>
-                            <tr class="out_button_area">
-                                <td colspan="4" style="text-align: right">
-                                    <a class="gray_btn" href="{{ route('front.product') }}">Jajan Lagi?</a>
-                                </td>
-                                <td style="text-align: right">
-                                    <a class="main_btn" href="{{ route('front.checkout') }}">Checkout</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <td colspan="4">
+                                        <h5 style="text-align: right">Subtotal</h5>
+                                    </td>
+                                    <td>
+                                        <h3 style="text-align: right">Rp {{ number_format($subtotal) }}.00,-</h3>
+                                    </td>
+                                </tr>
+                                <tr class="out_button_area">
+                                    <td colspan="4" style="text-align: right">
+                                        <a class="gray_btn" href="{{ route('front.product') }}">Jajan Lagi?</a>
+                                    </td>
+                                    <td style="text-align: right">
+                                        <a class="main_btn" href="{{ route('front.checkout') }}">Checkout</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!--================End Cart Area =================-->
-@endsection
+        </section>
+        <!--================End Cart Area =================-->
+    @endsection
