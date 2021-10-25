@@ -96,8 +96,8 @@
                 </div>
                 <div class="name-middle d-flex flex-column" style="width: 30%; padding-right: 3%; text-align: right;">
                     <p class="proile-rating">Registered_as: <span style="text-align-right"> {{ $profile->role_names[0] }} </span></p>
-                    <p style="margin-bottom: 0;" class="proile-rating">Sudah Jajan: <span style="text-align-right">Rp. {{ $sudah_bayar }} </span></p>
-                    <p style="margin-bottom: 0;" class="proile-rating">Sisa Hutang: <span style="text-align-right">Rp. {{ $sisa_hutang }} </span></p>
+                    <p style="margin-bottom: 0;" class="proile-rating">Sudah Jajan: <span style="text-align-right">Rp. {{ number_format($sudah_bayar) }} </span></p>
+                    <p style="margin-bottom: 0;" class="proile-rating">Sisa Hutang: <span style="text-align-right">Rp. {{ number_format($sisa_hutang) }} </span></p>
                 </div>
             </div>
             <div class="nav-jajanan"">
