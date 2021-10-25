@@ -41,7 +41,7 @@ Route::group([
     Route::put('/admin/supplier/{supplier_id}/edit', 'Web\SupplyController@update')->name('supplier.update');
     Route::delete('/admin/supplier/{supplier_id}/delete', 'Web\SupplyController@destroy')->name('supplier.destroy');
 
-    //Products Management
+    //  s Management
     Route::get('/admin/products', 'Web\ProductController@index')->name('products.index'); //index product
     Route::get('/admin/products/display', 'Web\ProductController@display')->name('products.display'); //index product
     Route::get('/admin/products/show', 'Web\ProductController@create')->name('products.create');

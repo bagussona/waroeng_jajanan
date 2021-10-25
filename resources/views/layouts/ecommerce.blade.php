@@ -359,7 +359,7 @@
             if (buttonAdd) {
                 buttonAdd.disabled = false;
             } else if (buttonDelete) {
-                for (let i = 0; i < buttonDelete.length - 1; i++) {
+                for (let i = 0; i < buttonDelete.length; i++) {
                     buttonDelete[i].disabled = false;
                 }
             }

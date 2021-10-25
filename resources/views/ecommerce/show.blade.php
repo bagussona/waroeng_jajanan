@@ -54,34 +54,32 @@
                         <p></p>
                         <form action="{{ route('front.cart') }}" method="POST">
                             @csrf
-                            @if (session('errors'))
-                                @foreach ($errors->all() as $error)
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        {{ $error }}
+                            @if (session('success') || session('error'))
+                                    <div class="alert {{ session('success') ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show" role="alert">
+                                        {{ session('success') ?? session('error') }}
                                         <button type="button" class="close" data-dismiss="alert"
                                             aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                @endforeach
                             @endif
                             <div class="product_count">
                                 <label for="qty">Quantity:</label>
                                 <input type="number" name="qty" id="sst" maxlength="12" value="1" min="1"
                                     max="{{ $products->stock }}" title="Quantity:" class="input-text qty"
                                     oninvalid="this.setCustomValidity('Jumlah yang dimasukkan melebihi stok')"
-                                    oninput="this.setCustomValidity('')">
+                                    oninput="this.setCustomValidity('')" autocomplete="off">
 
                                 <input type="hidden" name="product_id" value="{{ $products->id }}"
                                     class="form-control">
 
                                 <button
-                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )  &amp;&amp; sst < {{ $products->stock }}) result.value++;return false;"
+                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )  && sst < {{ $products->stock }}) result.value++;return false;"
                                     class="increase items-count" type="button">
                                     <i class="fa fa-plus no-float btn-up-cart"></i>
                                 </button>
                                 <button
-                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 1 ) result.value--;return false;"
                                     class="reduced items-count" type="button">
                                     <i class="fa fa-minus no-float btn-down-cart"></i>
                                 </button>

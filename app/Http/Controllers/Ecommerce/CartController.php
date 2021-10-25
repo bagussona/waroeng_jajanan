@@ -33,7 +33,7 @@ class CartController extends Controller
         $product = Product::find($request->product_id);
 
         if ($qty > $product->stock) {
-            return redirect()->back()->withErrors('Jumlah yang dimasukkan melebihi stok');
+            return redirect()->back()->withError('Jumlah yang dimasukkan melebihi stok');
         }
 
         DB::beginTransaction();
@@ -52,12 +52,12 @@ class CartController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
 
-            return redirect()->back()->withErrors('Terjadi kesalahan');
+            return redirect()->back()->withError('Terjadi kesalahan');
         }
 
         Product::find($request->product_id)->update(['stock' => $product->stock - $qty]);
 
-        return redirect()->back()->with(['success' => 'Produk Ditambahkan ke Keranjang']);
+        return redirect()->back()->withSuccess('Produk ditambahkan ke keranjang');
     }
 
 
@@ -87,64 +87,63 @@ class CartController extends Controller
         $licart = $getQty->notificationCart();
 
         $carts = Order::where('user_id', $uid)->get();
+        $products = Product::select('name', 'stock')->get();
         $subtotal = collect($carts)->sum(function ($q) {
             return $q['subtotal'];
         });
 
-        return view('ecommerce.cart', compact('carts', 'subtotal', 'licart'));
+        return view('ecommerce.cart', compact('carts', 'products', 'subtotal', 'licart'));
     }
 
     public function updateCart(Request $request)
     {
         $uid = Auth::user()->id;
 
-        $order = Order::where('user_id', $uid)->where('id', $request->id)->get();
-        $order_name = $order[0]['name'];
+        $order = Order::where('user_id', $uid)->where('id', $request->id)->firstOrFail();
 
-        $product = Product::where('name', $order_name)->get();
+        $product = Product::where('name', $order->name)->firstOrFail();
 
-        $pengembalian_stock = $product[0]['stock'] + $order[0]['qty'];
-        $subtotal = $request->qty * $order[0]['price'];
+        if($request->qty > $product->stock) {
+            return redirect()->back()->withError('Jumlah yang dimasukkan melebihi stok');
+        }
 
-        Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
+        DB::beginTransaction();
+        try {
+            Product::where('name', $order->name)->update(['stock' => ($product->stock + $order->qty) - $request->qty]);
+            Order::where('user_id', $uid)->where('id', $request->id)->update(['qty' => $request->qty, 'subtotal' => $request->qty * $order->price]);
 
-        Order::where('user_id', $uid)->where('id', $request->id)->update(['qty' => $request->qty, 'subtotal' => $subtotal]);
+            DB::commit();
+        } catch(Exception $e) {
+            return redirect()->back()->withError('Terjadi kesalahan');
+        }
 
-        $qty = Order::where('user_id', $uid)->where('id', $request->id)->get();
-        $stock = Product::where('name', $order_name)->get();
-
-        $updated_stock = $stock[0]['stock'] - $qty[0]['qty'];
-
-        Product::where('name', $order_name)->update(['stock' => $updated_stock]);
-
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Keranjang berhasil di ubah');
     }
 
     public function destroyCart(Request $request)
     {
         $uid = Auth::user()->id;
-        $id_order = $request->product_id;
 
-        $order = Order::where('id', $id_order)->get();
-        $order_name = $order[0]['name'];
-        $order_qty = $order[0]['qty'];
+        $order = Order::where('id', $request->order_id)->firstOrFail();
 
-        $product = Product::where('name', $order_name)->get();
-        $product_stock = $product[0]['stock'];
+        $product = Product::where('name', $order->name)->firstOrFail();
 
-        $pengembalian_stock = $product_stock + $order_qty;
+        Product::where('name', $order->name)->update(['stock' => $product->stock + $order->qty]);
 
-        Product::where('name', $order_name)->update(['stock' => $pengembalian_stock]);
         DB::beginTransaction();
         try {
-            Order::where('id', $id_order)->where('user_id', $uid)->delete();
+            $order = Order::where('id', $request->order_id)->where('user_id', $uid)->delete();
+            if(!$order) {
+                return redirect()->back()->withErrors('ada yang salah');
+            }
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
+
             return redirect()->back()->withErrors('Terjadi kesalahan');
         }
 
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Berhasil menghapus barang dari keranjang');
     }
 
     public function admindestroyCart(Request $request)
@@ -174,7 +173,7 @@ class CartController extends Controller
         DB::beginTransaction();
         try {
             $carts = Order::where('user_id', $uid)->get();
-            if($carts->isEmpty()) {
+            if ($carts->isEmpty()) {
                 return redirect()->back()->withErrors('Belum memesan apapun');
             }
 

@@ -32,16 +32,15 @@
                 <!-- DISABLE BAGIAN INI JIKA INGIN MELIHAT HASILNYA TERLEBIH DAHULU -->
 
                 <div class="table-responsive">
-                        @if (session('errors'))
-                            @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center">
-                                {{ $error }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endforeach
-                    @endif
+                    @if (session('success') || session('error'))
+                                    <div class="alert {{ session('success') ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show" role="alert">
+                                        {{ session('success') ?? session('error') }}
+                                        <button type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                            @endif
                     <table class="table">
                         <thead>
                             <tr style="text-align: center">
@@ -55,63 +54,56 @@
                         </thead>
                         <tbody>
                             <!-- LOOPING DATA DARI VARIABLE CARTS -->
-                            @if (session('errors'))
-                                @foreach ($errors->all() as $error)
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        {{ $error }}
-                                        <button type="button" class="close" data-dismiss="alert"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endforeach
-                            @endif
-                            @forelse ($carts as $row)
+                            @forelse ($carts as $cart)
                                 <tr style="text-align: center">
                                     <td>
                                         <div class="media justify-content-center">
                                             <div class="d-flex justify-content-center">
-                                                <img src="{{ $row['image'] }}" width="100px" height="100px"
-                                                    alt="{{ $row['name'] }}" class="rounded mx-auto d-block">
+                                                <img src="{{ $cart['image'] }}" width="100px" height="100px"
+                                                    alt="{{ $cart['name'] }}" class="rounded mx-auto d-block">
                                             </div>
                                         </div>
                                     </td>
                                     <td style="text-align: center">
                                         <div class="media-body">
-                                            <p>{{ $row['name'] }}</p>
+                                            <p>{{ $cart['name'] }}</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>Rp {{ number_format($row['price']) }}</h5>
+                                        <h5>Rp {{ number_format($cart['price']) }}</h5>
                                     </td>
                                     <td>
                                         <div class="product_count justify-content-center">
-
                                             <form action="{{ route('front.update_cart') }}" method="post">
                                                 @csrf
 
                                                 <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
-                                                <input type="hidden" name="id" value="{{ $row['id'] }}"
+                                                <input type="hidden" name="id" value="{{ $cart['id'] }}"
                                                     class="form-control">
-                                                <input type="text" name="qty" id="sst{{ $row['id'] }}" maxlength="12"
-                                                    value="{{ $row['qty'] }}" title="Quantity:" class="input-text qty">
+                                                @foreach ($products as $product)
+                                                    <input type="number" name="qty" id="sst{{ $cart['id'] }}"
+                                                        maxlength="12" value="{{ $cart['qty'] }}" min="1"
+                                                        max="@if ($product['name'] == $cart['name']){{ $product['stock'] }}@endif" title="Quantity:"
+                                                        class="input-text qty"
+                                                        oninvalid="this.setCustomValidity('Jumlah yang dimasukkan melebihi stok')"
+                                                        oninput="this.setCustomValidity('')" autocomplete="off">
+                                                @endforeach
                                                 <!-- PERHATIKAN BAGIAN INI, NAMENYA KITA GUNAKAN ARRAY AGAR BISA MENYIMPAN LEBIH DARI 1 DATA -->
 
-
                                                 <button
-                                                    onclick="var result = document.getElementById('sst{{ $row['id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                                    onclick="var result = document.getElementById('sst{{ $cart['id'] }}'); var sst = result.value; if( !isNaN( sst )  && sst < {{ $product->stock }}) result.value++;return false;"
                                                     class="increase items-count" type="button">
                                                     <i class="fa fa-plus no-float btn-up-cart"></i>
                                                 </button>
                                                 <button
-                                                    onclick="var result = document.getElementById('sst{{ $row['id'] }}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+                                                    onclick="var result = document.getElementById('sst{{ $cart['id'] }}'); var sst = result.value; if( !isNaN( sst ) && sst > 1 ) result.value--;return false;"
                                                     class="reduced items-count" type="button">
                                                     <i class="fa fa-minus no-float btn-down-cart"></i>
                                                 </button>
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>Rp {{ number_format($row['subtotal']) }}</h5>
+                                        <h5>Rp {{ number_format($cart['subtotal']) }}</h5>
                                     </td>
                                     <td>
                                         <button class="btn btn_primary"><i class="fa fa-pencil-square-o"></i></button>
@@ -121,7 +113,7 @@
                                         <td>
                                             @csrf
                                             @method('DELETE')
-                                            <input type="hidden" name="product_id" value="{{ $row['id'] }}"
+                                            <input type="hidden" name="order_id" value="{{ $cart['id'] }}"
                                                 class="form-control">
                                             <button class="btn btn_danger" disabled><i class="fa fa-trash-o"></i></button>
                                         </td>
