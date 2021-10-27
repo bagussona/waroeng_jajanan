@@ -8,104 +8,87 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card-group">
-                <div class="card p-4">
-                    <div class="card-body">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                </div>
+                <div class="card p-4 bg-primary">
+                    <div class="card-body col-12">
+                        <h1>Sign Up</h1>
+                        <p>Signing Up your account</p>
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ $errors->first() }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                        @endif
+                        <form action="{{ route('register') }}" method="POST">
+                            @csrf
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-user"></i></span>
+                                </div>
+                                <input class="form-control" type="text" name="name" placeholder="Insert full name.."
+                                    value="{{ old('name') }}" autofocus autocomplete="off" required
+                                    oninvalid="this.setCustomValidity('Wajib diisi')" oninput="this.setCustomValidity('')">
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                </div>
+                                <input class="form-control" type="text" name="username" placeholder="Insert username.."
+                                    value="{{ old('username') }}" required
+                                    oninvalid="this.setCustomValidity('Wajib diisi')" oninput="this.setCustomValidity('')">
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-envelope"></i></span>
+                                </div>
+                                <input class="form-control @error('email') is-invalid @enderror" type="email" name="email"
+                                    placeholder="Insert email.." value="{{ old('email') }}" required
+                                    oninvalid="this.setCustomValidity('Wajib diisi')" oninput="this.setCustomValidity('')">
+                            </div>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                </div>
+                                <input class="form-control @error('password') is-invalid @enderror" type="password"
+                                    name="password" placeholder="Insert password.." required
+                                    oninvalid="this.setCustomValidity('Wajib diisi')" oninput="this.setCustomValidity('')">
+                            </div>
+
+
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
                                 </div>
+                                <input class="form-control" type="password" name="password_confirmation"
+                                    placeholder="Password Confirmation" required
+                                    oninvalid="this.setCustomValidity('Wajib diisi')" oninput="this.setCustomValidity('')">
                             </div>
+
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-6">
+                                    <input class="btn btn-light px-4" type="submit" value="Register">
                                 </div>
                                 <div class="col-6">
+                                    <a class="hot_deal_link" href="{{ route('login') }}"><button
+                                            class="btn btn-primary px-4" type="button">Sudah punya akun?</button></a>
                                 </div>
-                                <div class="row">
-                                    <div class="col-7">
-                                    </div>
-                                    <div class="col-5">
-                                    </div>
-                                </div>
+
+                                {{--<div class="row">
+                                </div>--}}
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="card text-white bg-primary py-5 d-md-down-none">
+                <div class="card text-white d-md-down-none col-5" style="background-color: #fff">
                     <div class="card-body text-center">
-                        <h1>Sign Up</h1>
-                        <p class="text-muted">Signing Up your account</p>
-                        <form action="{{ route('register') }}" method="POST">
-                            @csrf
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-user"></i></span>
-                                </div>
-                                    <input class="form-control" type="text" name="name" placeholder="Insert full name.." value="{{ old('name') }}" autofocus required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-at"></i></span>
-                                </div>
-                                    <input class="form-control" type="text" name="username" placeholder="Insert username.." value="{{ old('username') }}" autofocus required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-envelope"></i></span>
-                                </div>
-                                <input class="form-control @error('email') is-invalid @enderror" type="email"  name="email" placeholder="Insert email.." value="{{ old('email') }}" required>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-lock"></i></span>
-                                </div>
-                                <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="Insert password.." required>
-                            </div>
-
-
-                            <div class="input-group mb-4">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-lock"></i></span>
-                                </div>
-                                <input class="form-control" type="password" name="password_confirmation" placeholder="Password Confirmation" required>
-                            </div>
-
-                            <div class="row">
-                                @error('email')
-                                    <span class="alert alert-warning" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-
-                                @error('password')
-                                <span class="alert alert-warning" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-
-                                <div class="col-6">
-                                    <input class="btn btn-light px-4" type="submit" value="Register">
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-7">
-                                    </div>
-                                    <div class="col-5">
-                                        <a class="hot_deal_link" href="{{ route('login') }}"><button class="btn btn-primary px-0" type="button">Login?</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 @endsection
