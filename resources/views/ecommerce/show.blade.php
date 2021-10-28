@@ -13,8 +13,8 @@
                     <h2>{{ $products->name }}</h2>
                     <div class="page_link">
                         <a href="{{ url('/') }}">Home</a>
+                        <a href="{{ url('/product') }}">Produk</a>
                         <a href="#">{{ $products->name }}</a>
-                        {{-- <a href="#">[product->name]</a> --}}
                     </div>
                 </div>
             </div>
@@ -64,9 +64,9 @@
                                     </div>
                             @endif
                             <div class="product_count">
-                                <label for="qty">Quantity:</label>
+                                <label for="qty">Jumlah:</label>
                                 <input type="number" name="qty" id="sst" maxlength="12" value="1" min="1"
-                                    max="{{ $products->stock }}" title="Quantity:" class="input-text qty"
+                                    max="{{ $products->stock }}" title="Jumlah:" class="input-text qty"
                                     oninvalid="this.setCustomValidity('Jumlah yang dimasukkan melebihi stok')"
                                     oninput="this.setCustomValidity('')" autocomplete="off">
 

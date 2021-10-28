@@ -115,7 +115,7 @@
                                         <i class="fa fa-cog"></i><strong> Settings</strong>
                                     </a>
                                     <a class="dropdown-item text-left" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                                            document.getElementById('logout-form').submit();">
                                         <strong><i class="fa fa-sign-out"></i></strong><strong> Sign Out </strong>
                                     </a>
 
@@ -134,7 +134,7 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <a class="navbar-brand logo_h" href="{{ url('/') }}">
-                        <img src="{{ asset('ecommerce/img/logo/logo-waroeng-jajanan.png') }}" alt="">
+                        <img src="{{ asset('ecommerce/img/logo/logo-waroeng-jajanan.png') }}" alt="Logo Waroeng Jajanan">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -319,7 +319,7 @@
             let tabUrl = element.firstElementChild.href;
             if (tabUrl) {
                 let tab = tabUrl.split('/');
-                if(nowUrl.length == 4) {
+                if (nowUrl.length == 4) {
                     if (nowUrl[3] == tab[3]) {
                         element.classList.add('active');
                     }
@@ -332,8 +332,10 @@
                         element.classList.add('active');
                     } else if (nowUrl[4] == tab[4] && tab[4] == 'profile') {
                         element.firstElementChild.firstElementChild.classList.add('active');
+                    } else if (nowUrl[3] == tab[3] && tab[3] == 'product') {
+                        element.classList.add('active');
                     } else if (nowUrl[4] != tab[4]) {
-                        if(nowUrl[4].split('?')[0] == tab[4]) {
+                        if (nowUrl[4].split('?')[0] == tab[4]) {
                             element.firstElementChild.firstElementChild.classList.add('active');
                         }
                     }
